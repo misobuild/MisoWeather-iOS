@@ -72,7 +72,7 @@ class nicknameSelectViewController: UIViewController {
     }()
     
     @objc func nextVC() {
-        self.navigationController?.pushViewController(regionSelectViewController(), animated: true)
+        self.navigationController?.pushViewController(regionSearchViewController(), animated: true)
     }
     
     override func viewDidLoad() {

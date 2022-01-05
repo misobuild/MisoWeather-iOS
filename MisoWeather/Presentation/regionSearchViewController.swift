@@ -1,5 +1,5 @@
 //
-//  regionSelectViewController.swift
+//  regionSearchViewController.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/03.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class regionSelectViewController: UIViewController {
+class regionSearchViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -49,7 +49,7 @@ class regionSelectViewController: UIViewController {
     }
 }
 
-extension regionSelectViewController {
+extension regionSearchViewController {
     private func setup() {
         [titleLabel, regionLabel, confirmButton].forEach{view.addSubview($0)}
 

@@ -18,7 +18,7 @@
 		E8E65BAE2782D4AE00FFA0FA /* MisoWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BAD2782D4AE00FFA0FA /* MisoWeatherTests.swift */; };
 		E8E65BB82782D4AE00FFA0FA /* MisoWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BB72782D4AE00FFA0FA /* MisoWeatherUITests.swift */; };
 		E8E65BBA2782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */; };
-		E8E65BC82782E0E200FFA0FA /* regionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BC72782E0E200FFA0FA /* regionSelectViewController.swift */; };
+		E8E65BC82782E0E200FFA0FA /* regionSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BC72782E0E200FFA0FA /* regionSearchViewController.swift */; };
 		E8E65BD6278568A500FFA0FA /* nicknameSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BD5278568A500FFA0FA /* nicknameSelectViewController.swift */; };
 		E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BDA27858A7D00FFA0FA /* customButton.swift */; };
 /* End PBXBuildFile section */
@@ -62,7 +62,7 @@
 		E8E65BB32782D4AE00FFA0FA /* MisoWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MisoWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65BB72782D4AE00FFA0FA /* MisoWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisoWeatherUITests.swift; sourceTree = "<group>"; };
 		E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisoWeatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		E8E65BC72782E0E200FFA0FA /* regionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = regionSelectViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		E8E65BC72782E0E200FFA0FA /* regionSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = regionSearchViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		E8E65BD5278568A500FFA0FA /* nicknameSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nicknameSelectViewController.swift; sourceTree = "<group>"; };
 		E8E65BDA27858A7D00FFA0FA /* customButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -208,8 +208,8 @@
 		E8E65BCF2783032300FFA0FA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E8E65BC72782E0E200FFA0FA /* regionSearchViewController.swift */,
 				E8E65B9A2782D4AC00FFA0FA /* registerViewController.swift */,
-				E8E65BC72782E0E200FFA0FA /* regionSelectViewController.swift */,
 				E8E65BD5278568A500FFA0FA /* nicknameSelectViewController.swift */,
 			);
 			path = Presentation;
@@ -479,7 +479,7 @@
 				E8E65BD6278568A500FFA0FA /* nicknameSelectViewController.swift in Sources */,
 				E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */,
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,
-				E8E65BC82782E0E200FFA0FA /* regionSelectViewController.swift in Sources */,
+				E8E65BC82782E0E200FFA0FA /* regionSearchViewController.swift in Sources */,
 				E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -65,7 +65,7 @@ class registerViewController: UIViewController {
                 //  닉네임, 이메일 정보
                 let nickname = user?.kakaoAccount?.profile?.nickname
                 
-                self.navigationController?.pushViewController(regionSelectViewController(), animated: true)
+                self.navigationController?.pushViewController(regionSearchViewController(), animated: true)
                 
             }
         }
