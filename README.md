@@ -1,1 +1,1 @@
-# 🐣 MisoWeather-iOS
+# 😊 Miso Weather

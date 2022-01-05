@@ -1,0 +1,825 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		344FF6921E8BD2EC96E8D117 /* Pods_MisoWeatherTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A5B6AE1EEC2C8DD95CBCB4 /* Pods_MisoWeatherTests.framework */; };
+		692CCC67F93C067D9C09CC35 /* Pods_MisoWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C5A805E7E8155CDB039479 /* Pods_MisoWeather.framework */; };
+		763FFD8DAF1CEDE900216580 /* Pods_MisoWeather_MisoWeatherUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E634486436168330A45E6928 /* Pods_MisoWeather_MisoWeatherUITests.framework */; };
+		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
+		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
+		E8E65B9B2782D4AC00FFA0FA /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* registerViewController.swift */; };
+		E8E65BA02782D4AE00FFA0FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8E65B9F2782D4AE00FFA0FA /* Assets.xcassets */; };
+		E8E65BA32782D4AE00FFA0FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8E65BA12782D4AE00FFA0FA /* LaunchScreen.storyboard */; };
+		E8E65BAE2782D4AE00FFA0FA /* MisoWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BAD2782D4AE00FFA0FA /* MisoWeatherTests.swift */; };
+		E8E65BB82782D4AE00FFA0FA /* MisoWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BB72782D4AE00FFA0FA /* MisoWeatherUITests.swift */; };
+		E8E65BBA2782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */; };
+		E8E65BC82782E0E200FFA0FA /* regionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BC72782E0E200FFA0FA /* regionSelectViewController.swift */; };
+		E8E65BD6278568A500FFA0FA /* nicknameSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BD5278568A500FFA0FA /* nicknameSelectViewController.swift */; };
+		E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BDA27858A7D00FFA0FA /* customButton.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E8E65BAA2782D4AE00FFA0FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E8E65B8B2782D4AC00FFA0FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E8E65B922782D4AC00FFA0FA;
+			remoteInfo = MisoWeather;
+		};
+		E8E65BB42782D4AE00FFA0FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E8E65B8B2782D4AC00FFA0FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E8E65B922782D4AC00FFA0FA;
+			remoteInfo = MisoWeather;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		23A5B6AE1EEC2C8DD95CBCB4 /* Pods_MisoWeatherTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MisoWeatherTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		243DB7CB5AF9BE36FE1D39A6 /* Pods-MisoWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisoWeather.release.xcconfig"; path = "Target Support Files/Pods-MisoWeather/Pods-MisoWeather.release.xcconfig"; sourceTree = "<group>"; };
+		2E04300681B62DADACB3DB1B /* Pods-MisoWeather-MisoWeatherUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisoWeather-MisoWeatherUITests.debug.xcconfig"; path = "Target Support Files/Pods-MisoWeather-MisoWeatherUITests/Pods-MisoWeather-MisoWeatherUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		704BC52D477DF7502183D0DD /* Pods-MisoWeather-MisoWeatherUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisoWeather-MisoWeatherUITests.release.xcconfig"; path = "Target Support Files/Pods-MisoWeather-MisoWeatherUITests/Pods-MisoWeather-MisoWeatherUITests.release.xcconfig"; sourceTree = "<group>"; };
+		72D7406057366229E8B5C147 /* Pods-MisoWeatherTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisoWeatherTests.release.xcconfig"; path = "Target Support Files/Pods-MisoWeatherTests/Pods-MisoWeatherTests.release.xcconfig"; sourceTree = "<group>"; };
+		87C5A805E7E8155CDB039479 /* Pods_MisoWeather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MisoWeather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9484E9FDF5DC1BC37A76F7D8 /* Pods-MisoWeatherTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisoWeatherTests.debug.xcconfig"; path = "Target Support Files/Pods-MisoWeatherTests/Pods-MisoWeatherTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A42591B8EC20D35C39722644 /* Pods-MisoWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisoWeather.debug.xcconfig"; path = "Target Support Files/Pods-MisoWeather/Pods-MisoWeather.debug.xcconfig"; sourceTree = "<group>"; };
+		E634486436168330A45E6928 /* Pods_MisoWeather_MisoWeatherUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MisoWeather_MisoWeatherUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		E8E65B9A2782D4AC00FFA0FA /* registerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
+		E8E65B9F2782D4AE00FFA0FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E8E65BA22782D4AE00FFA0FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E8E65BA42782D4AE00FFA0FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8E65BA92782D4AE00FFA0FA /* MisoWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MisoWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8E65BAD2782D4AE00FFA0FA /* MisoWeatherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisoWeatherTests.swift; sourceTree = "<group>"; };
+		E8E65BB32782D4AE00FFA0FA /* MisoWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MisoWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8E65BB72782D4AE00FFA0FA /* MisoWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisoWeatherUITests.swift; sourceTree = "<group>"; };
+		E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisoWeatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E8E65BC72782E0E200FFA0FA /* regionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = regionSelectViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		E8E65BD5278568A500FFA0FA /* nicknameSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nicknameSelectViewController.swift; sourceTree = "<group>"; };
+		E8E65BDA27858A7D00FFA0FA /* customButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customButton.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E8E65B902782D4AC00FFA0FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				692CCC67F93C067D9C09CC35 /* Pods_MisoWeather.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8E65BA62782D4AE00FFA0FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				344FF6921E8BD2EC96E8D117 /* Pods_MisoWeatherTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8E65BB02782D4AE00FFA0FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				763FFD8DAF1CEDE900216580 /* Pods_MisoWeather_MisoWeatherUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		63A602918AD552C7F547974B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A42591B8EC20D35C39722644 /* Pods-MisoWeather.debug.xcconfig */,
+				243DB7CB5AF9BE36FE1D39A6 /* Pods-MisoWeather.release.xcconfig */,
+				2E04300681B62DADACB3DB1B /* Pods-MisoWeather-MisoWeatherUITests.debug.xcconfig */,
+				704BC52D477DF7502183D0DD /* Pods-MisoWeather-MisoWeatherUITests.release.xcconfig */,
+				9484E9FDF5DC1BC37A76F7D8 /* Pods-MisoWeatherTests.debug.xcconfig */,
+				72D7406057366229E8B5C147 /* Pods-MisoWeatherTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		6916AE4C490D27CA826B1594 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87C5A805E7E8155CDB039479 /* Pods_MisoWeather.framework */,
+				E634486436168330A45E6928 /* Pods_MisoWeather_MisoWeatherUITests.framework */,
+				23A5B6AE1EEC2C8DD95CBCB4 /* Pods_MisoWeatherTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E8E65B8A2782D4AC00FFA0FA = {
+			isa = PBXGroup;
+			children = (
+				E8E65B952782D4AC00FFA0FA /* MisoWeather */,
+				E8E65BAC2782D4AE00FFA0FA /* MisoWeatherTests */,
+				E8E65BB62782D4AE00FFA0FA /* MisoWeatherUITests */,
+				E8E65B942782D4AC00FFA0FA /* Products */,
+				63A602918AD552C7F547974B /* Pods */,
+				6916AE4C490D27CA826B1594 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E8E65B942782D4AC00FFA0FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65B932782D4AC00FFA0FA /* MisoWeather.app */,
+				E8E65BA92782D4AE00FFA0FA /* MisoWeatherTests.xctest */,
+				E8E65BB32782D4AE00FFA0FA /* MisoWeatherUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E8E65B952782D4AC00FFA0FA /* MisoWeather */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65BCE2783026700FFA0FA /* Application */,
+				E8E65BCA278301DF00FFA0FA /* Data */,
+				E8E65BD7278587D500FFA0FA /* Common */,
+				E8E65BCB278301E600FFA0FA /* Domain */,
+				E8E65BCF2783032300FFA0FA /* Presentation */,
+				E8E65BCC278301F500FFA0FA /* Resources */,
+			);
+			path = MisoWeather;
+			sourceTree = "<group>";
+		};
+		E8E65BAC2782D4AE00FFA0FA /* MisoWeatherTests */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65BAD2782D4AE00FFA0FA /* MisoWeatherTests.swift */,
+			);
+			path = MisoWeatherTests;
+			sourceTree = "<group>";
+		};
+		E8E65BB62782D4AE00FFA0FA /* MisoWeatherUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65BB72782D4AE00FFA0FA /* MisoWeatherUITests.swift */,
+				E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */,
+			);
+			path = MisoWeatherUITests;
+			sourceTree = "<group>";
+		};
+		E8E65BCA278301DF00FFA0FA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E8E65BCB278301E600FFA0FA /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65BD0278303BB00FFA0FA /* Entities */,
+				E8E65BD1278303CC00FFA0FA /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		E8E65BCC278301F500FFA0FA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65B9F2782D4AE00FFA0FA /* Assets.xcassets */,
+				E8E65BA12782D4AE00FFA0FA /* LaunchScreen.storyboard */,
+				E8E65BA42782D4AE00FFA0FA /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E8E65BCE2783026700FFA0FA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */,
+				E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		E8E65BCF2783032300FFA0FA /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65B9A2782D4AC00FFA0FA /* registerViewController.swift */,
+				E8E65BC72782E0E200FFA0FA /* regionSelectViewController.swift */,
+				E8E65BD5278568A500FFA0FA /* nicknameSelectViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E8E65BD0278303BB00FFA0FA /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		E8E65BD1278303CC00FFA0FA /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		E8E65BD7278587D500FFA0FA /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65BDA27858A7D00FFA0FA /* customButton.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E8E65B922782D4AC00FFA0FA /* MisoWeather */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8E65BBD2782D4AE00FFA0FA /* Build configuration list for PBXNativeTarget "MisoWeather" */;
+			buildPhases = (
+				E557EE9B305E5FAFB0CEDF32 /* [CP] Check Pods Manifest.lock */,
+				E8E65B8F2782D4AC00FFA0FA /* Sources */,
+				E8E65B902782D4AC00FFA0FA /* Frameworks */,
+				E8E65B912782D4AC00FFA0FA /* Resources */,
+				DC3BB6AFF1DAA72B1550FC0B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MisoWeather;
+			productName = MisoWeather;
+			productReference = E8E65B932782D4AC00FFA0FA /* MisoWeather.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E8E65BA82782D4AE00FFA0FA /* MisoWeatherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8E65BC02782D4AE00FFA0FA /* Build configuration list for PBXNativeTarget "MisoWeatherTests" */;
+			buildPhases = (
+				44CDC27265BE3F1B3C2D1B82 /* [CP] Check Pods Manifest.lock */,
+				E8E65BA52782D4AE00FFA0FA /* Sources */,
+				E8E65BA62782D4AE00FFA0FA /* Frameworks */,
+				E8E65BA72782D4AE00FFA0FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E8E65BAB2782D4AE00FFA0FA /* PBXTargetDependency */,
+			);
+			name = MisoWeatherTests;
+			productName = MisoWeatherTests;
+			productReference = E8E65BA92782D4AE00FFA0FA /* MisoWeatherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E8E65BB22782D4AE00FFA0FA /* MisoWeatherUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8E65BC32782D4AE00FFA0FA /* Build configuration list for PBXNativeTarget "MisoWeatherUITests" */;
+			buildPhases = (
+				B4559AABDD71E2DA8900F343 /* [CP] Check Pods Manifest.lock */,
+				E8E65BAF2782D4AE00FFA0FA /* Sources */,
+				E8E65BB02782D4AE00FFA0FA /* Frameworks */,
+				E8E65BB12782D4AE00FFA0FA /* Resources */,
+				4BBBFB57B8232A4D0C610C14 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E8E65BB52782D4AE00FFA0FA /* PBXTargetDependency */,
+			);
+			name = MisoWeatherUITests;
+			productName = MisoWeatherUITests;
+			productReference = E8E65BB32782D4AE00FFA0FA /* MisoWeatherUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E8E65B8B2782D4AC00FFA0FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					E8E65B922782D4AC00FFA0FA = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					E8E65BA82782D4AE00FFA0FA = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = E8E65B922782D4AC00FFA0FA;
+					};
+					E8E65BB22782D4AE00FFA0FA = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = E8E65B922782D4AC00FFA0FA;
+					};
+				};
+			};
+			buildConfigurationList = E8E65B8E2782D4AC00FFA0FA /* Build configuration list for PBXProject "MisoWeather" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E8E65B8A2782D4AC00FFA0FA;
+			productRefGroup = E8E65B942782D4AC00FFA0FA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E8E65B922782D4AC00FFA0FA /* MisoWeather */,
+				E8E65BA82782D4AE00FFA0FA /* MisoWeatherTests */,
+				E8E65BB22782D4AE00FFA0FA /* MisoWeatherUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E8E65B912782D4AC00FFA0FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8E65BA32782D4AE00FFA0FA /* LaunchScreen.storyboard in Resources */,
+				E8E65BA02782D4AE00FFA0FA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8E65BA72782D4AE00FFA0FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8E65BB12782D4AE00FFA0FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		44CDC27265BE3F1B3C2D1B82 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MisoWeatherTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4BBBFB57B8232A4D0C610C14 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MisoWeather-MisoWeatherUITests/Pods-MisoWeather-MisoWeatherUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MisoWeather-MisoWeatherUITests/Pods-MisoWeather-MisoWeatherUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MisoWeather-MisoWeatherUITests/Pods-MisoWeather-MisoWeatherUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B4559AABDD71E2DA8900F343 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MisoWeather-MisoWeatherUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC3BB6AFF1DAA72B1550FC0B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MisoWeather/Pods-MisoWeather-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MisoWeather/Pods-MisoWeather-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MisoWeather/Pods-MisoWeather-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E557EE9B305E5FAFB0CEDF32 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MisoWeather-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E8E65B8F2782D4AC00FFA0FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8E65B9B2782D4AC00FFA0FA /* registerViewController.swift in Sources */,
+				E8E65BD6278568A500FFA0FA /* nicknameSelectViewController.swift in Sources */,
+				E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */,
+				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,
+				E8E65BC82782E0E200FFA0FA /* regionSelectViewController.swift in Sources */,
+				E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8E65BA52782D4AE00FFA0FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8E65BAE2782D4AE00FFA0FA /* MisoWeatherTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8E65BAF2782D4AE00FFA0FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8E65BB82782D4AE00FFA0FA /* MisoWeatherUITests.swift in Sources */,
+				E8E65BBA2782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E8E65BAB2782D4AE00FFA0FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E8E65B922782D4AC00FFA0FA /* MisoWeather */;
+			targetProxy = E8E65BAA2782D4AE00FFA0FA /* PBXContainerItemProxy */;
+		};
+		E8E65BB52782D4AE00FFA0FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E8E65B922782D4AC00FFA0FA /* MisoWeather */;
+			targetProxy = E8E65BB42782D4AE00FFA0FA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E8E65BA12782D4AE00FFA0FA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E8E65BA22782D4AE00FFA0FA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E8E65BBB2782D4AE00FFA0FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E8E65BBC2782D4AE00FFA0FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E8E65BBE2782D4AE00FFA0FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A42591B8EC20D35C39722644 /* Pods-MisoWeather.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MisoWeather/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.misobuild.MisoWeather;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E8E65BBF2782D4AE00FFA0FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 243DB7CB5AF9BE36FE1D39A6 /* Pods-MisoWeather.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MisoWeather/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.misobuild.MisoWeather;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E8E65BC12782D4AE00FFA0FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9484E9FDF5DC1BC37A76F7D8 /* Pods-MisoWeatherTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.misobuild.MisoWeatherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MisoWeather.app/MisoWeather";
+			};
+			name = Debug;
+		};
+		E8E65BC22782D4AE00FFA0FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72D7406057366229E8B5C147 /* Pods-MisoWeatherTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.misobuild.MisoWeatherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MisoWeather.app/MisoWeather";
+			};
+			name = Release;
+		};
+		E8E65BC42782D4AE00FFA0FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E04300681B62DADACB3DB1B /* Pods-MisoWeather-MisoWeatherUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.misobuild.MisoWeatherUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MisoWeather;
+			};
+			name = Debug;
+		};
+		E8E65BC52782D4AE00FFA0FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 704BC52D477DF7502183D0DD /* Pods-MisoWeather-MisoWeatherUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.misobuild.MisoWeatherUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MisoWeather;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E8E65B8E2782D4AC00FFA0FA /* Build configuration list for PBXProject "MisoWeather" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8E65BBB2782D4AE00FFA0FA /* Debug */,
+				E8E65BBC2782D4AE00FFA0FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E8E65BBD2782D4AE00FFA0FA /* Build configuration list for PBXNativeTarget "MisoWeather" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8E65BBE2782D4AE00FFA0FA /* Debug */,
+				E8E65BBF2782D4AE00FFA0FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E8E65BC02782D4AE00FFA0FA /* Build configuration list for PBXNativeTarget "MisoWeatherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8E65BC12782D4AE00FFA0FA /* Debug */,
+				E8E65BC22782D4AE00FFA0FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E8E65BC32782D4AE00FFA0FA /* Build configuration list for PBXNativeTarget "MisoWeatherUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8E65BC42782D4AE00FFA0FA /* Debug */,
+				E8E65BC52782D4AE00FFA0FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E8E65B8B2782D4AC00FFA0FA /* Project object */;
+}

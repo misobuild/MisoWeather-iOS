@@ -1,0 +1,6 @@
+framework module Pods_MisoWeatherTests {
+  umbrella header "Pods-MisoWeatherTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
