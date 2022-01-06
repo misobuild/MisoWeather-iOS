@@ -66,13 +66,13 @@ class nicknameSelectViewController: UIViewController {
     
     private lazy var confirmButton: customButton = {
         let button = customButton()
-        button.setTitle("회원가입", for: .normal)
+        button.setTitle("이걸로 결정했어요!", for: .normal)
         button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
     }()
     
     @objc func nextVC() {
-        self.navigationController?.pushViewController(regionSearchViewController(), animated: true)
+        self.navigationController?.pushViewController(mainViewController(), animated: true)
     }
     
     override func viewDidLoad() {

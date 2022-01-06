@@ -9,39 +9,34 @@ import UIKit
 import SnapKit
 
 class regionSearchViewController: UIViewController {
-    var num = 0
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.dataSource = self
-        tableView.delegate = self
-//        tableView.isHidden = true
-        return tableView
-    }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 25.0, weight: .light)
         label.textColor = .black
-        label.numberOfLines = 0
-        label.text = """
-                    어느 지역의
-                    옷차림을 보고 싶으신가요?
-                    """
+        label.text = "어떤 지역의 날씨를 위한"
         return label
     }()
     
-    private lazy var regionLabel: UILabel = {
+    private lazy var questionLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 25.0, weight: .bold)
+        label.font = .systemFont(ofSize: 27.0, weight: .black)
         label.textColor = .black
-        label.numberOfLines = 0
-        label.text = ""
+        label.text = "간식거리 🍩"
+        return label
+    }()
+    
+    private lazy var subTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 25.0, weight: .light)
+        label.textColor = .black
+        label.text = " 를 볼까요?"
         return label
     }()
     
     private lazy var confirmButton: customButton = {
         let button = customButton(type: .system)
-        button.setTitle("다음", for: .normal)
+        button.setTitle("검색", for: .normal)
         button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
     }()
@@ -50,84 +45,31 @@ class regionSearchViewController: UIViewController {
         self.navigationController?.pushViewController(nicknameSelectViewController(), animated: true)
     }
     
-    private func setNavigationItems(){
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "날씨"
-        
-        let searchController = UISearchController()
-        searchController.searchBar.placeholder = "도시로 검색해주세요. 예) 파주시 "
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.delegate = self
-        navigationItem.searchController = searchController
-    }
-    
+    let searchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setNavigationItems()
+        navigationItem.hidesBackButton = true
         setup()
-
     }
 }
 
 extension regionSearchViewController {
     private func setup() {
-        [tableView, titleLabel ,regionLabel, confirmButton].forEach{view.addSubview($0)}
-///
-        tableView.snp.makeConstraints{
-            $0.edges.equalToSuperview()
-        }
+        [titleLabel, questionLabel, subTitleLabel].forEach{view.addSubview($0)}
+        
         titleLabel.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(24.0)
-            $0.top.equalToSuperview().inset(300.0)
+            $0.top.equalToSuperview().inset(270.0)
         }
-        regionLabel.snp.makeConstraints{
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(titleLabel.snp.bottom).offset(100.0)
-
-        }
-        confirmButton.snp.makeConstraints{
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(titleLabel.snp.bottom).offset(100.0)
+        questionLabel.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(24.0)
-            $0.trailing.equalToSuperview().inset(24.0)
-            $0.height.equalTo(50.0)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(5.0)
         }
-    }
-}
-
-extension regionSearchViewController: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        num = 7
-        tableView.reloadData()
-        tableView.isHidden = false
-    }
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        num = 0
-        tableView.isHidden = true
-    }
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-    }
-}
-
-extension regionSearchViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return num
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
-        cell.textLabel?.text = "title"
-        cell.detailTextLabel?.text = "detail"
-        
-        return cell
-    }
-}
-
-extension regionSearchViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = nicknameSelectViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        subTitleLabel.snp.makeConstraints{
+            $0.top.equalTo(questionLabel)
+            $0.leading.equalTo(questionLabel.snp.trailing).inset(1.0)
+        }
     }
 }

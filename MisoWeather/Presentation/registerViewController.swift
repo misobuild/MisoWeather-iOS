@@ -15,7 +15,7 @@ class registerViewController: UIViewController {
     
     private lazy var kakaoLoginButon: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "kakao_login_large_wide"), for: .normal)
+        button.setImage(UIImage(named: "kakaoLoginButton"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
@@ -93,7 +93,7 @@ extension registerViewController {
             $0.leading.equalToSuperview().inset(24.0)
             $0.top.equalTo(titleLabel.snp.bottom).offset(150.0)
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(50.0)
+
         }
     }
 }
