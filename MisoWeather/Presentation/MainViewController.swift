@@ -1,5 +1,5 @@
 //
-//  mainViewController.swift
+//  MainViewController.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/06.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class mainViewController: UIViewController {
+class MainViewController: UIViewController {
     
     private lazy var imoticonLabel: UILabel = {
         let label = UILabel()
@@ -54,7 +54,7 @@ class mainViewController: UIViewController {
     }
 }
 
-extension mainViewController {
+extension MainViewController {
     private func setup() {
         [imoticonLabel, titleLabel, weatherView, graphView].forEach{view.addSubview($0)}
         

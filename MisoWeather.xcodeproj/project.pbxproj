@@ -10,18 +10,18 @@
 		344FF6921E8BD2EC96E8D117 /* Pods_MisoWeatherTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A5B6AE1EEC2C8DD95CBCB4 /* Pods_MisoWeatherTests.framework */; };
 		692CCC67F93C067D9C09CC35 /* Pods_MisoWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C5A805E7E8155CDB039479 /* Pods_MisoWeather.framework */; };
 		763FFD8DAF1CEDE900216580 /* Pods_MisoWeather_MisoWeatherUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E634486436168330A45E6928 /* Pods_MisoWeather_MisoWeatherUITests.framework */; };
-		E839205827869D99006A1D1B /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205727869D99006A1D1B /* mainViewController.swift */; };
+		E839205827869D99006A1D1B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205727869D99006A1D1B /* MainViewController.swift */; };
 		E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
-		E8E65B9B2782D4AC00FFA0FA /* registerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* registerViewController.swift */; };
+		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
 		E8E65BA02782D4AE00FFA0FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8E65B9F2782D4AE00FFA0FA /* Assets.xcassets */; };
 		E8E65BA32782D4AE00FFA0FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8E65BA12782D4AE00FFA0FA /* LaunchScreen.storyboard */; };
 		E8E65BAE2782D4AE00FFA0FA /* MisoWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BAD2782D4AE00FFA0FA /* MisoWeatherTests.swift */; };
 		E8E65BB82782D4AE00FFA0FA /* MisoWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BB72782D4AE00FFA0FA /* MisoWeatherUITests.swift */; };
 		E8E65BBA2782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */; };
-		E8E65BC82782E0E200FFA0FA /* regionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BC72782E0E200FFA0FA /* regionSelectViewController.swift */; };
-		E8E65BD6278568A500FFA0FA /* nicknameSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BD5278568A500FFA0FA /* nicknameSelectViewController.swift */; };
+		E8E65BC82782E0E200FFA0FA /* RegionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */; };
+		E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */; };
 		E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BDA27858A7D00FFA0FA /* customButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,12 +52,12 @@
 		9484E9FDF5DC1BC37A76F7D8 /* Pods-MisoWeatherTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisoWeatherTests.debug.xcconfig"; path = "Target Support Files/Pods-MisoWeatherTests/Pods-MisoWeatherTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A42591B8EC20D35C39722644 /* Pods-MisoWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisoWeather.debug.xcconfig"; path = "Target Support Files/Pods-MisoWeather/Pods-MisoWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		E634486436168330A45E6928 /* Pods_MisoWeather_MisoWeatherUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MisoWeather_MisoWeatherUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E839205727869D99006A1D1B /* mainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
+		E839205727869D99006A1D1B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionCollectionViewCell.swift; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E8E65B9A2782D4AC00FFA0FA /* registerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registerViewController.swift; sourceTree = "<group>"; };
+		E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		E8E65B9F2782D4AE00FFA0FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8E65BA22782D4AE00FFA0FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8E65BA42782D4AE00FFA0FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,8 +66,8 @@
 		E8E65BB32782D4AE00FFA0FA /* MisoWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MisoWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65BB72782D4AE00FFA0FA /* MisoWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisoWeatherUITests.swift; sourceTree = "<group>"; };
 		E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisoWeatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		E8E65BC72782E0E200FFA0FA /* regionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = regionSelectViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		E8E65BD5278568A500FFA0FA /* nicknameSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nicknameSelectViewController.swift; sourceTree = "<group>"; };
+		E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSelectViewController.swift; sourceTree = "<group>"; };
 		E8E65BDA27858A7D00FFA0FA /* customButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,10 +212,10 @@
 		E8E65BCF2783032300FFA0FA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				E8E65B9A2782D4AC00FFA0FA /* registerViewController.swift */,
-				E8E65BC72782E0E200FFA0FA /* regionSelectViewController.swift */,
-				E8E65BD5278568A500FFA0FA /* nicknameSelectViewController.swift */,
-				E839205727869D99006A1D1B /* mainViewController.swift */,
+				E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */,
+				E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */,
+				E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */,
+				E839205727869D99006A1D1B /* MainViewController.swift */,
 				E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */,
 			);
 			path = Presentation;
@@ -481,13 +481,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8E65B9B2782D4AC00FFA0FA /* registerViewController.swift in Sources */,
-				E8E65BD6278568A500FFA0FA /* nicknameSelectViewController.swift in Sources */,
-				E839205827869D99006A1D1B /* mainViewController.swift in Sources */,
+				E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */,
+				E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */,
+				E839205827869D99006A1D1B /* MainViewController.swift in Sources */,
 				E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */,
 				E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */,
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,
-				E8E65BC82782E0E200FFA0FA /* regionSelectViewController.swift in Sources */,
+				E8E65BC82782E0E200FFA0FA /* RegionSelectViewController.swift in Sources */,
 				E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
 //
-//  registerViewController.swift
+//  RegisterViewController.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/03.
@@ -9,7 +9,7 @@ import UIKit
 import KakaoSDKUser
 import SnapKit
 
-class registerViewController: UIViewController {
+class RegisterViewController: UIViewController {
     
     //MARK: - subviews
     
@@ -65,7 +65,7 @@ class registerViewController: UIViewController {
                 //  닉네임, 이메일 정보
                 let nickname = user?.kakaoAccount?.profile?.nickname
                 
-                self.navigationController?.pushViewController(regionSelectViewController(), animated: true)
+                self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
                 
             }
         }
@@ -79,7 +79,7 @@ class registerViewController: UIViewController {
     }
 }
 
-extension registerViewController {
+extension RegisterViewController {
     // MARK: - HElpors
     private func setup() {
         [kakaoLoginButon, titleLabel].forEach{ view.addSubview($0) }

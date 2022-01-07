@@ -1,5 +1,5 @@
 //
-//  nicknameSelectViewController.swift
+//  NicknameSelectViewController.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/05.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class nicknameSelectViewController: UIViewController {
+class NicknameSelectViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -72,7 +72,7 @@ class nicknameSelectViewController: UIViewController {
     }()
     
     @objc func nextVC() {
-        self.navigationController?.pushViewController(mainViewController(), animated: true)
+        self.navigationController?.pushViewController(MainViewController(), animated: true)
     }
     
     override func viewDidLoad() {
@@ -82,7 +82,7 @@ class nicknameSelectViewController: UIViewController {
     }
 }
 
-extension nicknameSelectViewController {
+extension NicknameSelectViewController {
     private func setup() {
         [titleLabel, nicknameLabel, subTitleLabel, imoticonLable, refreshButton, descriptionLabel, confirmButton].forEach{view.addSubview($0)}
         

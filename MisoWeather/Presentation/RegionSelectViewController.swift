@@ -1,5 +1,5 @@
 //
-//  regionSelectViewController.swift
+//  RegionSelectViewController.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/03.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class regionSelectViewController: UIViewController {
+class RegionSelectViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -53,7 +53,7 @@ class regionSelectViewController: UIViewController {
     }()
     
     @objc func nextVC() {
-        self.navigationController?.pushViewController(nicknameSelectViewController(), animated: true)
+        self.navigationController?.pushViewController(NicknameSelectViewController(), animated: true)
     }
     
     override func viewDidLoad() {
@@ -63,7 +63,7 @@ class regionSelectViewController: UIViewController {
     }
 }
 
-extension regionSelectViewController {
+extension RegionSelectViewController {
     private func setup() {
         
         view.backgroundColor = .white
@@ -108,7 +108,7 @@ extension regionSelectViewController {
     }
 }
 
-extension regionSelectViewController: UICollectionViewDataSource {
+extension RegionSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
@@ -120,7 +120,7 @@ extension regionSelectViewController: UICollectionViewDataSource {
     }
 }
 
-extension regionSelectViewController: UICollectionViewDelegateFlowLayout {
+extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: collectionView.frame.width - 32.0, height: collectionView.frame.width - 32.0)
     }
