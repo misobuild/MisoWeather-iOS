@@ -6,7 +6,7 @@
 		<key>region</key>
 		<string>서울</string>
 		<key>buttonInactive</key>
-		<string>seoulButton</string>
+		<string>seoulButtonActive</string>
 		<key>buttonActive</key>
 		<string>seoulButtonActive</string>
 	</dict>

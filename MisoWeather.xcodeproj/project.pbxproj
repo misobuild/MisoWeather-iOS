@@ -13,6 +13,7 @@
 		E839205827869D99006A1D1B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205727869D99006A1D1B /* MainViewController.swift */; };
 		E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */; };
 		E839206527883611006A1D1B /* Region.plist in Resources */ = {isa = PBXBuildFile; fileRef = E839206427883611006A1D1B /* Region.plist */; };
+		E8392067278838D1006A1D1B /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8392066278838D1006A1D1B /* Region.swift */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
 		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
@@ -56,6 +57,7 @@
 		E839205727869D99006A1D1B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionCollectionViewCell.swift; sourceTree = "<group>"; };
 		E839206427883611006A1D1B /* Region.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Region.plist; sourceTree = "<group>"; };
+		E8392066278838D1006A1D1B /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 		E8E65BD0278303BB00FFA0FA /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				E8392066278838D1006A1D1B /* Region.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8392067278838D1006A1D1B /* Region.swift in Sources */,
 				E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */,
 				E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */,
 				E839205827869D99006A1D1B /* MainViewController.swift in Sources */,

@@ -10,6 +10,8 @@ import SnapKit
 
 class RegionSelectViewController: UIViewController {
     
+    private var regionList: [Region] = []
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 26.0, weight: .light)
@@ -21,11 +23,11 @@ class RegionSelectViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
-     //   layout.minimumInteritemSpacing = 1
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = .white
 
         collectionView.register(RegionCollectionViewCell.self, forCellWithReuseIdentifier: "RegionCollectionViewCell")
         
@@ -60,8 +62,52 @@ class RegionSelectViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        fetchData()
         setup()
+    }
+}
+
+extension RegionSelectViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return regionList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as! RegionCollectionViewCell
+        let region = regionList[indexPath.item]
+        cell.setup(region: region)
+        return cell
+    }
+}
+
+extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
+    //지정된 셀의 크기를 반환하는 메서드
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width:(view.frame.width - 98.0 - 30) / 4 , height:(view.frame.width - 98.0 - 30) / 4 * 0.6)
+    }
+    //셀 사이의 최소 간격을 반환하는 메서드.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        5.0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let region = regionList[indexPath.item]
+        print("Selected cell: (\(indexPath.section), \(region.region))")
+    }
+}
+
+private extension RegionSelectViewController{
+    func fetchData() {
+        guard let url = Bundle.main.url(forResource: "Region", withExtension: "plist") else {return}
+        
+        do{
+            let data = try Data(contentsOf: url)
+            let result = try PropertyListDecoder().decode([Region].self, from: data)
+            regionList = result
+        } catch {}
     }
 }
 
@@ -96,8 +142,8 @@ extension RegionSelectViewController {
         
         collectionView.snp.makeConstraints{
             $0.top.equalTo(questionLabel.snp.bottom).offset(109.0)
-            $0.width.equalTo(view.frame.width - 98.0)
-            $0.height.equalTo((view.frame.width - 98.0) * 0.85)
+            $0.width.equalTo(view.frame.width - 96.0)
+            $0.height.equalTo((view.frame.width - 96.0) * 0.85)
             $0.centerX.equalToSuperview()
         }
         
@@ -108,28 +154,4 @@ extension RegionSelectViewController {
             $0.bottom.equalToSuperview().inset(87.0)
         }
     }
-}
-
-extension RegionSelectViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 17
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as! RegionCollectionViewCell
-        //cell.regionButton.text = dataSource[indexPath.row]
-        return cell
-    }
-}
-
-extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
-    //지정된 셀의 크기를 반환하는 메서드
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width:(view.frame.width - 98.0 - 30) / 4 , height:(view.frame.width - 98.0 - 30) / 4 * 0.6)
-    }
-    //셀 사이의 최소 간격을 반환하는 메서드.
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        5.0
-    }
-
 }
