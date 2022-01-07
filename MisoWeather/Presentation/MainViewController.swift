@@ -58,7 +58,6 @@ extension MainViewController {
     private func setup() {
         [imoticonLabel, titleLabel, weatherView, graphView].forEach{view.addSubview($0)}
         
-        
         imoticonLabel.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(24.0)
             $0.top.equalToSuperview().inset(60.0)

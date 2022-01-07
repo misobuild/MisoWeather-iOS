@@ -24,11 +24,23 @@ class RegisterViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 25.0, weight: .regular)
+        label.font = .systemFont(ofSize: 45.0, weight: .regular)
         label.textColor = .black
-        label.text = "회원가입을 해주세요."
+        label.text = "MisoWeather🌤"
         return label
     }()
+    
+    private lazy var nonLoginButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("그냥 둘러볼래요", for: .normal)
+        button.setTitleColor( UIColor.black, for: .normal)
+        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func nextVC() {
+        self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
+    }
     
     @objc func kakaoLogin() {
         // 카카오톡 설치 여부 확인
@@ -75,6 +87,11 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = .black
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+
         setup()
     }
 }
@@ -82,9 +99,8 @@ class RegisterViewController: UIViewController {
 extension RegisterViewController {
     // MARK: - HElpors
     private func setup() {
-        [kakaoLoginButon, titleLabel].forEach{ view.addSubview($0) }
+        [kakaoLoginButon, nonLoginButton ,titleLabel].forEach{ view.addSubview($0) }
         
-    
         titleLabel.snp.makeConstraints{
             $0.top.equalToSuperview().inset(300.0)
             $0.centerX.equalToSuperview()
@@ -93,7 +109,10 @@ extension RegisterViewController {
             $0.leading.equalToSuperview().inset(24.0)
             $0.top.equalTo(titleLabel.snp.bottom).offset(150.0)
             $0.centerX.equalToSuperview()
-
+        }
+        nonLoginButton.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(kakaoLoginButon.snp.bottom).offset(17.0)
         }
     }
 }

@@ -8,18 +8,16 @@
 import UIKit
 import SnapKit
 
+protocol SendDataDelegate {
+    func sendData(data: String)
+}
+
 class RegionSelectViewController: UIViewController {
     
+    var delegate: SendDataDelegate?
+    
     private var regionList: [Region] = []
-    
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 26.0, weight: .light)
-        label.textColor = .black
-        label.text = "어떤 지역의 날씨를 위한"
-        return label
-    }()
-    
+    private var regionTitle: String = ""
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
@@ -32,6 +30,14 @@ class RegionSelectViewController: UIViewController {
         collectionView.register(RegionCollectionViewCell.self, forCellWithReuseIdentifier: "RegionCollectionViewCell")
         
         return collectionView
+    }()
+    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 26.0, weight: .light)
+        label.textColor = .black
+        label.text = "어떤 지역의 날씨를 위한"
+        return label
     }()
     
     private lazy var questionLabel: UILabel = {
@@ -57,16 +63,29 @@ class RegionSelectViewController: UIViewController {
     }()
     
     @objc func nextVC() {
-        self.navigationController?.pushViewController(NicknameSelectViewController(), animated: true)
+        if let data = questionLabel.text {
+            delegate?.sendData(data: data)
+            let vc = RegionListViewController()
+            vc.region = regionTitle
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.topItem?.title = ""
+        view.backgroundColor = .white
         fetchData()
         setup()
     }
 }
-
+        
+extension RegionSelectViewController: SendDataDelegate {
+    func sendData(data: String) {
+        titleLabel.text = data
+    }
+}
+        
 extension RegionSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return regionList.count
@@ -76,25 +95,28 @@ extension RegionSelectViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as! RegionCollectionViewCell
         let region = regionList[indexPath.item]
         cell.setup(region: region)
+        cell.inactive = region.buttonInactive
+        cell.active = region.buttonActive
         return cell
     }
 }
 
 extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
-    //지정된 셀의 크기를 반환하는 메서드
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width:(view.frame.width - 98.0 - 30) / 4 , height:(view.frame.width - 98.0 - 30) / 4 * 0.6)
     }
-    //셀 사이의 최소 간격을 반환하는 메서드.
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         5.0
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 1, left: 1, bottom: 1, right: 1)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let region = regionList[indexPath.item]
+        regionTitle = region.region
         print("Selected cell: (\(indexPath.section), \(region.region))")
     }
 }
@@ -113,9 +135,7 @@ private extension RegionSelectViewController{
 
 extension RegionSelectViewController {
     private func setup() {
-        
-        view.backgroundColor = .white
-        navigationItem.hidesBackButton = true
+        let frameWidth = view.frame.width * 0.11
         
         [
             collectionView,
@@ -148,10 +168,10 @@ extension RegionSelectViewController {
         }
         
         confirmButton.snp.makeConstraints {
-            $0.leading.equalTo(titleLabel)
-            $0.trailing.equalToSuperview().inset(48.0)
-            $0.height.equalTo(48.0)
-            $0.bottom.equalToSuperview().inset(87.0)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(view.frame.height * 0.096)
+            $0.width.equalTo(view.frame.width - 96.0)
+            $0.height.equalTo((view.frame.width - 96.0) * 0.15)
         }
     }
 }

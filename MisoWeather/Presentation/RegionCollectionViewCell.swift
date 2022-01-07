@@ -10,8 +10,8 @@ import UIKit
 
 final class RegionCollectionViewCell: UICollectionViewCell {
     
-    var active = ""
-    var inactive = ""
+    var active: String = ""
+    var inactive: String = ""
     
     private lazy var regionButton: UIImageView = {
         let imageView = UIImageView()
@@ -31,8 +31,6 @@ final class RegionCollectionViewCell: UICollectionViewCell {
     
     func setup(region: Region) {
         regionButton.image = UIImage(named: region.buttonInactive)
-        active = region.buttonActive
-        inactive = region.buttonInactive
         setupSubView()
     }
 }
