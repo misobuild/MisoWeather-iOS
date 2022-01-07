@@ -38,8 +38,8 @@ class RegionListViewController: UIViewController, SendDataDelegate {
     
     private lazy var regionLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 50.0, weight: .bold)
-        label.textColor = .black
+        label.font = .systemFont(ofSize: 30.0, weight: .bold)
+        label.textColor = .orange
         label.text = region
         return label
     }()
@@ -48,6 +48,15 @@ class RegionListViewController: UIViewController, SendDataDelegate {
         let button = customButton(type: .system)
         button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.isScrollEnabled = true
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .orange
+        return tableView
     }()
     
     @objc func nextVC() {
@@ -73,6 +82,24 @@ class RegionListViewController: UIViewController, SendDataDelegate {
     }
 }
 
+extension RegionListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell.init(style: .default, reuseIdentifier: "Cell")
+        cell.textLabel?.text = "중구"
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+}
+
+extension RegionListViewController: UITableViewDataSource {
+    
+}
+
 extension RegionListViewController {
  
     private func setup() {
@@ -81,6 +108,7 @@ extension RegionListViewController {
              questionLabel,
              subTitleLabel,
              regionLabel,
+             tableView,
              confirmButton,
         ].forEach{ view.addSubview($0) }
         
@@ -98,9 +126,17 @@ extension RegionListViewController {
             $0.leading.equalTo(questionLabel.snp.trailing).inset(5.0)
             $0.top.equalTo(titleLabel.snp.bottom).offset(10.0)
         }
+        
         regionLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(100.0)
+        }
+        
+        tableView.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
             $0.top.equalTo(questionLabel.snp.bottom).offset(100.0)
+            $0.width.equalTo(view.frame.width - 96.0)
+            $0.height.equalTo(300.0)
         }
         
         confirmButton.snp.makeConstraints {
@@ -108,7 +144,6 @@ extension RegionListViewController {
             $0.bottom.equalToSuperview().inset(view.frame.height * 0.096)
             $0.width.equalTo(view.frame.width - 96.0)
             $0.height.equalTo((view.frame.width - 96.0) * 0.15)
-            
         }
     }
 }

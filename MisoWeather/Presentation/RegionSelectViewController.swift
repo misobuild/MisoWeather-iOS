@@ -161,7 +161,7 @@ extension RegionSelectViewController {
         }
         
         collectionView.snp.makeConstraints{
-            $0.top.equalTo(questionLabel.snp.bottom).offset(109.0)
+            $0.top.equalTo(questionLabel.snp.bottom).offset(105.0)
             $0.width.equalTo(view.frame.width - 96.0)
             $0.height.equalTo((view.frame.width - 96.0) * 0.85)
             $0.centerX.equalToSuperview()
