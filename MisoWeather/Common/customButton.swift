@@ -11,12 +11,7 @@ class customButton: UIButton{
     
     override init(frame: CGRect) {
         super.init(frame: CGRect.zero)
-        self.backgroundColor = .black
-        self.frame = CGRect(x: 0, y: 0, width: 200, height: 400)
-        self.setTitleColor(.white, for: .normal)
-        self.setTitleColor(.gray, for: .highlighted)
-        self.backgroundColor = .orange
-        self.layer.cornerRadius = 10
+        self.setBackgroundImage(UIImage(named: "next_button"), for: .normal)
     }
     
     required init?(coder: NSCoder) {

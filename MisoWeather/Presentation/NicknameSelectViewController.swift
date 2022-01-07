@@ -1,5 +1,5 @@
 //
-//  nicknameSelectViewController.swift
+//  NicknameSelectViewController.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/05.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class nicknameSelectViewController: UIViewController {
+class NicknameSelectViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -36,7 +36,7 @@ class nicknameSelectViewController: UIViewController {
     
     private lazy var imoticonLable: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 150.0)
+        label.font = .systemFont(ofSize: 170.0)
         label.textColor = .black
         label.text = "🐣"
         return label
@@ -58,40 +58,41 @@ class nicknameSelectViewController: UIViewController {
         label.textColor = .gray
         label.textAlignment = .center
         label.text = """
-                    닉네임 새로 받기를 하면 새로운 닉네임이 랜덤으로 부여돼요!
-                    한 번 부여된 닉네임은 바꿀 수 없어요!
+                    닉네임이 마음에 들지 않으면 새로 받아보세요!
+                    한 번 결정한 닉네임은 바꿀 수 없어요
                     """
         return label
     }()
     
-    private lazy var confirmButton: customButton = {
-        let button = customButton()
-        button.setTitle("회원가입", for: .normal)
+    private lazy var confirmButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(named: "nicknameSelectButton"), for: .normal)
         button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
     }()
     
     @objc func nextVC() {
-        self.navigationController?.pushViewController(regionSelectViewController(), animated: true)
+        self.navigationController?.pushViewController(MainViewController(), animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.topItem?.title = ""
         setup()
     }
 }
 
-extension nicknameSelectViewController {
+extension NicknameSelectViewController {
     private func setup() {
         [titleLabel, nicknameLabel, subTitleLabel, imoticonLable, refreshButton, descriptionLabel, confirmButton].forEach{view.addSubview($0)}
         
         titleLabel.snp.makeConstraints{
-            $0.leading.equalToSuperview().inset(24.0)
+            $0.leading.equalToSuperview().inset(48.0)
             $0.top.equalToSuperview().inset(170.0)
         }
         nicknameLabel.snp.makeConstraints{
-            $0.leading.equalToSuperview().inset(24.0)
+            $0.leading.equalToSuperview().inset(48.0)
             $0.top.equalTo(titleLabel.snp.bottom).offset(5.0)
         }
         subTitleLabel.snp.makeConstraints{
@@ -100,24 +101,23 @@ extension nicknameSelectViewController {
         }
         imoticonLable.snp.makeConstraints{
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(nicknameLabel.snp.bottom).offset(30.0)
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(view.frame.height * 0.06)
         }
         refreshButton.snp.makeConstraints{
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(imoticonLable.snp.bottom).offset(30.0)
-            $0.leading.equalToSuperview().inset(24.0)
-            $0.trailing.equalToSuperview().inset(24.0)
+            $0.top.equalTo(imoticonLable.snp.bottom).offset(view.frame.height * 0.06)
+            $0.leading.equalToSuperview().inset(48.0)
+            $0.trailing.equalToSuperview().inset(48.0)
         }
         descriptionLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalTo(refreshButton.snp.bottom).offset(10.0)
         }
-        confirmButton.snp.makeConstraints{
+        confirmButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(refreshButton.snp.bottom).offset(100.0)
-            $0.leading.equalToSuperview().inset(24.0)
-            $0.trailing.equalToSuperview().inset(24.0)
-            $0.height.equalTo(50.0)
+            $0.bottom.equalToSuperview().inset(view.frame.height * 0.096)
+            $0.width.equalTo(view.frame.width - 96.0)
+            $0.height.equalTo((view.frame.width - 96.0) * 0.15)
         }
     }
 }
