@@ -7,6 +7,8 @@
 
 import UIKit
 import KakaoSDKUser
+import KakaoSDKAuth
+import KakaoSDKCommon
 import SnapKit
 
 class RegisterViewController: UIViewController {
@@ -18,7 +20,7 @@ class RegisterViewController: UIViewController {
         button.setImage(UIImage(named: "kakaoLoginButton"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
-        button.addTarget(self, action: #selector(kakaoLogin), for: .touchUpInside)
+        button.addTarget(self, action: #selector(hasKakaoToken), for: .touchUpInside)
         return button
     }()
     
@@ -42,7 +44,35 @@ class RegisterViewController: UIViewController {
         self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
     }
     
-    @objc func kakaoLogin() {
+    @objc func hasKakaoToken() {
+
+        if (AuthApi.hasToken()) {
+            UserApi.shared.accessTokenInfo { (_, error) in
+                if let error = error {
+                    if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true  {
+                        //로그인 필요
+                        print("로그인 필요")
+                        self.kakaoLogin()
+                    }
+                    else {
+                        //기타 에러
+                    }
+                }
+                else {
+                    //토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
+                    print("토큰 유효성 체크 성공")
+                    self.getUserInfo()
+                }
+            }
+        }
+        else {
+            //로그인 필요
+            print("로그인 필요2")
+            self.kakaoLogin()
+        }
+    }
+    
+    private func kakaoLogin(){
         // 카카오톡 설치 여부 확인
         if (UserApi.isKakaoTalkLoginAvailable()) {
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
@@ -65,6 +95,7 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    
     private func getUserInfo() {
         //  사용자 정보 가져오기
         UserApi.shared.me() {(user, error) in
@@ -83,7 +114,7 @@ class RegisterViewController: UIViewController {
         }
     }
     
-    // MARK: - LifeCycle MEthods
+    // MARK: - LifeCycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +128,7 @@ class RegisterViewController: UIViewController {
 }
 
 extension RegisterViewController {
-    // MARK: - HElpors
+    // MARK: - Helpers
     private func setup() {
         [kakaoLoginButon, nonLoginButton ,titleLabel].forEach{ view.addSubview($0) }
         

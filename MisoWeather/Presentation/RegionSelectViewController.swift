@@ -17,6 +17,7 @@ class RegionSelectViewController: UIViewController {
     var delegate: SendDataDelegate?
     
     private var regionList: [Region] = []
+    
     private var regionTitle: String = ""
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
