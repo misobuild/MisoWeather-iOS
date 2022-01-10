@@ -10,27 +10,35 @@ import UIKit
 
 final class RegionCollectionViewCell: UICollectionViewCell {
     
-    var active: String = ""
-    var inactive: String = ""
-    
-    private lazy var regionButton: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
+    private lazy var regionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18.0, weight: .medium)
+        label.textAlignment = .center
+        label.textColor = .black
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.cornerRadius = 18
+        
+        return label
     }()
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                regionButton.image = UIImage(named: active)
+                regionLabel.textColor = .white
+                regionLabel.layer.borderColor = UIColor.white.cgColor
+                regionLabel.layer.masksToBounds = true
+                regionLabel.backgroundColor = .black
             } else {
-                regionButton.image = UIImage(named: inactive)
+                regionLabel.textColor = .black
+                regionLabel.layer.borderColor = UIColor.black.cgColor
+                regionLabel.backgroundColor = .white
             }
         }
     }
     
-    func setup(region: Region) {
-        regionButton.image = UIImage(named: region.buttonInactive)
+    func setup(region: String) {
+        regionLabel.text = region
         setupSubView()
     }
 }
@@ -38,13 +46,12 @@ final class RegionCollectionViewCell: UICollectionViewCell {
 
 private extension RegionCollectionViewCell{
     func setupSubView() {
-        contentView.addSubview(regionButton)
+        contentView.addSubview(regionLabel)
         
-        regionButton.snp.makeConstraints {
+        regionLabel.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
 }
-
 
 

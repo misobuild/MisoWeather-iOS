@@ -14,9 +14,9 @@ protocol SendDataDelegate {
 
 class RegionSelectViewController: UIViewController {
     
-    var delegate: SendDataDelegate?
+    let regionList = ["서울", "경기", "인천", "대전", "세종", "충북", "충남", "광주", "전북", "전남", "대구", "부산", "울산", "경북", "경남", "강원", "제주"]
     
-    private var regionList: [Region] = []
+    var delegate: SendDataDelegate?
     
     private var regionTitle: String = ""
     private lazy var collectionView: UICollectionView = {
@@ -27,7 +27,7 @@ class RegionSelectViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
-
+        
         collectionView.register(RegionCollectionViewCell.self, forCellWithReuseIdentifier: "RegionCollectionViewCell")
         
         return collectionView
@@ -76,17 +76,16 @@ class RegionSelectViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.topItem?.title = ""
         view.backgroundColor = .white
-        fetchData()
         setup()
     }
 }
-        
+
 extension RegionSelectViewController: SendDataDelegate {
     func sendData(data: String) {
         titleLabel.text = data
     }
 }
-        
+
 extension RegionSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return regionList.count
@@ -94,10 +93,8 @@ extension RegionSelectViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as! RegionCollectionViewCell
-        let region = regionList[indexPath.item]
+        let region = regionList[indexPath.row]
         cell.setup(region: region)
-        cell.inactive = region.buttonInactive
-        cell.active = region.buttonActive
         return cell
     }
 }
@@ -116,34 +113,19 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let region = regionList[indexPath.item]
-        regionTitle = region.region
-        print("Selected cell: (\(indexPath.section), \(region.region))")
-    }
-}
-
-private extension RegionSelectViewController{
-    func fetchData() {
-        guard let url = Bundle.main.url(forResource: "Region", withExtension: "plist") else {return}
-        
-        do{
-            let data = try Data(contentsOf: url)
-            let result = try PropertyListDecoder().decode([Region].self, from: data)
-            regionList = result
-        } catch {}
+        let region = regionList[indexPath.row]
+        print("Selected cell: (\(indexPath.section), \(region))")
     }
 }
 
 extension RegionSelectViewController {
     private func setup() {
-        let frameWidth = view.frame.width * 0.11
-        
         [
             collectionView,
-             titleLabel,
-             questionLabel,
-             subTitleLabel,
-             confirmButton
+            titleLabel,
+            questionLabel,
+            subTitleLabel,
+            confirmButton
         ].forEach{ view.addSubview($0) }
         
         titleLabel.snp.makeConstraints {
