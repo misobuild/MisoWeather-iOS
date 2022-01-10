@@ -22,7 +22,6 @@
 		E8E65BBA2782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */; };
 		E8E65BC82782E0E200FFA0FA /* RegionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */; };
 		E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */; };
-		E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BDA27858A7D00FFA0FA /* customButton.swift */; };
 		E8FB85ED278C2F9B0007DE27 /* RegionSelectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB85EC278C2F9B0007DE27 /* RegionSelectListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +68,6 @@
 		E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisoWeatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSelectViewController.swift; sourceTree = "<group>"; };
-		E8E65BDA27858A7D00FFA0FA /* customButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customButton.swift; sourceTree = "<group>"; };
 		E8FB85EC278C2F9B0007DE27 /* RegionSelectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -240,7 +238,6 @@
 		E8E65BD7278587D500FFA0FA /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				E8E65BDA27858A7D00FFA0FA /* customButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -527,7 +524,6 @@
 				E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */,
 				E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */,
 				E839205827869D99006A1D1B /* MainViewController.swift in Sources */,
-				E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */,
 				E8FB85ED278C2F9B0007DE27 /* RegionSelectListViewController.swift in Sources */,
 				E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */,
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,

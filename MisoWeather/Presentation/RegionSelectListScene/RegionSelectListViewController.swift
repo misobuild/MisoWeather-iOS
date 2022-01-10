@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RegionListViewController: UIViewController, SendDataDelegate {
+class RegionListViewController: UIViewController {
     
     var region = "값 없음"
     
@@ -44,8 +44,9 @@ class RegionListViewController: UIViewController, SendDataDelegate {
         return label
     }()
     
-    private lazy var confirmButton: customButton = {
-        let button = customButton(type: .system)
+    private lazy var confirmButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(named: "nextButton"), for: .normal)
         button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
     }()
@@ -73,12 +74,6 @@ class RegionListViewController: UIViewController, SendDataDelegate {
         self.navigationController?.navigationBar.topItem?.title = ""
         
         setup()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination.children.first as? RegionSelectViewController {
-            vc.delegate = self
-        }
     }
 }
 

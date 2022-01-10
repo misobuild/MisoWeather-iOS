@@ -22,18 +22,10 @@ class NicknameSelectViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 27.0, weight: .black)
         label.textColor = .black
-        label.text = "부산의 귀여운 병아리"
+        label.text = "부산의 귀여운 삐약병아리님!"
         return label
     }()
-    
-    private lazy var subTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 25.0, weight: .light)
-        label.textColor = .black
-        label.text = " 님!"
-        return label
-    }()
-    
+
     private lazy var imoticonLable: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 170.0)
@@ -85,34 +77,35 @@ class NicknameSelectViewController: UIViewController {
 
 extension NicknameSelectViewController {
     private func setup() {
-        [titleLabel, nicknameLabel, subTitleLabel, imoticonLable, refreshButton, descriptionLabel, confirmButton].forEach{view.addSubview($0)}
+        [titleLabel, nicknameLabel, imoticonLable, refreshButton, descriptionLabel, confirmButton].forEach{view.addSubview($0)}
         
         titleLabel.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(48.0)
             $0.top.equalToSuperview().inset(170.0)
         }
+        
         nicknameLabel.snp.makeConstraints{
             $0.leading.equalToSuperview().inset(48.0)
             $0.top.equalTo(titleLabel.snp.bottom).offset(5.0)
         }
-        subTitleLabel.snp.makeConstraints{
-            $0.top.equalTo(nicknameLabel)
-            $0.leading.equalTo(nicknameLabel.snp.trailing).inset(1.0)
-        }
+        
         imoticonLable.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalTo(nicknameLabel.snp.bottom).offset(view.frame.height * 0.06)
         }
+        
         refreshButton.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalTo(imoticonLable.snp.bottom).offset(view.frame.height * 0.06)
             $0.leading.equalToSuperview().inset(48.0)
             $0.trailing.equalToSuperview().inset(48.0)
         }
+        
         descriptionLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalTo(refreshButton.snp.bottom).offset(10.0)
         }
+        
         confirmButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().inset(view.frame.height * 0.096)

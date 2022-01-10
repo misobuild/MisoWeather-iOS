@@ -106,15 +106,13 @@ class RegisterViewController: UIViewController {
                 print("me() success.")
                 
                 //  닉네임, 이메일 정보
-                let nickname = user?.kakaoAccount?.profile?.nickname
+                //let nickname = user?.kakaoAccount?.profile?.nickname
                 self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
                 
             }
         }
     }
-    
     // MARK: - LifeCycle Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = .black
