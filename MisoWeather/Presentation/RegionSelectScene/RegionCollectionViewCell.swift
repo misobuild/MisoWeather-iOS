@@ -39,13 +39,15 @@ final class RegionCollectionViewCell: UICollectionViewCell {
     
     func setup(region: String) {
         regionLabel.text = region
-        setupSubView()
+        
+        setupView()
     }
 }
 
-
 private extension RegionCollectionViewCell{
-    func setupSubView() {
+    
+    // MARK: - Layout
+    func setupView() {
         contentView.addSubview(regionLabel)
         
         regionLabel.snp.makeConstraints {

@@ -10,6 +10,7 @@ import SnapKit
 
 class NicknameSelectViewController: UIViewController {
     
+    //MARK: - Subviews
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 25.0, weight: .light)
@@ -67,16 +68,20 @@ class NicknameSelectViewController: UIViewController {
         self.navigationController?.pushViewController(MainViewController(), animated: true)
     }
     
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
-        setup()
+        
+        setupView()
     }
 }
 
 extension NicknameSelectViewController {
-    private func setup() {
+    
+    // MARK: - Layout
+    private func setupView() {
         [titleLabel, nicknameLabel, imoticonLable, refreshButton, descriptionLabel, confirmButton].forEach{view.addSubview($0)}
         
         titleLabel.snp.makeConstraints{
