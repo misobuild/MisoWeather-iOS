@@ -120,7 +120,7 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
 
 extension RegionSelectViewController {
     private func setup() {
-        [
+        
             collectionView,
             titleLabel,
             questionLabel,
