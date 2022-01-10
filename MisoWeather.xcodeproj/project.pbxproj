@@ -12,7 +12,6 @@
 		763FFD8DAF1CEDE900216580 /* Pods_MisoWeather_MisoWeatherUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E634486436168330A45E6928 /* Pods_MisoWeather_MisoWeatherUITests.framework */; };
 		E839205827869D99006A1D1B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205727869D99006A1D1B /* MainViewController.swift */; };
 		E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */; };
-		E8392069278871E1006A1D1B /* RegionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8392068278871E1006A1D1B /* RegionListViewController.swift */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
 		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
@@ -55,7 +54,6 @@
 		E634486436168330A45E6928 /* Pods_MisoWeather_MisoWeatherUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MisoWeather_MisoWeatherUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E839205727869D99006A1D1B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionCollectionViewCell.swift; sourceTree = "<group>"; };
-		E8392068278871E1006A1D1B /* RegionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionListViewController.swift; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -214,12 +212,10 @@
 		E8E65BCF2783032300FFA0FA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */,
-				E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */,
-				E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */,
-				E8392068278871E1006A1D1B /* RegionListViewController.swift */,
-				E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */,
-				E839205727869D99006A1D1B /* MainViewController.swift */,
+				E8FB85EA278C18A40007DE27 /* MainScene */,
+				E8FB85E9278C18920007DE27 /* NicknameSelectScene */,
+				E8FB85E8278C18850007DE27 /* RegionSelectScene */,
+				E8FB85E7278C187D0007DE27 /* RegisterScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -244,6 +240,39 @@
 				E8E65BDA27858A7D00FFA0FA /* customButton.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		E8FB85E7278C187D0007DE27 /* RegisterScene */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */,
+			);
+			path = RegisterScene;
+			sourceTree = "<group>";
+		};
+		E8FB85E8278C18850007DE27 /* RegionSelectScene */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */,
+				E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */,
+			);
+			path = RegionSelectScene;
+			sourceTree = "<group>";
+		};
+		E8FB85E9278C18920007DE27 /* NicknameSelectScene */ = {
+			isa = PBXGroup;
+			children = (
+				E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */,
+			);
+			path = NicknameSelectScene;
+			sourceTree = "<group>";
+		};
+		E8FB85EA278C18A40007DE27 /* MainScene */ = {
+			isa = PBXGroup;
+			children = (
+				E839205727869D99006A1D1B /* MainViewController.swift */,
+			);
+			path = MainScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,7 +514,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */,
-				E8392069278871E1006A1D1B /* RegionListViewController.swift in Sources */,
 				E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */,
 				E839205827869D99006A1D1B /* MainViewController.swift in Sources */,
 				E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */,

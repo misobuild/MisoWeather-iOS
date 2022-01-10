@@ -66,9 +66,7 @@ class RegionSelectViewController: UIViewController {
     @objc func nextVC() {
         if let data = questionLabel.text {
             delegate?.sendData(data: data)
-            let vc = RegionListViewController()
-            vc.region = regionTitle
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(NicknameSelectViewController(), animated: true)
         }
     }
     
@@ -120,7 +118,7 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
 
 extension RegionSelectViewController {
     private func setup() {
-        
+        [
             collectionView,
             titleLabel,
             questionLabel,
