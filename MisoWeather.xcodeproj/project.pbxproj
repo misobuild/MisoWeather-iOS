@@ -23,6 +23,7 @@
 		E8E65BC82782E0E200FFA0FA /* RegionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */; };
 		E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */; };
 		E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BDA27858A7D00FFA0FA /* customButton.swift */; };
+		E8FB85ED278C2F9B0007DE27 /* RegionSelectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB85EC278C2F9B0007DE27 /* RegionSelectListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSelectViewController.swift; sourceTree = "<group>"; };
 		E8E65BDA27858A7D00FFA0FA /* customButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customButton.swift; sourceTree = "<group>"; };
+		E8FB85EC278C2F9B0007DE27 /* RegionSelectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 				E8FB85EA278C18A40007DE27 /* MainScene */,
 				E8FB85E9278C18920007DE27 /* NicknameSelectScene */,
 				E8FB85E8278C18850007DE27 /* RegionSelectScene */,
+				E8FB85EB278C2F4D0007DE27 /* RegionSelectListScene */,
 				E8FB85E7278C187D0007DE27 /* RegisterScene */,
 			);
 			path = Presentation;
@@ -273,6 +276,14 @@
 				E839205727869D99006A1D1B /* MainViewController.swift */,
 			);
 			path = MainScene;
+			sourceTree = "<group>";
+		};
+		E8FB85EB278C2F4D0007DE27 /* RegionSelectListScene */ = {
+			isa = PBXGroup;
+			children = (
+				E8FB85EC278C2F9B0007DE27 /* RegionSelectListViewController.swift */,
+			);
+			path = RegionSelectListScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -517,6 +528,7 @@
 				E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */,
 				E839205827869D99006A1D1B /* MainViewController.swift in Sources */,
 				E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */,
+				E8FB85ED278C2F9B0007DE27 /* RegionSelectListViewController.swift in Sources */,
 				E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */,
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,
 				E8E65BC82782E0E200FFA0FA /* RegionSelectViewController.swift in Sources */,
