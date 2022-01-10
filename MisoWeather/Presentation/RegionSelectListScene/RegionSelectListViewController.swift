@@ -1,8 +1,8 @@
 //
-//  RegionListViewController.swift
+//  RegionSelectListViewController.swift
 //  MisoWeather
 //
-//  Created by jiinheo on 2022/01/07.
+//  Created by jiinheo on 2022/01/10.
 //
 
 import UIKit
@@ -147,4 +147,3 @@ extension RegionListViewController {
         }
     }
 }
-
