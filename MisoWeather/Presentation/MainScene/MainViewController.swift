@@ -9,6 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    //MARK: - subviews
     private lazy var imoticonLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize:40.0, weight: .regular)
@@ -46,16 +47,20 @@ class MainViewController: UIViewController {
         return view
     }()
     
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.hidesBackButton = true
-        setup()
+        
+        setupView()
     }
 }
 
 extension MainViewController {
-    private func setup() {
+    
+    // MARK: - Layout
+    private func setupView() {
         [imoticonLabel, titleLabel, weatherView, graphView].forEach{view.addSubview($0)}
         
         imoticonLabel.snp.makeConstraints{

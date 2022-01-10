@@ -8,10 +8,9 @@
 import UIKit
 import SnapKit
 
-class RegionListViewController: UIViewController, SendDataDelegate {
+class RegionListViewController: UIViewController {
     
-    var region = "값 없음"
-    
+    //MARK: - Subviews
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 26.0, weight: .light)
@@ -36,16 +35,9 @@ class RegionListViewController: UIViewController, SendDataDelegate {
         return label
     }()
     
-    private lazy var regionLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 30.0, weight: .bold)
-        label.textColor = .orange
-        label.text = region
-        return label
-    }()
-    
-    private lazy var confirmButton: customButton = {
-        let button = customButton(type: .system)
+    private lazy var confirmButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(named: "nextButton"), for: .normal)
         button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
     }()
@@ -55,7 +47,7 @@ class RegionListViewController: UIViewController, SendDataDelegate {
         tableView.isScrollEnabled = true
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .orange
+        tableView.backgroundColor = .black
         return tableView
     }()
     
@@ -63,22 +55,13 @@ class RegionListViewController: UIViewController, SendDataDelegate {
         self.navigationController?.pushViewController(NicknameSelectViewController(), animated: true)
     }
     
-    func sendData(data: String) {
-
-    }
-    
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
         
-        setup()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination.children.first as? RegionSelectViewController {
-            vc.delegate = self
-        }
+        setupView()
     }
 }
 
@@ -101,15 +84,15 @@ extension RegionListViewController: UITableViewDataSource {
 }
 
 extension RegionListViewController {
- 
-    private func setup() {
+    
+    // MARK: - Layout
+    private func setupView() {
         [
-             titleLabel,
-             questionLabel,
-             subTitleLabel,
-             regionLabel,
-             tableView,
-             confirmButton,
+            titleLabel,
+            questionLabel,
+            subTitleLabel,
+            tableView,
+            confirmButton,
         ].forEach{ view.addSubview($0) }
         
         titleLabel.snp.makeConstraints {
@@ -125,11 +108,6 @@ extension RegionListViewController {
         subTitleLabel.snp.makeConstraints {
             $0.leading.equalTo(questionLabel.snp.trailing).inset(5.0)
             $0.top.equalTo(titleLabel.snp.bottom).offset(10.0)
-        }
-        
-        regionLabel.snp.makeConstraints{
-            $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(100.0)
         }
         
         tableView.snp.makeConstraints{

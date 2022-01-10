@@ -13,8 +13,7 @@ import SnapKit
 
 class RegisterViewController: UIViewController {
     
-    //MARK: - subviews
-    
+    //MARK: - Subviews
     private lazy var kakaoLoginButon: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "kakaoLoginButton"), for: .normal)
@@ -95,7 +94,6 @@ class RegisterViewController: UIViewController {
         }
     }
     
-    
     private func getUserInfo() {
         //  사용자 정보 가져오기
         UserApi.shared.me() {(user, error) in
@@ -106,7 +104,7 @@ class RegisterViewController: UIViewController {
                 print("me() success.")
                 
                 //  닉네임, 이메일 정보
-                let nickname = user?.kakaoAccount?.profile?.nickname
+                //let nickname = user?.kakaoAccount?.profile?.nickname
                 self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
                 
             }
@@ -114,7 +112,6 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - LifeCycle Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = .black
@@ -122,13 +119,13 @@ class RegisterViewController: UIViewController {
         
         self.navigationItem.backBarButtonItem = backBarButtonItem
 
-        setup()
+        setupView()
     }
 }
 
 extension RegisterViewController {
-    // MARK: - Helpers
-    private func setup() {
+    // MARK: - Layout
+    private func setupView() {
         [kakaoLoginButon, nonLoginButton ,titleLabel].forEach{ view.addSubview($0) }
         
         titleLabel.snp.makeConstraints{
