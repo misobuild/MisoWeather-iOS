@@ -12,11 +12,13 @@ PODS:
   - KakaoSDKUser (2.8.4):
     - KakaoSDKAuth (= 2.8.4)
   - SnapKit (5.0.1)
+  - SwiftLint (0.45.1)
 
 DEPENDENCIES:
   - KakaoSDKAuth
   - KakaoSDKUser
   - SnapKit (~> 5.0.0)
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
@@ -25,6 +27,7 @@ SPEC REPOS:
     - KakaoSDKCommon
     - KakaoSDKUser
     - SnapKit
+    - SwiftLint
 
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
@@ -32,7 +35,8 @@ SPEC CHECKSUMS:
   KakaoSDKCommon: 33c9902ee9ce13e9d1cac3549896406229836ff5
   KakaoSDKUser: d878977e0ba6b365cfeac3b6319cdf4231713bea
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
 
-PODFILE CHECKSUM: 677ae268dd98513a2f2b7e99ecce42ffba1a0085
+PODFILE CHECKSUM: c100c77cd513c55e2720849cbd00b9b3e908796f
 
 COCOAPODS: 1.11.2
