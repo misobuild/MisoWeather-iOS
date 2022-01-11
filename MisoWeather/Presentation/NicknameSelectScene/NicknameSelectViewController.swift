@@ -10,7 +10,7 @@ import SnapKit
 
 class NicknameSelectViewController: UIViewController {
     
-    //MARK: - Subviews
+    // MARK: - Subviews
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 25.0, weight: .light)
@@ -82,31 +82,31 @@ extension NicknameSelectViewController {
     
     // MARK: - Layout
     private func setupView() {
-        [titleLabel, nicknameLabel, imoticonLable, refreshButton, descriptionLabel, confirmButton].forEach{view.addSubview($0)}
+        [titleLabel, nicknameLabel, imoticonLable, refreshButton, descriptionLabel, confirmButton].forEach {view.addSubview($0)}
         
-        titleLabel.snp.makeConstraints{
+        titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(48.0)
             $0.top.equalToSuperview().inset(170.0)
         }
-        
-        nicknameLabel.snp.makeConstraints{
+         
+        nicknameLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(48.0)
             $0.top.equalTo(titleLabel.snp.bottom).offset(5.0)
         }
         
-        imoticonLable.snp.makeConstraints{
+        imoticonLable.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(nicknameLabel.snp.bottom).offset(view.frame.height * 0.06)
         }
         
-        refreshButton.snp.makeConstraints{
+        refreshButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(imoticonLable.snp.bottom).offset(view.frame.height * 0.06)
             $0.leading.equalToSuperview().inset(48.0)
             $0.trailing.equalToSuperview().inset(48.0)
         }
         
-        descriptionLabel.snp.makeConstraints{
+        descriptionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(refreshButton.snp.bottom).offset(10.0)
         }

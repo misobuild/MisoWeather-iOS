@@ -10,7 +10,7 @@ import SnapKit
 
 class RegionListViewController: UIViewController {
     
-    //MARK: - Subviews
+    // MARK: - Subviews
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 26.0, weight: .light)
@@ -92,8 +92,8 @@ extension RegionListViewController {
             questionLabel,
             subTitleLabel,
             tableView,
-            confirmButton,
-        ].forEach{ view.addSubview($0) }
+            confirmButton
+        ].forEach {view.addSubview($0)}
         
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(48.0)
@@ -110,7 +110,7 @@ extension RegionListViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(10.0)
         }
         
-        tableView.snp.makeConstraints{
+        tableView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(questionLabel.snp.bottom).offset(100.0)
             $0.width.equalTo(view.frame.width - 96.0)
