@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class RegionListViewController: UIViewController {
+
+    weak var delegate: SendDelegate?
     
     // MARK: - Subviews
     private lazy var titleLabel: UILabel = {
@@ -52,6 +54,7 @@ class RegionListViewController: UIViewController {
     }()
     
     @objc func nextVC() {
+        
         self.navigationController?.pushViewController(NicknameSelectViewController(), animated: true)
     }
     
@@ -60,7 +63,9 @@ class RegionListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
-        
+                
+        guard let data = self.delegate?.sendData() else {return}
+        print("넘어온 데이터: \(data)")
         setupView()
     }
 }

@@ -12,6 +12,8 @@ class RegionSelectViewController: UIViewController {
     
     let regionList = ["서울", "경기", "인천", "대전", "세종", "충북", "충남", "광주", "전북", "전남", "대구", "부산", "울산", "경북", "경남", "강원", "제주"]
     
+    var selectRegion: String = "서울"
+    
     // MARK: - subviews
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -59,7 +61,10 @@ class RegionSelectViewController: UIViewController {
     }()
     
     @objc func nextVC() {
-        self.navigationController?.pushViewController(RegionListViewController(), animated: true)
+        let nextVC = RegionListViewController()
+        nextVC.delegate = self
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     // MARK: - LifeCycle Methods
@@ -81,6 +86,12 @@ extension RegionSelectViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as? RegionCollectionViewCell
         let region = regionList[indexPath.row]
         cell?.setup(region: region)
+        
+        if indexPath.item == 0 {
+            cell?.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+        }
+        
         return cell ?? RegionCollectionViewCell()
     }
 }
@@ -99,8 +110,8 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        // let region = regionList[indexPath.row]
+         let region = regionList[indexPath.row]
+        selectRegion = region
     }
 }
 
@@ -144,5 +155,11 @@ extension RegionSelectViewController {
             $0.width.equalTo(view.frame.width - 96.0)
             $0.height.equalTo((view.frame.width - 96.0) * 0.15)
         }
+    }
+}
+
+extension RegionSelectViewController: SendDelegate {
+    func sendData() -> String {
+        return selectRegion
     }
 }
