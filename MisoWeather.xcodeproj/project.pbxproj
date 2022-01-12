@@ -22,8 +22,9 @@
 		E8E65BBA2782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */; };
 		E8E65BC82782E0E200FFA0FA /* RegionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */; };
 		E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */; };
-		E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BDA27858A7D00FFA0FA /* customButton.swift */; };
 		E8FB85ED278C2F9B0007DE27 /* RegionSelectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB85EC278C2F9B0007DE27 /* RegionSelectListViewController.swift */; };
+		E8FB85F0278D45DD0007DE27 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = E8FB85EF278D45DD0007DE27 /* .swiftlint.yml */; };
+		E8FB85F3278DB7F40007DE27 /* SendDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB85F2278DB7F40007DE27 /* SendDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,8 +70,9 @@
 		E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisoWeatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSelectViewController.swift; sourceTree = "<group>"; };
-		E8E65BDA27858A7D00FFA0FA /* customButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customButton.swift; sourceTree = "<group>"; };
 		E8FB85EC278C2F9B0007DE27 /* RegionSelectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectListViewController.swift; sourceTree = "<group>"; };
+		E8FB85EF278D45DD0007DE27 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		E8FB85F2278DB7F40007DE27 /* SendDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		E8E65B8A2782D4AC00FFA0FA = {
 			isa = PBXGroup;
 			children = (
+				E8FB85EF278D45DD0007DE27 /* .swiftlint.yml */,
 				E8E65B952782D4AC00FFA0FA /* MisoWeather */,
 				E8E65BAC2782D4AE00FFA0FA /* MisoWeatherTests */,
 				E8E65BB62782D4AE00FFA0FA /* MisoWeatherUITests */,
@@ -214,11 +217,11 @@
 		E8E65BCF2783032300FFA0FA /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				E8FB85EA278C18A40007DE27 /* MainScene */,
-				E8FB85E9278C18920007DE27 /* NicknameSelectScene */,
+				E8FB85E7278C187D0007DE27 /* RegisterScene */,
 				E8FB85E8278C18850007DE27 /* RegionSelectScene */,
 				E8FB85EB278C2F4D0007DE27 /* RegionSelectListScene */,
-				E8FB85E7278C187D0007DE27 /* RegisterScene */,
+				E8FB85E9278C18920007DE27 /* NicknameSelectScene */,
+				E8FB85EA278C18A40007DE27 /* MainScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -240,7 +243,6 @@
 		E8E65BD7278587D500FFA0FA /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				E8E65BDA27858A7D00FFA0FA /* customButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -258,6 +260,7 @@
 			children = (
 				E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */,
 				E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */,
+				E8FB85F2278DB7F40007DE27 /* SendDelegate.swift */,
 			);
 			path = RegionSelectScene;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				E8E65B902782D4AC00FFA0FA /* Frameworks */,
 				E8E65B912782D4AC00FFA0FA /* Resources */,
 				DC3BB6AFF1DAA72B1550FC0B /* [CP] Embed Pods Frameworks */,
+				E8FB85EE278D435F0007DE27 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -395,6 +399,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8FB85F0278D45DD0007DE27 /* .swiftlint.yml in Resources */,
 				E8E65BA32782D4AE00FFA0FA /* LaunchScreen.storyboard in Resources */,
 				E8E65BA02782D4AE00FFA0FA /* Assets.xcassets in Resources */,
 			);
@@ -517,6 +522,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E8FB85EE278D435F0007DE27 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -527,7 +549,7 @@
 				E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */,
 				E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */,
 				E839205827869D99006A1D1B /* MainViewController.swift in Sources */,
-				E8E65BDB27858A7D00FFA0FA /* customButton.swift in Sources */,
+				E8FB85F3278DB7F40007DE27 /* SendDelegate.swift in Sources */,
 				E8FB85ED278C2F9B0007DE27 /* RegionSelectListViewController.swift in Sources */,
 				E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */,
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,

@@ -8,17 +8,13 @@
 import UIKit
 import SnapKit
 
-protocol SendDataDelegate {
-    func sendData(data: String)
-}
-
 class RegionSelectViewController: UIViewController {
     
     let regionList = ["서울", "경기", "인천", "대전", "세종", "충북", "충남", "광주", "전북", "전남", "대구", "부산", "울산", "경북", "경남", "강원", "제주"]
     
-    var delegate: SendDataDelegate?
+    var selectRegion: String = "서울"
     
-    private var regionTitle: String = ""
+    // MARK: - subviews
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
@@ -57,30 +53,27 @@ class RegionSelectViewController: UIViewController {
         return label
     }()
     
-    private lazy var confirmButton: customButton = {
-        let button = customButton(type: .system)
+    private lazy var confirmButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(named: "nextButton"), for: .normal)
         button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
     }()
     
     @objc func nextVC() {
-        if let data = questionLabel.text {
-            delegate?.sendData(data: data)
-            self.navigationController?.pushViewController(NicknameSelectViewController(), animated: true)
-        }
+        let nextVC = RegionListViewController()
+        nextVC.delegate = self
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.topItem?.title = ""
         view.backgroundColor = .white
-        setup()
-    }
-}
-
-extension RegionSelectViewController: SendDataDelegate {
-    func sendData(data: String) {
-        titleLabel.text = data
+        
+        setupView()
     }
 }
 
@@ -90,20 +83,26 @@ extension RegionSelectViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as! RegionCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as? RegionCollectionViewCell
         let region = regionList[indexPath.row]
-        cell.setup(region: region)
-        return cell
+        cell?.setup(region: region)
+        
+        if indexPath.item == 0 {
+            cell?.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
+        }
+        
+        return cell ?? RegionCollectionViewCell()
     }
 }
 
 extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width:(view.frame.width - 98.0 - 30) / 4 , height:(view.frame.width - 98.0 - 30) / 4 * 0.6)
+        CGSize(width: (view.frame.width - 98.0 - 30) / 4, height: (view.frame.width - 98.0 - 30) / 4 * 0.6)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        5.0
+        return 5.0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -111,20 +110,22 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let region = regionList[indexPath.row]
-        print("Selected cell: (\(indexPath.section), \(region))")
+         let region = regionList[indexPath.row]
+        selectRegion = region
     }
 }
 
 extension RegionSelectViewController {
-    private func setup() {
+    
+    // MARK: - Layout
+    private func setupView() {
         [
             collectionView,
             titleLabel,
             questionLabel,
             subTitleLabel,
             confirmButton
-        ].forEach{ view.addSubview($0) }
+        ].forEach {view.addSubview($0)}
         
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(48.0)
@@ -141,7 +142,7 @@ extension RegionSelectViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(10.0)
         }
         
-        collectionView.snp.makeConstraints{
+        collectionView.snp.makeConstraints {
             $0.top.equalTo(questionLabel.snp.bottom).offset(105.0)
             $0.width.equalTo(view.frame.width - 96.0)
             $0.height.equalTo((view.frame.width - 96.0) * 0.85)
@@ -154,5 +155,11 @@ extension RegionSelectViewController {
             $0.width.equalTo(view.frame.width - 96.0)
             $0.height.equalTo((view.frame.width - 96.0) * 0.15)
         }
+    }
+}
+
+extension RegionSelectViewController: SendDelegate {
+    func sendData() -> String {
+        return selectRegion
     }
 }

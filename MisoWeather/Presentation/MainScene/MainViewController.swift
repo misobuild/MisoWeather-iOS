@@ -9,9 +9,10 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    // MARK: - subviews
     private lazy var imoticonLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize:40.0, weight: .regular)
+        label.font = .systemFont(ofSize: 40.0, weight: .regular)
         label.text = "🐣"
         label.backgroundColor = .black
         label.clipsToBounds = true
@@ -46,38 +47,42 @@ class MainViewController: UIViewController {
         return view
     }()
     
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.hidesBackButton = true
-        setup()
+        
+        setupView()
     }
 }
 
 extension MainViewController {
-    private func setup() {
-        [imoticonLabel, titleLabel, weatherView, graphView].forEach{view.addSubview($0)}
+    
+    // MARK: - Layout
+    private func setupView() {
+        [imoticonLabel, titleLabel, weatherView, graphView].forEach {view.addSubview($0)}
         
-        imoticonLabel.snp.makeConstraints{
+        imoticonLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(24.0)
             $0.top.equalToSuperview().inset(60.0)
             $0.width.equalTo(55.0)
             $0.height.equalTo(55.0)
         }
         
-        titleLabel.snp.makeConstraints{
+        titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(24.0)
             $0.top.equalTo(imoticonLabel.snp.bottom).offset(10.0)
         }
         
-        weatherView.snp.makeConstraints{
+        weatherView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(15.0)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(330.0)
             $0.width.equalTo(330.0)
         }
         
-        graphView.snp.makeConstraints{
+        graphView.snp.makeConstraints {
             $0.top.equalTo(weatherView.snp.bottom).offset(15.0)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(330.0)
