@@ -126,6 +126,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E83E00F8279001ED00C4661A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E83E00F9279001F400C4661A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		E83E00FA279001FC00C4661A /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		E8E65B8A2782D4AC00FFA0FA = {
 			isa = PBXGroup;
 			children = (
@@ -153,8 +174,8 @@
 			isa = PBXGroup;
 			children = (
 				E8E65BCE2783026700FFA0FA /* Application */,
-				E8E65BCA278301DF00FFA0FA /* Data */,
-				E8E65BD7278587D500FFA0FA /* Common */,
+				E83E00F9279001F400C4661A /* Common */,
+				E83E00F8279001ED00C4661A /* Data */,
 				E8E65BCB278301E600FFA0FA /* Domain */,
 				E8E65BCF2783032300FFA0FA /* Presentation */,
 				E8E65BCC278301F500FFA0FA /* Resources */,
@@ -179,17 +200,10 @@
 			path = MisoWeatherUITests;
 			sourceTree = "<group>";
 		};
-		E8E65BCA278301DF00FFA0FA /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		E8E65BCB278301E600FFA0FA /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				E8E65BD0278303BB00FFA0FA /* Entities */,
+				E83E00FA279001FC00C4661A /* Entities */,
 				E8E65BD1278303CC00FFA0FA /* UseCases */,
 			);
 			path = Domain;
@@ -226,25 +240,11 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		E8E65BD0278303BB00FFA0FA /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
 		E8E65BD1278303CC00FFA0FA /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = UseCases;
-			sourceTree = "<group>";
-		};
-		E8E65BD7278587D500FFA0FA /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		E8FB85E7278C187D0007DE27 /* RegisterScene */ = {

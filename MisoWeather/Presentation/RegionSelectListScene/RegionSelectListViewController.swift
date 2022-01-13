@@ -9,7 +9,9 @@ import UIKit
 import SnapKit
 
 class RegionListViewController: UIViewController {
-
+    
+    private let regionData: [String] = ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "마포구", "노원구", "도봉구", "동대문구", "동작구", "금천구"]
+    
     weak var delegate: SendDelegate?
     
     // MARK: - Subviews
@@ -72,14 +74,15 @@ class RegionListViewController: UIViewController {
 
 extension RegionListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return regionData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = "중구"
+        cell.textLabel?.text = regionData[indexPath.row]
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
 }
