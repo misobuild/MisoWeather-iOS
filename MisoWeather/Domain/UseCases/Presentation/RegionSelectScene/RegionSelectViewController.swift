@@ -23,33 +23,13 @@ class RegionSelectViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
-        
         collectionView.register(RegionCollectionViewCell.self, forCellWithReuseIdentifier: "RegionCollectionViewCell")
-        
         return collectionView
     }()
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 26.0, weight: .light)
-        label.textColor = .black
-        label.text = "어떤 지역의 날씨를 위한"
-        return label
-    }()
-    
-    private lazy var questionLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 26.0, weight: .black)
-        label.textColor = .black
-        label.text = "간식거리🍩         "
-        return label
-    }()
-    
-    private lazy var subTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 26.0, weight: .light)
-        label.textColor = .black
-        label.text = " 를 볼까요?"
+    private lazy var titleLabel: TitleLabel = {
+        let label = TitleLabel()
+        label.questionLabel.text = "간식거리🍩"
         return label
     }()
     
@@ -120,30 +100,17 @@ extension RegionSelectViewController {
     // MARK: - Layout
     private func setupView() {
         [
-            collectionView,
             titleLabel,
-            questionLabel,
-            subTitleLabel,
+            collectionView,
             confirmButton
         ].forEach {view.addSubview($0)}
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(48.0)
             $0.top.equalToSuperview().inset(174.0)
         }
         
-        questionLabel.snp.makeConstraints {
-            $0.leading.equalTo(titleLabel)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10.0)
-        }
-        
-        subTitleLabel.snp.makeConstraints {
-            $0.leading.equalTo(questionLabel.snp.trailing).inset(5.0)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10.0)
-        }
-        
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(questionLabel.snp.bottom).offset(105.0)
+            $0.top.equalToSuperview().offset(359.0)
             $0.width.equalTo(view.frame.width - 96.0)
             $0.height.equalTo((view.frame.width - 96.0) * 0.85)
             $0.centerX.equalToSuperview()
