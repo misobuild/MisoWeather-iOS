@@ -10,9 +10,8 @@ import SnapKit
 
 class RegionSelectViewController: UIViewController {
     
-    let regionList = ["서울", "경기", "인천", "대전", "세종", "충북", "충남", "광주", "전북", "전남", "대구", "부산", "울산", "경북", "경남", "강원", "제주"]
-    
-    var selectRegion: String = "서울"
+    private var selectRegion: String = "서울"
+    private var viewModel = RegionSelectViewModel()
     
     // MARK: - subviews
     private lazy var collectionView: UICollectionView = {
@@ -47,24 +46,33 @@ class RegionSelectViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    private func setupBinding() {
+        viewModel.storage.bind({ [weak self] _ in
+            guard let self = self else {return}
+            self.collectionView.reloadData()
+        })
+    }
+    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.topItem?.title = ""
         view.backgroundColor = .white
         
+        viewModel.fetchData()
         setupView()
+        setupBinding()
     }
 }
 
 extension RegionSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return regionList.count
+        return viewModel.storage.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as? RegionCollectionViewCell
-        let region = regionList[indexPath.row]
+        let region = viewModel.storage.value[indexPath.row]
         cell?.setup(region: region)
         
         if indexPath.item == 0 {
@@ -90,13 +98,13 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-         let region = regionList[indexPath.row]
+        let region = viewModel.storage.value[indexPath.row]
         selectRegion = region
     }
 }
 
 extension RegionSelectViewController {
-    
+
     // MARK: - Layout
     private func setupView() {
         [
