@@ -17,6 +17,7 @@
 		E83E01042790885300C4661A /* Observables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E01032790885300C4661A /* Observables.swift */; };
 		E83E01062790898900C4661A /* ObservableVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E01052790898900C4661A /* ObservableVMProtocol.swift */; };
 		E83E010827908B2300C4661A /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E010727908B2300C4661A /* Repository.swift */; };
+		E83E010C2790A24F00C4661A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E010B2790A24F00C4661A /* UserInfo.swift */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
 		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
@@ -66,6 +67,7 @@
 		E83E01032790885300C4661A /* Observables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observables.swift; sourceTree = "<group>"; };
 		E83E01052790898900C4661A /* ObservableVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableVMProtocol.swift; sourceTree = "<group>"; };
 		E83E010727908B2300C4661A /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		E83E010B2790A24F00C4661A /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				E83E01032790885300C4661A /* Observables.swift */,
 				E83E01052790898900C4661A /* ObservableVMProtocol.swift */,
 				E8FB85F2278DB7F40007DE27 /* SendDelegate.swift */,
+				E83E010B2790A24F00C4661A /* UserInfo.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */,
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,
 				E8E65BC82782E0E200FFA0FA /* RegionSelectViewController.swift in Sources */,
+				E83E010C2790A24F00C4661A /* UserInfo.swift in Sources */,
 				E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

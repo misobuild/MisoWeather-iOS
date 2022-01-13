@@ -12,6 +12,9 @@ import KakaoSDKCommon
 import SnapKit
 
 class RegisterViewController: UIViewController {
+    
+   // static let userInfo = userInfo.shared
+    var abc = ""
     // MARK: - Subviews
     private lazy var kakaoLoginButon: UIButton = {
         let button = UIButton()
@@ -45,24 +48,27 @@ class RegisterViewController: UIViewController {
     @objc func hasKakaoToken() {
 
         if AuthApi.hasToken() {
-            UserApi.shared.accessTokenInfo { (_, error) in
+            UserApi.shared.accessTokenInfo { (oauthToken, error) in
                 if let error = error {
                     if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
                         // 로그인 필요
-                        print("로그인 필요")
                         self.kakaoLogin()
                     } else {
                         // 기타 에러
                     }
                 } else {
                     // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
+                    if let id = oauthToken?.id {
+                        userInfo.id = String(id)
+                        print("id = \(userInfo.id!)")
+                    }
+                    
                     print("토큰 유효성 체크 성공")
                     self.getUserInfo()
                 }
             }
         } else {
             // 로그인 필요
-            print("로그인 필요2")
             self.kakaoLogin()
         }
     }
@@ -96,6 +102,7 @@ class RegisterViewController: UIViewController {
             } else {
                 print("me() success.")
                 
+              
                 //  닉네임, 이메일 정보
                 // let nickname = user?.kakaoAccount?.profile?.nickname
                 self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
