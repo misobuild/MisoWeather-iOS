@@ -194,6 +194,7 @@
 				E83E00F9279001F400C4661A /* Common */,
 				E83E00F8279001ED00C4661A /* Data */,
 				E8E65BCB278301E600FFA0FA /* Domain */,
+				E8E65BCF2783032300FFA0FA /* Presentation */,
 				E8E65BCC278301F500FFA0FA /* Resources */,
 			);
 			path = MisoWeather;
@@ -259,7 +260,6 @@
 		E8E65BD1278303CC00FFA0FA /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				E8E65BCF2783032300FFA0FA /* Presentation */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
