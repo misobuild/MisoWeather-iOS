@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class RegionListViewController: UIViewController {
-    
+  
     private let regionData: [String] = ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "마포구", "노원구", "도봉구", "동대문구", "동작구", "금천구"]
     
     weak var delegate: SendDelegate?
@@ -20,7 +20,7 @@ class RegionListViewController: UIViewController {
         label.questionLabel.text = "간식거리🍩"
         return label
     }()
-    
+
     private lazy var confirmButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(named: "nextButton"), for: .normal)
@@ -50,6 +50,7 @@ class RegionListViewController: UIViewController {
                 
         guard let data = self.delegate?.sendData() else {return}
         print("넘어온 데이터: \(data)")
+
         setupView()
     }
 }
@@ -74,6 +75,7 @@ extension RegionListViewController: UITableViewDataSource {
 }
 
 extension RegionListViewController {
+
     // MARK: - Layout
     private func setupView() {
         [

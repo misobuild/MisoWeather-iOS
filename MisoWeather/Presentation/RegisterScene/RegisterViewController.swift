@@ -13,8 +13,6 @@ import SnapKit
 
 class RegisterViewController: UIViewController {
     
-   // static let userInfo = userInfo.shared
-    var abc = ""
     // MARK: - Subviews
     private lazy var kakaoLoginButon: UIButton = {
         let button = UIButton()
@@ -101,10 +99,7 @@ class RegisterViewController: UIViewController {
                 print(error)
             } else {
                 print("me() success.")
-                
-              
-                //  닉네임, 이메일 정보
-                // let nickname = user?.kakaoAccount?.profile?.nickname
+    
                 self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
                 
             }
@@ -126,6 +121,7 @@ class RegisterViewController: UIViewController {
 extension RegisterViewController {
     // MARK: - Layout
     private func setupView() {
+      
         [kakaoLoginButon, nonLoginButton, titleLabel].forEach {view.addSubview($0)}
         
         titleLabel.snp.makeConstraints {

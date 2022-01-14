@@ -570,9 +570,11 @@
 				E83E0100279087C100C4661A /* RegionSelectViewModel.swift in Sources */,
 				E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */,
 				E839205827869D99006A1D1B /* MainViewController.swift in Sources */,
+
 				E83E00FE27901E4200C4661A /* TitleLabel.swift in Sources */,
 				E83E01062790898900C4661A /* ObservableVMProtocol.swift in Sources */,
 				E8FB85F3278DB7F40007DE27 /* SendDelegate.swift in Sources */,
+
 				E8FB85ED278C2F9B0007DE27 /* RegionSelectListViewController.swift in Sources */,
 				E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */,
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,

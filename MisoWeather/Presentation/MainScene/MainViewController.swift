@@ -10,6 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
     
     // MARK: - subviews
+
     private lazy var imoticonLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 40.0, weight: .regular)
@@ -61,6 +62,7 @@ extension MainViewController {
     
     // MARK: - Layout
     private func setupView() {
+      
         [imoticonLabel, titleLabel, weatherView, graphView].forEach {view.addSubview($0)}
         
         imoticonLabel.snp.makeConstraints {

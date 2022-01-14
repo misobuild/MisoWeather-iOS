@@ -31,7 +31,7 @@ class RegionSelectViewController: UIViewController {
         label.questionLabel.text = "간식거리🍩"
         return label
     }()
-    
+
     private lazy var confirmButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(named: "nextButton"), for: .normal)
@@ -104,7 +104,6 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension RegionSelectViewController {
-
     // MARK: - Layout
     private func setupView() {
         [
