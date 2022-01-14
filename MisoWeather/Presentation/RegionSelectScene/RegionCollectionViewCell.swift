@@ -44,7 +44,7 @@ final class RegionCollectionViewCell: UICollectionViewCell {
     }
 }
 
-private extension RegionCollectionViewCell{
+private extension RegionCollectionViewCell {
     
     // MARK: - Layout
     func setupView() {
@@ -55,5 +55,3 @@ private extension RegionCollectionViewCell{
         }
     }
 }
-
-

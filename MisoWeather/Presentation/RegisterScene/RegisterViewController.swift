@@ -13,7 +13,7 @@ import SnapKit
 
 class RegisterViewController: UIViewController {
     
-    //MARK: - Subviews
+    // MARK: - Subviews
     private lazy var kakaoLoginButon: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "kakaoLoginButton"), for: .normal)
@@ -45,41 +45,40 @@ class RegisterViewController: UIViewController {
     
     @objc func hasKakaoToken() {
 
-        if (AuthApi.hasToken()) {
-            UserApi.shared.accessTokenInfo { (_, error) in
+        if AuthApi.hasToken() {
+            UserApi.shared.accessTokenInfo { (oauthToken, error) in
                 if let error = error {
-                    if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true  {
-                        //로그인 필요
-                        print("로그인 필요")
+                    if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
+                        // 로그인 필요
                         self.kakaoLogin()
+                    } else {
+                        // 기타 에러
                     }
-                    else {
-                        //기타 에러
+                } else {
+                    // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
+                    if let id = oauthToken?.id {
+                        userInfo.id = String(id)
+                        print("id = \(userInfo.id!)")
                     }
-                }
-                else {
-                    //토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
+                    
                     print("토큰 유효성 체크 성공")
                     self.getUserInfo()
                 }
             }
-        }
-        else {
-            //로그인 필요
-            print("로그인 필요2")
+        } else {
+            // 로그인 필요
             self.kakaoLogin()
         }
     }
     
-    private func kakaoLogin(){
+    private func kakaoLogin() {
         // 카카오톡 설치 여부 확인
-        if (UserApi.isKakaoTalkLoginAvailable()) {
+        if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                 if let error = error {
                     print("error")
                     print(error)
-                }
-                else {
+                } else {
                     print("loginWithKakaoTalk() success.")
                     //  회원가입 성공 시 oauthToken 저장가능
                     // _ = oauthToken
@@ -88,23 +87,19 @@ class RegisterViewController: UIViewController {
                     self.getUserInfo()
                 }
             }
-        }
-        else {
+        } else {
             print("카카오톡 미설치")
         }
     }
     
     private func getUserInfo() {
         //  사용자 정보 가져오기
-        UserApi.shared.me() {(user, error) in
+        UserApi.shared.me {(user, error) in
             if let error = error {
                 print(error)
-            }
-            else {
+            } else {
                 print("me() success.")
-                
-                //  닉네임, 이메일 정보
-                //let nickname = user?.kakaoAccount?.profile?.nickname
+    
                 self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
                 
             }
@@ -126,21 +121,21 @@ class RegisterViewController: UIViewController {
 extension RegisterViewController {
     // MARK: - Layout
     private func setupView() {
-        [kakaoLoginButon, nonLoginButton ,titleLabel].forEach{ view.addSubview($0) }
+      
+        [kakaoLoginButon, nonLoginButton, titleLabel].forEach {view.addSubview($0)}
         
-        titleLabel.snp.makeConstraints{
+        titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(300.0)
             $0.centerX.equalToSuperview()
         }
-        kakaoLoginButon.snp.makeConstraints{
+        kakaoLoginButon.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(24.0)
             $0.top.equalTo(titleLabel.snp.bottom).offset(150.0)
             $0.centerX.equalToSuperview()
         }
-        nonLoginButton.snp.makeConstraints{
+        nonLoginButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(kakaoLoginButon.snp.bottom).offset(17.0)
         }
     }
 }
-
