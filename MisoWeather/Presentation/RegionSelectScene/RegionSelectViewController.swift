@@ -12,6 +12,7 @@ class RegionSelectViewController: UIViewController {
     
     private var selectRegion: String = "서울"
     private var viewModel = RegionSelectViewModel()
+    private var regionList = ["서울", "경기", "인천", "대전", "세종", "충북", "충남", "광주", "전북", "전남", "대구", "부산", "울산", "경북", "경남", "강원", "제주"]
     
     // MARK: - subviews
     private lazy var collectionView: UICollectionView = {
@@ -42,8 +43,27 @@ class RegionSelectViewController: UIViewController {
     @objc func nextVC() {
         let nextVC = RegionListViewController()
         nextVC.delegate = self
-        
+        fetchData(from: selectRegion)
         self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    func fetchData(from region: String) {
+        print("region = \(region)")
+        let urlString = "\(URLString.regionURL)\(region)"
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        
+        let url = URL(string: encodedString)
+        print(url?.absoluteString)
+        
+        let session = URLSession(configuration: .default)
+        
+        session.dataTask(with: url!) { data, response, error in
+            guard let data = data, error == nil else {return}
+            let decoder = JSONDecoder()
+            let midRegionList = try? decoder.decode(RegionModel.self, from: data)
+            
+            debugPrint(midRegionList)
+        }.resume()
     }
     
     private func setupBinding() {
@@ -67,12 +87,12 @@ class RegionSelectViewController: UIViewController {
 
 extension RegionSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.storage.value.count
+        return regionList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as? RegionCollectionViewCell
-        let region = viewModel.storage.value[indexPath.row]
+        let region = regionList[indexPath.row]
         cell?.setup(region: region)
         
         if indexPath.item == 0 {
