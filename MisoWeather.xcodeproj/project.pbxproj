@@ -281,8 +281,8 @@
 		E8FB85E8278C18850007DE27 /* RegionSelectScene */ = {
 			isa = PBXGroup;
 			children = (
-				E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */,
 				E83E00FF279087C100C4661A /* RegionSelectViewModel.swift */,
+				E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */,
 				E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */,
 				E83E010727908B2300C4661A /* Repository.swift */,
 			);

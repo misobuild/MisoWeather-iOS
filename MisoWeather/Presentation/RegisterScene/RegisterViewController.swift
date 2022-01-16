@@ -44,23 +44,21 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func hasKakaoToken() {
-
+        
         if AuthApi.hasToken() {
-            UserApi.shared.accessTokenInfo { (oauthToken, error) in
+            // 사용자 액세스 토큰 정보 조회
+            UserApi.shared.accessTokenInfo {(accessTokenInfo, error) in
                 if let error = error {
                     if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
+                        print("로그인 필요")
                         // 로그인 필요
                         self.kakaoLogin()
                     } else {
                         // 기타 에러
+                        print("기타 에러")
                     }
                 } else {
                     // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
-                    if let id = oauthToken?.id {
-                        userInfo.id = String(id)
-                        print("id = \(userInfo.id!)")
-                    }
-                    
                     print("토큰 유효성 체크 성공")
                     self.getUserInfo()
                 }
@@ -79,7 +77,8 @@ class RegisterViewController: UIViewController {
                     print("error")
                     print(error)
                 } else {
-                    print("loginWithKakaoTalk() success.")
+                    print("loginWithKakaoTalk!! = \(oauthToken!)\n")
+
                     //  회원가입 성공 시 oauthToken 저장가능
                     // _ = oauthToken
                     
@@ -99,9 +98,8 @@ class RegisterViewController: UIViewController {
                 print(error)
             } else {
                 print("me() success.")
-    
-                self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
                 
+                self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)ㅇ
             }
         }
     }
@@ -113,7 +111,7 @@ class RegisterViewController: UIViewController {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         self.navigationItem.backBarButtonItem = backBarButtonItem
-
+        
         setupView()
     }
 }
@@ -121,7 +119,7 @@ class RegisterViewController: UIViewController {
 extension RegisterViewController {
     // MARK: - Layout
     private func setupView() {
-      
+        
         [kakaoLoginButon, nonLoginButton, titleLabel].forEach {view.addSubview($0)}
         
         titleLabel.snp.makeConstraints {
