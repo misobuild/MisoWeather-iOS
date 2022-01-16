@@ -6,7 +6,7 @@
 //
 
 struct RegionModel: Codable {
-    let status: String
+    let httpStatus: String
     let message: String
     let data: Data
     
