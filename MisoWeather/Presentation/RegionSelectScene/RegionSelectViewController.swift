@@ -11,8 +11,8 @@ import SnapKit
 class RegionSelectViewController: UIViewController {
     
     private var selectRegion: String = "서울"
-    private var viewModel = RegionSelectViewModel()
     private var regionList = ["서울", "경기", "인천", "대전", "세종", "충북", "충남", "광주", "전북", "전남", "대구", "부산", "울산", "경북", "경남", "강원", "제주"]
+    private let requestRegionList = ["서울특별시", "경기도", "인천광역시", "대전광역시", "세종특별자치시", "충청북도", "충청남도", "광주광역시", "전라북도", "전라남도", "대구광역시", "부산광역시", "울산광역시", "경상북도", "경상남도", "강원도", "제주도"]
     
     // MARK: - subviews
     private lazy var collectionView: UICollectionView = {
@@ -66,12 +66,6 @@ class RegionSelectViewController: UIViewController {
         }.resume()
     }
     
-    private func setupBinding() {
-        viewModel.storage.bind({ [weak self] _ in
-            guard let self = self else {return}
-            self.collectionView.reloadData()
-        })
-    }
     
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
@@ -79,9 +73,7 @@ class RegionSelectViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = ""
         view.backgroundColor = .white
         
-        viewModel.fetchData()
         setupView()
-        setupBinding()
     }
 }
 
@@ -118,7 +110,7 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let region = viewModel.storage.value[indexPath.row]
+        let region = requestRegionList[indexPath.row]
         selectRegion = region
     }
 }

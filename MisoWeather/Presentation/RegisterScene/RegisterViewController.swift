@@ -99,7 +99,7 @@ class RegisterViewController: UIViewController {
             } else {
                 print("me() success.")
                 
-                self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)ㅇ
+                self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
             }
         }
     }
