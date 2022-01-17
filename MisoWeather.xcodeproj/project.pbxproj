@@ -10,6 +10,7 @@
 		344FF6921E8BD2EC96E8D117 /* Pods_MisoWeatherTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23A5B6AE1EEC2C8DD95CBCB4 /* Pods_MisoWeatherTests.framework */; };
 		692CCC67F93C067D9C09CC35 /* Pods_MisoWeather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87C5A805E7E8155CDB039479 /* Pods_MisoWeather.framework */; };
 		763FFD8DAF1CEDE900216580 /* Pods_MisoWeather_MisoWeatherUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E634486436168330A45E6928 /* Pods_MisoWeather_MisoWeatherUITests.framework */; };
+		E8132BAF2795501200A9518B /* TokenUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8132BAE2795501200A9518B /* TokenUtils.swift */; };
 		E839205827869D99006A1D1B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205727869D99006A1D1B /* MainViewController.swift */; };
 		E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */; };
 		E83E00FE27901E4200C4661A /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E00FD27901E4200C4661A /* TitleLabel.swift */; };
@@ -61,6 +62,7 @@
 		9484E9FDF5DC1BC37A76F7D8 /* Pods-MisoWeatherTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisoWeatherTests.debug.xcconfig"; path = "Target Support Files/Pods-MisoWeatherTests/Pods-MisoWeatherTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A42591B8EC20D35C39722644 /* Pods-MisoWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MisoWeather.debug.xcconfig"; path = "Target Support Files/Pods-MisoWeather/Pods-MisoWeather.debug.xcconfig"; sourceTree = "<group>"; };
 		E634486436168330A45E6928 /* Pods_MisoWeather_MisoWeatherUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MisoWeather_MisoWeatherUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8132BAE2795501200A9518B /* TokenUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenUtils.swift; sourceTree = "<group>"; };
 		E839205727869D99006A1D1B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionCollectionViewCell.swift; sourceTree = "<group>"; };
 		E83E00FD27901E4200C4661A /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		E83E00F8279001ED00C4661A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				E8132BAE2795501200A9518B /* TokenUtils.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,
 				E8E65BC82782E0E200FFA0FA /* RegionSelectViewController.swift in Sources */,
 				E83E010C2790A24F00C4661A /* UserInfo.swift in Sources */,
+				E8132BAF2795501200A9518B /* TokenUtils.swift in Sources */,
 				E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -44,27 +44,26 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func hasKakaoToken() {
-        
         if AuthApi.hasToken() {
             // 사용자 액세스 토큰 정보 조회
-            UserApi.shared.accessTokenInfo {(accessTokenInfo, error) in
+            UserApi.shared.accessTokenInfo {(_, error) in
                 if let error = error {
                     if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
-                        print("로그인 필요")
-                        // 로그인 필요
+                        // 유효한 토큰 아님 로그인 필요
                         self.kakaoLogin()
                     } else {
                         // 기타 에러
-                        print("기타 에러")
                     }
                 } else {
                     // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
                     print("토큰 유효성 체크 성공")
-                    self.getUserInfo()
+                    
+                    // 화면전환
+                    self.nextVC()
                 }
             }
         } else {
-            // 로그인 필요
+            // 액세스 토큰 정보 없음 로그인 필요
             self.kakaoLogin()
         }
     }
@@ -74,33 +73,25 @@ class RegisterViewController: UIViewController {
         if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                 if let error = error {
-                    print("error")
                     print(error)
                 } else {
-                    print("loginWithKakaoTalk!! = \(oauthToken!)\n")
-
                     //  회원가입 성공 시 oauthToken 저장가능
-                    // _ = oauthToken
+                    guard let accessToken = oauthToken?.accessToken else {return}
                     
-                    //  사용자정보를 성공적으로 가져오면 화면전환
-                    self.getUserInfo()
+                    let token = TokenUtils()
+                    token.create("kakao", account: "accessToken", value: accessToken)
+                    
+                    UserApi.shared.accessTokenInfo {(tokenInfo, _) in
+                        guard let userID = tokenInfo?.id else {return}
+                        token.create("kakao", account: "userID", value: String(userID))
+                    }
+                    
+                    // 화면전환
+                    self.nextVC()
                 }
             }
         } else {
             print("카카오톡 미설치")
-        }
-    }
-    
-    private func getUserInfo() {
-        //  사용자 정보 가져오기
-        UserApi.shared.me {(user, error) in
-            if let error = error {
-                print(error)
-            } else {
-                print("me() success.")
-                
-                self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
-            }
         }
     }
     

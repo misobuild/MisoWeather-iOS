@@ -10,6 +10,7 @@ class UserInfo {
     
     var id: String?
     var name: String?
+    var accessToken: String?
     
     private init() {}
     // instance 생성 X
