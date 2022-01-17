@@ -7,8 +7,6 @@
 
 class UserInfo {
     static let shared = UserInfo()
-    
-    var id: String?
     var name: String?
     
     private init() {}

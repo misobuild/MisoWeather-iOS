@@ -6,5 +6,6 @@
 //
 
 protocol SendDelegate: AnyObject {
-    func sendData() -> String
+    
+    func sendData() -> [RegionList]
 }

@@ -12,11 +12,12 @@ struct RegionModel: Codable {
     
     struct Data: Codable {
         let regionList: [RegionList]
-        
-        struct RegionList: Codable {
-            let id: Int
-            let bigScale: String
-            let midScale: String
-        }
     }
+}
+
+struct RegionList: Codable {
+    let id: Int
+    let bigScale: String
+    let midScale: String
+    let smallScale: String
 }
