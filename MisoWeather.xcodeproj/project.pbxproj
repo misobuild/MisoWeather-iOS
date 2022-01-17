@@ -18,7 +18,6 @@
 		E83E00FE27901E4200C4661A /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E00FD27901E4200C4661A /* TitleLabel.swift */; };
 		E83E01042790885300C4661A /* Observables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E01032790885300C4661A /* Observables.swift */; };
 		E83E01062790898900C4661A /* ObservableVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E01052790898900C4661A /* ObservableVMProtocol.swift */; };
-		E83E010827908B2300C4661A /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E010727908B2300C4661A /* Repository.swift */; };
 		E83E010C2790A24F00C4661A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E010B2790A24F00C4661A /* UserInfo.swift */; };
 		E86EA7062791CC8C0066BB46 /* RegionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86EA7052791CC8C0066BB46 /* RegionModel.swift */; };
 		E86EA70B279281F30066BB46 /* URLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86EA70A279281F30066BB46 /* URLString.swift */; };
@@ -72,7 +71,6 @@
 		E83E00FD27901E4200C4661A /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		E83E01032790885300C4661A /* Observables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observables.swift; sourceTree = "<group>"; };
 		E83E01052790898900C4661A /* ObservableVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableVMProtocol.swift; sourceTree = "<group>"; };
-		E83E010727908B2300C4661A /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		E83E010B2790A24F00C4661A /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		E86EA7052791CC8C0066BB46 /* RegionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionModel.swift; sourceTree = "<group>"; };
 		E86EA70A279281F30066BB46 /* URLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLString.swift; sourceTree = "<group>"; };
@@ -288,7 +286,6 @@
 			children = (
 				E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */,
 				E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */,
-				E83E010727908B2300C4661A /* Repository.swift */,
 			);
 			path = RegionSelectScene;
 			sourceTree = "<group>";
@@ -579,7 +576,6 @@
 				E83E01042790885300C4661A /* Observables.swift in Sources */,
 				E86EA7062791CC8C0066BB46 /* RegionModel.swift in Sources */,
 				E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */,
-				E83E010827908B2300C4661A /* Repository.swift in Sources */,
 				E8132BB12795863600A9518B /* RegionSelectListView.swift in Sources */,
 				E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */,
 				E839205827869D99006A1D1B /* MainViewController.swift in Sources */,
