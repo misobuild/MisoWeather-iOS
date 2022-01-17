@@ -10,8 +10,11 @@ import SnapKit
 
 class RegionSelectViewController: UIViewController {
     
-    private var selectRegion: String = "서울"
-    private var viewModel = RegionSelectViewModel()
+    private var selectRegion: String = "서울특별시"
+    private var selectRegionList = ["서울", "경기", "인천", "대전", "세종", "충북", "충남", "광주", "전북", "전남", "대구", "부산", "울산", "경북", "경남", "강원", "제주"]
+    private let requestRegionList = ["서울특별시", "경기도", "인천광역시", "대전광역시", "세종특별자치시", "충청북도", "충청남도", "광주광역시", "전라북도", "전라남도", "대구광역시", "부산광역시", "울산광역시", "경상북도", "경상남도", "강원도", "제주도"]
+    
+    private var midScaleRegionList: [RegionList] = []
     
     // MARK: - subviews
     private lazy var collectionView: UICollectionView = {
@@ -31,26 +34,39 @@ class RegionSelectViewController: UIViewController {
         label.questionLabel.text = "간식거리🍩"
         return label
     }()
-
+    
     private lazy var confirmButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(named: "nextButton"), for: .normal)
-        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
+        button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
         return button
     }()
     
     @objc func nextVC() {
-        let nextVC = RegionListViewController()
+        let nextVC = MidRegionListViewController()
         nextVC.delegate = self
-        
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    private func setupBinding() {
-        viewModel.storage.bind({ [weak self] _ in
-            guard let self = self else {return}
-            self.collectionView.reloadData()
-        })
+    @objc func fetchData() {
+        let urlString = "\(URLString.regionURL)\(selectRegion)"
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        
+        let url = URL(string: encodedString)
+        let session = URLSession(configuration: .default)
+        session.dataTask(with: url!) { data, _, error in
+            guard let data = data, error == nil else {return}
+            let decoder = JSONDecoder()
+            let midRegionList = try? decoder.decode(RegionModel.self, from: data)
+            
+            guard let regionList: RegionModel = midRegionList else {return}
+            self.midScaleRegionList = regionList.data.regionList
+            
+            DispatchQueue.main.async {
+                self.nextVC()
+            }
+            
+        }.resume()
     }
     
     // MARK: - LifeCycle Methods
@@ -59,20 +75,18 @@ class RegionSelectViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = ""
         view.backgroundColor = .white
         
-        viewModel.fetchData()
         setupView()
-        setupBinding()
     }
 }
 
 extension RegionSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.storage.value.count
+        return selectRegionList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as? RegionCollectionViewCell
-        let region = viewModel.storage.value[indexPath.row]
+        let region = selectRegionList[indexPath.row]
         cell?.setup(region: region)
         
         if indexPath.item == 0 {
@@ -98,7 +112,7 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let region = viewModel.storage.value[indexPath.row]
+        let region = requestRegionList[indexPath.row]
         selectRegion = region
     }
 }
@@ -133,7 +147,7 @@ extension RegionSelectViewController {
 }
 
 extension RegionSelectViewController: SendDelegate {
-    func sendData() -> String {
-        return selectRegion
+    func sendData() -> [RegionList] {
+        return midScaleRegionList
     }
 }
