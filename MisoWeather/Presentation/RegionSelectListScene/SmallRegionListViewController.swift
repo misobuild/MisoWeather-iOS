@@ -10,17 +10,44 @@ import SnapKit
 
 class SmallRegionListViewController: UIViewController {
         
-    weak var delegate: SendDelegate?
+    weak var delegate: RegionSendDelegate?
     private var midScaleRegionList: [RegionList] = []
-    
+    private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
+
     // MARK: - Subviews
-    
     private lazy var regionSelectListView: RegionSelectListView = {
         let view = RegionSelectListView()
         view.regionList = midScaleRegionList
+        view.confirmButton.addTarget(MidRegionListViewController(), action: #selector(fetchData), for: .touchUpInside)
         return view
     }()
     
+    @objc func nextVC() {
+            let nextVC = NicknameSelectViewController()
+            nextVC.delegate = self
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+ 
+    @objc func fetchData() {
+        let urlString = "\(URLString.nicknameURL)"
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        
+        let url = URL(string: encodedString)
+        let session = URLSession(configuration: .default)
+        session.dataTask(with: url!) { data, _, error in
+            guard let data = data, error == nil else {return}
+            let decoder = JSONDecoder()
+            let recive = try? decoder.decode(NicknameModel.self, from: data)
+            
+            if let nickName = recive {
+                self.recivedNickName = nickName.data
+                DispatchQueue.main.async {
+                    self.nextVC()
+                }
+            }
+        }.resume()
+    }
+
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +56,6 @@ class SmallRegionListViewController: UIViewController {
                 
         if let data = self.delegate?.sendData() {
             self.midScaleRegionList = data
-            print("midScaleRegionList \(midScaleRegionList)")
         }
         
         setupView()
@@ -48,6 +74,11 @@ extension SmallRegionListViewController {
         regionSelectListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
+    }
+}
+
+extension SmallRegionListViewController: nickNameSendDelegate {
+    func sendData() -> NicknameModel.Data {
+        return recivedNickName
     }
 }

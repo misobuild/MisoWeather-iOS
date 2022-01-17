@@ -43,6 +43,7 @@ class RegionSelectViewController: UIViewController {
     }()
     
     @objc func nextVC() {
+       
         let nextVC = MidRegionListViewController()
         nextVC.delegate = self
         self.navigationController?.pushViewController(nextVC, animated: true)
@@ -114,6 +115,9 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let region = requestRegionList[indexPath.row]
         selectRegion = region
+
+        // User 대분류 지역 저장
+        UserInfo.shared.region = selectRegionList[indexPath.row]
     }
 }
 
@@ -146,7 +150,7 @@ extension RegionSelectViewController {
     }
 }
 
-extension RegionSelectViewController: SendDelegate {
+extension RegionSelectViewController: RegionSendDelegate {
     func sendData() -> [RegionList] {
         return midScaleRegionList
     }
