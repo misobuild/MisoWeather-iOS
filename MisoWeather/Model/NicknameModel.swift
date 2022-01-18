@@ -6,7 +6,7 @@
 //
 
 struct NicknameModel: Codable {
-    let httpStatus: String
+    let status: String
     let message: String
     let data: Data
     

@@ -56,17 +56,15 @@ class RegionSelectViewController: UIViewController {
         let url = URL(string: encodedString)
         let session = URLSession(configuration: .default)
         session.dataTask(with: url!) { data, _, error in
-            guard let data = data, error == nil else {return}
+            guard let data = data, error == nil else {return print(error.debugDescription)}
             let decoder = JSONDecoder()
             let midRegionList = try? decoder.decode(RegionModel.self, from: data)
             
-            guard let regionList: RegionModel = midRegionList else {return}
+            guard let regionList: RegionModel = midRegionList else {return print(error.debugDescription)}
             self.midScaleRegionList = regionList.data.regionList
-            
             DispatchQueue.main.async {
                 self.nextVC()
             }
-            
         }.resume()
     }
     

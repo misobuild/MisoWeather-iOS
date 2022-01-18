@@ -68,7 +68,6 @@ class NicknameSelectViewController: UIViewController {
         return button
     }()
     
-    
     @objc func nextVC() {
         self.navigationController?.pushViewController(MainViewController(), animated: true)
     }
@@ -99,12 +98,20 @@ class NicknameSelectViewController: UIViewController {
     
     func animate() {
         imoticonLable.alpha = 0
+        nicknameLabel.alpha = 0
         imoticonLable.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         UIView.animate(withDuration: 0.8, animations: {
             self.imoticonLable.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.nicknameLabel.alpha = 1
             self.imoticonLable.alpha = 1
         })
+        
+        nicknameLabel.center.x = self.view.frame.width + 30
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 30.0, initialSpringVelocity: 30.0, options: UIView.AnimationOptions.curveEaseOut, animations: ({
+                self.nicknameLabel.center.x = self.view.frame.width / 2
+                }), completion: nil)
     }
+    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
