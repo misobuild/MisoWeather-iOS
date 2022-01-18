@@ -26,15 +26,21 @@ class RegisterViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 45.0, weight: .regular)
-        label.textColor = .black
+        label.textColor = .buttonTextColor
         label.text = "MisoWeather🌤"
         return label
     }()
     
     private lazy var nonLoginButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("그냥 둘러볼래요", for: .normal)
-        button.setTitleColor( UIColor.black, for: .normal)
+        let button = UIButton(type: .system)
+        let text = "그냥 둘러볼래요"
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle(text, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16.0)
+        let attributeString = NSMutableAttributedString(string: text)
+        attributeString.addAttribute(.underlineStyle, value: 1, range: NSRange.init(location: 0, length: text.count))
+        button.titleLabel?.attributedText = attributeString
+        // 굵기 1의 언더라인과 함께 처음부터 끝까지 밑줄 설정
         button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
     }()
@@ -102,6 +108,7 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = .black
+        self.view.backgroundColor = .mainColor
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         self.navigationItem.backBarButtonItem = backBarButtonItem
@@ -126,7 +133,8 @@ extension RegisterViewController {
             $0.centerX.equalToSuperview()
         }
         nonLoginButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+            $0.leading.equalToSuperview().inset(24.0)
+            $0.trailing.equalToSuperview().inset(24.0)
             $0.top.equalTo(kakaoLoginButon.snp.bottom).offset(17.0)
         }
     }

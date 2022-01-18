@@ -19,7 +19,7 @@ class TokenUtils {
         
         // 1. query작성
         let keyChainQuery: NSDictionary = [
-            kSecClass : kSecClassGenericPassword,
+            kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
             kSecAttrAccount: account,
             kSecValueData: value.data(using: .utf8, allowLossyConversion: false)!
@@ -51,7 +51,7 @@ class TokenUtils {
         let status = SecItemCopyMatching(keyChainQuery, &dataTypeRef)
         
         // Read 성공 및 실패한 경우
-        if(status == errSecSuccess) {
+        if status == errSecSuccess {
             let retrievedData = dataTypeRef as! Data
             let value = String(data: retrievedData, encoding: String.Encoding.utf8)
             return value

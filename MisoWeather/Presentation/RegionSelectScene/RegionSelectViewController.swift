@@ -35,9 +35,8 @@ class RegionSelectViewController: UIViewController {
         return label
     }()
     
-    private lazy var confirmButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(named: "nextButton"), for: .normal)
+    private lazy var confirmButton: CustomButton = {
+        let button = CustomButton(type: .next)
         button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
         return button
     }()

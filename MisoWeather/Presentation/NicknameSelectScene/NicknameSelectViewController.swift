@@ -41,9 +41,13 @@ class NicknameSelectViewController: UIViewController {
     
     private lazy var refreshButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("닉네임 새로 받기", for: .normal)
-        button.setTitleColor(UIColor.darkGray, for: .normal)
-        button.adjustsImageWhenHighlighted = true
+        let text = "닉네임 새로 받기"
+        button.setTitleColor(.darkGray, for: .normal)
+        button.setTitle(text, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16.0)
+        let attributeString = NSMutableAttributedString(string: text)
+        attributeString.addAttribute(.underlineStyle, value: 1, range: NSRange.init(location: 0, length: text.count))
+        button.titleLabel?.attributedText = attributeString
         button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
         return button
     }()
@@ -61,9 +65,8 @@ class NicknameSelectViewController: UIViewController {
         return label
     }()
     
-    private lazy var confirmButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(named: "nicknameSelectButton"), for: .normal)
+    private lazy var confirmButton: CustomButton = {
+        let button = CustomButton(type: .register)
         button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
     }()

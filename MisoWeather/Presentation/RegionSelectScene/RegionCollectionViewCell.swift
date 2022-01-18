@@ -14,9 +14,9 @@ final class RegionCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18.0, weight: .medium)
         label.textAlignment = .center
-        label.textColor = .black
+        label.textColor = .textColor
         label.layer.borderWidth = 1
-        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.borderColor = UIColor.textColor?.cgColor
         label.layer.cornerRadius = 18
         
         return label
@@ -25,10 +25,10 @@ final class RegionCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                regionLabel.textColor = .white
-                regionLabel.layer.borderColor = UIColor.white.cgColor
+                regionLabel.textColor = .buttonTextColor
+                regionLabel.layer.borderColor = UIColor.mainColor?.cgColor
                 regionLabel.layer.masksToBounds = true
-                regionLabel.backgroundColor = .black
+                regionLabel.backgroundColor = .mainColor
             } else {
                 regionLabel.textColor = .black
                 regionLabel.layer.borderColor = UIColor.black.cgColor
