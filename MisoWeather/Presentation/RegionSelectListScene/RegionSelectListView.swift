@@ -16,7 +16,7 @@ class RegionSelectListView: UIView {
     // MARK: - Subviews
     private lazy var titleLabel: TitleLabel = {
         let label = TitleLabel()
-        label.questionLabel.text = "간식거리🍩" 
+        label.questionLabel.text = "간식거리🍩"
         return label
     }()
     
@@ -76,7 +76,6 @@ extension RegionSelectListView: UITableViewDelegate {
 }
 
 extension RegionSelectListView: UITableViewDataSource {
-    
 }
 
 extension RegionSelectListView {

@@ -41,14 +41,15 @@ class RegionSelectViewController: UIViewController {
         return button
     }()
     
-    @objc func nextVC() {
+    // MARK: - Private Method
+    @objc private func nextVC() {
        
         let nextVC = MidRegionListViewController()
         nextVC.delegate = self
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    @objc func fetchData() {
+    @objc private func fetchData() {
         let urlString = "\(URLString.regionURL)\(selectRegion)"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         

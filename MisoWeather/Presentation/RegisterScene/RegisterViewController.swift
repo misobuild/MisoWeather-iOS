@@ -45,11 +45,12 @@ class RegisterViewController: UIViewController {
         return button
     }()
     
-    @objc func nextVC() {
+    // MARK: - Private Method
+    @objc private func nextVC() {
         self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
     }
     
-    @objc func hasKakaoToken() {
+    @objc private func hasKakaoToken() {
         if AuthApi.hasToken() {
             // 사용자 액세스 토큰 정보 조회
             UserApi.shared.accessTokenInfo {(_, error) in
@@ -65,7 +66,7 @@ class RegisterViewController: UIViewController {
                     print("토큰 유효성 체크 성공")
                     
                     let token = TokenUtils()
-                    print(token.read("kakao", account: "accessToken"))
+                    print(token.read("kakao", account: "accessToken") ?? "")
                     
                     // 화면전환
                     self.nextVC()
@@ -87,6 +88,7 @@ class RegisterViewController: UIViewController {
                     //  회원가입 성공 시 oauthToken 저장가능
                     guard let accessToken = oauthToken?.accessToken else {return}
                     
+                    // 키체인에 Token, ID 저장
                     let token = TokenUtils()
                     token.create("kakao", account: "accessToken", value: accessToken)
                     

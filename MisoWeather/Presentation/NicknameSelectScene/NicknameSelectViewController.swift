@@ -71,11 +71,12 @@ class NicknameSelectViewController: UIViewController {
         return button
     }()
     
-    @objc func nextVC() {
+    // MARK: - Private Method
+    @objc private func nextVC() {
         self.navigationController?.pushViewController(MainViewController(), animated: true)
     }
     
-    @objc func fetchData() {
+    @objc private func fetchData() {
         let urlString = "\(URLString.nicknameURL)"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         
@@ -99,7 +100,7 @@ class NicknameSelectViewController: UIViewController {
         }.resume()
     }
     
-    func animate() {
+    private func animate() {
         imoticonLable.alpha = 0
         nicknameLabel.alpha = 0
         imoticonLable.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
