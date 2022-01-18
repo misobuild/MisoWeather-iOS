@@ -43,6 +43,7 @@ class RegionSelectViewController: UIViewController {
     }()
     
     @objc func nextVC() {
+       
         let nextVC = MidRegionListViewController()
         nextVC.delegate = self
         self.navigationController?.pushViewController(nextVC, animated: true)
@@ -55,17 +56,15 @@ class RegionSelectViewController: UIViewController {
         let url = URL(string: encodedString)
         let session = URLSession(configuration: .default)
         session.dataTask(with: url!) { data, _, error in
-            guard let data = data, error == nil else {return}
+            guard let data = data, error == nil else {return print(error.debugDescription)}
             let decoder = JSONDecoder()
             let midRegionList = try? decoder.decode(RegionModel.self, from: data)
             
-            guard let regionList: RegionModel = midRegionList else {return}
+            guard let regionList: RegionModel = midRegionList else {return print(error.debugDescription)}
             self.midScaleRegionList = regionList.data.regionList
-            
             DispatchQueue.main.async {
                 self.nextVC()
             }
-            
         }.resume()
     }
     
@@ -114,6 +113,9 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let region = requestRegionList[indexPath.row]
         selectRegion = region
+
+        // User 대분류 지역 저장
+        UserInfo.shared.region = selectRegionList[indexPath.row]
     }
 }
 
@@ -146,7 +148,7 @@ extension RegionSelectViewController {
     }
 }
 
-extension RegionSelectViewController: SendDelegate {
+extension RegionSelectViewController: RegionSendDelegate {
     func sendData() -> [RegionList] {
         return midScaleRegionList
     }

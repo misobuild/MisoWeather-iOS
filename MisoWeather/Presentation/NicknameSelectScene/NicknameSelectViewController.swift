@@ -9,9 +9,12 @@ import UIKit
 import SnapKit
 
 class NicknameSelectViewController: UIViewController {
+    weak var delegate: nickNameSendDelegate?
+    private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
+    
+    private let region = UserInfo.shared.region!
     
     // MARK: - Subviews
-
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 25.0, weight: .light)
@@ -24,7 +27,7 @@ class NicknameSelectViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 27.0, weight: .black)
         label.textColor = .black
-        label.text = "부산의 귀여운 삐약병아리님!"
+        label.text = "\(region)의 \(recivedNickName.nickname)님!"
         return label
     }()
 
@@ -32,7 +35,7 @@ class NicknameSelectViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 170.0)
         label.textColor = .black
-        label.text = "🐣"
+        label.text = "\(recivedNickName.emoji)"
         return label
     }()
     
@@ -41,7 +44,7 @@ class NicknameSelectViewController: UIViewController {
         button.setTitle("닉네임 새로 받기", for: .normal)
         button.setTitleColor(UIColor.darkGray, for: .normal)
         button.adjustsImageWhenHighlighted = true
-        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
+        button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
         return button
     }()
     
@@ -69,12 +72,56 @@ class NicknameSelectViewController: UIViewController {
         self.navigationController?.pushViewController(MainViewController(), animated: true)
     }
     
+    @objc func fetchData() {
+        let urlString = "\(URLString.nicknameURL)"
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        
+        let url = URL(string: encodedString)
+        let session = URLSession(configuration: .default)
+        session.dataTask(with: url!) { data, _, error in
+            guard let data = data, error == nil else {return}
+            let decoder = JSONDecoder()
+            let recive = try? decoder.decode(NicknameModel.self, from: data)
+            
+            if let nickName = recive {
+                self.recivedNickName = nickName.data
+            }
+
+            DispatchQueue.main.async {
+                self.nicknameLabel.text = "\(self.region)의 \(self.recivedNickName.nickname)님!"
+                self.imoticonLable.text = self.recivedNickName.emoji
+                self.animate()
+            }
+            
+        }.resume()
+    }
+    
+    func animate() {
+        imoticonLable.alpha = 0
+        nicknameLabel.alpha = 0
+        imoticonLable.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        UIView.animate(withDuration: 0.8, animations: {
+            self.imoticonLable.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.nicknameLabel.alpha = 1
+            self.imoticonLable.alpha = 1
+        })
+        
+        nicknameLabel.center.x = self.view.frame.width + 30
+        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 30.0, initialSpringVelocity: 30.0, options: UIView.AnimationOptions.curveEaseOut, animations: ({
+                self.nicknameLabel.center.x = self.view.frame.width / 2
+                }), completion: nil)
+    }
+    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
         
+        if let data = self.delegate?.sendData() {
+            self.recivedNickName = data
+        }
+        animate()
         setupView()
     }
 }

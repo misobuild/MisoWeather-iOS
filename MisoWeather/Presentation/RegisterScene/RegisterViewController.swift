@@ -52,7 +52,7 @@ class RegisterViewController: UIViewController {
                         // 유효한 토큰 아님 로그인 필요
                         self.kakaoLogin()
                     } else {
-                        // 기타 에러.. 다시 버튼을 누르도록 하는게 좋을 듯
+                        // 기타 에러.. 
                     }
                 } else {
                     // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
