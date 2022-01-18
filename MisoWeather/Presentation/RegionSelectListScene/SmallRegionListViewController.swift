@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SmallRegionListViewController: UIViewController {
+final class SmallRegionListViewController: UIViewController {
         
     weak var delegate: RegionSendDelegate?
     private var midScaleRegionList: [RegionList] = []

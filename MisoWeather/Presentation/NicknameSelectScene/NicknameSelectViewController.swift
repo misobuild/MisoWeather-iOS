@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class NicknameSelectViewController: UIViewController {
+final class NicknameSelectViewController: UIViewController {
     weak var delegate: nickNameSendDelegate?
     private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
     
@@ -79,7 +79,6 @@ class NicknameSelectViewController: UIViewController {
     @objc private func fetchData() {
         let urlString = "\(URLString.nicknameURL)"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
-        
         let url = URL(string: encodedString)
         let session = URLSession(configuration: .default)
         session.dataTask(with: url!) { data, _, error in
@@ -110,10 +109,10 @@ class NicknameSelectViewController: UIViewController {
             self.imoticonLable.alpha = 1
         })
         
-        nicknameLabel.center.x = self.view.frame.width + 30
-        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 30.0, initialSpringVelocity: 30.0, options: UIView.AnimationOptions.curveEaseOut, animations: ({
-                self.nicknameLabel.center.x = self.view.frame.width / 2
-                }), completion: nil)
+//        nicknameLabel.center.x = self.view.frame.width + 30
+//        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 30.0, initialSpringVelocity: 30.0, options: UIView.AnimationOptions.curveEaseOut, animations: ({
+//                self.nicknameLabel.center.x = self.view.frame.width / 2
+//                }), completion: nil)
     }
     
     // MARK: - LifeCycle Methods

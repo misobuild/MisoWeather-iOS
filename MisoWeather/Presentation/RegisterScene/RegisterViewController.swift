@@ -11,7 +11,7 @@ import KakaoSDKAuth
 import KakaoSDKCommon
 import SnapKit
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
     
     // MARK: - Subviews
     private lazy var kakaoLoginButon: UIButton = {

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RegionSelectListView: UIView {
+final class RegionSelectListView: UIView {
     
     var regionList: [RegionList] = []
     var selectRegion = "선택 안 함"
