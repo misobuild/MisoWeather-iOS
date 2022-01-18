@@ -35,21 +35,21 @@ class RegionSelectViewController: UIViewController {
         return label
     }()
     
-    private lazy var confirmButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(named: "nextButton"), for: .normal)
+    private lazy var confirmButton: CustomButton = {
+        let button = CustomButton(type: .next)
         button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
         return button
     }()
     
-    @objc func nextVC() {
+    // MARK: - Private Method
+    @objc private func nextVC() {
        
         let nextVC = MidRegionListViewController()
         nextVC.delegate = self
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    @objc func fetchData() {
+    @objc private func fetchData() {
         let urlString = "\(URLString.regionURL)\(selectRegion)"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         

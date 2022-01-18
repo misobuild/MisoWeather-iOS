@@ -26,24 +26,31 @@ class RegisterViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 45.0, weight: .regular)
-        label.textColor = .black
+        label.textColor = .buttonTextColor
         label.text = "MisoWeather🌤"
         return label
     }()
     
     private lazy var nonLoginButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("그냥 둘러볼래요", for: .normal)
-        button.setTitleColor( UIColor.black, for: .normal)
+        let button = UIButton(type: .system)
+        let text = "그냥 둘러볼래요"
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle(text, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16.0)
+        let attributeString = NSMutableAttributedString(string: text)
+        attributeString.addAttribute(.underlineStyle, value: 1, range: NSRange.init(location: 0, length: text.count))
+        button.titleLabel?.attributedText = attributeString
+        // 굵기 1의 언더라인과 함께 처음부터 끝까지 밑줄 설정
         button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
     }()
     
-    @objc func nextVC() {
+    // MARK: - Private Method
+    @objc private func nextVC() {
         self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
     }
     
-    @objc func hasKakaoToken() {
+    @objc private func hasKakaoToken() {
         if AuthApi.hasToken() {
             // 사용자 액세스 토큰 정보 조회
             UserApi.shared.accessTokenInfo {(_, error) in
@@ -57,6 +64,9 @@ class RegisterViewController: UIViewController {
                 } else {
                     // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
                     print("토큰 유효성 체크 성공")
+                    
+                    let token = TokenUtils()
+                    print(token.read("kakao", account: "accessToken") ?? "")
                     
                     // 화면전환
                     self.nextVC()
@@ -78,6 +88,7 @@ class RegisterViewController: UIViewController {
                     //  회원가입 성공 시 oauthToken 저장가능
                     guard let accessToken = oauthToken?.accessToken else {return}
                     
+                    // 키체인에 Token, ID 저장
                     let token = TokenUtils()
                     token.create("kakao", account: "accessToken", value: accessToken)
                     
@@ -99,6 +110,7 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = .black
+        self.view.backgroundColor = .mainColor
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         
         self.navigationItem.backBarButtonItem = backBarButtonItem
@@ -123,7 +135,8 @@ extension RegisterViewController {
             $0.centerX.equalToSuperview()
         }
         nonLoginButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+            $0.leading.equalToSuperview().inset(24.0)
+            $0.trailing.equalToSuperview().inset(24.0)
             $0.top.equalTo(kakaoLoginButon.snp.bottom).offset(17.0)
         }
     }

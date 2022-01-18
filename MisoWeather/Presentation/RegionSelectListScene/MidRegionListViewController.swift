@@ -22,7 +22,8 @@ class MidRegionListViewController: UIViewController {
         return view
     }()
     
-    @objc func nextVC() {
+    // MARK: - Private Method
+    @objc private func nextVC() {
         if regionSelectListView.selectRegion == "선택 안 함" {
             weak var delegate: nickNameSendDelegate?
             let nextVC = NicknameSelectViewController()
@@ -35,11 +36,13 @@ class MidRegionListViewController: UIViewController {
         }
     }
     
-    @objc func fetchData() {
+    @objc private func fetchData() {
         var urlString = ""
         if regionSelectListView.selectRegion == "선택 안 함" {
+            // 닉네임 받기
             urlString = "\(URLString.nicknameURL)"
         } else {
+            // 다음 지역 받기
             urlString = "\(URLString.regionURL)\(midScaleRegionList[0].bigScale)/\(regionSelectListView.selectRegion)"
         }
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
@@ -51,17 +54,18 @@ class MidRegionListViewController: UIViewController {
             let decoder = JSONDecoder()
             
             if self.regionSelectListView.selectRegion == "선택 안 함" {
+                // 닉네임 받기
                 let recive = try? decoder.decode(NicknameModel.self, from: data)
                 if let nickName = recive {
                     self.recivedNickName = nickName.data
                 }
             } else {
+                // 다음 지역 받기
                 let recive = try? decoder.decode(RegionModel.self, from: data)
                 if let regionList = recive {
                     self.midScaleRegionList = regionList.data.regionList
                 }
             }
-            
             DispatchQueue.main.async {
                 self.nextVC()
             }
@@ -106,7 +110,7 @@ extension MidRegionListViewController: RegionSendDelegate {
 }
 
 extension MidRegionListViewController: nickNameSendDelegate {
-    func sendData() -> NicknameModel.Data{
+    func sendData() -> NicknameModel.Data {
         return recivedNickName
     }
 }

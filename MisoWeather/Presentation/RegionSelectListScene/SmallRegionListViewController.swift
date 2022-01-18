@@ -22,13 +22,14 @@ class SmallRegionListViewController: UIViewController {
         return view
     }()
     
-    @objc func nextVC() {
+    // MARK: - Private Method
+    @objc private func nextVC() {
             let nextVC = NicknameSelectViewController()
             nextVC.delegate = self
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
  
-    @objc func fetchData() {
+    @objc private func fetchData() {
         let urlString = "\(URLString.nicknameURL)"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         

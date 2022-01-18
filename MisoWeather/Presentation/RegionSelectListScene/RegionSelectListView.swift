@@ -20,9 +20,8 @@ class RegionSelectListView: UIView {
         return label
     }()
     
-    lazy var confirmButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(named: "nextButton"), for: .normal)
+    lazy var confirmButton: CustomButton = {
+        let button = CustomButton(type: .next)
         return button
     }()
     
@@ -52,6 +51,8 @@ extension RegionSelectListView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "Cell")
+        cell.selectionStyle = .none
+        cell.textLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
         if regionList[1].smallScale == "선택 안 함"{
             cell.textLabel?.text = regionList[indexPath.row].midScale
         } else {
@@ -62,11 +63,19 @@ extension RegionSelectListView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectRegion = regionList[indexPath.row].midScale
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.textLabel?.font = .systemFont(ofSize: 18.0, weight: .bold)
+        cell?.textLabel?.textColor = .mainColor
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.textLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
+        cell?.textLabel?.textColor = .textColor
     }
 }
 
 extension RegionSelectListView: UITableViewDataSource {
-    
 }
 
 extension RegionSelectListView {
