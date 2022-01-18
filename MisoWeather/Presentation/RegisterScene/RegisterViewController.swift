@@ -58,6 +58,9 @@ class RegisterViewController: UIViewController {
                     // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
                     print("토큰 유효성 체크 성공")
                     
+                    let token = TokenUtils()
+                    print(token.read("kakao", account: "accessToken"))
+                    
                     // 화면전환
                     self.nextVC()
                 }
