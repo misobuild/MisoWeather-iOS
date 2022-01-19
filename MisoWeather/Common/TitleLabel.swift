@@ -46,7 +46,7 @@ final class TitleLabel: UIView {
 extension TitleLabel {
     
     // MARK: - Layout
-    private func setupView() {
+    private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         [
             titleLabel,
             questionLabel,
@@ -54,8 +54,8 @@ extension TitleLabel {
         ].forEach {self.addSubview($0)}
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(48.0)
-            $0.trailing.equalToSuperview().inset(48.0)
+            $0.leading.equalToSuperview().inset(width * 0.12)
+            $0.trailing.equalToSuperview().inset(width * 0.12)
         }
         
         questionLabel.snp.makeConstraints {

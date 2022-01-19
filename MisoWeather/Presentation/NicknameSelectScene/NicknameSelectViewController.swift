@@ -12,7 +12,7 @@ final class NicknameSelectViewController: UIViewController {
     weak var delegate: nickNameSendDelegate?
     private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
     
-    private let region = UserInfo.shared.region!
+    private var region = ""
     
     // MARK: - Subviews
     private lazy var titleLabel: UILabel = {
@@ -44,7 +44,7 @@ final class NicknameSelectViewController: UIViewController {
         let text = "닉네임 새로 받기"
         button.setTitleColor(.darkGray, for: .normal)
         button.setTitle(text, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16.0)
+        button.titleLabel?.font = .systemFont(ofSize: 18.0)
         let attributeString = NSMutableAttributedString(string: text)
         attributeString.addAttribute(.underlineStyle, value: 1, range: NSRange.init(location: 0, length: text.count))
         button.titleLabel?.attributedText = attributeString
@@ -54,7 +54,7 @@ final class NicknameSelectViewController: UIViewController {
     
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13.0)
+        label.font = .systemFont(ofSize: 14.0)
         label.numberOfLines = 0
         label.textColor = .gray
         label.textAlignment = .center
@@ -179,6 +179,9 @@ final class NicknameSelectViewController: UIViewController {
         if let data = self.delegate?.sendData() {
             self.recivedNickName = data
         }
+        if let region = UserInfo.shared.region {
+            self.region = region
+        }
         animate()
         setupView()
     }
@@ -187,30 +190,30 @@ final class NicknameSelectViewController: UIViewController {
 extension NicknameSelectViewController {
     
     // MARK: - Layout
-    private func setupView() {
+    private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         
         [titleLabel, nicknameLabel, imoticonLable, refreshButton, descriptionLabel, confirmButton].forEach {view.addSubview($0)}
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(48.0)
-            $0.top.equalToSuperview().inset(170.0)
+            $0.leading.equalToSuperview().inset(width * 0.10)
+            $0.trailing.equalToSuperview().inset(width * 0.10)
+            $0.top.equalToSuperview().inset(height * 0.2)
         }
         
         nicknameLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(48.0)
+            $0.leading.equalTo(titleLabel)
             $0.top.equalTo(titleLabel.snp.bottom).offset(5.0)
         }
         
         imoticonLable.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(nicknameLabel.snp.bottom).offset(view.frame.height * 0.06)
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(height * 0.06)
         }
         
         refreshButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(imoticonLable.snp.bottom).offset(view.frame.height * 0.06)
-            $0.leading.equalToSuperview().inset(48.0)
-            $0.trailing.equalToSuperview().inset(48.0)
+            $0.top.equalTo(imoticonLable.snp.bottom).offset(height * 0.06)
+            $0.width.equalTo(200)
         }
         
         descriptionLabel.snp.makeConstraints {
@@ -220,9 +223,9 @@ extension NicknameSelectViewController {
         
         confirmButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(view.frame.height * 0.096)
-            $0.width.equalTo(view.frame.width - 96.0)
-            $0.height.equalTo((view.frame.width - 96.0) * 0.15)
+            $0.bottom.equalToSuperview().inset(height * 0.1)
+            $0.width.equalTo(width - (width * 0.14))
+            $0.height.equalTo((width - (width * 0.23)) * 0.15)
         }
     }
 }

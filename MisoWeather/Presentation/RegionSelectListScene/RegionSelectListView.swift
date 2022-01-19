@@ -83,7 +83,7 @@ extension RegionSelectListView: UITableViewDataSource {
 extension RegionSelectListView {
     
     // MARK: - Layout
-    private func setupView() {
+    private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         [
             titleLabel,
             tableView,
@@ -91,21 +91,21 @@ extension RegionSelectListView {
         ].forEach {addSubview($0)}
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(174.0)
+            $0.top.equalToSuperview().inset(height * 0.2)
         }
         
         tableView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(height * 0.4)
+            $0.width.equalTo(width - (width * 0.20))
+            $0.height.equalTo(height * 0.35)
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(359.0)
-            $0.width.equalTo(300.0)
-            $0.height.equalTo(300.0)
         }
         
         confirmButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(100.0)
-            $0.width.equalTo(300.0)
-            $0.height.equalTo(50.0)
+            $0.bottom.equalToSuperview().inset(height * 0.1)
+            $0.width.equalTo(width - (width * 0.14))
+            $0.height.equalTo((width - (width * 0.23)) * 0.15)
         }
     }
 }
