@@ -92,11 +92,6 @@ final class RegisterViewController: UIViewController {
                     let token = TokenUtils()
                     token.create("kakao", account: "accessToken", value: accessToken)
                     
-                    UserApi.shared.accessTokenInfo {(tokenInfo, _) in
-                        guard let userID = tokenInfo?.id else {return}
-                        token.create("kakao", account: "userID", value: String(userID))
-                    }
-                    
                     // 화면전환
                     self.nextVC()
                 }

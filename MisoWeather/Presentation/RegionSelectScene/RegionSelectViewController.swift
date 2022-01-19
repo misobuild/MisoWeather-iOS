@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import KakaoSDKCommon
 
 final class RegionSelectViewController: UIViewController {
     
@@ -51,21 +52,28 @@ final class RegionSelectViewController: UIViewController {
     
     @objc private func fetchData() {
         let urlString = "\(URLString.regionURL)\(selectRegion)"
-        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let url = URL(string: encodedString!)
         
-        let url = URL(string: encodedString)
         let session = URLSession(configuration: .default)
-        session.dataTask(with: url!) { data, _, error in
-            guard let data = data, error == nil else {return print(error.debugDescription)}
-            let decoder = JSONDecoder()
-            let midRegionList = try? decoder.decode(RegionModel.self, from: data)
-            
-            guard let regionList: RegionModel = midRegionList else {return print(error.debugDescription)}
+        session.dataTask(with: url!) { data, response, error in
+            self.task(data: data, response: response, error: error)
+        }.resume()
+    }
+    
+    func task(data: Data?, response: URLResponse?, error: Error?) {
+        guard let data = data, error == nil else {return}
+        guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {return}
+        let sucessRange = 200..<300
+        guard sucessRange.contains(statusCode) else {return}
+        let decoder = JSONDecoder()
+        let midRegionList = try? decoder.decode(RegionModel.self, from: data)
+        if let regionList: RegionModel = midRegionList {
             self.midScaleRegionList = regionList.data.regionList
             DispatchQueue.main.async {
                 self.nextVC()
             }
-        }.resume()
+        }
     }
     
     // MARK: - LifeCycle Methods

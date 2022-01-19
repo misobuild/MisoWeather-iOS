@@ -67,7 +67,7 @@ final class NicknameSelectViewController: UIViewController {
     
     private lazy var confirmButton: CustomButton = {
         let button = CustomButton(type: .register)
-        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
+        button.addTarget(self, action: #selector(register), for: .touchUpInside)
         return button
     }()
     
@@ -95,9 +95,54 @@ final class NicknameSelectViewController: UIViewController {
                 self.imoticonLable.text = self.recivedNickName.emoji
                 self.animate()
             }
-            
         }.resume()
     }
+    
+    @objc private func register() {
+        let urlString = "\(URLString.signupURL)/"
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        let url = URL(string: encodedString)
+        
+        let token = TokenUtils()
+        let accessToken = token.read("kakao", account: "accessToken")
+        let userID = token.read("kakao", account: "userID")
+        let body: [String: Any] = [
+            "defaultRegionId": 1241,
+            "emoji": recivedNickName.emoji,
+            "nickname": recivedNickName.nickname,
+            "socialId": userID!,
+            "socialToken": accessToken!,
+            "socialType": "kakao"
+        ]
+        
+        guard let paramData = try? JSONSerialization.data(withJSONObject: body, options: []) else {return}
+        var requeset: URLRequest = URLRequest(url: url!)
+        requeset.httpMethod = "POST"
+        requeset.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        requeset.httpBody = paramData
+        
+        let session = URLSession(configuration: .default)
+        session.dataTask(with: requeset) { data, response, error in
+            guard let data = data, error == nil else {return}
+            let resultCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+            let header = (response as? HTTPURLResponse)?.headers
+            let resultString = String(data: data, encoding: .utf8) ?? "" // 응답 메시지
+                    
+                     print("")
+                     print("======================Token========================")
+                     print(accessToken!)
+                     print("======================Header========================")
+                     print(header!)
+                     print("======================Body==========================")
+                     print("requestPOST : http post 요청 성공")
+                     print("resultCode : ", resultCode)
+                     print("resultString : ", resultString)
+                     print("====================================================")
+                     print("")
+        }.resume()
+    }
+
     
     private func animate() {
         imoticonLable.alpha = 0
