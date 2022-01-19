@@ -30,7 +30,7 @@ final class NicknameSelectViewController: UIViewController {
         label.text = "\(region)의 \(recivedNickName.nickname)님!"
         return label
     }()
-
+    
     private lazy var imoticonLable: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 170.0)
@@ -89,7 +89,7 @@ final class NicknameSelectViewController: UIViewController {
             if let nickName = recive {
                 self.recivedNickName = nickName.data
             }
-
+            
             DispatchQueue.main.async {
                 self.nicknameLabel.text = "\(self.region)의 \(self.recivedNickName.nickname)님!"
                 self.imoticonLable.text = self.recivedNickName.emoji
@@ -99,19 +99,20 @@ final class NicknameSelectViewController: UIViewController {
     }
     
     @objc private func register() {
-        let urlString = "\(URLString.signupURL)/"
-        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
-        let url = URL(string: encodedString)
+        
         let regionID = UserDefaults.standard.string(forKey: "regionID")
         let token = TokenUtils()
         let accessToken = token.read("kakao", account: "accessToken")
         let userID = token.read("kakao", account: "userID")
+        
+        let urlString = "\(URLString.signupURL)?socialToken=\(accessToken!)"
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        let url = URL(string: encodedString)
         let body: [String: Any] = [
             "defaultRegionId": regionID!,
             "emoji": recivedNickName.emoji,
             "nickname": recivedNickName.nickname,
             "socialId": userID!,
-            "socialToken": accessToken!,
             "socialType": "kakao"
         ]
         
@@ -126,18 +127,27 @@ final class NicknameSelectViewController: UIViewController {
             guard let data = data, error == nil else {return}
             let resultCode = (response as? HTTPURLResponse)?.statusCode ?? 0
             let header = (response as? HTTPURLResponse)?.headers
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                if let serverToken = httpResponse.value(forHTTPHeaderField: "serverToken") {
+                    token.create("misoWeather", account: "serverToken", value: serverToken)
+                    print("======================serverToken========================")
+                    print(serverToken)
+                }
+            }
             let resultString = String(data: data, encoding: .utf8) ?? "" // 응답 메시지
-                     print("")
-                     print("======================Token========================")
-                     print(accessToken!)
-                     print("======================Header========================")
-                     print(header!)
-                     print("======================Body==========================")
-                     print("requestPOST : http post 요청 성공")
-                     print("resultCode : ", resultCode)
-                     print("resultString : ", resultString)
-                     print("====================================================")
-                     print("")
+            print("")
+            print("======================accessToken========================")
+            print(accessToken!)
+            print("======================Header========================")
+            print(header!)
+            print("======================Body==========================")
+            print("requestPOST : http post 요청 성공")
+            print("resultCode : ", resultCode)
+            print("resultString : ", resultString)
+            print("====================================================")
+            print("")
+            
         }.resume()
     }
     
@@ -170,14 +180,14 @@ extension NicknameSelectViewController {
     
     // MARK: - Layout
     private func setupView() {
-      
+        
         [titleLabel, nicknameLabel, imoticonLable, refreshButton, descriptionLabel, confirmButton].forEach {view.addSubview($0)}
-
+        
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(48.0)
             $0.top.equalToSuperview().inset(170.0)
         }
-
+        
         nicknameLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(48.0)
             $0.top.equalTo(titleLabel.snp.bottom).offset(5.0)
@@ -187,7 +197,7 @@ extension NicknameSelectViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(nicknameLabel.snp.bottom).offset(view.frame.height * 0.06)
         }
-
+        
         refreshButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(imoticonLable.snp.bottom).offset(view.frame.height * 0.06)
