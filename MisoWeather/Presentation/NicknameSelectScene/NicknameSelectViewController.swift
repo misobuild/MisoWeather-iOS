@@ -148,6 +148,14 @@ final class NicknameSelectViewController: UIViewController {
             print("====================================================")
             print("")
             
+            // 1. status가 맞을 때 다음 화면으로 넘어가야함,
+            // 2. status가 틀릴 때 안내 알럿 띄워야함
+            // 3. 409 - 이미 회원가입이 되어있습니다.
+            // 4. 403 - 토큰이 만료되었습니다. 앱을 재 실행 해주세요
+            
+            DispatchQueue.main.async {
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(MainViewController())
+            }
         }.resume()
     }
     
