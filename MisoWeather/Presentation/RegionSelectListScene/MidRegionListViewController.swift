@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MidRegionListViewController: UIViewController {
+final class MidRegionListViewController: UIViewController {
     weak var delegate: RegionSendDelegate?
     
     private var midScaleRegionList: [RegionList] = []
@@ -25,6 +25,8 @@ class MidRegionListViewController: UIViewController {
     // MARK: - Private Method
     @objc private func nextVC() {
         if regionSelectListView.selectRegion == "선택 안 함" {
+            // 선택 지역ID 저장
+            UserDefaults.standard.set(midScaleRegionList[0].id, forKey: "regionID")
             weak var delegate: nickNameSendDelegate?
             let nextVC = NicknameSelectViewController()
             nextVC.delegate = self
@@ -69,7 +71,6 @@ class MidRegionListViewController: UIViewController {
             DispatchQueue.main.async {
                 self.nextVC()
             }
-            
         }.resume()
     }
     
@@ -91,15 +92,11 @@ extension MidRegionListViewController {
     
     // MARK: - Layout
     private func setupView() {
-        [
-            regionSelectListView
-            
-        ].forEach {view.addSubview($0)}
+        view.addSubview(regionSelectListView)
         
         regionSelectListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
     }
 }
 

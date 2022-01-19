@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class NicknameSelectViewController: UIViewController {
+final class NicknameSelectViewController: UIViewController {
     weak var delegate: nickNameSendDelegate?
     private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
     
@@ -30,7 +30,7 @@ class NicknameSelectViewController: UIViewController {
         label.text = "\(region)의 \(recivedNickName.nickname)님!"
         return label
     }()
-
+    
     private lazy var imoticonLable: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 170.0)
@@ -67,7 +67,7 @@ class NicknameSelectViewController: UIViewController {
     
     private lazy var confirmButton: CustomButton = {
         let button = CustomButton(type: .register)
-        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
+        button.addTarget(self, action: #selector(register), for: .touchUpInside)
         return button
     }()
     
@@ -79,7 +79,6 @@ class NicknameSelectViewController: UIViewController {
     @objc private func fetchData() {
         let urlString = "\(URLString.nicknameURL)"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
-        
         let url = URL(string: encodedString)
         let session = URLSession(configuration: .default)
         session.dataTask(with: url!) { data, _, error in
@@ -90,12 +89,64 @@ class NicknameSelectViewController: UIViewController {
             if let nickName = recive {
                 self.recivedNickName = nickName.data
             }
-
+            
             DispatchQueue.main.async {
                 self.nicknameLabel.text = "\(self.region)의 \(self.recivedNickName.nickname)님!"
                 self.imoticonLable.text = self.recivedNickName.emoji
                 self.animate()
             }
+        }.resume()
+    }
+    
+    @objc private func register() {
+        
+        let regionID = UserDefaults.standard.string(forKey: "regionID")
+        let token = TokenUtils()
+        let accessToken = token.read("kakao", account: "accessToken")
+        let userID = token.read("kakao", account: "userID")
+        
+        let urlString = "\(URLString.signupURL)?socialToken=\(accessToken!)"
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        let url = URL(string: encodedString)
+        let body: [String: Any] = [
+            "defaultRegionId": regionID!,
+            "emoji": recivedNickName.emoji,
+            "nickname": recivedNickName.nickname,
+            "socialId": userID!,
+            "socialType": "kakao"
+        ]
+        
+        guard let paramData = try? JSONSerialization.data(withJSONObject: body, options: []) else {return}
+        var requeset: URLRequest = URLRequest(url: url!)
+        requeset.httpMethod = "POST"
+        requeset.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        requeset.httpBody = paramData
+        
+        let session = URLSession(configuration: .default)
+        session.dataTask(with: requeset) { data, response, error in
+            guard let data = data, error == nil else {return}
+            let resultCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+            let header = (response as? HTTPURLResponse)?.headers
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                if let serverToken = httpResponse.value(forHTTPHeaderField: "serverToken") {
+                    token.create("misoWeather", account: "serverToken", value: serverToken)
+                    print("======================serverToken========================")
+                    print(serverToken)
+                }
+            }
+            let resultString = String(data: data, encoding: .utf8) ?? "" // 응답 메시지
+            print("")
+            print("======================accessToken========================")
+            print(accessToken!)
+            print("======================Header========================")
+            print(header!)
+            print("======================Body==========================")
+            print("requestPOST : http post 요청 성공")
+            print("resultCode : ", resultCode)
+            print("resultString : ", resultString)
+            print("====================================================")
+            print("")
             
         }.resume()
     }
@@ -109,11 +160,6 @@ class NicknameSelectViewController: UIViewController {
             self.nicknameLabel.alpha = 1
             self.imoticonLable.alpha = 1
         })
-        
-        nicknameLabel.center.x = self.view.frame.width + 30
-        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 30.0, initialSpringVelocity: 30.0, options: UIView.AnimationOptions.curveEaseOut, animations: ({
-                self.nicknameLabel.center.x = self.view.frame.width / 2
-                }), completion: nil)
     }
     
     // MARK: - LifeCycle Methods
@@ -134,14 +180,14 @@ extension NicknameSelectViewController {
     
     // MARK: - Layout
     private func setupView() {
-      
+        
         [titleLabel, nicknameLabel, imoticonLable, refreshButton, descriptionLabel, confirmButton].forEach {view.addSubview($0)}
-
+        
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(48.0)
             $0.top.equalToSuperview().inset(170.0)
         }
-
+        
         nicknameLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(48.0)
             $0.top.equalTo(titleLabel.snp.bottom).offset(5.0)
@@ -151,7 +197,7 @@ extension NicknameSelectViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(nicknameLabel.snp.bottom).offset(view.frame.height * 0.06)
         }
-
+        
         refreshButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(imoticonLable.snp.bottom).offset(view.frame.height * 0.06)

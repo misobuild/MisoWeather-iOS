@@ -11,7 +11,7 @@ import KakaoSDKAuth
 import KakaoSDKCommon
 import SnapKit
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
     
     // MARK: - Subviews
     private lazy var kakaoLoginButon: UIButton = {
@@ -47,7 +47,7 @@ class RegisterViewController: UIViewController {
     
     // MARK: - Private Method
     @objc private func nextVC() {
-        self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
+        self.navigationController?.pushViewController(BigRegionViewController(), animated: true)
     }
     
     @objc private func hasKakaoToken() {
@@ -91,11 +91,6 @@ class RegisterViewController: UIViewController {
                     // 키체인에 Token, ID 저장
                     let token = TokenUtils()
                     token.create("kakao", account: "accessToken", value: accessToken)
-                    
-                    UserApi.shared.accessTokenInfo {(tokenInfo, _) in
-                        guard let userID = tokenInfo?.id else {return}
-                        token.create("kakao", account: "userID", value: String(userID))
-                    }
                     
                     // 화면전환
                     self.nextVC()

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class TitleLabel: UIView {
+final class TitleLabel: UIView {
     // MARK: - Subviews
     private lazy var titleLabel: UILabel = {
         let label = UILabel()

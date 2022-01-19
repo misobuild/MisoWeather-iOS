@@ -8,12 +8,12 @@
 import UIKit
 import SnapKit
 
-class SmallRegionListViewController: UIViewController {
-        
+final class SmallRegionListViewController: UIViewController {
+    
     weak var delegate: RegionSendDelegate?
     private var midScaleRegionList: [RegionList] = []
     private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
-
+    
     // MARK: - Subviews
     private lazy var regionSelectListView: RegionSelectListView = {
         let view = RegionSelectListView()
@@ -24,11 +24,14 @@ class SmallRegionListViewController: UIViewController {
     
     // MARK: - Private Method
     @objc private func nextVC() {
-            let nextVC = NicknameSelectViewController()
-            nextVC.delegate = self
-            self.navigationController?.pushViewController(nextVC, animated: true)
-        }
- 
+        // 선택 지역ID 저장
+        UserDefaults.standard.set(regionSelectListView.regionID, forKey: "regionID")
+        
+        let nextVC = NicknameSelectViewController()
+        nextVC.delegate = self
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     @objc private func fetchData() {
         let urlString = "\(URLString.nicknameURL)"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
@@ -48,13 +51,13 @@ class SmallRegionListViewController: UIViewController {
             }
         }.resume()
     }
-
+    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
-                
+        
         if let data = self.delegate?.sendData() {
             self.midScaleRegionList = data
         }
@@ -64,14 +67,11 @@ class SmallRegionListViewController: UIViewController {
 }
 
 extension SmallRegionListViewController {
-
+    
     // MARK: - Layout
     private func setupView() {
-        [
-            regionSelectListView
-
-        ].forEach {view.addSubview($0)}
-
+        view.addSubview(regionSelectListView)
+        
         regionSelectListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

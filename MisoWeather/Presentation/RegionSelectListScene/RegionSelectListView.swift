@@ -8,10 +8,11 @@
 import UIKit
 import SnapKit
 
-class RegionSelectListView: UIView {
+final class RegionSelectListView: UIView {
     
     var regionList: [RegionList] = []
     var selectRegion = "선택 안 함"
+    var regionID = 0
     
     // MARK: - Subviews
     private lazy var titleLabel: TitleLabel = {
@@ -63,6 +64,7 @@ extension RegionSelectListView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectRegion = regionList[indexPath.row].midScale
+        regionID = regionList[indexPath.row].id
         let cell = tableView.cellForRow(at: indexPath)
         cell?.textLabel?.font = .systemFont(ofSize: 18.0, weight: .bold)
         cell?.textLabel?.textColor = .mainColor
