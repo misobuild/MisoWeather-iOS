@@ -79,15 +79,13 @@ final class BigRegionViewController: UIViewController {
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationController?.navigationBar.barTintColor = .white
-        // 라인 선 없애기
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
         view.backgroundColor = .white
         
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
 }
 
