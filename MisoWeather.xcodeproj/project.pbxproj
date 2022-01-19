@@ -19,7 +19,7 @@
 		E8132BBB279706DA00A9518B /* StatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8132BBA279706DA00A9518B /* StatusModel.swift */; };
 		E8132BBD2797194000A9518B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8132BBC2797194000A9518B /* APIService.swift */; };
 		E839205827869D99006A1D1B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205727869D99006A1D1B /* MainViewController.swift */; };
-		E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */; };
+		E839205B2786F132006A1D1B /* BigRegionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E839205A2786F132006A1D1B /* BigRegionCollectionViewCell.swift */; };
 		E83E00FE27901E4200C4661A /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E00FD27901E4200C4661A /* TitleLabel.swift */; };
 		E83E01042790885300C4661A /* Observables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E01032790885300C4661A /* Observables.swift */; };
 		E83E01062790898900C4661A /* ObservableVMProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83E01052790898900C4661A /* ObservableVMProtocol.swift */; };
@@ -34,7 +34,7 @@
 		E8E65BAE2782D4AE00FFA0FA /* MisoWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BAD2782D4AE00FFA0FA /* MisoWeatherTests.swift */; };
 		E8E65BB82782D4AE00FFA0FA /* MisoWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BB72782D4AE00FFA0FA /* MisoWeatherUITests.swift */; };
 		E8E65BBA2782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */; };
-		E8E65BC82782E0E200FFA0FA /* RegionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */; };
+		E8E65BC82782E0E200FFA0FA /* BigRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BC72782E0E200FFA0FA /* BigRegionViewController.swift */; };
 		E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */; };
 		E8FB85ED278C2F9B0007DE27 /* MidRegionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB85EC278C2F9B0007DE27 /* MidRegionListViewController.swift */; };
 		E8FB85F0278D45DD0007DE27 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = E8FB85EF278D45DD0007DE27 /* .swiftlint.yml */; };
@@ -77,7 +77,7 @@
 		E8132BBA279706DA00A9518B /* StatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusModel.swift; sourceTree = "<group>"; };
 		E8132BBC2797194000A9518B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E839205727869D99006A1D1B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionCollectionViewCell.swift; sourceTree = "<group>"; };
+		E839205A2786F132006A1D1B /* BigRegionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigRegionCollectionViewCell.swift; sourceTree = "<group>"; };
 		E83E00FD27901E4200C4661A /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		E83E01032790885300C4661A /* Observables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observables.swift; sourceTree = "<group>"; };
 		E83E01052790898900C4661A /* ObservableVMProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableVMProtocol.swift; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 		E8E65BB32782D4AE00FFA0FA /* MisoWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MisoWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65BB72782D4AE00FFA0FA /* MisoWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisoWeatherUITests.swift; sourceTree = "<group>"; };
 		E8E65BB92782D4AE00FFA0FA /* MisoWeatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MisoWeatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		E8E65BC72782E0E200FFA0FA /* BigRegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigRegionViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSelectViewController.swift; sourceTree = "<group>"; };
 		E8FB85EC278C2F9B0007DE27 /* MidRegionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidRegionListViewController.swift; sourceTree = "<group>"; };
 		E8FB85EF278D45DD0007DE27 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -299,8 +299,8 @@
 		E8FB85E8278C18850007DE27 /* RegionSelectScene */ = {
 			isa = PBXGroup;
 			children = (
-				E8E65BC72782E0E200FFA0FA /* RegionSelectViewController.swift */,
-				E839205A2786F132006A1D1B /* RegionCollectionViewCell.swift */,
+				E8E65BC72782E0E200FFA0FA /* BigRegionViewController.swift */,
+				E839205A2786F132006A1D1B /* BigRegionCollectionViewCell.swift */,
 			);
 			path = RegionSelectScene;
 			sourceTree = "<group>";
@@ -603,11 +603,11 @@
 				E8132BB32795978B00A9518B /* SmallRegionListViewController.swift in Sources */,
 				E8FB85F3278DB7F40007DE27 /* RegionSendDelegate.swift in Sources */,
 				E8FB85ED278C2F9B0007DE27 /* MidRegionListViewController.swift in Sources */,
-				E839205B2786F132006A1D1B /* RegionCollectionViewCell.swift in Sources */,
+				E839205B2786F132006A1D1B /* BigRegionCollectionViewCell.swift in Sources */,
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,
 				E8132BBB279706DA00A9518B /* StatusModel.swift in Sources */,
 				E8132BBD2797194000A9518B /* APIService.swift in Sources */,
-				E8E65BC82782E0E200FFA0FA /* RegionSelectViewController.swift in Sources */,
+				E8E65BC82782E0E200FFA0FA /* BigRegionViewController.swift in Sources */,
 				E83E010C2790A24F00C4661A /* UserInfo.swift in Sources */,
 				E8132BAF2795501200A9518B /* TokenUtils.swift in Sources */,
 				E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */,

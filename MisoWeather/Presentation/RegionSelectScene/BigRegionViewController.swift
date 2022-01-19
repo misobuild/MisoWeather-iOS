@@ -1,5 +1,5 @@
 //
-//  RegionSelectViewController.swift
+//  BigRegionViewController.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/03.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import KakaoSDKCommon
 
-final class RegionSelectViewController: UIViewController {
+final class BigRegionViewController: UIViewController {
     
     private var selectRegion: String = "서울특별시"
     private var selectRegionList = ["서울", "경기", "인천", "대전", "세종", "충북", "충남", "광주", "전북", "전남", "대구", "부산", "울산", "경북", "경남", "강원", "제주"]
@@ -26,7 +26,7 @@ final class RegionSelectViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .white
-        collectionView.register(RegionCollectionViewCell.self, forCellWithReuseIdentifier: "RegionCollectionViewCell")
+        collectionView.register(BigRegionCollectionViewCell.self, forCellWithReuseIdentifier: "RegionCollectionViewCell")
         return collectionView
     }()
     
@@ -86,13 +86,13 @@ final class RegionSelectViewController: UIViewController {
     }
 }
 
-extension RegionSelectViewController: UICollectionViewDataSource {
+extension BigRegionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return selectRegionList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as? RegionCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as? BigRegionCollectionViewCell
         let region = selectRegionList[indexPath.row]
         cell?.setup(region: region)
         
@@ -101,11 +101,11 @@ extension RegionSelectViewController: UICollectionViewDataSource {
             collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
         
-        return cell ?? RegionCollectionViewCell()
+        return cell ?? BigRegionCollectionViewCell()
     }
 }
 
-extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
+extension BigRegionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: (view.frame.width - 98.0 - 30) / 4, height: (view.frame.width - 98.0 - 30) / 4 * 0.6)
     }
@@ -127,7 +127,7 @@ extension RegionSelectViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension RegionSelectViewController {
+extension BigRegionViewController {
     // MARK: - Layout
     private func setupView() {
         [
@@ -156,7 +156,7 @@ extension RegionSelectViewController {
     }
 }
 
-extension RegionSelectViewController: RegionSendDelegate {
+extension BigRegionViewController: RegionSendDelegate {
     func sendData() -> [RegionList] {
         return midScaleRegionList
     }

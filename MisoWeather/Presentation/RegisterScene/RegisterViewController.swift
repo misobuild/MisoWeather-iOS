@@ -47,7 +47,7 @@ final class RegisterViewController: UIViewController {
     
     // MARK: - Private Method
     @objc private func nextVC() {
-        self.navigationController?.pushViewController(RegionSelectViewController(), animated: true)
+        self.navigationController?.pushViewController(BigRegionViewController(), animated: true)
     }
     
     @objc private func hasKakaoToken() {

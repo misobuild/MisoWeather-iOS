@@ -102,12 +102,12 @@ final class NicknameSelectViewController: UIViewController {
         let urlString = "\(URLString.signupURL)/"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         let url = URL(string: encodedString)
-        
+        let regionID = UserDefaults.standard.string(forKey: "regionID")
         let token = TokenUtils()
         let accessToken = token.read("kakao", account: "accessToken")
         let userID = token.read("kakao", account: "userID")
         let body: [String: Any] = [
-            "defaultRegionId": 1241,
+            "defaultRegionId": regionID!,
             "emoji": recivedNickName.emoji,
             "nickname": recivedNickName.nickname,
             "socialId": userID!,
@@ -119,7 +119,6 @@ final class NicknameSelectViewController: UIViewController {
         var requeset: URLRequest = URLRequest(url: url!)
         requeset.httpMethod = "POST"
         requeset.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
         requeset.httpBody = paramData
         
         let session = URLSession(configuration: .default)
@@ -128,7 +127,6 @@ final class NicknameSelectViewController: UIViewController {
             let resultCode = (response as? HTTPURLResponse)?.statusCode ?? 0
             let header = (response as? HTTPURLResponse)?.headers
             let resultString = String(data: data, encoding: .utf8) ?? "" // 응답 메시지
-                    
                      print("")
                      print("======================Token========================")
                      print(accessToken!)
@@ -142,7 +140,6 @@ final class NicknameSelectViewController: UIViewController {
                      print("")
         }.resume()
     }
-
     
     private func animate() {
         imoticonLable.alpha = 0
@@ -153,11 +150,6 @@ final class NicknameSelectViewController: UIViewController {
             self.nicknameLabel.alpha = 1
             self.imoticonLable.alpha = 1
         })
-        
-//        nicknameLabel.center.x = self.view.frame.width + 30
-//        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 30.0, initialSpringVelocity: 30.0, options: UIView.AnimationOptions.curveEaseOut, animations: ({
-//                self.nicknameLabel.center.x = self.view.frame.width / 2
-//                }), completion: nil)
     }
     
     // MARK: - LifeCycle Methods
