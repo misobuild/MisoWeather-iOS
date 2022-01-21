@@ -10,6 +10,14 @@ import SnapKit
 
 final class WeatherView: UIView {
     
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 8
+        view.distribution = .equalSpacing
+        return view
+    }()
+    
     private lazy var location: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(named: "location")
@@ -77,6 +85,7 @@ extension WeatherView {
             location,
             regionLabel,
             button,
+            stackView,
             emojiLabel,
             mainTempLabel,
             tempLabel
@@ -85,8 +94,8 @@ extension WeatherView {
         location.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(width * 0.03)
             $0.top.equalToSuperview().inset(22.0)
-            $0.width.equalTo(width * 0.06)
-            $0.height.equalTo(width * 0.06)
+            $0.width.equalTo(24.0)
+            $0.height.equalTo(24.0)
         }
         
         regionLabel.snp.makeConstraints {
@@ -97,18 +106,17 @@ extension WeatherView {
         button.snp.makeConstraints {
             $0.top.equalTo(location)
             $0.trailing.equalToSuperview().inset(width * 0.03)
-            $0.width.equalTo(width * 0.06)
-            $0.height.equalTo(width * 0.06)
+            $0.width.equalTo(24.0)
+            $0.height.equalTo(24.0)
         }
         
-        emojiLabel.snp.makeConstraints {
+        [emojiLabel, mainTempLabel].forEach {stackView.addArrangedSubview($0)}
+        
+        stackView.snp.makeConstraints {
             $0.top.equalTo(location.snp.bottom).offset(23.0)
-            $0.leading.equalToSuperview().inset(width * 0.22)
-        }
-        
-        mainTempLabel.snp.makeConstraints {
-            $0.top.equalTo(emojiLabel).inset(5.0)
-            $0.leading.equalTo(emojiLabel.snp.trailing).offset(7.0)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(150.0)
+            $0.height.equalTo(64.0)
         }
         
         tempLabel.snp.makeConstraints {

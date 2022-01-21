@@ -10,7 +10,7 @@ import SnapKit
 final class MainScrollView: UIView {
     
     let scrollView = UIScrollView()
-    
+
     // 스크롤 뷰 안에는 스크롤이 되는 컨텐트 뷰가 존재해야 함
     let contentView = UIView()
     
@@ -64,8 +64,6 @@ final class MainScrollView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.showsVerticalScrollIndicator = false
 
         self.setupView()
