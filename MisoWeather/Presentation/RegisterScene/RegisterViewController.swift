@@ -41,13 +41,17 @@ final class RegisterViewController: UIViewController {
         attributeString.addAttribute(.underlineStyle, value: 1, range: NSRange.init(location: 0, length: text.count))
         button.titleLabel?.attributedText = attributeString
         // 굵기 1의 언더라인과 함께 처음부터 끝까지 밑줄 설정
-        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
+        button.addTarget(self, action: #selector(mainVC), for: .touchUpInside)
         return button
     }()
     
     // MARK: - Private Method
     @objc private func nextVC() {
         self.navigationController?.pushViewController(BigRegionViewController(), animated: true)
+    }
+    
+    @objc private func mainVC() {
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(MainViewController())
     }
     
     @objc private func hasKakaoToken() {
@@ -104,11 +108,11 @@ final class RegisterViewController: UIViewController {
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.tintColor = .black
         self.view.backgroundColor = .mainColor
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        self.navigationController?.navigationBar.isHidden = true
         
-        self.navigationItem.backBarButtonItem = backBarButtonItem
+//        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+//        self.navigationItem.backBarButtonItem = backBarButtonItem
         
         setupView()
     }

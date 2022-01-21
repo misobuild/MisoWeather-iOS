@@ -78,7 +78,12 @@ final class MidRegionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.barTintColor = .white
+        // 라인 선 없애기
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         if let data = self.delegate?.sendData() {
             self.midScaleRegionList = data

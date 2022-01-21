@@ -79,10 +79,13 @@ final class BigRegionViewController: UIViewController {
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.topItem?.title = ""
         view.backgroundColor = .white
         
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
 }
 
@@ -128,8 +131,9 @@ extension BigRegionViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension BigRegionViewController {
+  
     // MARK: - Layout
-    private func setupView() {
+    private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         [
             titleLabel,
             collectionView,
@@ -137,21 +141,21 @@ extension BigRegionViewController {
         ].forEach {view.addSubview($0)}
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(174.0)
+            $0.top.equalToSuperview().inset(height * 0.2)
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(359.0)
-            $0.width.equalTo(view.frame.width - 96.0)
-            $0.height.equalTo((view.frame.width - 96.0) * 0.85)
+            $0.top.equalToSuperview().offset(height * 0.4)
+            $0.width.equalTo(width - (width * 0.23))
+            $0.height.equalTo((width - (width * 0.23)) * 0.85)
             $0.centerX.equalToSuperview()
         }
         
         confirmButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(view.frame.height * 0.096)
-            $0.width.equalTo(view.frame.width - 96.0)
-            $0.height.equalTo((view.frame.width - 96.0) * 0.15)
+            $0.bottom.equalToSuperview().inset(height * 0.1)
+            $0.width.equalTo(width - (width * 0.14))
+            $0.height.equalTo((width - (width * 0.23)) * 0.15)
         }
     }
 }
