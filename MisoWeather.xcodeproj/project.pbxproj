@@ -27,7 +27,10 @@
 		E86EA7062791CC8C0066BB46 /* RegionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86EA7052791CC8C0066BB46 /* RegionModel.swift */; };
 		E86EA70B279281F30066BB46 /* URLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86EA70A279281F30066BB46 /* URLString.swift */; };
 		E8CE99B927988CFC0095C958 /* MainScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99B827988CFC0095C958 /* MainScrollView.swift */; };
-		E8CE99BB27989CD40095C958 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BA27989CD40095C958 /* WeatherView.swift */; };
+		E8CE99BB27989CD40095C958 /* MainWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BA27989CD40095C958 /* MainWeatherView.swift */; };
+		E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */; };
+		E8CE99BF279A8CD60095C958 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BE279A8CD60095C958 /* WeatherViewController.swift */; };
+		E8CE99C2279A8F4D0095C958 /* RegionLocationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99C1279A8F4D0095C958 /* RegionLocationLabel.swift */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
 		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
@@ -87,7 +90,10 @@
 		E86EA7052791CC8C0066BB46 /* RegionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionModel.swift; sourceTree = "<group>"; };
 		E86EA70A279281F30066BB46 /* URLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLString.swift; sourceTree = "<group>"; };
 		E8CE99B827988CFC0095C958 /* MainScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScrollView.swift; sourceTree = "<group>"; };
-		E8CE99BA27989CD40095C958 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		E8CE99BA27989CD40095C958 /* MainWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherView.swift; sourceTree = "<group>"; };
+		E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeTempLabel.swift; sourceTree = "<group>"; };
+		E8CE99BE279A8CD60095C958 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		E8CE99C1279A8F4D0095C958 /* RegionLocationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionLocationLabel.swift; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,12 +175,14 @@
 		E83E00F9279001F400C4661A /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				E83E00FD27901E4200C4661A /* TitleLabel.swift */,
 				E83E01032790885300C4661A /* Observables.swift */,
 				E83E01052790898900C4661A /* ObservableVMProtocol.swift */,
 				E83E010B2790A24F00C4661A /* UserInfo.swift */,
 				E8FB85F2278DB7F40007DE27 /* RegionSendDelegate.swift */,
 				E8132BB62796AC8300A9518B /* CustomButton.swift */,
+				E83E00FD27901E4200C4661A /* TitleLabel.swift */,
+				E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */,
+				E8CE99C1279A8F4D0095C958 /* RegionLocationLabel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -196,6 +204,14 @@
 				E8132BBC2797194000A9518B /* APIService.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		E8CE99C0279A8CDE0095C958 /* WeatherScene */ = {
+			isa = PBXGroup;
+			children = (
+				E8CE99BE279A8CD60095C958 /* WeatherViewController.swift */,
+			);
+			path = WeatherScene;
 			sourceTree = "<group>";
 		};
 		E8E65B8A2782D4AC00FFA0FA = {
@@ -288,6 +304,7 @@
 				E8FB85EB278C2F4D0007DE27 /* RegionSelectListScene */,
 				E8FB85E9278C18920007DE27 /* NicknameSelectScene */,
 				E8FB85EA278C18A40007DE27 /* MainScene */,
+				E8CE99C0279A8CDE0095C958 /* WeatherScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -322,7 +339,7 @@
 			children = (
 				E839205727869D99006A1D1B /* MainViewController.swift */,
 				E8CE99B827988CFC0095C958 /* MainScrollView.swift */,
-				E8CE99BA27989CD40095C958 /* WeatherView.swift */,
+				E8CE99BA27989CD40095C958 /* MainWeatherView.swift */,
 			);
 			path = MainScene;
 			sourceTree = "<group>";
@@ -595,6 +612,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E83E01042790885300C4661A /* Observables.swift in Sources */,
+				E8CE99BF279A8CD60095C958 /* WeatherViewController.swift in Sources */,
 				E86EA7062791CC8C0066BB46 /* RegionModel.swift in Sources */,
 				E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */,
 				E8132BB12795863600A9518B /* RegionSelectListView.swift in Sources */,
@@ -602,9 +620,11 @@
 				E8132BB72796AC8300A9518B /* CustomButton.swift in Sources */,
 				E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */,
 				E839205827869D99006A1D1B /* MainViewController.swift in Sources */,
+				E8CE99C2279A8F4D0095C958 /* RegionLocationLabel.swift in Sources */,
 				E86EA70B279281F30066BB46 /* URLString.swift in Sources */,
+				E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */,
 				E8132BB52795BAE700A9518B /* NicknameModel.swift in Sources */,
-				E8CE99BB27989CD40095C958 /* WeatherView.swift in Sources */,
+				E8CE99BB27989CD40095C958 /* MainWeatherView.swift in Sources */,
 				E83E00FE27901E4200C4661A /* TitleLabel.swift in Sources */,
 				E83E01062790898900C4661A /* ObservableVMProtocol.swift in Sources */,
 				E8132BB32795978B00A9518B /* SmallRegionListViewController.swift in Sources */,

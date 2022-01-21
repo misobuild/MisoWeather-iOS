@@ -12,8 +12,15 @@ final class MainViewController: UIViewController {
     // MARK: - subviews
     private lazy var mainScrollView: MainScrollView = {
         let view = MainScrollView()
+        view.weatherView.nextButton.addTarget(MainViewController(), action: #selector(nextVC), for: .touchUpInside)
         return view
+        
     }()
+    // MARK: - Private Method
+    @objc private func nextVC() {
+        let nextVC = WeatherViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
     
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
@@ -22,6 +29,10 @@ final class MainViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
     }
 }
 

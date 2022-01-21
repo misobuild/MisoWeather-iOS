@@ -48,8 +48,8 @@ final class MainScrollView: UIView {
         return label
     }()
     
-    private lazy var weatherView: WeatherView = {
-        let view = WeatherView()
+    lazy var weatherView: MainWeatherView = {
+        let view = MainWeatherView()
         view.backgroundColor = .backgroundColor
         view.layer.cornerRadius = 25
         return view
@@ -78,7 +78,6 @@ extension MainScrollView {
     
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
-      
         [
             misoLabel,
             listButton,
@@ -102,8 +101,8 @@ extension MainScrollView {
         }
   
         misoLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(30.0)
             $0.leading.equalToSuperview().inset(width * 0.07)
-            $0.top.equalToSuperview().inset(height * 0.07)
         }
         
         listButton.snp.makeConstraints {
@@ -130,7 +129,6 @@ extension MainScrollView {
             $0.leading.equalToSuperview().inset(width * 0.07)
             $0.width.equalTo(width - (width * 0.14))
             $0.height.equalTo(190.0)
-
         }
            
         graphView.snp.makeConstraints {
