@@ -8,25 +8,13 @@
 import UIKit
 import SnapKit
 
-class WeatherViewController: UIViewController {
+final class WeatherViewController: UIViewController {
     
-    private lazy var locationLabel: RegionLocationLabel = {
-        let view = RegionLocationLabel()
+    // MARK: - subviews
+    private lazy var weatherScrollView: WeatherScrollView = {
+        let view = WeatherScrollView()
         return view
     }()
-    
-    private lazy var realtimeTempLabel: RealtimeTempLabel = {
-        let label = RealtimeTempLabel()
-        return label
-    }()
-    
-    private lazy var chatButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setBackgroundImage(UIImage(named: "chatButton"), for: .normal)
-        
-        return button
-    }()
-    
 //    // MARK: - Private Method
 //    @objc private func nextVC() {
 //        
@@ -52,28 +40,12 @@ extension WeatherViewController {
         // 라인 선 없애기
         self.navigationController?.navigationBar.shadowImage = UIImage()
       
-        [
-            locationLabel,
-            realtimeTempLabel,
-            chatButton
-        ].forEach {view.addSubview($0)}
-
-        locationLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(113.0)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(185.0)
-        }
-        
-        realtimeTempLabel.snp.makeConstraints {
-            $0.top.equalTo(locationLabel.snp.bottom).offset(25.00)
-            $0.centerX.equalToSuperview()
-        }
-        
-        chatButton.snp.makeConstraints {
-            $0.top.equalTo(locationLabel.snp.bottom).offset(161.0)
-            $0.height.equalTo(height * 0.07)
-            $0.width.equalTo(width - (width * 0.14))
-            $0.centerX.equalToSuperview()
+        view.addSubview(weatherScrollView)
+        weatherScrollView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
 }
