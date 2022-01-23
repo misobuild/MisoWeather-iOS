@@ -44,11 +44,14 @@ extension RegionLocationLabel {
         ].forEach {addSubview($0)}
         
         location.snp.makeConstraints {
-            $0.width.equalTo(24.0)
-            $0.height.equalTo(24.0)
+            $0.leading.equalToSuperview().inset(10.0)
+            $0.centerY.equalToSuperview()
+            $0.width.equalTo(20.0)
+            $0.height.equalTo(20.0)
         }
         
         regionLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
             $0.leading.equalTo(location.snp.trailing).offset(width * 0.01)
         }
     }

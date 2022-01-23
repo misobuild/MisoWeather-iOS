@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class MainWeatherView: UIView {
-    
+    // MARK: - subviews
     private lazy var regionLocationLabel: RegionLocationLabel = {
         let view = RegionLocationLabel()
         return view
@@ -23,15 +23,27 @@ final class MainWeatherView: UIView {
         return button
     }()
     
-    private lazy var mainTempLabel: RealtimeTempLabel = {
-        let view = RealtimeTempLabel()
-        return view
+    private lazy var emojiLabel: UILabel = {
+        let label = UILabel()
+//        label.backgroundColor = .red
+        label.font = .systemFont(ofSize: 20.0)
+        label.textColor = .textColor
+        label.text = "🌦"
+        return label
+    }()
+    
+    private lazy var tempLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16.0, weight: .medium)
+        label.textColor = .textColor
+        label.text = "-10°"
+        return label
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .red
         self.setupView()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -45,27 +57,31 @@ extension MainWeatherView {
       
         [
             regionLocationLabel,
-            nextButton,
-            mainTempLabel
+            emojiLabel,
+            tempLabel,
+            nextButton
         ].forEach {addSubview($0)}
         
         regionLocationLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(22.0)
+            $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(width * 0.03)
         }
         
+        emojiLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(width * 0.22)
+        }
+        
+        tempLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(width * 0.12)
+        }
+        
         nextButton.snp.makeConstraints {
-            $0.top.equalTo(regionLocationLabel)
+            $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(width * 0.03)
             $0.width.equalTo(24.0)
             $0.height.equalTo(24.0)
-        }
-        
-        mainTempLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(68.0)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(150.0)
-            $0.height.equalTo(64.0)
         }
     }
 }

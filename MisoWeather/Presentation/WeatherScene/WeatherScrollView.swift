@@ -60,8 +60,6 @@ class WeatherScrollView: UIView {
         return view
     }()
     
-
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         scrollView.showsVerticalScrollIndicator = false

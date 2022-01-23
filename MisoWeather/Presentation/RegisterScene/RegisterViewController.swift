@@ -20,6 +20,10 @@ final class RegisterViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(hasKakaoToken), for: .touchUpInside)
+        
+        // MARK: test
+        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
+        
         return button
     }()
     
@@ -46,6 +50,7 @@ final class RegisterViewController: UIViewController {
     }()
     
     // MARK: - Private Method
+
     @objc private func nextVC() {
         self.navigationController?.pushViewController(BigRegionViewController(), animated: true)
     }

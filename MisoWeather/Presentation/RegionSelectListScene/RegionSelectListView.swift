@@ -31,7 +31,6 @@ final class RegionSelectListView: UIView {
         tableView.isScrollEnabled = true
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .black
         return tableView
     }()
     
