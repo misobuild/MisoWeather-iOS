@@ -13,7 +13,7 @@ final class RealtimeTempLabel: UIView {
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.spacing = 8
+        view.spacing = 6
         view.distribution = .equalSpacing
         return view
     }()
@@ -67,7 +67,7 @@ extension RealtimeTempLabel {
         
         stackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(150.0)
+            $0.width.equalTo(160.0)
             $0.height.equalTo(64.0)
         }
         

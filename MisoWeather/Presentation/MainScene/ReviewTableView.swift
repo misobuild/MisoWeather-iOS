@@ -1,32 +1,25 @@
 //
-//  ForecastTableView.swift
+//  ReviewTableView.swift
 //  MisoWeather
 //
-//  Created by jiinheo on 2022/01/22.
+//  Created by jiinheo on 2022/01/23.
 //
 
 import UIKit
 import SnapKit
 
-final class ForecastTableView: UIView {
+final class ReviewTableView: UIView {
     
     // MARK: - subView
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 14.0, weight: .regular)
-        label.textColor = .textColor
-        label.text = "10일 예보"
-        return label
-    }()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.isScrollEnabled = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 39.0
+        tableView.rowHeight = 72
         tableView.separatorStyle = .none
-        tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: "ForecastTableViewCell")
+        tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: "ReviewTableViewCell")
     
         return tableView
     }()
@@ -43,40 +36,38 @@ final class ForecastTableView: UIView {
     }
 }
 
-extension ForecastTableView: UITableViewDelegate {
+extension ReviewTableView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 5
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastTableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath)
+        cell.selectionStyle = .none
+//        cell.layer.masksToBounds = true
+        //height += cell.bounds.height
         return cell
     }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
 }
 
-extension ForecastTableView: UITableViewDataSource {
+extension ReviewTableView: UITableViewDataSource {
     
 }
 
-extension ForecastTableView {
+extension ReviewTableView {
     // MARK: - layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
       
         [
-            titleLabel,
             tableView
         ].forEach {addSubview($0)}
-
-        titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(13.0)
-            $0.leading.equalToSuperview().inset(width * 0.05)
-        }
         
         tableView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(27.0)
-            $0.leading.equalToSuperview()
-            $0.height.equalTo(390)
-            $0.width.equalTo(width - (width * 0.17))
+            $0.edges.equalToSuperview()
         }
     }
 }
