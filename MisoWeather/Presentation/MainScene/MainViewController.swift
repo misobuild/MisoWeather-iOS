@@ -12,13 +12,19 @@ final class MainViewController: UIViewController {
     // MARK: - subviews
     private lazy var mainScrollView: MainScrollView = {
         let view = MainScrollView()
-        view.weatherView.nextButton.addTarget(MainViewController(), action: #selector(nextVC), for: .touchUpInside)
+        view.weatherView.nextButton.addTarget(MainViewController(), action: #selector(nextWeatherVC), for: .touchUpInside)
+        view.serveyTitleView.nextButton.addTarget(MainViewController(), action: #selector(nextServeyVC), for: .touchUpInside)
         return view
         
     }()
     // MARK: - Private Method
-    @objc private func nextVC() {
+    @objc private func nextWeatherVC() {
         let nextVC = WeatherViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    @objc private func nextServeyVC() {
+        let nextVC = SurveyViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
