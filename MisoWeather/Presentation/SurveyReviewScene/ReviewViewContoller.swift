@@ -10,6 +10,7 @@ import SnapKit
 
 final class ReviewViewContoller: UIViewController {
     
+    let name = "유쾌한 막내사자"
     let textViewPlaceHolder =  """
                             오늘 날씨에 대한
                             유쾌한 막내사자님의 느낌은 어떠신가요?
@@ -29,7 +30,7 @@ final class ReviewViewContoller: UIViewController {
         view.delegate = self
         view.font = .systemFont(ofSize: 14)
         view.text = textViewPlaceHolder
-        view.textColor = .lightGray
+        view.textColor = .systemGray2
         return view
     }()
     
@@ -40,6 +41,17 @@ final class ReviewViewContoller: UIViewController {
         label.textColor = .lightGray
         label.textAlignment = .center
         return label
+    }()
+    
+    private lazy var lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray5
+        return view
+    }()
+    
+    private lazy var postButton: CustomButton = {
+        let view = CustomButton(type: .post)
+        return view
     }()
     
     @objc
@@ -63,43 +75,6 @@ final class ReviewViewContoller: UIViewController {
     }
 }
 
-extension ReviewViewContoller {
-    // MARK: - Layout
-    private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
-        [
-            textBackgoundView,
-            textView,
-            remainCountLabel
-        ].forEach {view.addSubview($0)}
-        
-        textBackgoundView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(26)
-            $0.leading.equalToSuperview().inset(width * 0.06)
-            $0.trailing.equalToSuperview().inset(width * 0.06)
-            $0.height.equalTo(143)
-        }
-        
-        textView.snp.makeConstraints {
-            $0.top.equalTo(textBackgoundView).inset(10)
-            $0.leading.equalToSuperview().inset(width * 0.1)
-            $0.trailing.equalToSuperview().inset(width * 0.1)
-            $0.height.equalTo(80)
-        }
-        remainCountLabel.snp.makeConstraints {
-            $0.top.equalTo(textView.snp.bottom).inset(20)
-            $0.centerX.equalToSuperview()
-        }
-        
-        
-        //        tableView.snp.makeConstraints {
-        //            $0.top.equalToSuperview()
-        //            $0.leading.equalToSuperview().inset(width * 0.06)
-        //            $0.trailing.equalToSuperview().inset(width * 0.06)
-        //            $0.bottom.equalToSuperview()
-        //        }
-    }
-}
-
 extension ReviewViewContoller: UITextViewDelegate {
   
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -111,7 +86,7 @@ extension ReviewViewContoller: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = textViewPlaceHolder
-            textView.textColor = .lightGray
+            textView.textColor = .gray
         }
     }
     
@@ -122,6 +97,57 @@ extension ReviewViewContoller: UITextViewDelegate {
         let characterCount = updatedText.count
         guard characterCount <= 40 else { return false }
         updateCountLabel(characterCount: characterCount)
+        
         return true
+    }
+}
+
+extension ReviewViewContoller {
+    // MARK: - Layout
+    private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
+        [
+            textBackgoundView,
+            textView,
+            remainCountLabel,
+            lineView,
+            postButton
+        ].forEach {view.addSubview($0)}
+        
+        textBackgoundView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(26)
+            $0.leading.equalToSuperview().inset(width * 0.06)
+            $0.trailing.equalToSuperview().inset(width * 0.06)
+            $0.height.equalTo(143)
+        }
+        
+        textView.snp.makeConstraints {
+            $0.top.equalTo(textBackgoundView).inset(20)
+            $0.leading.equalToSuperview().inset(width * 0.13)
+            $0.trailing.equalToSuperview().inset(width * 0.13)
+            $0.height.equalTo(80)
+        }
+        remainCountLabel.snp.makeConstraints {
+            $0.top.equalTo(textView.snp.bottom).inset(17)
+            $0.trailing.equalTo(textBackgoundView.snp.trailing).inset(25)
+        }
+        lineView.snp.makeConstraints {
+            $0.bottom.equalTo(textBackgoundView.snp.bottom).inset(37)
+            $0.leading.equalTo(textBackgoundView).inset(20)
+            $0.trailing.equalTo(textBackgoundView).inset(20)
+            $0.height.equalTo(1)
+        }
+        postButton.snp.makeConstraints {
+            $0.trailing.equalTo(lineView)
+            $0.top.equalTo(lineView).inset(6)
+            $0.width.equalTo(70)
+            $0.height.equalTo(25)
+        }
+        
+        //        tableView.snp.makeConstraints {
+        //            $0.top.equalToSuperview()
+        //            $0.leading.equalToSuperview().inset(width * 0.06)
+        //            $0.trailing.equalToSuperview().inset(width * 0.06)
+        //            $0.bottom.equalToSuperview()
+        //        }
     }
 }

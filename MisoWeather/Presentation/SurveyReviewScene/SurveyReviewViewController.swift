@@ -138,7 +138,7 @@ extension SurveyReviewViewController {
             $0.top.equalTo(locationButton.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(width * 0.75)
-            $0.height.equalTo(40)
+            $0.height.equalTo(height * 0.04)
         }
         
         pageViewController.view.snp.makeConstraints {
