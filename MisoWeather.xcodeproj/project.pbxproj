@@ -52,6 +52,7 @@
 		E8CE99F5279E93B40095C958 /* RegionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F4279E93B40095C958 /* RegionButton.swift */; };
 		E8CE99F7279EC1B80095C958 /* ServeyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F6279EC1B80095C958 /* ServeyTableView.swift */; };
 		E8CE99F9279EC1C70095C958 /* ServeyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F8279EC1C70095C958 /* ServeyTableViewCell.swift */; };
+		E8CE99FF279EF17D0095C958 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99FE279EF17D0095C958 /* Chart.swift */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
 		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
@@ -136,6 +137,7 @@
 		E8CE99F4279E93B40095C958 /* RegionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionButton.swift; sourceTree = "<group>"; };
 		E8CE99F6279EC1B80095C958 /* ServeyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServeyTableView.swift; sourceTree = "<group>"; };
 		E8CE99F8279EC1C70095C958 /* ServeyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServeyTableViewCell.swift; sourceTree = "<group>"; };
+		E8CE99FE279EF17D0095C958 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				E8CE99F2279E907E0095C958 /* ReviewViewContoller.swift */,
 				E8CE99F6279EC1B80095C958 /* ServeyTableView.swift */,
 				E8CE99F8279EC1C70095C958 /* ServeyTableViewCell.swift */,
+				E8CE99FE279EF17D0095C958 /* Chart.swift */,
 			);
 			path = SurveyReviewScene;
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 				E8FB85ED278C2F9B0007DE27 /* MidRegionListViewController.swift in Sources */,
 				E839205B2786F132006A1D1B /* BigRegionCollectionViewCell.swift in Sources */,
 				E8CE99E1279BE6200095C958 /* ChartView.swift in Sources */,
+				E8CE99FF279EF17D0095C958 /* Chart.swift in Sources */,
 				E8CE99C7279AEB020095C958 /* HourlyWeatherViewCell.swift in Sources */,
 				E8CE99D5279B13700095C958 /* WindSpeedView.swift in Sources */,
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,

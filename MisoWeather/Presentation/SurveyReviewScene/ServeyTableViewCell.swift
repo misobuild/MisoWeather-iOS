@@ -10,7 +10,7 @@ import SnapKit
 
 final class ServeyTableViewCell: UITableViewCell {
     
-    // MARK: - subView
+    // MARK: - SubView
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18.0, weight: .bold)
@@ -64,30 +64,80 @@ final class ServeyTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var pmStatusLabel: UILabel = {
+    // MARK: - ChartView
+    private lazy var chartHideView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray5
+        return view
+    }()
+    
+    private lazy var chart1: Chart = {
+        let chart = Chart()
+        chart.percent = 84
+        chart.color = UIColor.mainColor!.cgColor
+        return chart
+    }()
+    private lazy var chart2: Chart = {
+        let chart = Chart()
+        chart.percent = 10
+        return chart
+    }()
+    private lazy var chart3: Chart = {
+        let chart = Chart()
+        chart.percent = 6
+        return chart
+    }()
+    
+    private lazy var chart1Label: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14.0, weight: .regular)
+        label.font = .systemFont(ofSize: 11.0, weight: .bold)
+        label.textColor = .mainColor
+        label.textAlignment = .right
+        label.text = "아이스 아메"
+        return label
+    }()
+    private lazy var chart2Label: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 11.0, weight: .bold)
         label.textColor = .textColor
-        label.text = "🌧"
+        label.textAlignment = .right
+        label.text = "따뜻한 아메"
+        return label
+    }()
+    private lazy var chart3Label: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 11.0, weight: .bold)
+        label.textColor = .textColor
+        label.textAlignment = .right
+        label.text = "에이드"
         return label
     }()
     
-    private lazy var minTempLabel: UILabel = {
+    private lazy var chart1PercentLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14.0, weight: .regular)
-        label.textColor = .textColor
-        label.text = "-15°"
+        label.font = .systemFont(ofSize: 10, weight: .bold)
+        label.textColor = .mainColor
+        label.textAlignment = .right
+        label.text = "84%"
         return label
     }()
-    
-    private lazy var maxTempLabel: UILabel = {
+    private lazy var chart2PercentLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14.0, weight: .regular)
+        label.font = .systemFont(ofSize: 10, weight: .bold)
         label.textColor = .textColor
-        label.text = "0°"
+        label.textAlignment = .right
+        label.text = "10%"
         return label
     }()
-    
+    private lazy var chart3PercentLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 10, weight: .bold)
+        label.textColor = .textColor
+        label.textAlignment = .right
+        label.text = "6%"
+        return label
+    }()
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
@@ -111,9 +161,16 @@ extension ServeyTableViewCell {
             askTitleLabel,
             checkImage,
             questionLabel,
-            pmStatusLabel,
-            minTempLabel,
-            maxTempLabel
+            chart1,
+            chart1Label,
+            chart1PercentLabel,
+            chart2,
+            chart2Label,
+            chart2PercentLabel,
+            chart3,
+            chart3Label,
+            chart3PercentLabel,
+            chartHideView
         ].forEach {addSubview($0)}
 
         titleLabel.snp.makeConstraints {
@@ -149,6 +206,60 @@ extension ServeyTableViewCell {
         questionLabel.snp.makeConstraints {
             $0.top.equalTo(checkImage.snp.bottom).offset(9)
             $0.centerX.equalTo(leftBackgoundView)
+        }
+        chartHideView.snp.makeConstraints {
+            $0.top.equalTo(askTitleLabel.snp.bottom).offset(3)
+            $0.leading.equalTo(rightBackgoundView).inset(width * 0.029)
+            $0.width.equalTo(4)
+            $0.height.equalTo(76)
+        }
+        chart1.snp.makeConstraints {
+            $0.top.equalTo(answerTitleLabel.snp.bottom).offset(13)
+            $0.leading.equalTo(rightBackgoundView.snp.leading).inset(width * 0.05)
+            $0.height.equalTo(15)
+            $0.width.equalTo(width * 0.27)
+        }
+        chart2.snp.makeConstraints {
+            $0.top.equalTo(chart1.snp.bottom).offset(7)
+            $0.leading.equalTo(rightBackgoundView.snp.leading).inset(width * 0.05)
+            $0.height.equalTo(15)
+            $0.width.equalTo(width * 0.27)
+        }
+        chart3.snp.makeConstraints {
+            $0.top.equalTo(chart2.snp.bottom).offset(7)
+            $0.leading.equalTo(rightBackgoundView.snp.leading).inset(width * 0.05)
+            $0.height.equalTo(15)
+            $0.width.equalTo(width * 0.27)
+        }
+        chart1Label.snp.makeConstraints {
+            $0.centerY.equalTo(chart1)
+            $0.leading.equalTo(chart1.snp.trailing)
+            $0.width.equalTo(51)
+        }
+        chart2Label.snp.makeConstraints {
+            $0.centerY.equalTo(chart2)
+            $0.leading.equalTo(chart1.snp.trailing)
+            $0.width.equalTo(51)
+        }
+        chart3Label.snp.makeConstraints {
+            $0.centerY.equalTo(chart3)
+            $0.leading.equalTo(chart1.snp.trailing)
+            $0.width.equalTo(51)
+        }
+        chart1PercentLabel.snp.makeConstraints {
+            $0.centerY.equalTo(chart1)
+            $0.leading.equalTo(chart1Label.snp.trailing).offset(3)
+            $0.width.equalTo(27)
+        }
+        chart2PercentLabel.snp.makeConstraints {
+            $0.centerY.equalTo(chart2)
+            $0.leading.equalTo(chart1Label.snp.trailing).offset(3)
+            $0.width.equalTo(27)
+        }
+        chart3PercentLabel.snp.makeConstraints {
+            $0.centerY.equalTo(chart3)
+            $0.leading.equalTo(chart1Label.snp.trailing).offset(3)
+            $0.width.equalTo(27)
         }
     }
 }
