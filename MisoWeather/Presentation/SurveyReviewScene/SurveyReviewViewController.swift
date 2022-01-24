@@ -135,14 +135,14 @@ extension SurveyReviewViewController {
         }
         
         segmentedControl.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(164)
+            $0.top.equalTo(locationButton.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(width * 0.75)
             $0.height.equalTo(40)
         }
         
         pageViewController.view.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(150)
+            $0.top.equalTo(segmentedControl.snp.bottom).offset(3)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()

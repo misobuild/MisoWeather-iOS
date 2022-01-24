@@ -20,12 +20,15 @@ final class SurveyViewController: UIViewController {
         return label
     }()
     
-
+    private var serveyTableView: ServeyTableView = {
+        let tabieView = ServeyTableView()
+        return tabieView
+    }()
+    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         
         setupView()
     }
@@ -35,12 +38,13 @@ extension SurveyViewController {
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         [
-            titleLabel
+            serveyTableView
         ].forEach {view.addSubview($0)}
         
-        titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(110)
-            $0.leading.equalToSuperview().inset(width * 0.06)
+        
+        serveyTableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            //$0.leading.equalToSuperview().inset(width * 0.06)
         }
     }
 }
