@@ -24,7 +24,7 @@ final class MainViewController: UIViewController {
     }
     
     @objc private func nextServeyVC() {
-        let nextVC = SurveyViewController()
+        let nextVC = SurveyReviewViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
@@ -35,10 +35,6 @@ final class MainViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
         setupView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
     }
 }
 

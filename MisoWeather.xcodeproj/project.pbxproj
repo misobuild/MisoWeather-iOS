@@ -46,7 +46,7 @@
 		E8CE99E3279C47EC0095C958 /* MainServeyTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99E2279C47EC0095C958 /* MainServeyTitleView.swift */; };
 		E8CE99E5279C5D450095C958 /* ReviewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99E4279C5D450095C958 /* ReviewTableView.swift */; };
 		E8CE99E7279C5D6E0095C958 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99E6279C5D6E0095C958 /* ReviewTableViewCell.swift */; };
-		E8CE99ED279D8D150095C958 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99EC279D8D150095C958 /* SurveyViewController.swift */; };
+		E8CE99ED279D8D150095C958 /* SurveyReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99EC279D8D150095C958 /* SurveyReviewViewController.swift */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
 		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
@@ -125,7 +125,7 @@
 		E8CE99E2279C47EC0095C958 /* MainServeyTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainServeyTitleView.swift; sourceTree = "<group>"; };
 		E8CE99E4279C5D450095C958 /* ReviewTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableView.swift; sourceTree = "<group>"; };
 		E8CE99E6279C5D6E0095C958 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
-		E8CE99EC279D8D150095C958 /* SurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
+		E8CE99EC279D8D150095C958 /* SurveyReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyReviewViewController.swift; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 		E8CE99EB279D8CDC0095C958 /* SurveyScene */ = {
 			isa = PBXGroup;
 			children = (
-				E8CE99EC279D8D150095C958 /* SurveyViewController.swift */,
+				E8CE99EC279D8D150095C958 /* SurveyReviewViewController.swift */,
 			);
 			path = SurveyScene;
 			sourceTree = "<group>";
@@ -709,7 +709,7 @@
 				E8132BBB279706DA00A9518B /* StatusModel.swift in Sources */,
 				E8132BBD2797194000A9518B /* APIService.swift in Sources */,
 				E8CE99C4279AC0240095C958 /* HourlyWeatherView.swift in Sources */,
-				E8CE99ED279D8D150095C958 /* SurveyViewController.swift in Sources */,
+				E8CE99ED279D8D150095C958 /* SurveyReviewViewController.swift in Sources */,
 				E8CE99D1279B07870095C958 /* WeatherScrollView.swift in Sources */,
 				E8E65BC82782E0E200FFA0FA /* BigRegionViewController.swift in Sources */,
 				E8CE99DD279BE56E0095C958 /* MainServeyView.swift in Sources */,
