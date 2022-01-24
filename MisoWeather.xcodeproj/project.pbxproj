@@ -47,6 +47,9 @@
 		E8CE99E5279C5D450095C958 /* ReviewTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99E4279C5D450095C958 /* ReviewTableView.swift */; };
 		E8CE99E7279C5D6E0095C958 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99E6279C5D6E0095C958 /* ReviewTableViewCell.swift */; };
 		E8CE99ED279D8D150095C958 /* SurveyReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99EC279D8D150095C958 /* SurveyReviewViewController.swift */; };
+		E8CE99F1279E906D0095C958 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F0279E906D0095C958 /* SurveyViewController.swift */; };
+		E8CE99F3279E907E0095C958 /* ReviewViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F2279E907E0095C958 /* ReviewViewContoller.swift */; };
+		E8CE99F5279E93B40095C958 /* RegionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F4279E93B40095C958 /* RegionButton.swift */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
 		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
@@ -126,6 +129,9 @@
 		E8CE99E4279C5D450095C958 /* ReviewTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableView.swift; sourceTree = "<group>"; };
 		E8CE99E6279C5D6E0095C958 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		E8CE99EC279D8D150095C958 /* SurveyReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyReviewViewController.swift; sourceTree = "<group>"; };
+		E8CE99F0279E906D0095C958 /* SurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
+		E8CE99F2279E907E0095C958 /* ReviewViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewContoller.swift; sourceTree = "<group>"; };
+		E8CE99F4279E93B40095C958 /* RegionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionButton.swift; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -263,12 +269,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		E8CE99EB279D8CDC0095C958 /* SurveyScene */ = {
+		E8CE99EB279D8CDC0095C958 /* SurveyReviewScene */ = {
 			isa = PBXGroup;
 			children = (
 				E8CE99EC279D8D150095C958 /* SurveyReviewViewController.swift */,
+				E8CE99F0279E906D0095C958 /* SurveyViewController.swift */,
+				E8CE99F2279E907E0095C958 /* ReviewViewContoller.swift */,
+				E8CE99F4279E93B40095C958 /* RegionButton.swift */,
 			);
-			path = SurveyScene;
+			path = SurveyReviewScene;
 			sourceTree = "<group>";
 		};
 		E8E65B8A2782D4AC00FFA0FA = {
@@ -363,7 +372,7 @@
 				E8FB85E9278C18920007DE27 /* NicknameSelectScene */,
 				E8FB85EA278C18A40007DE27 /* MainScene */,
 				E8CE99C0279A8CDE0095C958 /* WeatherScene */,
-				E8CE99EB279D8CDC0095C958 /* SurveyScene */,
+				E8CE99EB279D8CDC0095C958 /* SurveyReviewScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -678,6 +687,7 @@
 				E8CE99CB279AF5A00095C958 /* ParticulateMatterViewCell.swift in Sources */,
 				E83E01042790885300C4661A /* Observables.swift in Sources */,
 				E8CE99E3279C47EC0095C958 /* MainServeyTitleView.swift in Sources */,
+				E8CE99F3279E907E0095C958 /* ReviewViewContoller.swift in Sources */,
 				E8CE99CF279B04E30095C958 /* ForecastTableView.swift in Sources */,
 				E8CE99E7279C5D6E0095C958 /* ReviewTableViewCell.swift in Sources */,
 				E8CE99BF279A8CD60095C958 /* WeatherViewController.swift in Sources */,
@@ -691,6 +701,7 @@
 				E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */,
 				E839205827869D99006A1D1B /* MainViewController.swift in Sources */,
 				E8CE99C2279A8F4D0095C958 /* RegionLocationLabel.swift in Sources */,
+				E8CE99F5279E93B40095C958 /* RegionButton.swift in Sources */,
 				E86EA70B279281F30066BB46 /* URLString.swift in Sources */,
 				E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */,
 				E8132BB52795BAE700A9518B /* NicknameModel.swift in Sources */,
@@ -709,6 +720,7 @@
 				E8132BBB279706DA00A9518B /* StatusModel.swift in Sources */,
 				E8132BBD2797194000A9518B /* APIService.swift in Sources */,
 				E8CE99C4279AC0240095C958 /* HourlyWeatherView.swift in Sources */,
+				E8CE99F1279E906D0095C958 /* SurveyViewController.swift in Sources */,
 				E8CE99ED279D8D150095C958 /* SurveyReviewViewController.swift in Sources */,
 				E8CE99D1279B07870095C958 /* WeatherScrollView.swift in Sources */,
 				E8E65BC82782E0E200FFA0FA /* BigRegionViewController.swift in Sources */,

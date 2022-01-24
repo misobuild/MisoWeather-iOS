@@ -14,6 +14,7 @@ final class CustomButton: UIButton {
         case register
         case addRegion
         case survey
+        case changeRegion
     }
     
     init() {
@@ -26,7 +27,11 @@ final class CustomButton: UIButton {
     
     override var isHighlighted: Bool {
         didSet {
-            backgroundColor = isHighlighted ? .selectButtonColor : .mainColor
+            if self.tag == 0 {
+                backgroundColor = isHighlighted ? .backgroundColor : .white
+            } else {
+                backgroundColor = isHighlighted ? .selectButtonColor : .mainColor
+            }
         }
     }
     
@@ -49,6 +54,21 @@ final class CustomButton: UIButton {
             
         case .survey:
             self.setTitle("이걸로 할래요!", for: .normal)
+            
+        case .changeRegion:
+            self.tag = 0
+            self.backgroundColor = .white
+            self.layer.cornerRadius = 15
+            self.layer.masksToBounds = true
+            self.setTitleColor(.mainColor, for: .normal)
+            self.setTitle("서울", for: .normal)
+            self.titleLabel?.font = .systemFont(ofSize: 16.0)
+            self.layer.cornerRadius = 10
+            self.setImage(UIImage(named: "chevron")?.withTintColor(UIColor.mainColor!), for: .normal)
+            self.semanticContentAttribute = .forceRightToLeft
+            self.imageEdgeInsets = .init(top: 0, left: 15, bottom: 0, right: -15)
+            self.titleEdgeInsets = .init(top: 0, left: 10, bottom: 0, right: -10)
+            self.imageView?.tintColor = .mainColor
         }
     }
 }

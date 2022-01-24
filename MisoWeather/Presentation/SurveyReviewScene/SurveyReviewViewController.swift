@@ -25,13 +25,21 @@ final class SurveyReviewViewController: UIViewController {
         return segment
     }()
     
-    private lazy var  surveyViewController: MainViewController = {
-        let viewController = MainViewController()
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 24.0, weight: .bold)
+        label.textColor = .black
+        label.text = "날씨 이야기"
+        return label
+    }()
+    
+    private lazy var  surveyViewController: SurveyViewController = {
+        let viewController = SurveyViewController()
         return viewController
     }()
 
-    private lazy var  reviewViewController: WeatherViewController = {
-        let viewController = WeatherViewController()
+    private lazy var  reviewViewController: ReviewViewContoller = {
+        let viewController = ReviewViewContoller()
         return viewController
     }()
     
@@ -44,6 +52,11 @@ final class SurveyReviewViewController: UIViewController {
         viewController.dataSource = self
         viewController.delegate = self
         return viewController
+    }()
+    
+    private lazy var locationButton: RegionButton = {
+        let button = RegionButton()
+        return button
     }()
     
     // MARK: - Private Method
@@ -70,7 +83,6 @@ final class SurveyReviewViewController: UIViewController {
         if let firstVC = dataViewControllers.first {
             pageViewController.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
-        
         setupView()
     }
 }
@@ -107,11 +119,23 @@ extension SurveyReviewViewController: UIPageViewControllerDataSource, UIPageView
 extension SurveyReviewViewController {
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
-        [segmentedControl, pageViewController.view].forEach {view.addSubview($0)}
+        [titleLabel, locationButton, pageViewController.view, segmentedControl].forEach {view.addSubview($0)}
         addChild(pageViewController)
         
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(110)
+            $0.leading.equalToSuperview().inset(width * 0.06)
+        }
+        
+        locationButton.snp.makeConstraints {
+            $0.top.equalTo(titleLabel)
+            $0.trailing.equalToSuperview().inset(width * 0.06)
+            $0.width.equalTo(80)
+            $0.height.equalTo(22)
+        }
+        
         segmentedControl.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(80)
+            $0.top.equalToSuperview().inset(164)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(width * 0.75)
             $0.height.equalTo(40)
