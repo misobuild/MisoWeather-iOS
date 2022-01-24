@@ -27,7 +27,7 @@ final class ReviewViewContoller: UIViewController {
     private lazy var textView: UITextView = {
         let view = UITextView()
         view.backgroundColor = .backgroundColor
-        view.delegate = self
+       // view.delegate = self
         view.font = .systemFont(ofSize: 14)
         view.text = textViewPlaceHolder
         view.textColor = .systemGray2
@@ -62,6 +62,11 @@ final class ReviewViewContoller: UIViewController {
         return view
     }()
     
+    private lazy var scrollView: ReviewScrollView = {
+        let view = ReviewScrollView()
+        return view
+    }()
+    
     // MARK: - Method
     @objc private func didTapTextView(_ sender: Any) {
         view.endEditing(true)
@@ -83,77 +88,18 @@ final class ReviewViewContoller: UIViewController {
     }
 }
 
-extension ReviewViewContoller: UITextViewDelegate {
-  
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == textViewPlaceHolder {
-            textView.text = nil
-            textView.textColor = .textColor
-        }
-    }
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = textViewPlaceHolder
-            textView.textColor = .gray
-        }
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let currentText = textView.text ?? ""
-        guard let stringRagne = Range(range, in: currentText) else {return false}
-        let updatedText = currentText.replacingCharacters(in: stringRagne, with: text)
-        let characterCount = updatedText.count
-        guard characterCount <= 40 else { return false }
-        updateCountLabel(characterCount: characterCount)
-        
-        return true
-    }
-}
-
 extension ReviewViewContoller {
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         [
-            textBackgoundView,
-            textView,
-            remainCountLabel,
-            lineView,
-            postButton,
-            tableView
+          
+            scrollView
         ].forEach {view.addSubview($0)}
         
-        textBackgoundView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(26)
-            $0.leading.equalToSuperview().inset(width * 0.06)
-            $0.trailing.equalToSuperview().inset(width * 0.06)
-            $0.height.equalTo(143)
-        }
-        textView.snp.makeConstraints {
-            $0.top.equalTo(textBackgoundView).inset(20)
-            $0.leading.equalToSuperview().inset(width * 0.13)
-            $0.trailing.equalToSuperview().inset(width * 0.13)
-            $0.height.equalTo(80)
-        }
-        remainCountLabel.snp.makeConstraints {
-            $0.top.equalTo(textView.snp.bottom).inset(17)
-            $0.trailing.equalTo(textBackgoundView.snp.trailing).inset(25)
-        }
-        lineView.snp.makeConstraints {
-            $0.bottom.equalTo(textBackgoundView.snp.bottom).inset(37)
-            $0.leading.equalTo(textBackgoundView).inset(20)
-            $0.trailing.equalTo(textBackgoundView).inset(20)
-            $0.height.equalTo(1)
-        }
-        postButton.snp.makeConstraints {
-            $0.trailing.equalTo(lineView)
-            $0.top.equalTo(lineView).inset(6)
-            $0.width.equalTo(70)
-            $0.height.equalTo(25)
-        }
-        tableView.snp.makeConstraints {
-            $0.top.equalTo(textBackgoundView.snp.bottom).offset(7)
-            $0.leading.equalToSuperview().inset(width * 0.045)
-            $0.trailing.equalToSuperview().inset(width * 0.045)
+        scrollView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
     }
