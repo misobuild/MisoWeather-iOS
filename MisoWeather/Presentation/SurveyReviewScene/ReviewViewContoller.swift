@@ -54,8 +54,16 @@ final class ReviewViewContoller: UIViewController {
         return view
     }()
     
-    @objc
-    private func didTapTextView(_ sender: Any) {
+    private lazy var tableView: ReviewTableView = {
+        let view = ReviewTableView()
+        view.frontColor = UIColor.backgroundColor ?? .gray
+        view.backColor = UIColor.white
+        view.row = 20
+        return view
+    }()
+    
+    // MARK: - Method
+    @objc private func didTapTextView(_ sender: Any) {
         view.endEditing(true)
     }
     
@@ -110,7 +118,8 @@ extension ReviewViewContoller {
             textView,
             remainCountLabel,
             lineView,
-            postButton
+            postButton,
+            tableView
         ].forEach {view.addSubview($0)}
         
         textBackgoundView.snp.makeConstraints {
@@ -119,7 +128,6 @@ extension ReviewViewContoller {
             $0.trailing.equalToSuperview().inset(width * 0.06)
             $0.height.equalTo(143)
         }
-        
         textView.snp.makeConstraints {
             $0.top.equalTo(textBackgoundView).inset(20)
             $0.leading.equalToSuperview().inset(width * 0.13)
@@ -142,12 +150,11 @@ extension ReviewViewContoller {
             $0.width.equalTo(70)
             $0.height.equalTo(25)
         }
-        
-        //        tableView.snp.makeConstraints {
-        //            $0.top.equalToSuperview()
-        //            $0.leading.equalToSuperview().inset(width * 0.06)
-        //            $0.trailing.equalToSuperview().inset(width * 0.06)
-        //            $0.bottom.equalToSuperview()
-        //        }
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(textBackgoundView.snp.bottom).offset(7)
+            $0.leading.equalToSuperview().inset(width * 0.045)
+            $0.trailing.equalToSuperview().inset(width * 0.045)
+            $0.bottom.equalToSuperview()
+        }
     }
 }
