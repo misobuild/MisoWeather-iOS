@@ -24,4 +24,7 @@ extension UIColor {
     class var selectButtonColor: UIColor? {
         return UIColor(named: "selectButtonColor")
     }
+    class var subColor: UIColor? {
+        return UIColor(named: "subColor")
+    }
 }

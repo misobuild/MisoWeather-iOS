@@ -20,7 +20,7 @@ final class WeatherViewController: UIViewController {
 //        
 //        self.navigationController?.pushViewController(nextVC, animated: true)
 //    }
-    
+    // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
