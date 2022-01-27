@@ -10,7 +10,7 @@ import SnapKit
 
 final class TitleLabel: UIView {
     // MARK: - Subviews
-    private lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 26.0, weight: .light)
         label.textColor = .black
@@ -25,7 +25,7 @@ final class TitleLabel: UIView {
         return label
     }()
 
-    private lazy var subTitleLabel: UILabel = {
+    lazy var subTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 26.0, weight: .light)
         label.textColor = .black

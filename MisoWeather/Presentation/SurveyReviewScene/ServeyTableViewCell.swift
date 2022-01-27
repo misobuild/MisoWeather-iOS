@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class ServeyTableViewCell: UITableViewCell {
-    
+    weak var navigationController: UINavigationController?
     // MARK: - SubView
     private lazy var titleLabel: UILabel = {
         let label = UILabel()

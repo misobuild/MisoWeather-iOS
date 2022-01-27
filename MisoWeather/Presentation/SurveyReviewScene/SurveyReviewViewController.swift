@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class SurveyReviewViewController: UIViewController {
+final class SurveyReviewViewController: UIViewController, UITableViewDelegate {
     
     // MARK: - SubView
     private lazy var segmentedControl: UISegmentedControl = {
@@ -33,12 +33,23 @@ final class SurveyReviewViewController: UIViewController {
         return label
     }()
     
+    private lazy var locationButton: RegionButton = {
+        let button = RegionButton()
+        return button
+    }()
+    
     private lazy var  surveyViewController: SurveyViewController = {
         let viewController = SurveyViewController()
+        viewController.serveyTableView.tableView.delegate = self
+        
         return viewController
     }()
-
-    private lazy var  reviewViewController: ReviewViewContoller = {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.pushViewController(QnaViewController(), animated: true)
+    }
+    
+     private lazy var  reviewViewController: ReviewViewContoller = {
         let viewController = ReviewViewContoller()
         return viewController
     }()
@@ -54,11 +65,6 @@ final class SurveyReviewViewController: UIViewController {
         return viewController
     }()
     
-    private lazy var locationButton: RegionButton = {
-        let button = RegionButton()
-        return button
-    }()
-    
     // MARK: - Private Method
     private var currentIndex: Int {
         guard let viewController = pageViewController.viewControllers?.first else {return 0}
@@ -67,10 +73,10 @@ final class SurveyReviewViewController: UIViewController {
 
     @objc func switchView(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            print(currentIndex)
+            locationButton.isHidden = false
             pageViewController.setViewControllers([dataViewControllers[0]], direction: .reverse, animated: true, completion: nil)
         } else {
-            print(currentIndex)
+            self.locationButton.isHidden = true
             pageViewController.setViewControllers([dataViewControllers[1]], direction: .forward, animated: true, completion: nil)
         }
     }
@@ -110,8 +116,10 @@ extension SurveyReviewViewController: UIPageViewControllerDataSource, UIPageView
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if currentIndex == 0 {
             segmentedControl.selectedSegmentIndex = 0
+            locationButton.isHidden = false
         } else {
             segmentedControl.selectedSegmentIndex = 1
+            self.locationButton.isHidden = true
         }
     }
 }
@@ -119,11 +127,19 @@ extension SurveyReviewViewController: UIPageViewControllerDataSource, UIPageView
 extension SurveyReviewViewController {
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
+        view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.barTintColor = .white
+        // 라인 선 없애기
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
         [titleLabel, locationButton, pageViewController.view, segmentedControl].forEach {view.addSubview($0)}
         addChild(pageViewController)
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(110)
+            $0.top.equalToSuperview().inset(100)
             $0.leading.equalToSuperview().inset(width * 0.06)
         }
         
@@ -135,10 +151,10 @@ extension SurveyReviewViewController {
         }
         
         segmentedControl.snp.makeConstraints {
-            $0.top.equalTo(locationButton.snp.bottom).offset(20)
+            $0.top.equalTo(locationButton.snp.bottom).offset(21)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(width * 0.75)
-            $0.height.equalTo(40)
+            $0.height.equalTo(height * 0.04)
         }
         
         pageViewController.view.snp.makeConstraints {

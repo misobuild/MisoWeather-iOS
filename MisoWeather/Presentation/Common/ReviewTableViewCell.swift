@@ -12,18 +12,20 @@ final class ReviewTableViewCell: UITableViewCell {
     
     // MARK: - subView
     
-    private lazy var backView: UIView = {
+    var frontColor = UIColor.white
+    var backColor = UIColor.backgroundColor
+    
+    lazy var backView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = frontColor
         view.layer.cornerRadius = 20
         return view
     }()
     
-    private lazy var emojiLabel: UILabel = {
+    lazy var emojiLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 34.0)
         label.textColor = .textColor
-      //  label.backgroundColor = .orange
         label.text = "🐯"
         return label
     }()
@@ -33,7 +35,6 @@ final class ReviewTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 12.0, weight: .regular)
         label.textColor = .textColor
         label.text = "부산의 춤추는 레몬호랑이"
-       // label.backgroundColor = .orange
         return label
     }()
     
@@ -50,14 +51,13 @@ final class ReviewTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 12.0, weight: .thin)
         label.textColor = .textColor
         label.numberOfLines = 0
-       // label.backgroundColor = .orange
         label.text = "이번주만 지나면 좀 나아진다니까 참아봅시다...오늘 뭔가 오뎅탕 땡기네요"
         return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .backgroundColor
+        backgroundColor = backColor
         setupView()
     }
     

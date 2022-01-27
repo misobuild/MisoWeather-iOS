@@ -56,8 +56,8 @@ final class BigRegionViewController: UIViewController {
         let url = URL(string: encodedString!)
         
         let session = URLSession(configuration: .default)
-        session.dataTask(with: url!) { data, response, error in
-            self.task(data: data, response: response, error: error)
+        session.dataTask(with: url!) {  [weak self] data, response, error in
+            self?.task(data: data, response: response, error: error)
         }.resume()
     }
     

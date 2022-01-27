@@ -53,6 +53,10 @@
 		E8CE99F7279EC1B80095C958 /* ServeyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F6279EC1B80095C958 /* ServeyTableView.swift */; };
 		E8CE99F9279EC1C70095C958 /* ServeyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F8279EC1C70095C958 /* ServeyTableViewCell.swift */; };
 		E8CE99FF279EF17D0095C958 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99FE279EF17D0095C958 /* Chart.swift */; };
+		E8CE9A01279F1ED40095C958 /* ReviewScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE9A00279F1ED30095C958 /* ReviewScrollView.swift */; };
+		E8CE9A03279FEA650095C958 /* QnaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE9A02279FEA650095C958 /* QnaViewController.swift */; };
+		E8CE9A05279FEAEA0095C958 /* QnaTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE9A04279FEAEA0095C958 /* QnaTableVIewCell.swift */; };
+		E8CE9A0A27A00F670095C958 /* qnaData.json in Resources */ = {isa = PBXBuildFile; fileRef = E8CE9A0927A00F670095C958 /* qnaData.json */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
 		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
@@ -138,6 +142,10 @@
 		E8CE99F6279EC1B80095C958 /* ServeyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServeyTableView.swift; sourceTree = "<group>"; };
 		E8CE99F8279EC1C70095C958 /* ServeyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServeyTableViewCell.swift; sourceTree = "<group>"; };
 		E8CE99FE279EF17D0095C958 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		E8CE9A00279F1ED30095C958 /* ReviewScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewScrollView.swift; sourceTree = "<group>"; };
+		E8CE9A02279FEA650095C958 /* QnaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaViewController.swift; sourceTree = "<group>"; };
+		E8CE9A04279FEAEA0095C958 /* QnaTableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaTableVIewCell.swift; sourceTree = "<group>"; };
+		E8CE9A0927A00F670095C958 /* qnaData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = qnaData.json; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				E8132BAE2795501200A9518B /* TokenUtils.swift */,
+				E8CE9A0927A00F670095C958 /* qnaData.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -272,6 +281,8 @@
 				E8CE99C1279A8F4D0095C958 /* RegionLocationLabel.swift */,
 				E8132BB62796AC8300A9518B /* CustomButton.swift */,
 				E8CE99F4279E93B40095C958 /* RegionButton.swift */,
+				E8CE99E4279C5D450095C958 /* ReviewTableView.swift */,
+				E8CE99E6279C5D6E0095C958 /* ReviewTableViewCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -281,12 +292,22 @@
 			children = (
 				E8CE99EC279D8D150095C958 /* SurveyReviewViewController.swift */,
 				E8CE99F0279E906D0095C958 /* SurveyViewController.swift */,
-				E8CE99F2279E907E0095C958 /* ReviewViewContoller.swift */,
 				E8CE99F6279EC1B80095C958 /* ServeyTableView.swift */,
 				E8CE99F8279EC1C70095C958 /* ServeyTableViewCell.swift */,
+				E8CE99F2279E907E0095C958 /* ReviewViewContoller.swift */,
+				E8CE9A00279F1ED30095C958 /* ReviewScrollView.swift */,
 				E8CE99FE279EF17D0095C958 /* Chart.swift */,
 			);
 			path = SurveyReviewScene;
+			sourceTree = "<group>";
+		};
+		E8CE9A06279FEC4B0095C958 /* QnA */ = {
+			isa = PBXGroup;
+			children = (
+				E8CE9A02279FEA650095C958 /* QnaViewController.swift */,
+				E8CE9A04279FEAEA0095C958 /* QnaTableVIewCell.swift */,
+			);
+			path = QnA;
 			sourceTree = "<group>";
 		};
 		E8E65B8A2782D4AC00FFA0FA = {
@@ -382,6 +403,7 @@
 				E8FB85EA278C18A40007DE27 /* MainScene */,
 				E8CE99C0279A8CDE0095C958 /* WeatherScene */,
 				E8CE99EB279D8CDC0095C958 /* SurveyReviewScene */,
+				E8CE9A06279FEC4B0095C958 /* QnA */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -420,8 +442,6 @@
 				E8CE99E2279C47EC0095C958 /* MainServeyTitleView.swift */,
 				E8CE99DC279BE56E0095C958 /* MainServeyView.swift */,
 				E8CE99E0279BE6200095C958 /* ChartView.swift */,
-				E8CE99E4279C5D450095C958 /* ReviewTableView.swift */,
-				E8CE99E6279C5D6E0095C958 /* ReviewTableViewCell.swift */,
 			);
 			path = MainScene;
 			sourceTree = "<group>";
@@ -547,6 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8FB85F0278D45DD0007DE27 /* .swiftlint.yml in Resources */,
+				E8CE9A0A27A00F670095C958 /* qnaData.json in Resources */,
 				E8E65BA32782D4AE00FFA0FA /* LaunchScreen.storyboard in Resources */,
 				E8E65BA02782D4AE00FFA0FA /* Assets.xcassets in Resources */,
 			);
@@ -729,12 +750,15 @@
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,
 				E8CE99D3279B09DF0095C958 /* ForecastTableViewCell.swift in Sources */,
 				E8132BBB279706DA00A9518B /* StatusModel.swift in Sources */,
+				E8CE9A05279FEAEA0095C958 /* QnaTableVIewCell.swift in Sources */,
 				E8132BBD2797194000A9518B /* APIService.swift in Sources */,
 				E8CE99C4279AC0240095C958 /* HourlyWeatherView.swift in Sources */,
 				E8CE99F1279E906D0095C958 /* SurveyViewController.swift in Sources */,
+				E8CE9A03279FEA650095C958 /* QnaViewController.swift in Sources */,
 				E8CE99ED279D8D150095C958 /* SurveyReviewViewController.swift in Sources */,
 				E8CE99D1279B07870095C958 /* WeatherScrollView.swift in Sources */,
 				E8E65BC82782E0E200FFA0FA /* BigRegionViewController.swift in Sources */,
+				E8CE9A01279F1ED40095C958 /* ReviewScrollView.swift in Sources */,
 				E8CE99DD279BE56E0095C958 /* MainServeyView.swift in Sources */,
 				E83E010C2790A24F00C4661A /* UserInfo.swift in Sources */,
 				E8CE99F9279EC1C70095C958 /* ServeyTableViewCell.swift in Sources */,

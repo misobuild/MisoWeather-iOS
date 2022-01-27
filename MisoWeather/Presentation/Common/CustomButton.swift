@@ -15,6 +15,7 @@ final class CustomButton: UIButton {
         case addRegion
         case survey
         case changeRegion
+        case post
     }
     
     init() {
@@ -27,7 +28,7 @@ final class CustomButton: UIButton {
     
     override var isHighlighted: Bool {
         didSet {
-            if self.tag == 0 {
+            if self.tag == 1 {
                 backgroundColor = isHighlighted ? .backgroundColor : .white
             } else {
                 backgroundColor = isHighlighted ? .selectButtonColor : .mainColor
@@ -54,9 +55,14 @@ final class CustomButton: UIButton {
             
         case .survey:
             self.setTitle("이걸로 할래요!", for: .normal)
+      
+        case .post:
+            self.setTitle("공유하기", for: .normal)
+            self.titleLabel?.font = .systemFont(ofSize: 11, weight: .bold)
+            self.layer.cornerRadius = 12.5
             
         case .changeRegion:
-            self.tag = 0
+            self.tag = 1
             self.backgroundColor = .white
             self.layer.cornerRadius = 15
             self.layer.masksToBounds = true
