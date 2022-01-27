@@ -9,10 +9,9 @@ import UIKit
 import SnapKit
 
 final class ServeyTableView: UIView {
-    
     // MARK: - subView
     
-    private lazy var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
@@ -41,12 +40,20 @@ extension ServeyTableView: UITableViewDelegate {
         return 8
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell", for: indexPath)
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell", for: indexPath) as? ServeyTableViewCell
+
+        return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell") as? ServeyTableViewCell
+
+        print("선택")
     }
 }
 
 extension ServeyTableView: UITableViewDataSource {
+    
     
 }
 

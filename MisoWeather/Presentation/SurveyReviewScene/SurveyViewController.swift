@@ -11,7 +11,7 @@ import SnapKit
 final class SurveyViewController: UIViewController {
     
     // MARK: - SubView 
-    private var serveyTableView: ServeyTableView = {
+    var serveyTableView: ServeyTableView = {
         let tabieView = ServeyTableView()
         return tabieView
     }()
@@ -32,9 +32,9 @@ extension SurveyViewController {
             serveyTableView
         ].forEach {view.addSubview($0)}
         
-        
         serveyTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
 }
+
