@@ -83,7 +83,7 @@ final class BigRegionViewController: UIViewController {
         
         setupView()
     }
-    
+     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
     }

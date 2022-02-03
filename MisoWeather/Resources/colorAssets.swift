@@ -27,4 +27,7 @@ extension UIColor {
     class var subColor: UIColor? {
         return UIColor(named: "subColor")
     }
+    class var surveyAnswerColor: UIColor? {
+        return UIColor(named: "surveyAnswerColor")
+    }
 }

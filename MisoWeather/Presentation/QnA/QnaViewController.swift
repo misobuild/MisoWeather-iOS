@@ -22,7 +22,7 @@ final class QnaViewController: UIViewController {
     }()
     
     lazy var confirmButton: CustomButton = {
-        let button = CustomButton(type: .next)
+        let button = CustomButton(type: .answer)
         return button
     }()
     
@@ -31,12 +31,12 @@ final class QnaViewController: UIViewController {
         tableView.isScrollEnabled = true
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.rowHeight = 50
         tableView.register(QnaTableVIewCell.self, forCellReuseIdentifier: "QnaTableVIewCell")
         return tableView
     }()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -51,22 +51,19 @@ extension QnaViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QnaTableVIewCell", for: indexPath) as? QnaTableVIewCell
-
-        return cell ?? UITableViewCell()
-//        cell?.selectionStyle = .none
-//        cell?.textLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
+        cell?.selectionStyle = .none
+        cell?.setup()
+        return cell ?? QnaTableVIewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        cell?.textLabel?.font = .systemFont(ofSize: 18.0, weight: .bold)
-        cell?.textLabel?.textColor = .mainColor
+        cell?.isSelected = true
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        cell?.textLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
-        cell?.textLabel?.textColor = .textColor
+        cell?.isSelected = false
     }
 }
 
@@ -88,15 +85,15 @@ extension QnaViewController {
         }
         
         tableView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(height * 0.4)
+            $0.top.equalToSuperview().offset(height * 0.32)
             $0.width.equalTo(width - (width * 0.20))
-            $0.height.equalTo(height * 0.35)
+            $0.height.equalTo(height * 0.45)
             $0.centerX.equalToSuperview()
         }
         
         confirmButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(height * 0.1)
+            $0.bottom.equalToSuperview().inset(height * 0.14)
             $0.width.equalTo(width - (width * 0.14))
             $0.height.equalTo((width - (width * 0.23)) * 0.15)
         }

@@ -13,19 +13,18 @@ final class QnaTableVIewCell: UITableViewCell {
     // MARK: - SubView
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18.0, weight: .thin)
-        label.backgroundColor = .orange
+        label.font = .systemFont(ofSize: 18.0, weight: .light)
         label.textColor = .textColor
-        label.text = "꽁꽁 싸매자"
-        return label
-    }()
-    
-    private lazy var subTitleLable: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 18.0, weight: .bold)
-        label.backgroundColor = .blue
-        label.textColor = .textColor
-        label.text = "롱패딩"
+        label.text = "꽁꽁 싸매자 롱패딩"
+        label.textAlignment = .center
+        label.layer.cornerRadius = 20
+        
+        guard let text = label.text else { return UILabel() }
+        let attributeString = NSMutableAttributedString(string: text)
+        let font = UIFont.systemFont(ofSize: 18, weight: .heavy)
+        attributeString.addAttribute(.font, value: font, range: (text as NSString).range(of: "롱패딩"))
+        label.attributedText = attributeString
+        
         return label
     }()
     
@@ -37,23 +36,30 @@ final class QnaTableVIewCell: UITableViewCell {
         return view
     }()
     
-    private lazy var stackView: UIStackView = {
-        let view = UIStackView()
-        view.backgroundColor = .red
-        view.axis = .horizontal
-        view.spacing = 6
-        view.distribution = .equalSpacing
+    private lazy var checkView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "check")
         return view
     }()
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
-        setupView()
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                
+                titleLabel.textColor = .buttonTextColor
+                backView.layer.borderColor = UIColor.mainColor?.cgColor
+                backView.layer.masksToBounds = true
+                backView.backgroundColor = .mainColor
+            } else {
+                titleLabel.textColor = .black
+                backView.layer.borderColor = UIColor.black.cgColor
+                backView.backgroundColor = .white
+            }
+        }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func setup() {
+        setupView()
     }
 }
 
@@ -62,31 +68,25 @@ extension QnaTableVIewCell {
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         
         [   backView,
-            stackView
- 
-        ].forEach {addSubview($0)}
-        [
             titleLabel,
-            subTitleLable
-        ].forEach {stackView.addSubview($0)}
+            checkView
+        ].forEach {addSubview($0)}
 
-        stackView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(44)
-            $0.width.equalTo(318)
+        backView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(3)
+            $0.bottom.equalToSuperview().inset(3)
+            $0.trailing.equalToSuperview().inset(3)
+            $0.leading.equalToSuperview().inset(3)
         }
         
-        backView.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(3)
-        }
-
         titleLabel.snp.makeConstraints {
-            $0.centerY.equalTo(stackView)
+            $0.centerY.equalTo(backView)
+            $0.center.equalTo(backView)
         }
-
-        subTitleLable.snp.makeConstraints {
-            $0.centerY.equalTo(stackView)
-            $0.leading.equalTo(titleLabel.snp.trailing).offset(10)
+        
+        checkView.snp.makeConstraints {
+            $0.centerY.equalTo(backView)
+            $0.trailing.equalTo(titleLabel.snp.leading).inset(-10)
         }
     }
 }
