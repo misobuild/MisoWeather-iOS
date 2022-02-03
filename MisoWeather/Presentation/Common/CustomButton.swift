@@ -16,6 +16,7 @@ final class CustomButton: UIButton {
         case survey
         case changeRegion
         case post
+        case answer
     }
     
     init() {
@@ -30,6 +31,8 @@ final class CustomButton: UIButton {
         didSet {
             if self.tag == 1 {
                 backgroundColor = isHighlighted ? .backgroundColor : .white
+            } else if self.tag == 2 {
+                backgroundColor = isHighlighted ? .selectButtonColor  : .surveyAnswerColor
             } else {
                 backgroundColor = isHighlighted ? .selectButtonColor : .mainColor
             }
@@ -75,6 +78,12 @@ final class CustomButton: UIButton {
             self.imageEdgeInsets = .init(top: 0, left: 15, bottom: 0, right: -15)
             self.titleEdgeInsets = .init(top: 0, left: 10, bottom: 0, right: -10)
             self.imageView?.tintColor = .mainColor
+            
+        case .answer:
+            self.tag = 2
+            self.setTitle("답변 완료!", for: .normal)
+            self.setTitleColor(.mainColor, for: .normal)
+            self.backgroundColor = .surveyAnswerColor
         }
     }
 }

@@ -38,8 +38,8 @@ final class BigRegionCollectionViewCell: UICollectionViewCell {
     
     func setup(region: String) {
         regionLabel.text = region
-        
         setupView()
+     
     }
 }
 

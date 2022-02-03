@@ -51,7 +51,7 @@ final class ServeyTableViewCell: UITableViewCell {
     
     private lazy var checkImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "check")
+        image.image = UIImage(named: "checkCircle")
         image.contentMode = .scaleAspectFit
         return image
     }()
