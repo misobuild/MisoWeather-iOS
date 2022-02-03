@@ -28,6 +28,7 @@
 		E86EA70B279281F30066BB46 /* URLString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86EA70A279281F30066BB46 /* URLString.swift */; };
 		E8BFAD2427AC30880007E1DC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD2327AC30880007E1DC /* SettingViewController.swift */; };
 		E8BFAD2627AC405A0007E1DC /* QnaAnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD2527AC405A0007E1DC /* QnaAnswerViewController.swift */; };
+		E8BFAD2827AC42B00007E1DC /* lf20_tnqgtf5o.json in Resources */ = {isa = PBXBuildFile; fileRef = E8BFAD2727AC42B00007E1DC /* lf20_tnqgtf5o.json */; };
 		E8CE99B927988CFC0095C958 /* MainScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99B827988CFC0095C958 /* MainScrollView.swift */; };
 		E8CE99BB27989CD40095C958 /* MainWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BA27989CD40095C958 /* MainWeatherView.swift */; };
 		E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */; };
@@ -119,6 +120,7 @@
 		E86EA70A279281F30066BB46 /* URLString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLString.swift; sourceTree = "<group>"; };
 		E8BFAD2327AC30880007E1DC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		E8BFAD2527AC405A0007E1DC /* QnaAnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaAnswerViewController.swift; sourceTree = "<group>"; };
+		E8BFAD2727AC42B00007E1DC /* lf20_tnqgtf5o.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf20_tnqgtf5o.json; sourceTree = "<group>"; };
 		E8CE99B827988CFC0095C958 /* MainScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScrollView.swift; sourceTree = "<group>"; };
 		E8CE99BA27989CD40095C958 /* MainWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherView.swift; sourceTree = "<group>"; };
 		E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeTempLabel.swift; sourceTree = "<group>"; };
@@ -267,6 +269,14 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		E8BFAD2927AC42B90007E1DC /* lottie */ = {
+			isa = PBXGroup;
+			children = (
+				E8BFAD2727AC42B00007E1DC /* lf20_tnqgtf5o.json */,
+			);
+			path = lottie;
+			sourceTree = "<group>";
+		};
 		E8CE99C0279A8CDE0095C958 /* WeatherScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,6 +398,7 @@
 		E8E65BCC278301F500FFA0FA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E8BFAD2927AC42B90007E1DC /* lottie */,
 				E8132BB82796B90200A9518B /* colorAssets.swift */,
 				E8E65B9F2782D4AE00FFA0FA /* Assets.xcassets */,
 				E8E65BA12782D4AE00FFA0FA /* LaunchScreen.storyboard */,
@@ -582,6 +593,7 @@
 			files = (
 				E8FB85F0278D45DD0007DE27 /* .swiftlint.yml in Resources */,
 				E8CE9A0A27A00F670095C958 /* qnaData.json in Resources */,
+				E8BFAD2827AC42B00007E1DC /* lf20_tnqgtf5o.json in Resources */,
 				E8E65BA32782D4AE00FFA0FA /* LaunchScreen.storyboard in Resources */,
 				E8E65BA02782D4AE00FFA0FA /* Assets.xcassets in Resources */,
 			);
