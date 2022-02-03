@@ -7,19 +7,16 @@
 
 import Security
 import Foundation
+import Alamofire
 
-class TokenUtils {
+final class TokenUtils {
     
-    // TokenUtils.swift
-    // import Security, import Alamofire
-    
-    // Create
  // service 파라미터는 url주소를 의미
     func create(_ service: String, account: String, value: String) {
         
         // 1. query작성
         let keyChainQuery: NSDictionary = [
-            kSecClass : kSecClassGenericPassword,
+            kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
             kSecAttrAccount: account,
             kSecValueData: value.data(using: .utf8, allowLossyConversion: false)!
@@ -51,7 +48,7 @@ class TokenUtils {
         let status = SecItemCopyMatching(keyChainQuery, &dataTypeRef)
         
         // Read 성공 및 실패한 경우
-        if(status == errSecSuccess) {
+        if status == errSecSuccess {
             let retrievedData = dataTypeRef as! Data
             let value = String(data: retrievedData, encoding: String.Encoding.utf8)
             return value
@@ -73,13 +70,13 @@ class TokenUtils {
         assert(status == noErr, "failed to delete the value, status code = \(status)")
     }
     
-    // HTTPHeaders 구성
-//    func getAuthorizationHeader(serviceID: String) -> HTTPHeaders? {
-//        let serviceID = serviceID
-//        if let accessToken = self.read(serviceID, account: "accessToken") {
-//            return ["Authorization" : "bearer \(accessToken)"] as HTTPHeaders
-//        } else {
-//            return nil
-//        }
-//    }
+     // HTTPHeaders 구성
+    func getAuthorizationHeader(serviceID: String) -> HTTPHeaders? {
+        let serviceID = serviceID
+        if let accessToken = self.read(serviceID, account: "accessToken") {
+            return ["Authorization": "bearer \(accessToken)"] as HTTPHeaders
+        } else {
+            return nil
+        }
+    }
 }

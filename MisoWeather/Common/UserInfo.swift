@@ -7,6 +7,7 @@
 
 class UserInfo {
     static let shared = UserInfo()
+    var region: String?
     var name: String?
     
     private init() {}

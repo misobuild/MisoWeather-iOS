@@ -8,10 +8,11 @@
 import UIKit
 import SnapKit
 
-class MidRegionListViewController: UIViewController {
-        
-    weak var delegate: SendDelegate?
+final class MidRegionListViewController: UIViewController {
+    weak var delegate: RegionSendDelegate?
+    
     private var midScaleRegionList: [RegionList] = []
+    private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
     
     // MARK: - Subviews
     private lazy var regionSelectListView: RegionSelectListView = {
@@ -21,9 +22,14 @@ class MidRegionListViewController: UIViewController {
         return view
     }()
     
-    @objc func nextVC() {
+    // MARK: - Private Method
+    @objc private func nextVC() {
         if regionSelectListView.selectRegion == "선택 안 함" {
+            // 선택 지역ID 저장
+            UserDefaults.standard.set(midScaleRegionList[0].id, forKey: "regionID")
+            weak var delegate: nickNameSendDelegate?
             let nextVC = NicknameSelectViewController()
+            nextVC.delegate = self
             self.navigationController?.pushViewController(nextVC, animated: true)
         } else {
             let nextVC = SmallRegionListViewController()
@@ -32,8 +38,15 @@ class MidRegionListViewController: UIViewController {
         }
     }
     
-    @objc func fetchData() {
-        let urlString = "\(URLString.regionURL)\(midScaleRegionList[0].bigScale)/\(regionSelectListView.selectRegion)"
+    @objc private func fetchData() {
+        var urlString = ""
+        if regionSelectListView.selectRegion == "선택 안 함" {
+            // 닉네임 받기
+            urlString = "\(URLString.nicknameURL)"
+        } else {
+            // 다음 지역 받기
+            urlString = "\(URLString.regionURL)\(midScaleRegionList[0].bigScale)/\(regionSelectListView.selectRegion)"
+        }
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         
         let url = URL(string: encodedString)
@@ -41,15 +54,23 @@ class MidRegionListViewController: UIViewController {
         session.dataTask(with: url!) { data, _, error in
             guard let data = data, error == nil else {return}
             let decoder = JSONDecoder()
-            let midRegionList = try? decoder.decode(RegionModel.self, from: data)
             
-            guard let regionList: RegionModel = midRegionList else {return}
-            self.midScaleRegionList = regionList.data.regionList
-            
+            if self.regionSelectListView.selectRegion == "선택 안 함" {
+                // 닉네임 받기
+                let recive = try? decoder.decode(NicknameModel.self, from: data)
+                if let nickName = recive {
+                    self.recivedNickName = nickName.data
+                }
+            } else {
+                // 다음 지역 받기
+                let recive = try? decoder.decode(RegionModel.self, from: data)
+                if let regionList = recive {
+                    self.midScaleRegionList = regionList.data.regionList
+                }
+            }
             DispatchQueue.main.async {
                 self.nextVC()
             }
-            
         }.resume()
     }
     
@@ -57,34 +78,41 @@ class MidRegionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationBar.topItem?.title = ""
-                
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.barTintColor = .white
+        // 라인 선 없애기
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
         if let data = self.delegate?.sendData() {
             self.midScaleRegionList = data
         }
-
+        
         setupView()
     }
 }
 
 extension MidRegionListViewController {
-
+    
     // MARK: - Layout
     private func setupView() {
-        [
-            regionSelectListView
-
-        ].forEach {view.addSubview($0)}
-
+        view.addSubview(regionSelectListView)
+        
         regionSelectListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
     }
 }
 
-extension MidRegionListViewController: SendDelegate {
+extension MidRegionListViewController: RegionSendDelegate {
     func sendData() -> [RegionList] {
         return midScaleRegionList
+    }
+}
+
+extension MidRegionListViewController: nickNameSendDelegate {
+    func sendData() -> NicknameModel.Data {
+        return recivedNickName
     }
 }
