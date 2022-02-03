@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         window?.backgroundColor = .white
-        window?.rootViewController = UINavigationController(rootViewController: SettingViewController())
+        window?.rootViewController = UINavigationController(rootViewController: QnaAnswerViewController())
         window?.makeKeyAndVisible()
     }
     
