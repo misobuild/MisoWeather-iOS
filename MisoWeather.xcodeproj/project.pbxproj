@@ -29,6 +29,9 @@
 		E8BFAD2427AC30880007E1DC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD2327AC30880007E1DC /* SettingViewController.swift */; };
 		E8BFAD2627AC405A0007E1DC /* QnaAnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD2527AC405A0007E1DC /* QnaAnswerViewController.swift */; };
 		E8BFAD2827AC42B00007E1DC /* lf20_tnqgtf5o.json in Resources */ = {isa = PBXBuildFile; fileRef = E8BFAD2727AC42B00007E1DC /* lf20_tnqgtf5o.json */; };
+		E8BFAD2B27ACEBB80007E1DC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD2A27ACEBB80007E1DC /* NetworkManager.swift */; };
+		E8BFAD2D27ACEBD30007E1DC /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD2C27ACEBD30007E1DC /* ErrorMessage.swift */; };
+		E8BFAD2F27ACEC080007E1DC /* URLMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD2E27ACEC080007E1DC /* URLMethod.swift */; };
 		E8CE99B927988CFC0095C958 /* MainScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99B827988CFC0095C958 /* MainScrollView.swift */; };
 		E8CE99BB27989CD40095C958 /* MainWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BA27989CD40095C958 /* MainWeatherView.swift */; };
 		E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */; };
@@ -121,6 +124,9 @@
 		E8BFAD2327AC30880007E1DC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		E8BFAD2527AC405A0007E1DC /* QnaAnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaAnswerViewController.swift; sourceTree = "<group>"; };
 		E8BFAD2727AC42B00007E1DC /* lf20_tnqgtf5o.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lf20_tnqgtf5o.json; sourceTree = "<group>"; };
+		E8BFAD2A27ACEBB80007E1DC /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E8BFAD2C27ACEBD30007E1DC /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
+		E8BFAD2E27ACEC080007E1DC /* URLMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLMethod.swift; sourceTree = "<group>"; };
 		E8CE99B827988CFC0095C958 /* MainScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScrollView.swift; sourceTree = "<group>"; };
 		E8CE99BA27989CD40095C958 /* MainWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherView.swift; sourceTree = "<group>"; };
 		E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeTempLabel.swift; sourceTree = "<group>"; };
@@ -257,6 +263,9 @@
 			children = (
 				E86EA70A279281F30066BB46 /* URLString.swift */,
 				E8132BBC2797194000A9518B /* APIService.swift */,
+				E8BFAD2A27ACEBB80007E1DC /* NetworkManager.swift */,
+				E8BFAD2C27ACEBD30007E1DC /* ErrorMessage.swift */,
+				E8BFAD2E27ACEC080007E1DC /* URLMethod.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -748,6 +757,7 @@
 				E8CE99CF279B04E30095C958 /* ForecastTableView.swift in Sources */,
 				E8CE99E7279C5D6E0095C958 /* ReviewTableViewCell.swift in Sources */,
 				E8CE99BF279A8CD60095C958 /* WeatherViewController.swift in Sources */,
+				E8BFAD2D27ACEBD30007E1DC /* ErrorMessage.swift in Sources */,
 				E86EA7062791CC8C0066BB46 /* RegionModel.swift in Sources */,
 				E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */,
 				E8132BB12795863600A9518B /* RegionSelectListView.swift in Sources */,
@@ -785,6 +795,7 @@
 				E8CE99ED279D8D150095C958 /* SurveyReviewViewController.swift in Sources */,
 				E8CE99D1279B07870095C958 /* WeatherScrollView.swift in Sources */,
 				E8E65BC82782E0E200FFA0FA /* BigRegionViewController.swift in Sources */,
+				E8BFAD2F27ACEC080007E1DC /* URLMethod.swift in Sources */,
 				E8CE9A01279F1ED40095C958 /* ReviewScrollView.swift in Sources */,
 				E8BFAD2627AC405A0007E1DC /* QnaAnswerViewController.swift in Sources */,
 				E8CE99DD279BE56E0095C958 /* MainServeyView.swift in Sources */,
@@ -792,6 +803,7 @@
 				E8CE99F9279EC1C70095C958 /* ServeyTableViewCell.swift in Sources */,
 				E8132BAF2795501200A9518B /* TokenUtils.swift in Sources */,
 				E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */,
+				E8BFAD2B27ACEBB80007E1DC /* NetworkManager.swift in Sources */,
 				E8CE99B927988CFC0095C958 /* MainScrollView.swift in Sources */,
 				E8CE99C9279AF3E90095C958 /* ParticulateMatterView.swift in Sources */,
 				E8CE99CD279AFACF0095C958 /* PrecipitationView.swift in Sources */,
