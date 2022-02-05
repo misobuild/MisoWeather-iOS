@@ -31,6 +31,7 @@ final class MainViewController: UIViewController {
     }
     
     private func setData() {
+        self.mainScrollView.userButton.addTarget(self, action: #selector(settingVC), for: .touchUpInside)
         
         model.getMemberData {
             DispatchQueue.main.async {
@@ -41,6 +42,10 @@ final class MainViewController: UIViewController {
         }
     }
     
+    @objc private func settingVC() {
+        self.navigationController?.pushViewController(SettingViewController(), animated: true)
+    }
+    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +53,10 @@ final class MainViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         setData()
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
 }
 

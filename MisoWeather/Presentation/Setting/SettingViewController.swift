@@ -84,14 +84,21 @@ extension SettingViewController: UITableViewDataSource {
         
         alert.addAction(cancle)
         alert.addAction(confirm)
-        present(alert, animated: true,completion: nil)
+        present(alert, animated: true, completion: nil)
     }
 }
 
 extension SettingViewController {
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
-       
+        view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.barTintColor = .white
+        // 라인 선 없애기
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
         [
             emojiLabel,
             titleLabel

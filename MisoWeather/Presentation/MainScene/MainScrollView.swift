@@ -29,7 +29,7 @@ final class MainScrollView: UIView {
         return button
     }()
     
-    private lazy var userButton: UIButton = {
+    lazy var userButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "person.fill"), for: .normal)
         button.tintColor = .black
@@ -138,21 +138,21 @@ extension MainScrollView {
   
         misoLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(30.0)
-            $0.leading.equalToSuperview().inset(width * 0.07)
+            $0.leading.equalToSuperview().inset(width * 0.05)
         }
         
         addLocationButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(width * 0.16)
             $0.top.equalTo(misoLabel)
-            $0.width.equalTo(24.0)
-            $0.height.equalTo(24.0)
+            $0.width.equalTo(width * 0.05)
+            $0.height.equalTo(width * 0.05)
         }
         
         userButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(width * 0.07)
+            $0.trailing.equalToSuperview().inset(width * 0.05)
             $0.top.equalTo(misoLabel)
-            $0.width.equalTo(24.0)
-            $0.height.equalTo(24.0)
+            $0.width.equalTo(width * 0.05)
+            $0.height.equalTo(width * 0.05)
         }
         
         greetingLabel.snp.makeConstraints {
@@ -167,15 +167,15 @@ extension MainScrollView {
         
         weatherView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(23.0)
-            $0.leading.equalToSuperview().inset(width * 0.07)
-            $0.width.equalTo(width - (width * 0.14))
+            $0.leading.equalToSuperview().inset(width * 0.05)
+            $0.width.equalTo(width - (width * 0.1))
             $0.height.equalTo(42.0)
         }
         
         serveyBackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(weatherView.snp.bottom).offset(15.0)
-            $0.width.equalTo(width - (width * 0.14))
+            $0.width.equalTo(width - (width * 0.1))
             $0.height.equalTo(700)
         }
         
