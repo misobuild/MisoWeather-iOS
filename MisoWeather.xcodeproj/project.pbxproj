@@ -38,6 +38,8 @@
 		E8BFAD3727AE47680007E1DC /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3627AE47680007E1DC /* MainViewModel.swift */; };
 		E8BFAD3927AE4B1D0007E1DC /* MemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3827AE4B1D0007E1DC /* MemberModel.swift */; };
 		E8BFAD3D27AE5B210007E1DC /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3C27AE5B210007E1DC /* SettingViewModel.swift */; };
+		E8BFAD3F27AE67C90007E1DC /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3E27AE67C90007E1DC /* RegisterViewModel.swift */; };
+		E8BFAD4127AE7BB90007E1DC /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD4027AE7BB90007E1DC /* TokenModel.swift */; };
 		E8CE99B927988CFC0095C958 /* MainScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99B827988CFC0095C958 /* MainScrollView.swift */; };
 		E8CE99BB27989CD40095C958 /* MainWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BA27989CD40095C958 /* MainWeatherView.swift */; };
 		E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */; };
@@ -139,6 +141,8 @@
 		E8BFAD3627AE47680007E1DC /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		E8BFAD3827AE4B1D0007E1DC /* MemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModel.swift; sourceTree = "<group>"; };
 		E8BFAD3C27AE5B210007E1DC /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		E8BFAD3E27AE67C90007E1DC /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		E8BFAD4027AE7BB90007E1DC /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
 		E8CE99B827988CFC0095C958 /* MainScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScrollView.swift; sourceTree = "<group>"; };
 		E8CE99BA27989CD40095C958 /* MainWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherView.swift; sourceTree = "<group>"; };
 		E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeTempLabel.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 				E8132BB42795BAE700A9518B /* NicknameModel.swift */,
 				E8132BBA279706DA00A9518B /* StatusModel.swift */,
 				E8BFAD3827AE4B1D0007E1DC /* MemberModel.swift */,
+				E8BFAD4027AE7BB90007E1DC /* TokenModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -451,6 +456,7 @@
 		E8FB85E7278C187D0007DE27 /* RegisterScene */ = {
 			isa = PBXGroup;
 			children = (
+				E8BFAD3E27AE67C90007E1DC /* RegisterViewModel.swift */,
 				E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */,
 			);
 			path = RegisterScene;
@@ -760,6 +766,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8CE99CB279AF5A00095C958 /* ParticulateMatterViewCell.swift in Sources */,
+				E8BFAD4127AE7BB90007E1DC /* TokenModel.swift in Sources */,
 				E8CE99F7279EC1B80095C958 /* ServeyTableView.swift in Sources */,
 				E83E01042790885300C4661A /* Observables.swift in Sources */,
 				E8CE99E3279C47EC0095C958 /* MainServeyTitleView.swift in Sources */,
@@ -780,6 +787,7 @@
 				E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */,
 				E839205827869D99006A1D1B /* MainViewController.swift in Sources */,
 				E8CE99C2279A8F4D0095C958 /* RegionLocationLabel.swift in Sources */,
+				E8BFAD3F27AE67C90007E1DC /* RegisterViewModel.swift in Sources */,
 				E8CE99F5279E93B40095C958 /* RegionButton.swift in Sources */,
 				E86EA70B279281F30066BB46 /* URLString.swift in Sources */,
 				E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */,

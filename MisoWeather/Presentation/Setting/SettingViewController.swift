@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import KakaoSDKUser
 
 class SettingViewController: UIViewController {
     
@@ -62,6 +63,34 @@ class SettingViewController: UIViewController {
         }
     }
     
+    private func logoutAlert() {
+        let alert = UIAlertController(title: "로그아웃 하시겠습니까 🔒",
+            message: "",
+            preferredStyle: UIAlertController.Style.alert)
+    
+        let cancle = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+        let confirm = UIAlertAction(title: "로그아웃", style: .default) { _ in
+            self.kakaoLogout()
+        }
+        
+        alert.addAction(cancle)
+        alert.addAction(confirm)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func kakaoLogout() {
+        UserApi.shared.logout {(error) in
+            if let error = error {
+                print(error)
+            } else {
+                print("logout() success.")
+                let token = TokenUtils()
+                token.delete("kakao", account: "accessToken")
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(RegisterViewController())
+            }
+        }
+    }
+    
     // MARK: - LifeCycle Method
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,16 +113,9 @@ extension SettingViewController: UITableViewDelegate {
 
 extension SettingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let alert = UIAlertController(title: "로그아웃 하시겠습니까 🔒",
-            message: "",
-            preferredStyle: UIAlertController.Style.alert)
-    
-        let cancle = UIAlertAction(title: "취소", style: .destructive, handler: nil)
-        let confirm = UIAlertAction(title: "로그아웃", style: .default, handler: nil)
-        
-        alert.addAction(cancle)
-        alert.addAction(confirm)
-        present(alert, animated: true, completion: nil)
+        if indexPath.row == 0 {
+            logoutAlert()
+        }
     }
 }
 

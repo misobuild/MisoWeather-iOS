@@ -83,6 +83,7 @@ class NetworkManager {
             if let httpResponse = response as? HTTPURLResponse {
                 if let serverToken =  httpResponse.value(forHTTPHeaderField: "serverToken") {
                     completion(.success(serverToken))
+                    
                 } else {
                     if let resultString = String(data: data, encoding: .utf8) {
                         print("result String: \(resultString)")
