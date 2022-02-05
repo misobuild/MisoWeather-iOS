@@ -10,14 +10,14 @@ import SnapKit
 
 final class SmallRegionListViewController: UIViewController {
     
+    private var model = RegionSelectModel()
     weak var delegate: RegionSendDelegate?
-    private var midScaleRegionList: [RegionList] = []
-    private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
+    var smallScaleRegionList: [RegionList] = []
     
     // MARK: - Subviews
     private lazy var regionSelectListView: RegionSelectListView = {
         let view = RegionSelectListView()
-        view.regionList = midScaleRegionList
+        view.regionList = smallScaleRegionList
         view.confirmButton.addTarget(MidRegionListViewController(), action: #selector(fetchData), for: .touchUpInside)
         return view
     }()
@@ -28,28 +28,18 @@ final class SmallRegionListViewController: UIViewController {
         UserDefaults.standard.set(regionSelectListView.regionID, forKey: "regionID")
         
         let nextVC = NicknameSelectViewController()
-        nextVC.delegate = self
+        nextVC.recivedNickName = model.reciveNickname
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
     @objc private func fetchData() {
-        let urlString = "\(URLString.nicknameURL)"
-        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        let urlString = URL.nickname
         
-        let url = URL(string: encodedString)
-        let session = URLSession(configuration: .default)
-        session.dataTask(with: url!) { data, _, error in
-            guard let data = data, error == nil else {return}
-            let decoder = JSONDecoder()
-            let recive = try? decoder.decode(NicknameModel.self, from: data)
-            
-            if let nickName = recive {
-                self.recivedNickName = nickName.data
-                DispatchQueue.main.async {
-                    self.nextVC()
-                }
+        model.fetchNicknameData(urlString: urlString) {
+            DispatchQueue.main.async {
+                self.nextVC()
             }
-        }.resume()
+        }
     }
     
     // MARK: - LifeCycle Methods
@@ -57,10 +47,6 @@ final class SmallRegionListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
-        
-        if let data = self.delegate?.sendData() {
-            self.midScaleRegionList = data
-        }
         
         setupView()
     }
@@ -75,11 +61,5 @@ extension SmallRegionListViewController {
         regionSelectListView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-    }
-}
-
-extension SmallRegionListViewController: nickNameSendDelegate {
-    func sendData() -> NicknameModel.Data {
-        return recivedNickName
     }
 }

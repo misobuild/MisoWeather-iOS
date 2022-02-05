@@ -9,6 +9,8 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
+    let model = MainViewModel()
+    
     // MARK: - subviews
     private lazy var mainScrollView: MainScrollView = {
         let view = MainScrollView()

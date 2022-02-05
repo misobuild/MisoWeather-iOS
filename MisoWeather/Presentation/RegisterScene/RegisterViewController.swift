@@ -72,16 +72,15 @@ final class RegisterViewController: UIViewController {
                     }
                 } else {
                     // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
-                    print("토큰 유효성 체크 성공")
                     
-                    // 엑세스 토큰 발급Test
-                    self.kakaoLogin()
+                    // MARK: 엑세스 토큰 발급Test
+//                    self.kakaoLogin()
                     
                     let token = TokenUtils()
                     print(token.read("kakao", account: "accessToken") ?? "")
                     
-                    // 화면전환
-                    self.nextVC()
+                    // Main으로 화면 전환
+                    self.mainVC()
                 }
             }
         } else {
@@ -104,11 +103,12 @@ final class RegisterViewController: UIViewController {
                     let token = TokenUtils()
                     token.create("kakao", account: "accessToken", value: accessToken)
                     
-                    // 화면전환
+                    // 지역 선택응로 화면 전환
                     self.nextVC()
                 }
             }
         } else {
+            // TODO: ShowAlert 카카오톡이 설치되어있지 않습니다.
             print("카카오톡 미설치")
         }
     }

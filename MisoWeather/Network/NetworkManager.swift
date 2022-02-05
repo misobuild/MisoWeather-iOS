@@ -19,8 +19,9 @@ class NetworkManager {
     let sucessRange = 200..<300
     let session: URLSession = URLSession.shared
     
-    func fetchModel<T: Decodable>(url: URL, completion: @escaping (Result<T,APIError>) -> Void) {
-         
+    // MARK: - GET
+    func getfetchData<T: Decodable>(url: URL, completion: @escaping (Result<T, APIError>) -> Void) {
+        
         let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             
             guard let data = data else {
@@ -36,6 +37,58 @@ class NetworkManager {
                 completion(.success(model))
             } else {
                 completion(.failure(.decodingJSON))
+            }
+        }
+        dataTask.resume()
+        dataTasks.append(dataTask)
+    }
+    
+    func getRequsetData<T: Decodable>(url: URLRequest, completion: @escaping (Result<T, APIError>) -> Void) {
+        
+        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            guard let data = data else {
+                return completion(.failure(.data))
+            }
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                return completion(.failure(.statusCode))
+            }
+            guard self.sucessRange.contains(statusCode) else {
+                return completion(.failure(.error))
+            }
+            if let model = try? JSONDecoder().decode(T.self, from: data) {
+                completion(.success(model))
+            } else {
+                completion(.failure(.decodingJSON))
+            }
+        }
+        dataTask.resume()
+        dataTasks.append(dataTask)
+    }
+    
+    // MARK: - POST
+    func postRegister(url: URLRequest, completion: @escaping (Result<String, APIError>) -> Void) {
+        
+        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            guard let data = data else {
+                return completion(.failure(.data))
+            }
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                return completion(.failure(.statusCode))
+            }
+            guard self.sucessRange.contains(statusCode) else {
+                return completion(.failure(.error))
+            }
+            if let httpResponse = response as? HTTPURLResponse {
+                if let serverToken =  httpResponse.value(forHTTPHeaderField: "serverToken") {
+                    completion(.success(serverToken))
+                } else {
+                    if let resultString = String(data: data, encoding: .utf8) {
+                        print("result String: \(resultString)")
+                    }
+                    completion(.failure(.error))
+                }
             }
         }
         dataTask.resume()
