@@ -9,9 +9,11 @@ import Foundation
 final class MainViewModel {
     
     private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
+    
+    private var memberData: MemberModel?
 
-    var reciveNickname: NicknameModel.Data {
-        self.recivedNickName
+    var memberInfo: MemberModel? {
+        self.memberData
     }
     
     func getMemberData(completion: @escaping () -> Void) {
@@ -29,14 +31,14 @@ final class MainViewModel {
         networkManager.getRequsetData(url: requeset) {(result: Result<MemberModel, APIError>) in
             switch result {
             case .success(let model):
-                //completion(model)
+                self.memberData = model
+                completion()
                 
             case .failure(let error):
                 debugPrint("error = \(error)")
                 completion()
             }
         }
-        
     }
     
     func register(completion: @escaping (Result<String, APIError>) -> Void) {

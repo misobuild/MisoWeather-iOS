@@ -36,15 +36,21 @@ final class MainScrollView: UIView {
         return button
     }()
     
-    private lazy var titleLabel: UILabel = {
+    private lazy var greetingLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 19.0, weight: .light)
         label.textColor = .black
         label.numberOfLines = 0
-        label.text = """
-                    안녕하세요!
-                    부산의 귀여운 막내병아리님 🐣
-                    """
+        label.text = "안녕하세요!"
+        return label
+    }()
+    
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 19.0, weight: .heavy)
+        label.textColor = .black
+        label.numberOfLines = 0
+        label.text = "부산의 귀여운 막내병아리님 🐣"
         return label
     }()
     
@@ -107,6 +113,7 @@ extension MainScrollView {
             misoLabel,
             addLocationButton,
             userButton,
+            greetingLabel,
             titleLabel,
             weatherView,
             serveyBackView,
@@ -148,8 +155,13 @@ extension MainScrollView {
             $0.height.equalTo(24.0)
         }
         
-        titleLabel.snp.makeConstraints {
+        greetingLabel.snp.makeConstraints {
             $0.top.equalTo(misoLabel.snp.bottom).offset(32.0)
+            $0.leading.equalTo(misoLabel)
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(greetingLabel.snp.bottom).offset(7.0)
             $0.leading.equalTo(misoLabel)
         }
         

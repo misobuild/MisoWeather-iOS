@@ -21,8 +21,8 @@ final class RegisterViewController: UIViewController {
         button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(hasKakaoToken), for: .touchUpInside)
         
-        // MARK: test
-        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
+//        // MARK: test
+//        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         
         return button
     }()
@@ -121,7 +121,7 @@ final class RegisterViewController: UIViewController {
         
 //        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
 //        self.navigationItem.backBarButtonItem = backBarButtonItem
-        
+        hasKakaoToken()
         setupView()
     }
 }

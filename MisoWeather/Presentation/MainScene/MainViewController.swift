@@ -30,12 +30,23 @@ final class MainViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    private func setData() {
+        
+        model.getMemberData {
+            DispatchQueue.main.async {
+                if let data = self.model.memberInfo {
+                    self.mainScrollView.titleLabel.text = "\(data.data.regionName)의 \(data.data.nickname)님\(data.data.emoji)"
+                }
+            }
+        }
+    }
+    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
-        
+        setData()
         setupView()
     }
 }

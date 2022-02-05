@@ -14,6 +14,6 @@ struct MemberModel: Decodable {
 struct Member: Decodable {
     let nickname: String
     let emoji: String
-    let regionID: Int
+    let regionId: Int
     let regionName: String
 }
