@@ -10,7 +10,7 @@ import SnapKit
 
 class SettingViewController: UIViewController {
     
-    let settingList = ["🔑  로그아웃", "📱  앱 버전", "💔  계정 삭제"]
+    private let model = SettingViewModel()
     
     // MARK: - SubView
     
@@ -30,14 +30,12 @@ class SettingViewController: UIViewController {
     
     private lazy var emojiLabel: UILabel = {
         let label = UILabel()
-        label.text = "🐣"
         label.font = .systemFont(ofSize: 120)
         return label
     }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "귀여운 막내병아리"
         label.font = .systemFont(ofSize: 20, weight: .bold)
         return label
     }()
@@ -53,22 +51,33 @@ class SettingViewController: UIViewController {
         return tableView
     }()
     
+    private func setData() {
+        model.getMemberData {
+            DispatchQueue.main.async {
+                if let info = self.model.memberInfo {
+                    self.emojiLabel.text = info.data.emoji
+                    self.titleLabel.text = info.data.nickname
+                }
+            }
+        }
+    }
+    
     // MARK: - LifeCycle Method
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setData()
         setupView()
     }
 }
 
 extension SettingViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingList.count
+        return model.settingList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "Cell")
-        cell.textLabel?.text = settingList[indexPath.row]
+        cell.textLabel?.text = model.settingList[indexPath.row]
         return cell
     }
 }
@@ -80,7 +89,7 @@ extension SettingViewController: UITableViewDataSource {
             preferredStyle: UIAlertController.Style.alert)
     
         let cancle = UIAlertAction(title: "취소", style: .destructive, handler: nil)
-        let confirm = UIAlertAction(title: "삭제", style: .default, handler: nil)
+        let confirm = UIAlertAction(title: "로그아웃", style: .default, handler: nil)
         
         alert.addAction(cancle)
         alert.addAction(confirm)
@@ -120,7 +129,7 @@ extension SettingViewController {
             $0.top.equalTo(stackView.snp.bottom).offset(30)
             $0.trailing.equalTo(stackView.snp.trailing)
             $0.leading.equalTo(stackView.snp.leading)
-            $0.height.equalTo(60 * settingList.count)
+            $0.height.equalTo(60 * model.settingList.count)
         }
     }
 }
