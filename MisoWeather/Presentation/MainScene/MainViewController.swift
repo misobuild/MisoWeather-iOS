@@ -9,6 +9,8 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
+    let model = MainViewModel()
+    
     // MARK: - subviews
     private lazy var mainScrollView: MainScrollView = {
         let view = MainScrollView()
@@ -28,13 +30,33 @@ final class MainViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    private func setData() {
+        self.mainScrollView.userButton.addTarget(self, action: #selector(settingVC), for: .touchUpInside)
+        
+        model.getMemberData {
+            DispatchQueue.main.async {
+                if let data = self.model.memberInfo {
+                    self.mainScrollView.titleLabel.text = "\(data.data.regionName)의 \(data.data.nickname)님\(data.data.emoji)"
+                }
+            }
+        }
+    }
+    
+    @objc private func settingVC() {
+        self.navigationController?.pushViewController(SettingViewController(), animated: true)
+    }
+    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.navigationBar.isHidden = true
-        
+        setData()
         setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
     }
 }
 

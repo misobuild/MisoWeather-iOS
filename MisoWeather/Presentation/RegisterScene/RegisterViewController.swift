@@ -13,6 +13,8 @@ import SnapKit
 
 final class RegisterViewController: UIViewController {
     
+    let model = RegisterViewModel()
+    
     // MARK: - Subviews
     private lazy var kakaoLoginButon: UIButton = {
         let button = UIButton()
@@ -21,8 +23,8 @@ final class RegisterViewController: UIViewController {
         button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(hasKakaoToken), for: .touchUpInside)
         
-        // MARK: test
-        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
+//        // MARK: test
+//        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         
         return button
     }()
@@ -60,6 +62,7 @@ final class RegisterViewController: UIViewController {
     }
     
     @objc private func hasKakaoToken() {
+        print("hasKakaoToken 실행")
         if AuthApi.hasToken() {
             // 사용자 액세스 토큰 정보 조회
             UserApi.shared.accessTokenInfo {(_, error) in
@@ -68,25 +71,97 @@ final class RegisterViewController: UIViewController {
                         // 유효한 토큰 아님 로그인 필요
                         self.kakaoLogin()
                     } else {
-                        // 기타 에러.. 
+                        // 기타 에러..
+                        self.kakaoLogin()
                     }
                 } else {
                     // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
-                    print("토큰 유효성 체크 성공")
                     
-                    // 엑세스 토큰 발급Test
-                    self.kakaoLogin()
+                    // MARK: 엑세스 토큰 발급Test
+//                    self.kakaoLogin()
                     
+                    print("토큰 있니!?")
                     let token = TokenUtils()
                     print(token.read("kakao", account: "accessToken") ?? "")
+                    self.kakaoLogin()
                     
-                    // 화면전환
-                    self.nextVC()
+                    // Main으로 화면 전환
+                    // self.mainVC()
                 }
             }
         } else {
             // 액세스 토큰 정보 없음 로그인 필요
             self.kakaoLogin()
+        }
+    }
+    
+    // 앱 실행시 처음 실행되는 함수
+    // 화면 분기에 대해 처리해야함
+    // RegionSelect or MainView
+    private func hasUser() {
+        print("hasUser 실행")
+        if AuthApi.hasToken() {
+            // 사용자 액세스 토큰 정보 조회
+            UserApi.shared.accessTokenInfo {(_, error) in
+                if let error = error {
+                    if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
+                        // 유효한 토큰 아님 로그인 필요
+                       print("유효 토큰 없음 로그인 필요 ")
+                    } else {
+                        // 기타 에러..
+                    }
+                } else {
+                    // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
+                    
+                    let token = TokenUtils()
+                    print("토큰 있음??")
+                    print(token.read("kakao", account: "accessToken") ?? "")
+                    // Main으로 화면 전환
+                    self.checkMain()
+                }
+            }
+        }
+    }
+    
+    // 로그아웃 -> 로그인 시 기존 유저인지 확인할 때
+    private func checkUser() {
+        print("checkUser 실행")
+        model.token {(result: Result<String, APIError>) in
+            
+            switch result {
+            case .success(let serverToken):
+                print("유저 있음")
+                // 메인으로 화면 전환
+                DispatchQueue.main.async {
+                    self.mainVC()
+                }
+                
+            case .failure(let error):
+                print("유저 없음")
+                // 지역 선택으로 화면 전환
+                DispatchQueue.main.async {
+                    self.nextVC()
+                }
+            }
+        }
+    }
+    
+    // 처음 앱 실행 시 화면 분기에 대해서
+    private func checkMain() {
+        print("checkMain 실행")
+        model.token {(result: Result<String, APIError>) in
+            
+            switch result {
+            case .success(let serverToken):
+                print("유저 있음")
+                // 메인으로 화면 전환
+                DispatchQueue.main.async {
+                    self.mainVC()
+                }
+                
+            case .failure(let error):
+                print("유저 없음")
+            }
         }
     }
     
@@ -104,11 +179,15 @@ final class RegisterViewController: UIViewController {
                     let token = TokenUtils()
                     token.create("kakao", account: "accessToken", value: accessToken)
                     
-                    // 화면전환
-                    self.nextVC()
+                    // TODO: 우리 기존 회원인지 아닌지 검사하는 과정이 필요함
+                    self.checkUser()
+
+//                    // 지역 선택으로 화면 전환
+//                    self.nextVC()
                 }
             }
         } else {
+            // TODO: ShowAlert 카카오톡이 설치되어있지 않습니다.
             print("카카오톡 미설치")
         }
     }
@@ -121,7 +200,21 @@ final class RegisterViewController: UIViewController {
         
 //        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
 //        self.navigationItem.backBarButtonItem = backBarButtonItem
+
+//        let token = TokenUtils()
+//        token.delete("kakao", account: "accessToken")
+//
+//
+//        UserApi.shared.logout {(error) in
+//            if let error = error {
+//                print(error)
+//            }
+//            else {
+//                print("logout() success.")
+//            }
+//        }
         
+        hasUser()
         setupView()
     }
 }

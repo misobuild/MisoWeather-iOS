@@ -11,11 +11,11 @@ import KakaoSDKCommon
 
 final class BigRegionViewController: UIViewController {
     
-    private var selectRegion: String = "서울특별시"
-    private var selectRegionList = ["서울", "경기", "인천", "대전", "세종", "충북", "충남", "광주", "전북", "전남", "대구", "부산", "울산", "경북", "경남", "강원", "제주"]
-    private let requestRegionList = ["서울특별시", "경기도", "인천광역시", "대전광역시", "세종특별자치시", "충청북도", "충청남도", "광주광역시", "전라북도", "전라남도", "대구광역시", "부산광역시", "울산광역시", "경상북도", "경상남도", "강원도", "제주도"]
-    
+    private let model = BigRegionModel()
     private var midScaleRegionList: [RegionList] = []
+    
+    private var selectRegion: String = "서울"
+    private var selectRegionList = ["서울", "경기", "인천", "대전", "세종", "충북", "충남", "광주", "전북", "전남", "대구", "부산", "울산", "경북", "경남", "강원", "제주"]
     
     // MARK: - subviews
     private lazy var collectionView: UICollectionView = {
@@ -44,32 +44,15 @@ final class BigRegionViewController: UIViewController {
     
     // MARK: - Private Method
     @objc private func nextVC() {
-       
         let nextVC = MidRegionListViewController()
         nextVC.delegate = self
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    // 2단계 지역 리스트 가져오기
     @objc private func fetchData() {
-        let urlString = "\(URLString.regionURL)\(selectRegion)"
-        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let url = URL(string: encodedString!)
-        
-        let session = URLSession(configuration: .default)
-        session.dataTask(with: url!) {  [weak self] data, response, error in
-            self?.task(data: data, response: response, error: error)
-        }.resume()
-    }
-    
-    func task(data: Data?, response: URLResponse?, error: Error?) {
-        guard let data = data, error == nil else {return}
-        guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {return}
-        let sucessRange = 200..<300
-        guard sucessRange.contains(statusCode) else {return}
-        let decoder = JSONDecoder()
-        let midRegionList = try? decoder.decode(RegionModel.self, from: data)
-        if let regionList: RegionModel = midRegionList {
-            self.midScaleRegionList = regionList.data.regionList
+        model.fetchRegionData(region: selectRegion) {
+            self.midScaleRegionList = self.model.midleRegionList
             DispatchQueue.main.async {
                 self.nextVC()
             }
@@ -81,6 +64,11 @@ final class BigRegionViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+//        // MARK: test 시뮬레이터 키체인에 Token, ID 저장
+//        let token = TokenUtils()
+//        token.create("kakao", account: "accessToken", value: "bcHIUrVU5To7BYugt55LUkGqPeoOJ8xmXmRJ7Aopb7gAAAF-xOiRSw")
+//        token.create("kakao", account: "userID", value: "2063494098")
+        
         setupView()
     }
      
@@ -89,6 +77,7 @@ final class BigRegionViewController: UIViewController {
     }
 }
 
+// MARK: - Extension
 extension BigRegionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return selectRegionList.count
@@ -122,7 +111,7 @@ extension BigRegionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let region = requestRegionList[indexPath.row]
+        let region = selectRegionList[indexPath.row]
         selectRegion = region
 
         // User 대분류 지역 저장

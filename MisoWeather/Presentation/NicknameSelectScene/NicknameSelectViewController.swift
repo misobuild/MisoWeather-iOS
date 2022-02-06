@@ -9,8 +9,9 @@ import UIKit
 import SnapKit
 
 final class NicknameSelectViewController: UIViewController {
-    weak var delegate: nickNameSendDelegate?
-    private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
+
+    var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
+    private var model = NicknameSelectModel()
     
     private var region = ""
     
@@ -73,90 +74,36 @@ final class NicknameSelectViewController: UIViewController {
     
     // MARK: - Private Method
     @objc private func nextVC() {
-        self.navigationController?.pushViewController(MainViewController(), animated: true)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(MainViewController())
     }
     
     @objc private func fetchData() {
-        let urlString = "\(URLString.nicknameURL)"
-        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
-        let url = URL(string: encodedString)
-        let session = URLSession(configuration: .default)
-        session.dataTask(with: url!) { data, _, error in
-            guard let data = data, error == nil else {return}
-            let decoder = JSONDecoder()
-            let recive = try? decoder.decode(NicknameModel.self, from: data)
-            
-            if let nickName = recive {
-                self.recivedNickName = nickName.data
-            }
-            
+        let urlString = URL.nickname
+        model.fetchNicknameData(urlString: urlString) {
+            self.recivedNickName = self.model.reciveNickname
             DispatchQueue.main.async {
                 self.nicknameLabel.text = "\(self.region)의 \(self.recivedNickName.nickname)님!"
-                self.imoticonLable.text = self.recivedNickName.emoji
+                self.imoticonLable.text = "\(self.recivedNickName.emoji)"
                 self.animate()
             }
-        }.resume()
+        }
     }
     
     @objc private func register() {
         
-        let regionID = UserDefaults.standard.string(forKey: "regionID")
-        let token = TokenUtils()
-        let accessToken = token.read("kakao", account: "accessToken")
-        let userID = token.read("kakao", account: "userID")
-        
-        let urlString = "\(URLString.signupURL)?socialToken=\(accessToken!)"
-        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
-        let url = URL(string: encodedString)
-        let body: [String: Any] = [
-            "defaultRegionId": regionID!,
-            "emoji": recivedNickName.emoji,
-            "nickname": recivedNickName.nickname,
-            "socialId": userID!,
-            "socialType": "kakao"
-        ]
-        
-        guard let paramData = try? JSONSerialization.data(withJSONObject: body, options: []) else {return}
-        var requeset: URLRequest = URLRequest(url: url!)
-        requeset.httpMethod = "POST"
-        requeset.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        requeset.httpBody = paramData
-        
-        let session = URLSession(configuration: .default)
-        session.dataTask(with: requeset) { data, response, error in
-            guard let data = data, error == nil else {return}
-            let resultCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-            let header = (response as? HTTPURLResponse)?.headers
+        model.register {(result: Result<String, APIError>) in
             
-            if let httpResponse = response as? HTTPURLResponse {
-                if let serverToken = httpResponse.value(forHTTPHeaderField: "serverToken") {
-                    token.create("misoWeather", account: "serverToken", value: serverToken)
-                    print("======================serverToken========================")
-                    print(serverToken)
+            switch result {
+            case .failure(let error):
+                // TODO: - error 처리 필요
+                print("error: \(error)")
+                
+            case .success:
+                DispatchQueue.main.async {
+                    self.nextVC()
                 }
             }
-            let resultString = String(data: data, encoding: .utf8) ?? "" // 응답 메시지
-            print("")
-            print("======================accessToken========================")
-            print(accessToken!)
-            print("======================Header========================")
-            print(header!)
-            print("======================Body==========================")
-            print("requestPOST : http post 요청 성공")
-            print("resultCode : ", resultCode)
-            print("resultString : ", resultString)
-            print("====================================================")
-            print("")
-            
-            // 1. status가 맞을 때 다음 화면으로 넘어가야함,
-            // 2. status가 틀릴 때 안내 알럿 띄워야함
-            // 3. 409 - 이미 회원가입이 되어있습니다.
-            // 4. 403 - 토큰이 만료되었습니다. 앱을 재 실행 해주세요
-            
-            DispatchQueue.main.async {
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(MainViewController())
-            }
-        }.resume()
+        }
     }
     
     private func animate() {
@@ -176,9 +123,6 @@ final class NicknameSelectViewController: UIViewController {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = ""
         
-        if let data = self.delegate?.sendData() {
-            self.recivedNickName = data
-        }
         if let region = UserInfo.shared.region {
             self.region = region
         }

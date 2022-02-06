@@ -53,9 +53,11 @@ extension RegionSelectListView: UITableViewDelegate {
         let cell = UITableViewCell.init(style: .default, reuseIdentifier: "Cell")
         cell.selectionStyle = .none
         cell.textLabel?.font = .systemFont(ofSize: 18.0, weight: .regular)
-        if regionList[1].smallScale == "선택 안 함"{
+        if regionList[1].smallScale == regionList[0].smallScale {
+            // MidScale
             cell.textLabel?.text = regionList[indexPath.row].midScale
         } else {
+            // SmallScale
             cell.textLabel?.text = regionList[indexPath.row].smallScale
         }
         return cell
