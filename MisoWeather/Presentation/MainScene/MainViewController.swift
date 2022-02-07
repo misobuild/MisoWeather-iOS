@@ -29,6 +29,13 @@ final class MainViewController: UIViewController {
         let nextVC = SurveyReviewViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
+    private func setWeatherData() {
+        if let info = model.forecastInfo {
+            mainScrollView.weatherView.regionLocationLabel.regionLabel.text = model.locationInfo
+            mainScrollView.weatherView.emojiLabel.text = info.data.forecast.sky
+            mainScrollView.weatherView.tempLabel.text = info.data.forecast.temperature + "°"
+        }
+    }
     
     private func setData() {
         self.mainScrollView.userButton.addTarget(self, action: #selector(settingVC), for: .touchUpInside)
@@ -37,6 +44,11 @@ final class MainViewController: UIViewController {
             DispatchQueue.main.async {
                 if let data = self.model.memberInfo {
                     self.mainScrollView.titleLabel.text = "\(data.data.regionName)의 \(data.data.nickname)님\(data.data.emoji)"
+                }
+            }
+            self.model.getCurrentTempData {
+                DispatchQueue.main.async {
+                    self.setWeatherData()
                 }
             }
         }

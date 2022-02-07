@@ -40,6 +40,7 @@
 		E8BFAD3D27AE5B210007E1DC /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3C27AE5B210007E1DC /* SettingViewModel.swift */; };
 		E8BFAD3F27AE67C90007E1DC /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3E27AE67C90007E1DC /* RegisterViewModel.swift */; };
 		E8BFAD4127AE7BB90007E1DC /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD4027AE7BB90007E1DC /* TokenModel.swift */; };
+		E8BFAD4727B1514F0007E1DC /* CurrentTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD4627B1514F0007E1DC /* CurrentTemp.swift */; };
 		E8CE99B927988CFC0095C958 /* MainScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99B827988CFC0095C958 /* MainScrollView.swift */; };
 		E8CE99BB27989CD40095C958 /* MainWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BA27989CD40095C958 /* MainWeatherView.swift */; };
 		E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */; };
@@ -143,6 +144,7 @@
 		E8BFAD3E27AE67C90007E1DC /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		E8BFAD4027AE7BB90007E1DC /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
 		E8BFAD4227B0B1140007E1DC /* MisoWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MisoWeather.entitlements; sourceTree = "<group>"; };
+		E8BFAD4627B1514F0007E1DC /* CurrentTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTemp.swift; sourceTree = "<group>"; };
 		E8CE99B827988CFC0095C958 /* MainScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScrollView.swift; sourceTree = "<group>"; };
 		E8CE99BA27989CD40095C958 /* MainWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherView.swift; sourceTree = "<group>"; };
 		E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeTempLabel.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				E8132BBA279706DA00A9518B /* StatusModel.swift */,
 				E8BFAD3827AE4B1D0007E1DC /* MemberModel.swift */,
 				E8BFAD4027AE7BB90007E1DC /* TokenModel.swift */,
+				E8BFAD4627B1514F0007E1DC /* CurrentTemp.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 				E86EA70B279281F30066BB46 /* URLString.swift in Sources */,
 				E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */,
 				E8132BB52795BAE700A9518B /* NicknameModel.swift in Sources */,
+				E8BFAD4727B1514F0007E1DC /* CurrentTemp.swift in Sources */,
 				E8BFAD3327AD0DA00007E1DC /* RegionSelectViewModel.swift in Sources */,
 				E8CE99BB27989CD40095C958 /* MainWeatherView.swift in Sources */,
 				E8BFAD3D27AE5B210007E1DC /* SettingViewModel.swift in Sources */,

@@ -9,9 +9,19 @@ import Foundation
 final class MainViewModel {
     
     private var memberData: MemberModel?
+    private var forecastData: CurrentTemp?
+    private var location: String = ""
 
     var memberInfo: MemberModel? {
         self.memberData
+    }
+    
+    var forecastInfo: CurrentTemp? {
+        self.forecastData
+    }
+    
+    var locationInfo: String {
+        self.location
     }
     
     func getMemberData(completion: @escaping () -> Void) {
@@ -30,13 +40,42 @@ final class MainViewModel {
             switch result {
             case .success(let model):
                 self.memberData = model
-                print(model)
-                
+                UserDefaults.standard.set(model.data.regionId, forKey: "regionID")
                 completion()
                 
             case .failure(let error):
                 debugPrint("error = \(error)")
                 completion()
+            }
+        }
+    }
+    
+    func getCurrentTempData(completion: @escaping () -> Void) {
+    
+        let networkManager = NetworkManager()
+        guard let regionID = UserDefaults.standard.string(forKey: "regionID") else {return}
+        let urlString = URL.realtimeForecast + regionID
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        
+        if let url =  URL(string: encodedString) {
+            networkManager.getfetchData(url: url) {(result: Result<CurrentTemp, APIError>) in
+                switch result {
+                case .success(let model):
+                    self.forecastData = model
+                    
+                    self.location.append(model.data.region.bigScale)
+                    if model.data.region.midScale != "선택 안 함" {
+                        self.location.append(" " + model.data.region.midScale)
+                        if model.data.region.smallScale != "선택 안 함" {
+                            self.location.append(" " + model.data.region.smallScale)
+                        }
+                    }
+                    
+                    completion()
+                    
+                case .failure(let error):
+                    debugPrint("error = \(error)")
+                }
             }
         }
     }

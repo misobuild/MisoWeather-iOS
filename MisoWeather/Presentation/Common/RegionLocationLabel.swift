@@ -17,7 +17,7 @@ class RegionLocationLabel: UIView {
         return view
     }()
     
-    private lazy var regionLabel: UILabel = {
+    lazy var regionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .black
