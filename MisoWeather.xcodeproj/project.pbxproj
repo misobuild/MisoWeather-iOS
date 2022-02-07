@@ -143,6 +143,7 @@
 		E8BFAD3C27AE5B210007E1DC /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		E8BFAD3E27AE67C90007E1DC /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		E8BFAD4027AE7BB90007E1DC /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
+		E8BFAD4227B0B1140007E1DC /* MisoWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MisoWeather.entitlements; sourceTree = "<group>"; };
 		E8CE99B827988CFC0095C958 /* MainScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScrollView.swift; sourceTree = "<group>"; };
 		E8CE99BA27989CD40095C958 /* MainWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherView.swift; sourceTree = "<group>"; };
 		E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeTempLabel.swift; sourceTree = "<group>"; };
@@ -387,6 +388,7 @@
 		E8E65B952782D4AC00FFA0FA /* MisoWeather */ = {
 			isa = PBXGroup;
 			children = (
+				E8BFAD4227B0B1140007E1DC /* MisoWeather.entitlements */,
 				E8E65BCE2783026700FFA0FA /* Application */,
 				E83E00F9279001F400C4661A /* Common */,
 				E83E00F8279001ED00C4661A /* Data */,
@@ -1000,6 +1002,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MisoWeather/MisoWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
@@ -1028,6 +1031,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MisoWeather/MisoWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
