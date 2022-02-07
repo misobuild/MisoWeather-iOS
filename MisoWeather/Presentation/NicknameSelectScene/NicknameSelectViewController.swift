@@ -11,10 +11,10 @@ import SnapKit
 final class NicknameSelectViewController: UIViewController {
 
     var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
-    private var model = NicknameSelectModel()
+    var model = NicknameSelectViewModel()
     
     private var region = ""
-    
+
     // MARK: - Subviews
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -28,7 +28,6 @@ final class NicknameSelectViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 27.0, weight: .black)
         label.textColor = .black
-        label.text = "\(region)의 \(recivedNickName.nickname)님!"
         return label
     }()
     
@@ -36,7 +35,6 @@ final class NicknameSelectViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 170.0)
         label.textColor = .black
-        label.text = "\(recivedNickName.emoji)"
         return label
     }()
     
@@ -49,7 +47,7 @@ final class NicknameSelectViewController: UIViewController {
         let attributeString = NSMutableAttributedString(string: text)
         attributeString.addAttribute(.underlineStyle, value: 1, range: NSRange.init(location: 0, length: text.count))
         button.titleLabel?.attributedText = attributeString
-        button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
+        button.addTarget(self, action: #selector(fetchNicknameData), for: .touchUpInside)
         return button
     }()
     
@@ -73,31 +71,33 @@ final class NicknameSelectViewController: UIViewController {
     }()
     
     // MARK: - Private Method
-    @objc private func nextVC() {
-        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(MainViewController())
-    }
-    
-    @objc private func fetchData() {
+    @objc private func fetchNicknameData() {
         let urlString = URL.nickname
         model.fetchNicknameData(urlString: urlString) {
             self.recivedNickName = self.model.reciveNickname
             DispatchQueue.main.async {
-                self.nicknameLabel.text = "\(self.region)의 \(self.recivedNickName.nickname)님!"
-                self.imoticonLable.text = "\(self.recivedNickName.emoji)"
-                self.animate()
+                self.setData()
             }
         }
     }
     
+    private func setData() {
+        if let region = UserInfo.shared.region {
+            self.region = region
+        }
+        self.nicknameLabel.text = "\(self.region)의 \(self.recivedNickName.nickname)님!"
+        self.imoticonLable.text = "\(self.recivedNickName.emoji)"
+        self.animate()
+    }
+    
+    private func nextVC() {
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(MainViewController())
+    }
+    
     @objc private func register() {
-        
-        // TODO: 닉네임 처음에 안받아지는거 가져와야함!
         model.register {(result: Result<String, APIError>) in
-            
             switch result {
-                
             case .failure(let error):
-                // TODO: - error 처리 필요
                 print("error: \(error)")
                 
             case .success:
@@ -122,12 +122,8 @@ final class NicknameSelectViewController: UIViewController {
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        self.navigationController?.navigationBar.topItem?.title = ""
-        
-        if let region = UserInfo.shared.region {
-            self.region = region
-        }
+
+        setData()
         animate()
         setupView()
     }
@@ -137,6 +133,9 @@ extension NicknameSelectViewController {
     
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
+        
+        view.backgroundColor = .white
+        self.navigationController?.navigationBar.topItem?.title = ""
         
         [titleLabel, nicknameLabel, imoticonLable, refreshButton, descriptionLabel, confirmButton].forEach {view.addSubview($0)}
         

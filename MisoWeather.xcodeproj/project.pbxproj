@@ -32,9 +32,9 @@
 		E8BFAD2B27ACEBB80007E1DC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD2A27ACEBB80007E1DC /* NetworkManager.swift */; };
 		E8BFAD2D27ACEBD30007E1DC /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD2C27ACEBD30007E1DC /* ErrorMessage.swift */; };
 		E8BFAD2F27ACEC080007E1DC /* URLMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD2E27ACEC080007E1DC /* URLMethod.swift */; };
-		E8BFAD3127AD01000007E1DC /* BigRegionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3027AD01000007E1DC /* BigRegionModel.swift */; };
-		E8BFAD3327AD0DA00007E1DC /* RegionSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3227AD0DA00007E1DC /* RegionSelectModel.swift */; };
-		E8BFAD3527AD4D800007E1DC /* NicknameSelectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3427AD4D800007E1DC /* NicknameSelectModel.swift */; };
+		E8BFAD3127AD01000007E1DC /* BigRegionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3027AD01000007E1DC /* BigRegionViewModel.swift */; };
+		E8BFAD3327AD0DA00007E1DC /* RegionSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3227AD0DA00007E1DC /* RegionSelectViewModel.swift */; };
+		E8BFAD3527AD4D800007E1DC /* NicknameSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3427AD4D800007E1DC /* NicknameSelectViewModel.swift */; };
 		E8BFAD3727AE47680007E1DC /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3627AE47680007E1DC /* MainViewModel.swift */; };
 		E8BFAD3927AE4B1D0007E1DC /* MemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3827AE4B1D0007E1DC /* MemberModel.swift */; };
 		E8BFAD3D27AE5B210007E1DC /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD3C27AE5B210007E1DC /* SettingViewModel.swift */; };
@@ -83,7 +83,6 @@
 		E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */; };
 		E8FB85ED278C2F9B0007DE27 /* MidRegionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB85EC278C2F9B0007DE27 /* MidRegionListViewController.swift */; };
 		E8FB85F0278D45DD0007DE27 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = E8FB85EF278D45DD0007DE27 /* .swiftlint.yml */; };
-		E8FB85F3278DB7F40007DE27 /* RegionSendDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB85F2278DB7F40007DE27 /* RegionSendDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,9 +134,9 @@
 		E8BFAD2A27ACEBB80007E1DC /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E8BFAD2C27ACEBD30007E1DC /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		E8BFAD2E27ACEC080007E1DC /* URLMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLMethod.swift; sourceTree = "<group>"; };
-		E8BFAD3027AD01000007E1DC /* BigRegionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigRegionModel.swift; sourceTree = "<group>"; };
-		E8BFAD3227AD0DA00007E1DC /* RegionSelectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectModel.swift; sourceTree = "<group>"; };
-		E8BFAD3427AD4D800007E1DC /* NicknameSelectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSelectModel.swift; sourceTree = "<group>"; };
+		E8BFAD3027AD01000007E1DC /* BigRegionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigRegionViewModel.swift; sourceTree = "<group>"; };
+		E8BFAD3227AD0DA00007E1DC /* RegionSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSelectViewModel.swift; sourceTree = "<group>"; };
+		E8BFAD3427AD4D800007E1DC /* NicknameSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSelectViewModel.swift; sourceTree = "<group>"; };
 		E8BFAD3627AE47680007E1DC /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		E8BFAD3827AE4B1D0007E1DC /* MemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModel.swift; sourceTree = "<group>"; };
 		E8BFAD3C27AE5B210007E1DC /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
@@ -191,7 +190,6 @@
 		E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSelectViewController.swift; sourceTree = "<group>"; };
 		E8FB85EC278C2F9B0007DE27 /* MidRegionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidRegionListViewController.swift; sourceTree = "<group>"; };
 		E8FB85EF278D45DD0007DE27 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		E8FB85F2278DB7F40007DE27 /* RegionSendDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionSendDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,7 +258,6 @@
 				E83E010B2790A24F00C4661A /* UserInfo.swift */,
 				E83E01032790885300C4661A /* Observables.swift */,
 				E83E01052790898900C4661A /* ObservableVMProtocol.swift */,
-				E8FB85F2278DB7F40007DE27 /* RegionSendDelegate.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -467,7 +464,7 @@
 		E8FB85E8278C18850007DE27 /* RegionSelectScene */ = {
 			isa = PBXGroup;
 			children = (
-				E8BFAD3027AD01000007E1DC /* BigRegionModel.swift */,
+				E8BFAD3027AD01000007E1DC /* BigRegionViewModel.swift */,
 				E8E65BC72782E0E200FFA0FA /* BigRegionViewController.swift */,
 				E839205A2786F132006A1D1B /* BigRegionCollectionViewCell.swift */,
 			);
@@ -477,7 +474,7 @@
 		E8FB85E9278C18920007DE27 /* NicknameSelectScene */ = {
 			isa = PBXGroup;
 			children = (
-				E8BFAD3427AD4D800007E1DC /* NicknameSelectModel.swift */,
+				E8BFAD3427AD4D800007E1DC /* NicknameSelectViewModel.swift */,
 				E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */,
 			);
 			path = NicknameSelectScene;
@@ -500,7 +497,7 @@
 		E8FB85EB278C2F4D0007DE27 /* RegionSelectListScene */ = {
 			isa = PBXGroup;
 			children = (
-				E8BFAD3227AD0DA00007E1DC /* RegionSelectModel.swift */,
+				E8BFAD3227AD0DA00007E1DC /* RegionSelectViewModel.swift */,
 				E8FB85EC278C2F9B0007DE27 /* MidRegionListViewController.swift */,
 				E8132BB22795978B00A9518B /* SmallRegionListViewController.swift */,
 				E8132BB02795863600A9518B /* RegionSelectListView.swift */,
@@ -774,7 +771,7 @@
 				E8CE99E3279C47EC0095C958 /* MainServeyTitleView.swift in Sources */,
 				E8CE99F3279E907E0095C958 /* ReviewViewContoller.swift in Sources */,
 				E8CE99CF279B04E30095C958 /* ForecastTableView.swift in Sources */,
-				E8BFAD3527AD4D800007E1DC /* NicknameSelectModel.swift in Sources */,
+				E8BFAD3527AD4D800007E1DC /* NicknameSelectViewModel.swift in Sources */,
 				E8CE99E7279C5D6E0095C958 /* ReviewTableViewCell.swift in Sources */,
 				E8CE99BF279A8CD60095C958 /* WeatherViewController.swift in Sources */,
 				E8BFAD2D27ACEBD30007E1DC /* ErrorMessage.swift in Sources */,
@@ -794,14 +791,13 @@
 				E86EA70B279281F30066BB46 /* URLString.swift in Sources */,
 				E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */,
 				E8132BB52795BAE700A9518B /* NicknameModel.swift in Sources */,
-				E8BFAD3327AD0DA00007E1DC /* RegionSelectModel.swift in Sources */,
+				E8BFAD3327AD0DA00007E1DC /* RegionSelectViewModel.swift in Sources */,
 				E8CE99BB27989CD40095C958 /* MainWeatherView.swift in Sources */,
 				E8BFAD3D27AE5B210007E1DC /* SettingViewModel.swift in Sources */,
 				E8BFAD2427AC30880007E1DC /* SettingViewController.swift in Sources */,
 				E83E00FE27901E4200C4661A /* TitleLabel.swift in Sources */,
 				E83E01062790898900C4661A /* ObservableVMProtocol.swift in Sources */,
 				E8132BB32795978B00A9518B /* SmallRegionListViewController.swift in Sources */,
-				E8FB85F3278DB7F40007DE27 /* RegionSendDelegate.swift in Sources */,
 				E8FB85ED278C2F9B0007DE27 /* MidRegionListViewController.swift in Sources */,
 				E839205B2786F132006A1D1B /* BigRegionCollectionViewCell.swift in Sources */,
 				E8CE99E1279BE6200095C958 /* ChartView.swift in Sources */,
@@ -831,7 +827,7 @@
 				E8CE99B927988CFC0095C958 /* MainScrollView.swift in Sources */,
 				E8CE99C9279AF3E90095C958 /* ParticulateMatterView.swift in Sources */,
 				E8CE99CD279AFACF0095C958 /* PrecipitationView.swift in Sources */,
-				E8BFAD3127AD01000007E1DC /* BigRegionModel.swift in Sources */,
+				E8BFAD3127AD01000007E1DC /* BigRegionViewModel.swift in Sources */,
 				E8BFAD3727AE47680007E1DC /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

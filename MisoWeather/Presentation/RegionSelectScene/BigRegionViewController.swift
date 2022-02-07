@@ -11,7 +11,7 @@ import KakaoSDKCommon
 
 final class BigRegionViewController: UIViewController {
     
-    private let model = BigRegionModel()
+    private let model = BigRegionViewModel()
     private var midScaleRegionList: [RegionList] = []
     
     private var selectRegion: String = "서울"

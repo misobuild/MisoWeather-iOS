@@ -10,8 +10,7 @@ import SnapKit
 
 final class MidRegionListViewController: UIViewController {
     weak var delegate: RegionSendDelegate?
-    
-    private let model = RegionSelectModel()
+    private let model = RegionSelectViewModel()
     
     private var midScaleRegionList: [RegionList] = []
     private var smallScaleRegionList: [RegionList] = []

@@ -7,16 +7,19 @@
 
 import Foundation
 
-final class NicknameSelectModel {
-    
+final class NicknameSelectViewModel {
+
     private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
 
     var reciveNickname: NicknameModel.Data {
         self.recivedNickName
     }
     
+    func setData(data: NicknameModel.Data) {
+        self.recivedNickName = data
+    }
+    
     func fetchNicknameData(urlString: String, completion: @escaping () -> Void) {
-        
         let networkManager = NetworkManager()
         if let url = URL(string: urlString) {
             networkManager.getfetchData(url: url) {(result: Result<NicknameModel, APIError>) in

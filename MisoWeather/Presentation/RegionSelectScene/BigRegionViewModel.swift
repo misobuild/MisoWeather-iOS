@@ -11,7 +11,7 @@ protocol RegionSendDelegate: AnyObject {
     func sendData() -> [RegionList]
 }
 
-final class BigRegionModel {
+final class BigRegionViewModel {
     
     private var midleRegionData: RegionModel?
     

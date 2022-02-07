@@ -9,9 +9,10 @@ import UIKit
 import SnapKit
 
 final class SmallRegionListViewController: UIViewController {
-    
-    private var model = RegionSelectModel()
+
+    private var model = RegionSelectViewModel()
     weak var delegate: RegionSendDelegate?
+  
     var smallScaleRegionList: [RegionList] = []
     
     // MARK: - Subviews
@@ -26,7 +27,6 @@ final class SmallRegionListViewController: UIViewController {
     @objc private func nextVC() {
         // 선택 지역ID 저장
         UserDefaults.standard.set(regionSelectListView.regionID, forKey: "regionID")
-        
         let nextVC = NicknameSelectViewController()
         nextVC.recivedNickName = model.reciveNickname
         self.navigationController?.pushViewController(nextVC, animated: true)
@@ -34,7 +34,6 @@ final class SmallRegionListViewController: UIViewController {
     
     @objc private func fetchData() {
         let urlString = URL.nickname
-        
         model.fetchNicknameData(urlString: urlString) {
             DispatchQueue.main.async {
                 self.nextVC()

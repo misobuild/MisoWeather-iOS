@@ -7,8 +7,8 @@
 
 import Foundation
 
-final class RegionSelectModel {
-    
+final class RegionSelectViewModel {
+
     private var midleRegionData: RegionModel?
     private var recivedNickName: NicknameModel.Data = NicknameModel.Data(nickname: "", emoji: "")
     
