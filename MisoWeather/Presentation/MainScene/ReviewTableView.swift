@@ -10,9 +10,10 @@ import SnapKit
 
 final class ReviewTableView: UIView {
     
-    var row = 5
     var frontColor = UIColor.white
     var backColor = UIColor.backgroundColor
+    var commentList: [CommentList] = []
+    var row = 5
 
     // MARK: - subView
     lazy var tableView: UITableView = {
@@ -20,10 +21,9 @@ final class ReviewTableView: UIView {
         tableView.isScrollEnabled = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 72
+        tableView.rowHeight = 80
         tableView.separatorStyle = .none
         tableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: "ReviewTableViewCell")
-        
         return tableView
     }()
     
@@ -32,6 +32,7 @@ final class ReviewTableView: UIView {
         setupView()
         backgroundColor = .backgroundColor
         layer.cornerRadius = 20
+        print(self.commentList)
     }
     
     required init?(coder: NSCoder) {
@@ -42,7 +43,7 @@ final class ReviewTableView: UIView {
 extension ReviewTableView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return row
+        return commentList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,6 +51,7 @@ extension ReviewTableView: UITableViewDelegate {
         cell?.selectionStyle = .none
         cell?.backView.backgroundColor = frontColor
         cell?.backgroundColor = backColor
+        cell?.setData(data: commentList[indexPath.row])
         return cell ?? UITableViewCell()
     }
 }

@@ -47,7 +47,7 @@ final class MainScrollView: UIView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 19.0, weight: .heavy)
+        label.font = .systemFont(ofSize: 20.0, weight: .heavy)
         label.textColor = .black
         label.numberOfLines = 0
         return label
@@ -72,7 +72,7 @@ final class MainScrollView: UIView {
         return view
     }()
     
-    private lazy var graphView: MainServeyView = {
+    lazy var graphView: MainServeyView = {
         let view = MainServeyView()
         return view
     }()
@@ -86,7 +86,7 @@ final class MainScrollView: UIView {
         return label
     }()
     
-    private lazy var reviewTableView: ReviewTableView = {
+    lazy var reviewTableView: ReviewTableView = {
         let view = ReviewTableView()
         return view
     }()
@@ -130,7 +130,7 @@ extension MainScrollView {
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalTo(width)
-            $0.height.equalTo(900)
+            $0.height.equalTo(950)
         }
   
         misoLabel.snp.makeConstraints {
@@ -173,7 +173,7 @@ extension MainScrollView {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(weatherView.snp.bottom).offset(15.0)
             $0.width.equalTo(width - (width * 0.1))
-            $0.height.equalTo(650)
+            $0.height.equalTo(680)
         }
         
         serveyTitleView.snp.makeConstraints {
@@ -199,7 +199,7 @@ extension MainScrollView {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(reviewTitleLabel.snp.bottom).offset(15.0)
             $0.width.equalTo(width * 0.87)
-            $0.height.equalTo(360)
+            $0.height.equalTo(400)
         }
     }
 }

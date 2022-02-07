@@ -16,9 +16,7 @@ final class MainServeyTitleView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = """
-                    오늘은 뭘 입을까?
-                    """
+        label.text = "오늘은 뭘 입을까?"
         label.textColor = .textColor
         label.font = .systemFont(ofSize: 18.0, weight: .bold)
         return label

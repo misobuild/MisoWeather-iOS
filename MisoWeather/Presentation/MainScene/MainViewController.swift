@@ -19,6 +19,7 @@ final class MainViewController: UIViewController {
         return view
         
     }()
+    
     // MARK: - Private Method
     @objc private func nextWeatherVC() {
         let nextVC = WeatherViewController()
@@ -29,6 +30,7 @@ final class MainViewController: UIViewController {
         let nextVC = SurveyReviewViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
+    
     private func setWeatherData() {
         if let info = model.forecastInfo {
             mainScrollView.weatherView.regionLocationLabel.regionLabel.text = model.locationInfo
@@ -50,6 +52,12 @@ final class MainViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.setWeatherData()
                 }
+            }
+        }
+        model.getCommentData {
+            DispatchQueue.main.async {
+                self.mainScrollView.reviewTableView.commentList = self.model.commenttInfo
+                self.mainScrollView.reviewTableView.tableView.reloadData()
             }
         }
     }
