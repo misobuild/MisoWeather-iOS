@@ -31,6 +31,7 @@ final class MainViewModel {
             case .success(let model):
                 self.memberData = model
                 print(model)
+                
                 completion()
                 
             case .failure(let error):

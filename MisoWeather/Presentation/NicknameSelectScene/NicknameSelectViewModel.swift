@@ -17,7 +17,6 @@ final class NicknameSelectViewModel {
     
     func setData(data: NicknameModel.Data) {
         self.recivedNickName = data
-        print(self.reciveNickname)
     }
     
     func fetchNicknameData(urlString: String, completion: @escaping () -> Void) {

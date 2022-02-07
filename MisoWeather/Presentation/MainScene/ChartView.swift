@@ -40,11 +40,6 @@ final class ChartView: UIView {
         view.clipsToBounds = true
         view.layer.cornerRadius = 15
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
-        let layer = CAGradientLayer()
-        layer.frame = CGRect(x: 0, y: 0, width: 60, height: 70)
-        layer.colors = [UIColor.mainColor!.cgColor, UIColor.white.cgColor]
-        view.layer.addSublayer(layer)
         return view
     }()
     
@@ -76,7 +71,6 @@ extension ChartView {
         }
         
         percentLabel.snp.makeConstraints {
-            $0.centerX.equalTo(titleLabel)
             $0.top.equalTo(titleLabel.snp.bottom).offset(2.0)
         }
         

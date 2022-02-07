@@ -52,6 +52,7 @@ extension MainServeyTitleView {
         ].forEach {addSubview($0)}
         
         titleLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(width * 0.02)
             $0.top.equalToSuperview()
         }
         
