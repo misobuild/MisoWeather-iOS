@@ -26,17 +26,31 @@ final class SmallRegionListViewController: UIViewController {
     // MARK: - Private Method
     @objc private func nextVC() {
         // 선택 지역ID 저장
-        UserDefaults.standard.set(regionSelectListView.regionID, forKey: "regionID")
         let nextVC = NicknameSelectViewController()
         nextVC.recivedNickName = model.reciveNickname
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    private func showAlert() {
+        let alert = UIAlertController(title: "지역을 선택해 주세요.",
+                                      message: "",
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        let confirm = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(confirm)
+        present(alert, animated: true, completion: nil)
+    }
+    
     @objc private func fetchData() {
-        let urlString = URL.nickname
-        model.fetchNicknameData(urlString: urlString) {
-            DispatchQueue.main.async {
-                self.nextVC()
+        if regionSelectListView.selectRegion == "" {
+            self.showAlert()
+        } else {
+            let urlString = URL.nickname
+            UserDefaults.standard.set(regionSelectListView.regionID, forKey: "regionID")
+            model.fetchNicknameData(urlString: urlString) {
+                DispatchQueue.main.async {
+                    self.nextVC()
+                }
             }
         }
     }

@@ -82,12 +82,16 @@ final class NicknameSelectViewController: UIViewController {
     }
     
     private func setData() {
-        if let region = UserInfo.shared.region {
-            self.region = region
-        }
         self.nicknameLabel.text = "\(self.region)의 \(self.recivedNickName.nickname)님!"
         self.imoticonLable.text = "\(self.recivedNickName.emoji)"
         self.animate()
+    }
+    
+    private func configureData() {
+        if let region = UserInfo.shared.region {
+            self.region = region
+        }
+        model.setData(data: self.recivedNickName)
     }
     
     private func nextVC() {
@@ -122,7 +126,8 @@ final class NicknameSelectViewController: UIViewController {
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configureData()
         setData()
         animate()
         setupView()
