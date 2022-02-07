@@ -43,7 +43,6 @@ final class RegisterViewModel {
             print(accessToken)
             print(result)
 
-            
             switch result {
             case .success(let serverToken):
                 print("serverToken: \(serverToken)")

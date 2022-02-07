@@ -117,6 +117,7 @@ final class RegisterViewController: UIViewController {
                     print("토큰 있음??")
                     print(token.read("kakao", account: "accessToken") ?? "")
                     // Main으로 화면 전환
+
                     self.checkMain()
                 }
             }

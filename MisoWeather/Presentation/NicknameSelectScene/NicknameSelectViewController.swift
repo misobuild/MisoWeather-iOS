@@ -91,9 +91,11 @@ final class NicknameSelectViewController: UIViewController {
     
     @objc private func register() {
         
+        // TODO: 닉네임 처음에 안받아지는거 가져와야함!
         model.register {(result: Result<String, APIError>) in
             
             switch result {
+                
             case .failure(let error):
                 // TODO: - error 처리 필요
                 print("error: \(error)")

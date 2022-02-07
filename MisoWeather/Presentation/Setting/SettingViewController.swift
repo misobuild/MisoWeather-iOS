@@ -78,6 +78,22 @@ class SettingViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    private func deleteAlert() {
+        let alert = UIAlertController(title: "계정을 삭제할까요? 😢",
+            message: "",
+            preferredStyle: UIAlertController.Style.alert)
+    
+        let cancle = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+        let confirm = UIAlertAction(title: "삭제", style: .default) { _ in
+            self.deleteUser()
+        }
+        
+        alert.addAction(cancle)
+        alert.addAction(confirm)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
     private func kakaoLogout() {
         UserApi.shared.logout {(error) in
             if let error = error {
@@ -91,9 +107,35 @@ class SettingViewController: UIViewController {
         }
     }
     
-    // MARK: - LifeCycle Method
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private func deleteUser() {
+        UserApi.shared.unlink {(error) in
+            if let error = error {
+                print(error)
+            }
+            else {
+                print("unlink() success.")
+                self.model.deleteUser {(result: Result<String, APIError>) in
+                    
+                    switch result {
+                    case .success(let serverToken):
+                        DispatchQueue.main.async {
+                            let token = TokenUtils()
+                            token.delete("kakao", account: "accessToken")
+                            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(RegisterViewController())
+                        }
+                        
+                    case .failure(let error):
+                        print("error")
+                    }
+                }
+            }
+        }
+    }
+
+
+// MARK: - LifeCycle Method
+override func viewDidLoad() {
+    super.viewDidLoad()
         setData()
         setupView()
     }
@@ -115,6 +157,9 @@ extension SettingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             logoutAlert()
+        }
+        if indexPath.row == 2 {
+            deleteAlert()
         }
     }
 }

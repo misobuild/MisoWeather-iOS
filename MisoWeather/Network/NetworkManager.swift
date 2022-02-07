@@ -95,4 +95,27 @@ class NetworkManager {
         dataTask.resume()
         dataTasks.append(dataTask)
     }
+    
+    // MARK: - DELETE
+
+    func deleteUser(url: URLRequest, completion: @escaping (Result<String, APIError>) -> Void) {
+        
+        let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let data = data {
+                completion(.success("성공"))
+            } else {
+                completion(.failure(.error))
+            }
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
+                return completion(.failure(.statusCode))
+            }
+            guard self.sucessRange.contains(statusCode) else {
+                return completion(.failure(.error))
+            }
+        }
+        dataTask.resume()
+        dataTasks.append(dataTask)
+    }
 }
