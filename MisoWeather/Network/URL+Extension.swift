@@ -18,6 +18,7 @@ enum Path {
     static var comment = "comment?"
     static var commnetId = "commentId="
     static var size = "size="
+    static var survey = "survey"
 }
 
 extension URL {
@@ -35,6 +36,10 @@ extension URL {
     // 날씨 간략 정보
     static let realtimeForecast = Path.domain + Path.forecast
     
+    // 답변 정보 (Graph)
+    static let survey = Path.domain + Path.survey
+    
     // 한줄평
     static let comment = Path.domain + Path.comment
+    
 }

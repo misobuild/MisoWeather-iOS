@@ -83,6 +83,25 @@ final class MainViewModel {
         }
     }
     
+    func getSurveyData(completion: @escaping () -> Void) {
+        let networkManager = NetworkManager()
+        let urlString = URL.survey
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        
+        if let url =  URL(string: encodedString) {
+            networkManager.getfetchData(url: url) {(result: Result<SurveyModel, APIError>) in
+                switch result {
+                case .success(let model):
+                    print(model)
+                    completion()
+                    
+                case .failure(let error):
+                    debugPrint("error = \(error)")
+                }
+            }
+        }
+    }
+    
     func getCommentData(completion: @escaping () -> Void) {
         let networkManager = NetworkManager()
         let urlString = URL.comment + Path.size + "5"

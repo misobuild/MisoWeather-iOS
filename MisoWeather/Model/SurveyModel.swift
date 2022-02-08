@@ -8,11 +8,16 @@
 struct SurveyModel: Decodable {
     let status: String
     let message: String
-    let data: [ResponseList]
+    let data: ResponseList
 }
 
 struct ResponseList: Decodable {
-    let keyList: [String]
+    let responseList: [Survey]
+}
+
+struct Survey: Decodable {
+    let keyList: [String?]
     let valueList: [Int]
     let surveyId: Int
 }
+

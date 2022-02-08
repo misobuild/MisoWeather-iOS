@@ -60,6 +60,9 @@ final class MainViewController: UIViewController {
                 self.mainScrollView.reviewTableView.tableView.reloadData()
             }
         }
+        model.getSurveyData {
+            print("성공!")
+        }
     }
     
     @objc private func settingVC() {
