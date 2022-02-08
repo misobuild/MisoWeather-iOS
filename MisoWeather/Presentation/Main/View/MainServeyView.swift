@@ -18,13 +18,11 @@ final class MainServeyView: UIView {
         return view
     }()
     
-    lazy var chart1View: ChartView = {
+    lazy var chart2View: ChartView = {
         let view = ChartView()
-        view.titleLabel.text = "숏패딩"
-        view.percentLabel.text = "29%"
         view.rangkLabel.text = "2"
         let layer = CAGradientLayer()
-        layer.frame = CGRect(x: 0, y: 0, width: 60, height: 44)
+        layer.frame = CGRect(x: 0, y: 0, width: 60, height: 50)
         layer.colors = [UIColor.mainColor!.cgColor, UIColor.white.cgColor]
         view.chartView.layer.addSublayer(layer)
         view.percentLabel.snp.makeConstraints {
@@ -33,10 +31,8 @@ final class MainServeyView: UIView {
         return view
     }()
     
-    lazy var chart2View: ChartView = {
+    lazy var chart1View: ChartView = {
         let view = ChartView()
-        view.titleLabel.text = "롱패딩"
-        view.percentLabel.text = "52%"
         view.titleLabel.textColor = .mainColor
         view.percentLabel.textColor = .mainColor
         view.titleLabel.font = .systemFont(ofSize: 20.0, weight: .bold)
@@ -68,8 +64,6 @@ final class MainServeyView: UIView {
     
     lazy var chart3View: ChartView = {
         let view = ChartView()
-        view.titleLabel.text = "코트"
-        view.percentLabel.text = "10%"
         view.rangkLabel.text = "3"
         let layer = CAGradientLayer()
         layer.frame = CGRect(x: 0, y: 0, width: 60, height: 32)
@@ -104,13 +98,13 @@ extension MainServeyView {
             checkView
         ].forEach {addSubview($0)}
         
-        chart1View.snp.makeConstraints {
+        chart2View.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(width * 0.12)
             $0.width.equalTo(57.0)
             $0.height.equalTo(113.0)
-            $0.bottom.equalToSuperview().inset(-23)
+            $0.bottom.equalToSuperview().inset(-15)
         }
-        chart2View.snp.makeConstraints {
+        chart1View.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.width.equalTo(57.0)
             $0.height.equalTo(113.0)

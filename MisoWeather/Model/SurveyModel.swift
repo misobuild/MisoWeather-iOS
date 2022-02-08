@@ -8,14 +8,14 @@
 struct SurveyModel: Decodable {
     let status: String
     let message: String
-    let data: ResponseList
+    let data: Response
 }
 
-struct ResponseList: Decodable {
-    let responseList: [Survey]
+struct Response: Decodable {
+    let responseList: [SurveyList]
 }
 
-struct Survey: Decodable {
+struct SurveyList: Decodable {
     let keyList: [String?]
     let valueList: [Int]
     let surveyId: Int

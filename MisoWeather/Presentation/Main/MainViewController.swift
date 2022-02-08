@@ -61,7 +61,14 @@ final class MainViewController: UIViewController {
             }
         }
         model.getSurveyData {
-            print("성공!")
+            DispatchQueue.main.async {
+                self.mainScrollView.graphView.chart1View.titleLabel.text = self.model.surveyInfo[1].keyList[0]
+                self.mainScrollView.graphView.chart1View.percentLabel.text = String(self.model.surveyInfo[1].valueList[0]) + "%"
+                self.mainScrollView.graphView.chart2View.titleLabel.text = self.model.surveyInfo[1].keyList[1]
+                self.mainScrollView.graphView.chart2View.percentLabel.text = String(self.model.surveyInfo[1].valueList[1]) + "%"
+                self.mainScrollView.graphView.chart3View.titleLabel.text = self.model.surveyInfo[1].keyList[2]
+                self.mainScrollView.graphView.chart3View.percentLabel.text = String(self.model.surveyInfo[1].valueList[2]) + "%"
+            }
         }
     }
     

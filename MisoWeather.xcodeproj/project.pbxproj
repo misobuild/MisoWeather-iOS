@@ -317,17 +317,16 @@
 			children = (
 				E8CE99B827988CFC0095C958 /* MainScrollView.swift */,
 				E8CE99BA27989CD40095C958 /* MainWeatherView.swift */,
-				E8CE99DC279BE56E0095C958 /* MainServeyView.swift */,
 				E8CE99E2279C47EC0095C958 /* MainServeyTitleView.swift */,
+				E8CE99DC279BE56E0095C958 /* MainServeyView.swift */,
 				E8CE99E0279BE6200095C958 /* ChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		E8CE99C0279A8CDE0095C958 /* Weather */ = {
+		E8BFAD4F27B25EE70007E1DC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E8CE99BE279A8CD60095C958 /* WeatherViewController.swift */,
 				E8CE99D0279B07870095C958 /* WeatherScrollView.swift */,
 				E8CE99C3279AC0240095C958 /* HourlyWeatherView.swift */,
 				E8CE99C6279AEB020095C958 /* HourlyWeatherViewCell.swift */,
@@ -338,6 +337,15 @@
 				E8CE99D2279B09DF0095C958 /* ForecastTableViewCell.swift */,
 				E8CE99D4279B13700095C958 /* WindSpeedView.swift */,
 				E8CE99D8279B13940095C958 /* HumidityView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E8CE99C0279A8CDE0095C958 /* Weather */ = {
+			isa = PBXGroup;
+			children = (
+				E8CE99BE279A8CD60095C958 /* WeatherViewController.swift */,
+				E8BFAD4F27B25EE70007E1DC /* View */,
 			);
 			path = Weather;
 			sourceTree = "<group>";

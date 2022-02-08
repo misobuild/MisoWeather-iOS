@@ -68,6 +68,7 @@ extension ChartView {
         titleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(3.0)
+            $0.height.equalTo(20)
         }
         
         percentLabel.snp.makeConstraints {

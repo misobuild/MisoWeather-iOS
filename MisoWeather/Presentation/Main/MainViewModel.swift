@@ -12,6 +12,7 @@ final class MainViewModel {
     private var forecastData: CurrentTempModel?
     private var location: String = ""
     private var commentData: [CommentList] = []
+    private var surveyData: [SurveyList] = []
 
     var memberInfo: MemberModel? {
         self.memberData
@@ -27,6 +28,10 @@ final class MainViewModel {
     
     var commenttInfo: [CommentList] {
         self.commentData
+    }
+    
+    var surveyInfo: [SurveyList] {
+        self.surveyData
     }
     
     func getMemberData(completion: @escaping () -> Void) {
@@ -92,7 +97,7 @@ final class MainViewModel {
             networkManager.getfetchData(url: url) {(result: Result<SurveyModel, APIError>) in
                 switch result {
                 case .success(let model):
-                    print(model)
+                    self.surveyData = model.data.responseList
                     completion()
                     
                 case .failure(let error):
