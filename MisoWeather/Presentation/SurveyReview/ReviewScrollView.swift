@@ -10,6 +10,9 @@ import SnapKit
 
 class ReviewScrollView: UIView {
     
+    let model = SurveyViewModel()
+    var textCount = 0
+    
     let scrollView = UIScrollView()
     let contentView = UIView()
     
@@ -27,7 +30,7 @@ class ReviewScrollView: UIView {
         return view
     }()
 
-    private lazy var textView: UITextView = {
+    lazy var textView: UITextView = {
         let view = UITextView()
         view.backgroundColor = .backgroundColor
         view.delegate = self
@@ -53,29 +56,28 @@ class ReviewScrollView: UIView {
     }()
 
     private lazy var postButton: CustomButton = {
-        let view = CustomButton(type: .post)
-        return view
+        let button = CustomButton(type: .post)
+        button.addTarget(ReviewViewContoller(), action: #selector(ReviewViewContoller.post), for: .touchUpInside)
+        return button
     }()
 
-    private lazy var tableView: ReviewTableView = {
+    lazy var tableView: ReviewTableView = {
         let view = ReviewTableView()
         view.frontColor = UIColor.backgroundColor ?? .gray
         view.backColor = UIColor.white
-        view.row = 20
         return view
     }()
 
     // MARK: - Method
-    @objc private func didTapTextView(_ sender: Any) {
-        self.endEditing(true)
-    }
-
+    
     private func updateCountLabel(characterCount: Int) {
+        textCount = characterCount
         remainCountLabel.text = "\(characterCount)/40"
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        scrollView.delegate = self
         scrollView.showsVerticalScrollIndicator = false
         self.setupView()
     }

@@ -15,7 +15,7 @@ enum Path {
     static var token = "/token"
     static var socialToken = "?socialToken="
     static var forecast = "forecast/"
-    static var comment = "comment?"
+    static var comment = "comment"
     static var commnetId = "commentId="
     static var size = "size="
     static var survey = "survey"
@@ -40,6 +40,8 @@ extension URL {
     static let survey = Path.domain + Path.survey
     
     // 한줄평
-    static let comment = Path.domain + Path.comment
+    static let comment = Path.domain + Path.comment + "?"
     
+    // 한줄평 등록
+    static let registerComment = Path.domain + Path.comment
 }

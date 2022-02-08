@@ -10,6 +10,8 @@ import SnapKit
 
 final class SurveyReviewViewController: UIViewController, UITableViewDelegate {
     
+    let model = MainViewModel()
+    
     // MARK: - SubView
     private lazy var segmentedControl: UISegmentedControl = {
         let segment = UISegmentedControl(items: ["오늘의 사람들", "날씨 한 줄 평"])
@@ -44,10 +46,6 @@ final class SurveyReviewViewController: UIViewController, UITableViewDelegate {
         
         return viewController
     }()
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(QnaViewController(), animated: true)
-    }
     
      private lazy var  reviewViewController: ReviewViewContoller = {
         let viewController = ReviewViewContoller()
@@ -89,12 +87,12 @@ final class SurveyReviewViewController: UIViewController, UITableViewDelegate {
         if let firstVC = dataViewControllers.first {
             pageViewController.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
+        
         setupView()
     }
 }
 
 extension SurveyReviewViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = dataViewControllers.firstIndex(of: viewController) else { return nil }
         let previousIndex = index - 1
