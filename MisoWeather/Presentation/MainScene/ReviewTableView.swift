@@ -32,7 +32,6 @@ final class ReviewTableView: UIView {
         setupView()
         backgroundColor = .backgroundColor
         layer.cornerRadius = 20
-        print(self.commentList)
     }
     
     required init?(coder: NSCoder) {

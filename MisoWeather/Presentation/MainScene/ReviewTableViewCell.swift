@@ -34,7 +34,6 @@ final class ReviewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13.0, weight: .regular)
         label.textColor = .textColor
-        label.text = "부산의 춤추는 레몬호랑이"
         return label
     }()
     
@@ -42,7 +41,6 @@ final class ReviewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 11.0, weight: .thin)
         label.textColor = .textColor
-        label.text = "07:49"
         return label
     }()
     
@@ -51,14 +49,39 @@ final class ReviewTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 13.0, weight: .light)
         label.textColor = .textColor
         label.numberOfLines = 0
-        label.text = "이번주만 지나면 좀 나아진다니까 참아봅시다...오늘 뭔가 오뎅탕 땡기네요"
         return label
     }()
     
     func setData(data: CommentList) {
+        
+        //2022-02-07T13:47:41.269958
+    
+        // 02-07
+        let dateStart = data.createdAt.index(data.createdAt.startIndex, offsetBy: 5)
+        let dateEnd = data.createdAt.index(data.createdAt.endIndex, offsetBy: -16)
+        let dateRange = dateStart..<dateEnd
+        let date = data.createdAt.substring(with: dateRange)
+        
+        var formatter = DateFormatter()
+        formatter.dateFormat = "MM-dd"
+        var currentDate = formatter.string(from: Date())
+        
+        let start = data.createdAt.index(data.createdAt.startIndex, offsetBy: 11)
+        let end = data.createdAt.index(data.createdAt.endIndex, offsetBy: -10)
+        let range = start..<end
+        let time = data.createdAt.substring(with: range)
+        
+        timeLabel.text = time
+        
+        //02-07 == 02-07
+        if date != currentDate {
+            let date = date.replacingOccurrences(of: "-", with: ".")
+            timeLabel.text = date + "." + time
+        }
+        
         nameLabel.text = data.bigScale + "의 " + data.nickname
-        timeLabel.text = data.createdAt
         reviewLabel.text = data.content
+
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
