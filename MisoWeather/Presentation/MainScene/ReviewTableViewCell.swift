@@ -54,34 +54,21 @@ final class ReviewTableViewCell: UITableViewCell {
     
     func setData(data: CommentList) {
         
-        //2022-02-07T13:47:41.269958
-    
-        // 02-07
-        let dateStart = data.createdAt.index(data.createdAt.startIndex, offsetBy: 5)
-        let dateEnd = data.createdAt.index(data.createdAt.endIndex, offsetBy: -16)
-        let dateRange = dateStart..<dateEnd
-        let date = data.createdAt.substring(with: dateRange)
-        
-        var formatter = DateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "MM-dd"
-        var currentDate = formatter.string(from: Date())
-        
-        let start = data.createdAt.index(data.createdAt.startIndex, offsetBy: 11)
-        let end = data.createdAt.index(data.createdAt.endIndex, offsetBy: -10)
-        let range = start..<end
-        let time = data.createdAt.substring(with: range)
-        
+        let currentDate = formatter.string(from: Date())
+                                           
+        let date = data.createdAt[5..<10]
+        let time = data.createdAt[11..<16]
+                                           
         timeLabel.text = time
-        
-        //02-07 == 02-07
+
         if date != currentDate {
             let date = date.replacingOccurrences(of: "-", with: ".")
             timeLabel.text = date + "." + time
         }
-        
         nameLabel.text = data.bigScale + "의 " + data.nickname
         reviewLabel.text = data.content
-
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
