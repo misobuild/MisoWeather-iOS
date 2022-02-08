@@ -1,11 +1,11 @@
 //
-//  RealtimeForecast.swift
+//  CurrentTempModel.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/02/07.
 //
 
-struct CurrentTemp: Decodable {
+struct CurrentTempModel: Decodable {
     let data: Info
     let message: String
     let status: String

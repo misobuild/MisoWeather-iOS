@@ -9,7 +9,7 @@ import Foundation
 final class MainViewModel {
     
     private var memberData: MemberModel?
-    private var forecastData: CurrentTemp?
+    private var forecastData: CurrentTempModel?
     private var location: String = ""
     private var commentData: [CommentList] = []
 
@@ -17,7 +17,7 @@ final class MainViewModel {
         self.memberData
     }
     
-    var forecastInfo: CurrentTemp? {
+    var forecastInfo: CurrentTempModel? {
         self.forecastData
     }
     
@@ -62,7 +62,7 @@ final class MainViewModel {
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         
         if let url =  URL(string: encodedString) {
-            networkManager.getfetchData(url: url) {(result: Result<CurrentTemp, APIError>) in
+            networkManager.getfetchData(url: url) {(result: Result<CurrentTempModel, APIError>) in
                 switch result {
                 case .success(let model):
                     self.forecastData = model

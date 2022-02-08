@@ -1,6 +1,5 @@
 //
-//  URL+Extension
-.swift
+//  URL+Extension.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/15.
