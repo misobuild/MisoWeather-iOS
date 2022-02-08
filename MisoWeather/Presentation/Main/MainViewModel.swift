@@ -51,6 +51,7 @@ final class MainViewModel {
             case .success(let model):
                 self.memberData = model
                 UserDefaults.standard.set(model.data.regionId, forKey: "regionID")
+                UserDefaults.standard.set(model.data.nickname, forKey: "nickName")
                 completion()
                 
             case .failure(let error):

@@ -12,12 +12,6 @@ final class ReviewViewContoller: UIViewController {
     
     let model = SurveyViewModel()
     
-    let name = "유쾌한 막내사자"
-    let textViewPlaceHolder =  """
-                            오늘 날씨에 대한
-                            유쾌한 막내사자님의 느낌은 어떠신가요?
-                            """
-    
     // MARK: - SubView
     lazy var scrollView: ReviewScrollView = {
         let view = ReviewScrollView()
@@ -29,7 +23,8 @@ final class ReviewViewContoller: UIViewController {
     private func setData() {
         model.getCommentData {
             DispatchQueue.main.async {
-                self.scrollView.textView.text = self.scrollView.textViewPlaceHolder
+                self.scrollView.textView.text = self.model.placeHolderText
+                self.scrollView.textView.textColor = .gray
                 self.scrollView.tableView.commentList = self.model.commenttInfo
                 self.scrollView.tableView.tableView.reloadData()
             }
@@ -49,10 +44,13 @@ final class ReviewViewContoller: UIViewController {
     @objc func post() {
         if  scrollView.textCount == 0 {
             showAlert()
-        }
-        model.setCommentData(text: scrollView.textView.text)
-        model.getRegisterComment {
-            self.setData()
+        } else {
+            scrollView.textCount = 0
+            scrollView.updateCountLabel()
+            model.setCommentData(text: scrollView.textView.text)
+            model.postCommentData {
+                self.setData()
+            }
         }
     }
     
@@ -77,7 +75,6 @@ extension ReviewViewContoller {
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         
         view.backgroundColor = .white
-        
         [
             scrollView
         ].forEach {view.addSubview($0)}

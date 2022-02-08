@@ -15,13 +15,7 @@ class ReviewScrollView: UIView {
     
     let scrollView = UIScrollView()
     let contentView = UIView()
-    
-    let name = "유쾌한 막내사자"
-    let textViewPlaceHolder =  """
-                            오늘 날씨에 대한
-                            유쾌한 막내사자님의 느낌은 어떠신가요?
-                            """
-    
+
 //    // MARK: - SubView
     private lazy var textBackgoundView: UIView = {
         let view = UIView()
@@ -35,7 +29,7 @@ class ReviewScrollView: UIView {
         view.backgroundColor = .backgroundColor
         view.delegate = self
         view.font = .systemFont(ofSize: 14)
-        view.text = textViewPlaceHolder
+        view.text = model.placeHolderText
         view.textColor = .systemGray2
         return view
     }()
@@ -70,9 +64,8 @@ class ReviewScrollView: UIView {
 
     // MARK: - Method
     
-    private func updateCountLabel(characterCount: Int) {
-        textCount = characterCount
-        remainCountLabel.text = "\(characterCount)/40"
+    func updateCountLabel(){
+        remainCountLabel.text = "\(textCount)/40"
     }
 
     override init(frame: CGRect) {
@@ -153,14 +146,14 @@ extension ReviewScrollView {
 extension ReviewScrollView: UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == textViewPlaceHolder {
+        if textView.text == model.placeHolderText {
             textView.text = nil
             textView.textColor = .textColor
         }
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = textViewPlaceHolder
+            textView.text =  model.placeHolderText
             textView.textColor = .gray
         }
     }
@@ -169,10 +162,9 @@ extension ReviewScrollView: UITextViewDelegate {
         let currentText = textView.text ?? ""
         guard let stringRagne = Range(range, in: currentText) else {return false}
         let updatedText = currentText.replacingCharacters(in: stringRagne, with: text)
-        let characterCount = updatedText.count
-        guard characterCount <= 40 else { return false }
-        updateCountLabel(characterCount: characterCount)
-
+        textCount = updatedText.count
+        guard textCount <= 40 else { return false }
+        
         return true
     }
 }
