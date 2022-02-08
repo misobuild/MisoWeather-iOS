@@ -43,4 +43,44 @@ final class SettingViewModel {
             }
         }
     }
+    
+    func deleteUser(completion: @escaping (Result<String, APIError>) -> Void) {
+        
+        print("deleteUser 실행")
+        
+        let token = TokenUtils()
+        let userID = token.read("kakao", account: "userID")
+        guard let serverToken = token.read("misoWeather", account: "serverToken") else {return}
+
+        
+        let body: [String: Any] = [
+            "socialId": userID!,
+            "socialType": "kakao"
+        ]
+        
+        let urlString = URL.member
+        print(urlString)
+        
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        guard let url = URL(string: encodedString) else {return}
+        guard let jsonBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return}
+        
+        var requeset: URLRequest = URLRequest(url: url)
+        requeset.httpMethod = URLMethod.delete
+        requeset.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        requeset.addValue(serverToken, forHTTPHeaderField: "serverToken")
+        requeset.httpBody = jsonBody
+        
+        let networkManager = NetworkManager()
+        networkManager.deleteUser(url: requeset) {(result: Result<String, APIError>) in
+            switch result {
+            case .success(let serverToken):
+                print("유저삭제: \(serverToken)")
+                completion(.success(""))
+                
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

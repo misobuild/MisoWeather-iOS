@@ -11,7 +11,7 @@ import SnapKit
 final class RegionSelectListView: UIView {
     
     var regionList: [RegionList] = []
-    var selectRegion = "선택 안 함"
+    var selectRegion = ""
     var regionID = 0
     
     // MARK: - Subviews

@@ -47,10 +47,9 @@ final class MainScrollView: UIView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 19.0, weight: .heavy)
+        label.font = .systemFont(ofSize: 20.0, weight: .heavy)
         label.textColor = .black
         label.numberOfLines = 0
-        label.text = "부산의 귀여운 막내병아리님 🐣"
         return label
     }()
     
@@ -73,7 +72,7 @@ final class MainScrollView: UIView {
         return view
     }()
     
-    private lazy var graphView: MainServeyView = {
+    lazy var graphView: MainServeyView = {
         let view = MainServeyView()
         return view
     }()
@@ -81,15 +80,13 @@ final class MainScrollView: UIView {
     private lazy var reviewTitleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = """
-                    오늘 날씨 어때요
-                    """
+        label.text = "오늘 날씨 어때요?"
         label.textColor = .textColor
         label.font = .systemFont(ofSize: 18.0, weight: .bold)
         return label
     }()
     
-    private lazy var reviewTableView: ReviewTableView = {
+    lazy var reviewTableView: ReviewTableView = {
         let view = ReviewTableView()
         return view
     }()
@@ -133,26 +130,26 @@ extension MainScrollView {
         contentView.snp.makeConstraints {
             $0.edges.equalToSuperview()
             $0.width.equalTo(width)
-            $0.height.equalTo(1000)
+            $0.height.equalTo(950)
         }
   
         misoLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(30.0)
-            $0.leading.equalToSuperview().inset(width * 0.05)
+            $0.leading.equalToSuperview().inset(width * 0.06)
         }
         
         addLocationButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(width * 0.16)
+            $0.trailing.equalToSuperview().inset(width * 0.14)
             $0.top.equalTo(misoLabel)
-            $0.width.equalTo(width * 0.05)
-            $0.height.equalTo(width * 0.05)
+            $0.width.equalTo(width * 0.06)
+            $0.height.equalTo(width * 0.06)
         }
         
         userButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(width * 0.05)
+            $0.trailing.equalToSuperview().inset(width * 0.06)
             $0.top.equalTo(misoLabel)
-            $0.width.equalTo(width * 0.05)
-            $0.height.equalTo(width * 0.05)
+            $0.width.equalTo(width * 0.06)
+            $0.height.equalTo(width * 0.06)
         }
         
         greetingLabel.snp.makeConstraints {
@@ -176,33 +173,33 @@ extension MainScrollView {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(weatherView.snp.bottom).offset(15.0)
             $0.width.equalTo(width - (width * 0.1))
-            $0.height.equalTo(700)
+            $0.height.equalTo(680)
         }
         
         serveyTitleView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(serveyBackView).inset(30.0)
-            $0.width.equalTo(width * 0.77)
+            $0.top.equalTo(serveyBackView).inset(25.0)
+            $0.width.equalTo(width * 0.84)
             $0.height.equalTo(height * 0.03)
         }
            
         graphView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(serveyTitleView.snp.bottom).offset(10.0)
-            $0.width.equalTo(width * 0.8)
+            $0.top.equalTo(serveyTitleView.snp.bottom).offset(15.0)
+            $0.width.equalTo(width * 0.84)
             $0.height.equalTo(128.0)
         }
         
         reviewTitleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(width * 0.12)
-            $0.top.equalTo(graphView.snp.bottom).offset(38.0)
+            $0.leading.equalToSuperview().inset(width * 0.10)
+            $0.top.equalTo(graphView.snp.bottom).offset(30.0)
         }
         
         reviewTableView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(reviewTitleLabel.snp.bottom).offset(10.0)
-            $0.width.equalTo(width * 0.82)
-            $0.height.equalTo(360)
+            $0.top.equalTo(reviewTitleLabel.snp.bottom).offset(15.0)
+            $0.width.equalTo(width * 0.87)
+            $0.height.equalTo(400)
         }
     }
 }

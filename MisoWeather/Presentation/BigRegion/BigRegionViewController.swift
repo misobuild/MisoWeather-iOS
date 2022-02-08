@@ -11,10 +11,10 @@ import KakaoSDKCommon
 
 final class BigRegionViewController: UIViewController {
     
-    private let model = BigRegionModel()
+    private let model = BigRegionViewModel()
     private var midScaleRegionList: [RegionList] = []
     
-    private var selectRegion: String = "서울"
+    private var selectRegion: String = ""
     private var selectRegionList = ["서울", "경기", "인천", "대전", "세종", "충북", "충남", "광주", "전북", "전남", "대구", "부산", "울산", "경북", "경남", "강원", "제주"]
     
     // MARK: - subviews
@@ -43,6 +43,16 @@ final class BigRegionViewController: UIViewController {
     }()
     
     // MARK: - Private Method
+    private func showAlert() {
+        let alert = UIAlertController(title: "지역을 선택해 주세요.",
+                                      message: "",
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        let confirm = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(confirm)
+        present(alert, animated: true, completion: nil)
+    }
+    
     @objc private func nextVC() {
         let nextVC = MidRegionListViewController()
         nextVC.delegate = self
@@ -51,6 +61,9 @@ final class BigRegionViewController: UIViewController {
     
     // 2단계 지역 리스트 가져오기
     @objc private func fetchData() {
+        if selectRegion == "" {
+            self.showAlert()
+        }
         model.fetchRegionData(region: selectRegion) {
             self.midScaleRegionList = self.model.midleRegionList
             DispatchQueue.main.async {
@@ -87,12 +100,6 @@ extension BigRegionViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RegionCollectionViewCell", for: indexPath) as? BigRegionCollectionViewCell
         let region = selectRegionList[indexPath.row]
         cell?.setup(region: region)
-        
-        if indexPath.item == 0 {
-            cell?.isSelected = true
-            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
-        }
-        
         return cell ?? BigRegionCollectionViewCell()
     }
 }

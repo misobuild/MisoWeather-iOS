@@ -10,8 +10,7 @@ import SnapKit
 
 final class MidRegionListViewController: UIViewController {
     weak var delegate: RegionSendDelegate?
-    
-    private let model = RegionSelectModel()
+    private let model = RegionSelectViewModel()
     
     private var midScaleRegionList: [RegionList] = []
     private var smallScaleRegionList: [RegionList] = []
@@ -40,23 +39,37 @@ final class MidRegionListViewController: UIViewController {
         }
     }
     
+    private func showAlert() {
+        let alert = UIAlertController(title: "지역을 선택해 주세요.",
+                                      message: "",
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        let confirm = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(confirm)
+        present(alert, animated: true, completion: nil)
+    }
+    
     @objc private func fetchData() {
         var urlString = ""
-        if regionSelectListView.selectRegion == midScaleRegionList.first?.smallScale {
-            // 닉네임 받기
-            urlString = URL.nickname
-            model.fetchNicknameData(urlString: urlString) {
-                DispatchQueue.main.async {
-                    self.nextVC()
-                }
-            }
+        if regionSelectListView.selectRegion == "" {
+            self.showAlert()
         } else {
-            // small region 받기
-            urlString = URL.region + midScaleRegionList[0].bigScale + "/" + regionSelectListView.selectRegion
-            model.fetchMiddleRegionData(urlString: urlString) {
-                self.smallScaleRegionList = self.model.midleRegionList
-                DispatchQueue.main.async {
-                    self.nextVC()
+            if regionSelectListView.selectRegion == midScaleRegionList.first?.smallScale {
+                // 닉네임 받기
+                urlString = URL.nickname
+                model.fetchNicknameData(urlString: urlString) {
+                    DispatchQueue.main.async {
+                        self.nextVC()
+                    }
+                }
+            } else {
+                // small region 받기
+                urlString = URL.region + midScaleRegionList[0].bigScale + "/" + regionSelectListView.selectRegion
+                model.fetchMiddleRegionData(urlString: urlString) {
+                    self.smallScaleRegionList = self.model.midleRegionList
+                    DispatchQueue.main.async {
+                        self.nextVC()
+                    }
                 }
             }
         }

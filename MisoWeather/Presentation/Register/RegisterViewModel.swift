@@ -16,7 +16,6 @@ final class RegisterViewModel {
     }
     
     func token(completion: @escaping (Result<String, APIError>) -> Void) {
-        print("token() 실행")
         let token = TokenUtils()
         guard let accessToken = token.read("kakao", account: "accessToken") else {return}
         let userID = token.read("kakao", account: "userID")
@@ -40,10 +39,6 @@ final class RegisterViewModel {
         
         let networkManager = NetworkManager()
         networkManager.postRegister(url: requeset) {(result: Result<String, APIError>) in
-            print(accessToken)
-            print(result)
-
-            
             switch result {
             case .success(let serverToken):
                 print("serverToken: \(serverToken)")

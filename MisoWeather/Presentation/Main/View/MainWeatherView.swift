@@ -10,7 +10,7 @@ import SnapKit
 
 final class MainWeatherView: UIView {
     // MARK: - subviews
-    private lazy var regionLocationLabel: RegionLocationLabel = {
+    lazy var regionLocationLabel: RegionLocationLabel = {
         let view = RegionLocationLabel()
         return view
     }()
@@ -23,16 +23,15 @@ final class MainWeatherView: UIView {
         return button
     }()
     
-    private lazy var emojiLabel: UILabel = {
+   lazy var emojiLabel: UILabel = {
         let label = UILabel()
-//        label.backgroundColor = .red
         label.font = .systemFont(ofSize: 20.0)
         label.textColor = .textColor
         label.text = "🌦"
         return label
     }()
     
-    private lazy var tempLabel: UILabel = {
+    lazy var tempLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .medium)
         label.textColor = .textColor
@@ -64,7 +63,7 @@ extension MainWeatherView {
         
         regionLocationLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(width * 0.03)
+            $0.leading.equalToSuperview().inset(width * 0.01)
         }
         
         emojiLabel.snp.makeConstraints {

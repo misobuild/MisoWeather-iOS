@@ -19,6 +19,7 @@ final class MainViewController: UIViewController {
         return view
         
     }()
+    
     // MARK: - Private Method
     @objc private func nextWeatherVC() {
         let nextVC = WeatherViewController()
@@ -30,6 +31,14 @@ final class MainViewController: UIViewController {
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+    private func setWeatherData() {
+        if let info = model.forecastInfo {
+            mainScrollView.weatherView.regionLocationLabel.regionLabel.text = model.locationInfo
+            mainScrollView.weatherView.emojiLabel.text = info.data.forecast.sky
+            mainScrollView.weatherView.tempLabel.text = info.data.forecast.temperature + "°"
+        }
+    }
+    
     private func setData() {
         self.mainScrollView.userButton.addTarget(self, action: #selector(settingVC), for: .touchUpInside)
         
@@ -38,6 +47,27 @@ final class MainViewController: UIViewController {
                 if let data = self.model.memberInfo {
                     self.mainScrollView.titleLabel.text = "\(data.data.regionName)의 \(data.data.nickname)님\(data.data.emoji)"
                 }
+            }
+            self.model.getCurrentTempData {
+                DispatchQueue.main.async {
+                    self.setWeatherData()
+                }
+            }
+        }
+        model.getCommentData {
+            DispatchQueue.main.async {
+                self.mainScrollView.reviewTableView.commentList = self.model.commenttInfo
+                self.mainScrollView.reviewTableView.tableView.reloadData()
+            }
+        }
+        model.getSurveyData {
+            DispatchQueue.main.async {
+                self.mainScrollView.graphView.chart1View.titleLabel.text = self.model.surveyInfo[1].keyList[0]
+                self.mainScrollView.graphView.chart1View.percentLabel.text = String(self.model.surveyInfo[1].valueList[0]) + "%"
+                self.mainScrollView.graphView.chart2View.titleLabel.text = self.model.surveyInfo[1].keyList[1]
+                self.mainScrollView.graphView.chart2View.percentLabel.text = String(self.model.surveyInfo[1].valueList[1]) + "%"
+                self.mainScrollView.graphView.chart3View.titleLabel.text = self.model.surveyInfo[1].keyList[2]
+                self.mainScrollView.graphView.chart3View.percentLabel.text = String(self.model.surveyInfo[1].valueList[2]) + "%"
             }
         }
     }
