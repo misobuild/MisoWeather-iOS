@@ -13,12 +13,10 @@ final class ReviewTableView: UIView {
     var frontColor = UIColor.white
     var backColor = UIColor.backgroundColor
     var commentList: [CommentList] = []
-    var row = 5
 
     // MARK: - subView
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.isScrollEnabled = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 80

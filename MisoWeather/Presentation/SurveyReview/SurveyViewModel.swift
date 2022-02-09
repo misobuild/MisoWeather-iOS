@@ -41,7 +41,7 @@ final class SurveyViewModel {
         guard let serverToken =  token.read("misoWeather", account: "serverToken") else {return}
         
         let body: [String: Any] = [
-            "content":  postData
+            "content": postData
         ]
         
         guard let jsonBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return}
@@ -69,7 +69,7 @@ final class SurveyViewModel {
     
     func getCommentData(completion: @escaping () -> Void) {
         let networkManager = NetworkManager()
-        let urlString = URL.comment + Path.size + "5"
+        let urlString = URL.comment + Path.size + "20"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         
         if let url =  URL(string: encodedString) {

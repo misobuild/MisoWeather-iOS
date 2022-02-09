@@ -68,9 +68,7 @@ final class RegisterViewController: UIViewController {
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
-        
     }
-
     
     @objc private func nextVC() {
         self.navigationController?.pushViewController(BigRegionViewController(), animated: true)
@@ -163,6 +161,7 @@ final class RegisterViewController: UIViewController {
     
     // 처음 앱 실행 시 화면 분기에 대해서
     private func checkMain() {
+        print("checkMain 실행 ")
         model.token {(result: Result<String, APIError>) in
             
             switch result {

@@ -51,7 +51,7 @@ class ReviewScrollView: UIView {
 
     private lazy var postButton: CustomButton = {
         let button = CustomButton(type: .post)
-        button.addTarget(ReviewViewContoller(), action: #selector(ReviewViewContoller.post), for: .touchUpInside)
+       // button.addTarget(ReviewViewContoller(), action: #selector(post), for: .touchUpInside)
         return button
     }()
 
@@ -63,8 +63,7 @@ class ReviewScrollView: UIView {
     }()
 
     // MARK: - Method
-    
-    func updateCountLabel(){
+    func updateCountLabel() {
         remainCountLabel.text = "\(textCount)/40"
     }
 
