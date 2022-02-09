@@ -22,4 +22,5 @@ struct CommentList: Decodable {
     let content: String
     let bigScale: String
     let nickname: String
+    let emoji: String
 }

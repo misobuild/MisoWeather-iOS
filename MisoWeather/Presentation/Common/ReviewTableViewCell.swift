@@ -26,7 +26,6 @@ final class ReviewTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 34.0)
         label.textColor = .textColor
-        label.text = "🐯"
         return label
     }()
     
@@ -69,6 +68,7 @@ final class ReviewTableViewCell: UITableViewCell {
         }
         nameLabel.text = data.bigScale + "의 " + data.nickname
         reviewLabel.text = data.content
+        emojiLabel.text = data.emoji
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
