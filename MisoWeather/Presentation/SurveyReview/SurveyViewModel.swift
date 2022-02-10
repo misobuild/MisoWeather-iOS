@@ -9,6 +9,7 @@ import Foundation
 
 final class SurveyViewModel {
     
+    private var row = 15
     private var placeHolder =
                     """
                 오늘 날씨에 대한
@@ -59,7 +60,7 @@ final class SurveyViewModel {
         requeset.httpBody = jsonBody
         
         let networkManager = NetworkManager()
-        networkManager.headerTokenRequsetData(url: requeset) {(result: Result<String, APIError>) in
+        networkManager.headerTokenRequsetData(url: requeset) {(result: Result<StatusModel, APIError>) in
             switch result {
             case .success:
                 completion()
@@ -73,7 +74,7 @@ final class SurveyViewModel {
     
     func getCommentData(completion: @escaping () -> Void) {
         let networkManager = NetworkManager()
-        let urlString = URL.comment + Path.size + "7"
+        let urlString = URL.comment + Path.size + "\(row)"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         
         if let url =  URL(string: encodedString) {
@@ -82,6 +83,7 @@ final class SurveyViewModel {
                 case .success(let model):
                     self.commentData = model.data.commentList
                     self.lastID = model.data.commentList.last!.id
+                    self.hasNext = model.data.hasNext
                     
                     completion()
                     
@@ -94,7 +96,7 @@ final class SurveyViewModel {
     
     func getMoreCommentData(completion: @escaping () -> Void) {
         let networkManager = NetworkManager()
-        let urlString = URL.comment + Path.commnetId + "\(lastID)&" + Path.size + "7"
+        let urlString = URL.comment + Path.commnetId + "\(lastID)&" + Path.size + "\(row)"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         
         if let url =  URL(string: encodedString) {

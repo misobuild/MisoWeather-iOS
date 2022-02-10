@@ -9,10 +9,7 @@ import UIKit
 import SnapKit
 
 final class ReviewTableView: UIView {
-    
-    let model = SurveyViewModel()
-    var isMoreData = false
-    
+
     var frontColor = UIColor.white
     var backColor = UIColor.backgroundColor
     var commentList: [CommentList] = []

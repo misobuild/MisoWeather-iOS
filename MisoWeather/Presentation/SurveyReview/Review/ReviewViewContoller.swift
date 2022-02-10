@@ -14,6 +14,8 @@ final class ReviewViewContoller: UIViewController {
     var textCount = 0
 
     // MARK: - SubView
+    let refreshControl = UIRefreshControl()
+    
     private lazy var textBackgoundView: UIView = {
         let view = UIView()
         view.backgroundColor = .backgroundColor
@@ -59,14 +61,14 @@ final class ReviewViewContoller: UIViewController {
         view.frontColor = UIColor.backgroundColor ?? .gray
         view.tableView.delegate = self
         view.backColor = UIColor.white
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        view.tableView.refreshControl = refreshControl
 
         return view
     }()
     
     // MARK: - Private Method
-    private func updateCountLabel() {
-        remainCountLabel.text = "\(textCount)/40"
-    }
     
     private func setData() {
         model.getCommentData {
@@ -77,6 +79,21 @@ final class ReviewViewContoller: UIViewController {
                 self.tableView.tableView.reloadData()
             }
         }
+    }
+    
+    private func updateCountLabel() {
+        remainCountLabel.text = "\(textCount)/40"
+    }
+    
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        
+        return footerView
     }
     
     private func showAlert() {
@@ -107,26 +124,15 @@ final class ReviewViewContoller: UIViewController {
         view.endEditing(true)
     }
     
-    // spinnerView
-    private func createSpinnerFooter() -> UIView {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
-        
-        let spinner = UIActivityIndicatorView()
-        spinner.center = footerView.center
-        footerView.addSubview(spinner)
-        spinner.startAnimating()
-        
-        return footerView
+    @objc private func refresh() {
+        refreshControl.endRefreshing()
+        setData()
     }
     
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        scrollView.delegate = self
-//        scrollView.showsVerticalScrollIndicator = false
-        self.setupView()
-
+        setupView()
         setData()
         setupView()
         
@@ -217,7 +223,6 @@ extension ReviewViewContoller: UITableViewDelegate {
         let boundsHeight = tableView.tableView.bounds.size.height // 테이블 뷰의 고정된 높이 ex) 600
         let offsetY = tableView.tableView.contentOffset.y // 스크롤한 높이 ex) 500
         let contentHeight = tableView.tableView.contentSize.height // 테이블 뷰의 전체 높이 ex) 1000
-
 
         //  보이는크기 + 스크롤한크기가 테이블 전체 크기를 넘어서면 데이터 가져오기
         if boundsHeight + offsetY > contentHeight {
