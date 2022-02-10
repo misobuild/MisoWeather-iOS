@@ -17,6 +17,8 @@ final class SurveyViewModel {
     private var surveyData: [SurveyList] = []
     private var commentData: [CommentList] = []
     private var postData = ""
+    private var lastID = 0
+    private var hasNext = true
 
     var surveyInfo: [SurveyList] {
         self.surveyData
@@ -29,6 +31,9 @@ final class SurveyViewModel {
     }
     var commnetText: String {
         self.postData
+    }
+    var isMoreData: Bool {
+        self.hasNext
     }
     
     func setCommentData(text: String) {
@@ -54,14 +59,13 @@ final class SurveyViewModel {
         requeset.httpBody = jsonBody
         
         let networkManager = NetworkManager()
-        networkManager.getRequsetData(url: requeset) {(result: Result<CommentModel, APIError>) in
+        networkManager.headerTokenRequsetData(url: requeset) {(result: Result<String, APIError>) in
             switch result {
-            case .success(let model):
-                print(model)
+            case .success:
                 completion()
                 
             case .failure(let error):
-                debugPrint("error = \(error)")
+                debugPrint("PostCommentData error = \(error)")
                 completion()
             }
         }
@@ -69,7 +73,7 @@ final class SurveyViewModel {
     
     func getCommentData(completion: @escaping () -> Void) {
         let networkManager = NetworkManager()
-        let urlString = URL.comment + Path.size + "20"
+        let urlString = URL.comment + Path.size + "7"
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         
         if let url =  URL(string: encodedString) {
@@ -77,10 +81,33 @@ final class SurveyViewModel {
                 switch result {
                 case .success(let model):
                     self.commentData = model.data.commentList
+                    self.lastID = model.data.commentList.last!.id
+                    
                     completion()
                     
                 case .failure(let error):
-                    debugPrint("error = \(error)")
+                    debugPrint("getCommentData error = \(error)")
+                }
+            }
+        }
+    }
+    
+    func getMoreCommentData(completion: @escaping () -> Void) {
+        let networkManager = NetworkManager()
+        let urlString = URL.comment + Path.commnetId + "\(lastID)&" + Path.size + "7"
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        
+        if let url =  URL(string: encodedString) {
+            networkManager.getfetchData(url: url) {(result: Result<CommentModel, APIError>) in
+                switch result {
+                case .success(let model):
+                    self.commentData.append(contentsOf: model.data.commentList)
+                    self.lastID = model.data.commentList.last!.id
+                    self.hasNext = model.data.hasNext
+                    completion()
+                    
+                case .failure(let error):
+                    debugPrint("getCommentData error = \(error)")
                 }
             }
         }

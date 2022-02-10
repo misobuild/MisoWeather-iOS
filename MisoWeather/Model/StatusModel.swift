@@ -6,6 +6,6 @@
 //
 
 struct StatusModel: Codable {
-    let httpStatus: String
+    let status: String
     let message: String
 }

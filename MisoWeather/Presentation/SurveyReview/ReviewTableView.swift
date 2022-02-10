@@ -10,6 +10,9 @@ import SnapKit
 
 final class ReviewTableView: UIView {
     
+    let model = SurveyViewModel()
+    var isMoreData = false
+    
     var frontColor = UIColor.white
     var backColor = UIColor.backgroundColor
     var commentList: [CommentList] = []
@@ -35,6 +38,19 @@ final class ReviewTableView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Private Method
+    
+    // spinnerView
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: 100))
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        
+        return footerView
+    }
 }
 
 extension ReviewTableView: UITableViewDelegate {
@@ -45,8 +61,8 @@ extension ReviewTableView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell
-        cell?.selectionStyle = .none
         cell?.backView.backgroundColor = frontColor
+        cell?.selectionStyle = .none
         cell?.backgroundColor = backColor
         cell?.setData(data: commentList[indexPath.row])
         return cell ?? UITableViewCell()

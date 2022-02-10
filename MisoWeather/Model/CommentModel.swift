@@ -6,9 +6,9 @@
 //
 
 struct CommentModel: Decodable {
-    let data: Comment
-    let message: String
     let status: String
+    let message: String
+    let data: Comment
 }
 
 struct Comment: Decodable {

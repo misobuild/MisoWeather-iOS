@@ -93,7 +93,6 @@ class SettingViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    
     private func kakaoLogout() {
         UserApi.shared.logout {(error) in
             if let error = error {

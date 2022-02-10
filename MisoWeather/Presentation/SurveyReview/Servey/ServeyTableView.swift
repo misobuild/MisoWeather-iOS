@@ -54,7 +54,6 @@ extension ServeyTableView: UITableViewDelegate {
 
 extension ServeyTableView: UITableViewDataSource {
     
-    
 }
 
 extension ServeyTableView {

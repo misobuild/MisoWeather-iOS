@@ -1,22 +1,19 @@
 //
-//  ReviewScrollView.swift
+//  ReviewViewContoller.swift
 //  MisoWeather
 //
-//  Created by jiinheo on 2022/01/25.
+//  Created by jiinheo on 2022/01/24.
 //
 
 import UIKit
 import SnapKit
 
-class ReviewScrollView: UIView {
-    
+final class ReviewViewContoller: UIViewController {
+    var isScrollEnd = false
     let model = SurveyViewModel()
     var textCount = 0
-    
-    let scrollView = UIScrollView()
-    let contentView = UIView()
 
-//    // MARK: - SubView
+    // MARK: - SubView
     private lazy var textBackgoundView: UIView = {
         let view = UIView()
         view.backgroundColor = .backgroundColor
@@ -27,6 +24,8 @@ class ReviewScrollView: UIView {
     lazy var textView: UITextView = {
         let view = UITextView()
         view.backgroundColor = .backgroundColor
+        view.isScrollEnabled = true
+        view.showsVerticalScrollIndicator = true
         view.delegate = self
         view.font = .systemFont(ofSize: 14)
         view.text = model.placeHolderText
@@ -51,36 +50,92 @@ class ReviewScrollView: UIView {
 
     private lazy var postButton: CustomButton = {
         let button = CustomButton(type: .post)
-       // button.addTarget(ReviewViewContoller(), action: #selector(post), for: .touchUpInside)
+        button.addTarget(ReviewViewContoller(), action: #selector(ReviewViewContoller.post), for: .touchUpInside)
         return button
     }()
 
     lazy var tableView: ReviewTableView = {
         let view = ReviewTableView()
         view.frontColor = UIColor.backgroundColor ?? .gray
+        view.tableView.delegate = self
         view.backColor = UIColor.white
+
         return view
     }()
-
-    // MARK: - Method
-    func updateCountLabel() {
+    
+    // MARK: - Private Method
+    private func updateCountLabel() {
         remainCountLabel.text = "\(textCount)/40"
     }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        scrollView.delegate = self
-        scrollView.showsVerticalScrollIndicator = false
-        self.setupView()
+    
+    private func setData() {
+        model.getCommentData {
+            DispatchQueue.main.async {
+                self.textView.text = self.model.placeHolderText
+                self.textView.textColor = .gray
+                self.tableView.commentList = self.model.commenttInfo
+                self.tableView.tableView.reloadData()
+            }
+        }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func showAlert() {
+        let alert = UIAlertController(title: "한줄평을 남겨주세요",
+                                      message: "",
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        let confirm = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(confirm)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func post() {
+        if  textCount == 0 {
+            showAlert()
+        } else {
+            textCount = 0
+            updateCountLabel()
+            didTapTextView((Any).self)
+            model.setCommentData(text: textView.text)
+            model.postCommentData {
+                self.setData()
+            }
+        }
+    }
+
+    @objc private func didTapTextView(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
+    // spinnerView
+    private func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        
+        return footerView
+    }
+    
+    // MARK: - LifeCycle Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        scrollView.delegate = self
+//        scrollView.showsVerticalScrollIndicator = false
+        self.setupView()
+
+        setData()
+        setupView()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapTextView(_:)))
+        view.addGestureRecognizer(tapGesture)
     }
 }
 
-extension ReviewScrollView {
-    
+extension ReviewViewContoller {
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         [
@@ -90,20 +145,7 @@ extension ReviewScrollView {
             lineView,
             postButton,
             tableView
-        ].forEach {contentView.addSubview($0)}
-        
-        scrollView.addSubview(contentView)
-        addSubview(scrollView)
-        
-        scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.width.equalTo(width)
-            $0.height.equalTo(height * 1.35)
-        }
+        ].forEach {view.addSubview($0)}
         
         textBackgoundView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(26)
@@ -142,7 +184,7 @@ extension ReviewScrollView {
     }
 }
 
-extension ReviewScrollView: UITextViewDelegate {
+extension ReviewViewContoller: UITextViewDelegate {
 
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == model.placeHolderText {
@@ -165,5 +207,36 @@ extension ReviewScrollView: UITextViewDelegate {
         guard textCount <= 40 else { return false }
         
         return true
+    }
+}
+
+extension ReviewViewContoller: UITableViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let boundsHeight = tableView.tableView.bounds.size.height // 테이블 뷰의 고정된 높이 ex) 600
+        let offsetY = tableView.tableView.contentOffset.y // 스크롤한 높이 ex) 500
+        let contentHeight = tableView.tableView.contentSize.height // 테이블 뷰의 전체 높이 ex) 1000
+
+
+        //  보이는크기 + 스크롤한크기가 테이블 전체 크기를 넘어서면 데이터 가져오기
+        if boundsHeight + offsetY > contentHeight {
+            self.tableView.tableView.tableFooterView = createSpinnerFooter()
+            if model.isMoreData {
+                if !isScrollEnd {
+                    self.isScrollEnd = true
+                    model.getMoreCommentData {
+                        DispatchQueue.main.async {
+                            self.tableView.tableView.tableFooterView = nil
+                            self.tableView.commentList = self.model.commenttInfo
+                            self.tableView.tableView.reloadData()
+                            self.isScrollEnd = false
+                        }
+                    }
+                }
+            } else {
+                self.tableView.tableView.tableFooterView = nil
+            }
+        }
     }
 }
