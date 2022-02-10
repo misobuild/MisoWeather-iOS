@@ -43,7 +43,7 @@ class NetworkManager {
         dataTasks.append(dataTask)
     }
     
-    func getRequsetData<T: Decodable>(url: URLRequest, completion: @escaping (Result<T, APIError>) -> Void) {
+    func headerTokenRequsetData<T: Decodable>(url: URLRequest, completion: @escaping (Result<T, APIError>) -> Void) {
         
         let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             
@@ -67,7 +67,7 @@ class NetworkManager {
     }
     
     // MARK: - POST
-    func postRegister(url: URLRequest, completion: @escaping (Result<String, APIError>) -> Void) {
+    func postRegister<T: Decodable>(url: URLRequest, completion: @escaping (Result<T, APIError>) -> Void) {
         
         let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
             
@@ -82,7 +82,7 @@ class NetworkManager {
             }
             if let httpResponse = response as? HTTPURLResponse {
                 if let serverToken =  httpResponse.value(forHTTPHeaderField: "serverToken") {
-                    completion(.success(serverToken))
+                    completion(.success(serverToken as! T))
                     
                 } else {
                     if let resultString = String(data: data, encoding: .utf8) {

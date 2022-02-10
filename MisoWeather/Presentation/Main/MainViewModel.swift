@@ -46,11 +46,12 @@ final class MainViewModel {
         requeset.httpMethod = URLMethod.get
         requeset.addValue(serverToken, forHTTPHeaderField: "serverToken")
         
-        networkManager.getRequsetData(url: requeset) {(result: Result<MemberModel, APIError>) in
+        networkManager.headerTokenRequsetData(url: requeset) {(result: Result<MemberModel, APIError>) in
             switch result {
             case .success(let model):
                 self.memberData = model
                 UserDefaults.standard.set(model.data.regionId, forKey: "regionID")
+                UserDefaults.standard.set(model.data.nickname, forKey: "nickName")
                 completion()
                 
             case .failure(let error):

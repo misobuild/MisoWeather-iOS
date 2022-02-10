@@ -130,14 +130,14 @@ extension WeatherScrollView {
             $0.top.equalTo(hourlyWeatherView.snp.bottom).offset(10.0)
             $0.height.equalTo(105.0)
             $0.width.equalTo(width * 0.42)
-            $0.left.equalToSuperview().inset(width * 0.07)
+            $0.leading.equalToSuperview().inset(width * 0.07)
         }
         
         precipitationView.snp.makeConstraints {
             $0.top.equalTo(particulateMatterView)
             $0.height.equalTo(105.0)
             $0.width.equalTo(width * 0.42)
-            $0.right.equalToSuperview().inset(width * 0.07)
+            $0.trailing.equalToSuperview().inset(width * 0.07)
         }
         
         forecastTableView.snp.makeConstraints {
@@ -151,14 +151,14 @@ extension WeatherScrollView {
             $0.top.equalTo(forecastTableView.snp.bottom).offset(10.0)
             $0.height.equalTo(105.0)
             $0.width.equalTo(width * 0.42)
-            $0.left.equalToSuperview().inset(width * 0.07)
+            $0.leading.equalToSuperview().inset(width * 0.07)
         }
         
         humidityView.snp.makeConstraints {
             $0.top.equalTo(windSpeedView)
             $0.height.equalTo(105.0)
             $0.width.equalTo(width * 0.42)
-            $0.right.equalToSuperview().inset(width * 0.07)
+            $0.trailing.equalToSuperview().inset(width * 0.07)
         }
     }
 }
