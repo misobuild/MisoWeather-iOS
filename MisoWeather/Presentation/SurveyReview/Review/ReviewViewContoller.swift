@@ -113,7 +113,8 @@ final class ReviewViewContoller: UIViewController {
             textCount = 0
             updateCountLabel()
             didTapTextView((Any).self)
-            model.setCommentData(text: textView.text)
+            let textString = textView.text.replacingOccurrences(of: "\n", with: " ")
+            model.setCommentData(text: textString)
             model.postCommentData {
                 self.setData()
             }
@@ -210,8 +211,10 @@ extension ReviewViewContoller: UITextViewDelegate {
         guard let stringRagne = Range(range, in: currentText) else {return false}
         let updatedText = currentText.replacingCharacters(in: stringRagne, with: text)
         textCount = updatedText.count
-        guard textCount <= 40 else { return false }
-        
+        updateCountLabel()
+        guard textCount < 40 else {
+            return false
+        }
         return true
     }
 }
