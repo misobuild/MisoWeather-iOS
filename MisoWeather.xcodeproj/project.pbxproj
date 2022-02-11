@@ -45,6 +45,7 @@
 		E8BFAD4E27B2512E0007E1DC /* SurveyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD4D27B2512E0007E1DC /* SurveyModel.swift */; };
 		E8BFAD5327B271D20007E1DC /* SurveyReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD5227B271D20007E1DC /* SurveyReviewViewModel.swift */; };
 		E8BFAD5727B5FDB10007E1DC /* SurveyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD5627B5FDB10007E1DC /* SurveyViewModel.swift */; };
+		E8BFAD5927B6264D0007E1DC /* UserSurveyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD5827B6264D0007E1DC /* UserSurveyModel.swift */; };
 		E8CE99B927988CFC0095C958 /* MainScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99B827988CFC0095C958 /* MainScrollView.swift */; };
 		E8CE99BB27989CD40095C958 /* MainWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BA27989CD40095C958 /* MainWeatherView.swift */; };
 		E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */; };
@@ -152,6 +153,7 @@
 		E8BFAD4D27B2512E0007E1DC /* SurveyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyModel.swift; sourceTree = "<group>"; };
 		E8BFAD5227B271D20007E1DC /* SurveyReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyReviewViewModel.swift; sourceTree = "<group>"; };
 		E8BFAD5627B5FDB10007E1DC /* SurveyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewModel.swift; sourceTree = "<group>"; };
+		E8BFAD5827B6264D0007E1DC /* UserSurveyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSurveyModel.swift; sourceTree = "<group>"; };
 		E8CE99B827988CFC0095C958 /* MainScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScrollView.swift; sourceTree = "<group>"; };
 		E8CE99BA27989CD40095C958 /* MainWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherView.swift; sourceTree = "<group>"; };
 		E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeTempLabel.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				E8BFAD4827B16F150007E1DC /* CommentModel.swift */,
 				E8BFAD4627B1514F0007E1DC /* CurrentTempModel.swift */,
 				E8BFAD4D27B2512E0007E1DC /* SurveyModel.swift */,
+				E8BFAD5827B6264D0007E1DC /* UserSurveyModel.swift */,
 				E8BFAD3827AE4B1D0007E1DC /* MemberModel.swift */,
 				E8132BB42795BAE700A9518B /* NicknameModel.swift */,
 				E86EA7052791CC8C0066BB46 /* RegionModel.swift */,
@@ -812,6 +815,7 @@
 				E8BFAD4127AE7BB90007E1DC /* TokenModel.swift in Sources */,
 				E8CE99F7279EC1B80095C958 /* SurveyTableView.swift in Sources */,
 				E83E01042790885300C4661A /* Observables.swift in Sources */,
+				E8BFAD5927B6264D0007E1DC /* UserSurveyModel.swift in Sources */,
 				E8CE99E3279C47EC0095C958 /* MainServeyTitleView.swift in Sources */,
 				E8CE99F3279E907E0095C958 /* ReviewViewContoller.swift in Sources */,
 				E8CE99CF279B04E30095C958 /* ForecastTableView.swift in Sources */,

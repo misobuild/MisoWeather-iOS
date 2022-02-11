@@ -132,21 +132,24 @@ final class SurveyTableViewCell: UITableViewCell {
     }()
     
     // MARK: - Method
-    
+
     private func setList() {
         chartList = [chart1, chart2, chart3]
         titleList = [chart1Label, chart2Label, chart3Label]
         percentList = [chart1PercentLabel, chart2PercentLabel, chart3PercentLabel]
     }
     
-    func setData(data: SurveyList) {
+    func setSurveyData(surveyData: SurveyList) {
         for index in 0..<chartList.count {
-            titleLabel.text = data.surveyDescription + " " + data.surveyTitle
-            titleList[index].text = data.keyList[index]
-            chartList[index].percent = data.valueList[index]
-            percentList[index].text = "\(data.valueList[index])%"
-            questionLabel.text = "프라푸후치노"
+            titleLabel.text = surveyData.surveyDescription + " " + surveyData.surveyTitle
+            titleList[index].text = surveyData.keyList[index]
+            chartList[index].percent = surveyData.valueList[index]
+            percentList[index].text = "\(surveyData.valueList[index])%"
         }
+    }
+    
+    func setUserSurveyData(userData: UserSurveyList) {
+            questionLabel.text = userData.memberAnswer
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -229,19 +232,19 @@ extension SurveyTableViewCell {
             $0.top.equalTo(answerTitleLabel.snp.bottom).offset(13)
             $0.leading.equalTo(rightBackgoundView.snp.leading).inset(width * 0.05)
             $0.height.equalTo(15)
-            $0.width.equalTo(width * 0.27)
+            $0.width.equalTo(width * 0.25)
         }
         chart2.snp.makeConstraints {
             $0.top.equalTo(chart1.snp.bottom).offset(7)
             $0.leading.equalTo(rightBackgoundView.snp.leading).inset(width * 0.05)
             $0.height.equalTo(15)
-            $0.width.equalTo(width * 0.27)
+            $0.width.equalTo(width * 0.25)
         }
         chart3.snp.makeConstraints {
             $0.top.equalTo(chart2.snp.bottom).offset(7)
             $0.leading.equalTo(rightBackgoundView.snp.leading).inset(width * 0.05)
             $0.height.equalTo(15)
-            $0.width.equalTo(width * 0.27)
+            $0.width.equalTo(width * 0.25)
         }
         chart1Label.snp.makeConstraints {
             $0.centerY.equalTo(chart1)
@@ -260,18 +263,18 @@ extension SurveyTableViewCell {
         }
         chart1PercentLabel.snp.makeConstraints {
             $0.centerY.equalTo(chart1)
-            $0.leading.equalTo(chart1Label.snp.trailing).offset(3)
-            $0.width.equalTo(31)
+            $0.leading.equalTo(chart1Label.snp.trailing).offset(1)
+            $0.width.equalTo(33)
         }
         chart2PercentLabel.snp.makeConstraints {
             $0.centerY.equalTo(chart2)
-            $0.leading.equalTo(chart1Label.snp.trailing).offset(3)
-            $0.width.equalTo(31)
+            $0.leading.equalTo(chart1Label.snp.trailing).offset(1)
+            $0.width.equalTo(33)
         }
         chart3PercentLabel.snp.makeConstraints {
             $0.centerY.equalTo(chart3)
-            $0.leading.equalTo(chart1Label.snp.trailing).offset(3)
-            $0.width.equalTo(31)
+            $0.leading.equalTo(chart1Label.snp.trailing).offset(1)
+            $0.width.equalTo(33)
         }
     }
 }

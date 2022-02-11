@@ -39,6 +39,8 @@ extension URL {
     // 서베이 결과(Graph)
     static let survey = Path.domain + Path.survey
     
+    // 사용자 서베이 답변 상태
+    static let userSurvy = Path.domain + Path.survey + "/" + Path.member
     
     // 한줄평
     static let comment = Path.domain + Path.comment + "?"

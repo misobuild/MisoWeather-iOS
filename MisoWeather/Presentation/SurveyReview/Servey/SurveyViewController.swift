@@ -12,7 +12,7 @@ final class SurveyViewController: UIViewController {
     
     let model = SurveyViewModel()
     
-    // MARK: - SubView 
+    // MARK: - SubView
     var surveyTableView: SurveyTableView = {
         let tabieView = SurveyTableView()
         return tabieView
@@ -22,9 +22,12 @@ final class SurveyViewController: UIViewController {
     
     private func setData() {
         model.getSurveyData {
-            self.surveyTableView.surveyList = self.model.surveyInfo
-            DispatchQueue.main.async {
-                self.surveyTableView.tableView.reloadData()
+            self.model.getUserSurveyData {
+                self.surveyTableView.surveyList = self.model.surveyInfo
+                self.surveyTableView.userSurveyList = self.model.userSurveyInfo
+                DispatchQueue.main.async {
+                    self.surveyTableView.tableView.reloadData()
+                }
             }
         }
     }

@@ -10,9 +10,14 @@ import Foundation
 final class SurveyViewModel {
     
     private var surveyData: [SurveyList] = []
-
+    private var userSurveyData: [UserSurveyList] = []
+    
     var surveyInfo: [SurveyList] {
         self.surveyData
+    }
+    
+    var userSurveyInfo: [UserSurveyList] {
+        self.userSurveyData
     }
     
     // MARK: - Survey
@@ -34,5 +39,30 @@ final class SurveyViewModel {
                 }
             }
         }
+    }
+    
+    func getUserSurveyData(completion: @escaping () -> Void) {
+       
+        let token = TokenUtils()
+        guard let serverToken =  token.read("misoWeather", account: "serverToken") else {return}
+        
+        guard let url = URL(string: URL.userSurvy) else {return}
+        var requeset: URLRequest = URLRequest(url: url)
+        requeset.httpMethod = URLMethod.get
+        requeset.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        requeset.addValue(serverToken, forHTTPHeaderField: "serverToken")
+        
+        let networkManager = NetworkManager()
+        networkManager.headerTokenRequsetData(url: requeset) {(result: Result<UserSurveyModel, APIError>) in
+            switch result {
+            case .success(let model):
+                self.userSurveyData = model.data.responseList
+                completion()
+                
+            case .failure(let error):
+                debugPrint("getSurveyData error = \(error)")
+            }
+        }
+        
     }
 }

@@ -11,6 +11,7 @@ import SnapKit
 final class SurveyTableView: UIView {
     // MARK: - subView
     var surveyList: [SurveyList] = []
+    var userSurveyList: [UserSurveyList] = []
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -38,20 +39,18 @@ final class SurveyTableView: UIView {
 extension SurveyTableView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return surveyList.count
+        return userSurveyList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell", for: indexPath) as? SurveyTableViewCell
-        // tableView cell에 정보를 넘겨줘야 함
-        // 그럼 model에서 list를 가지고 와야 함 
-        cell?.setData(data: surveyList[indexPath.row])
+        cell?.setSurveyData(surveyData: surveyList[indexPath.row])
+        cell?.setUserSurveyData(userData: userSurveyList[indexPath.row])
         return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell") as? SurveyTableViewCell
-
         print("선택")
     }
 }
