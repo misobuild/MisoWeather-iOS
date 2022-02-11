@@ -62,6 +62,7 @@ final class MainViewModel {
     }
     
     func getCurrentTempData(completion: @escaping () -> Void) {
+        
         let networkManager = NetworkManager()
         guard let regionID = UserDefaults.standard.string(forKey: "regionID") else {return}
         let urlString = URL.realtimeForecast + regionID
@@ -73,13 +74,14 @@ final class MainViewModel {
                 case .success(let model):
                     self.forecastData = model
                     
-                    self.location.append(model.data.region.bigScale)
+                    var text = model.data.region.bigScale
                     if model.data.region.midScale != "선택 안 함" {
-                        self.location.append(" " + model.data.region.midScale)
+                        text.append(" " + model.data.region.midScale)
                         if model.data.region.smallScale != "선택 안 함" {
-                            self.location.append(" " + model.data.region.smallScale)
+                            text.append(" " + model.data.region.smallScale)
                         }
                     }
+                    self.location = text
                     completion()
                     
                 case .failure(let error):

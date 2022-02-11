@@ -43,7 +43,8 @@
 		E8BFAD4927B16F150007E1DC /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD4827B16F150007E1DC /* CommentModel.swift */; };
 		E8BFAD4B27B24B780007E1DC /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD4A27B24B780007E1DC /* String+Extension.swift */; };
 		E8BFAD4E27B2512E0007E1DC /* SurveyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD4D27B2512E0007E1DC /* SurveyModel.swift */; };
-		E8BFAD5327B271D20007E1DC /* SurveyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD5227B271D20007E1DC /* SurveyViewModel.swift */; };
+		E8BFAD5327B271D20007E1DC /* SurveyReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD5227B271D20007E1DC /* SurveyReviewViewModel.swift */; };
+		E8BFAD5727B5FDB10007E1DC /* SurveyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BFAD5627B5FDB10007E1DC /* SurveyViewModel.swift */; };
 		E8CE99B927988CFC0095C958 /* MainScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99B827988CFC0095C958 /* MainScrollView.swift */; };
 		E8CE99BB27989CD40095C958 /* MainWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BA27989CD40095C958 /* MainWeatherView.swift */; };
 		E8CE99BD279A8BD10095C958 /* RealtimeTempLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */; };
@@ -68,8 +69,8 @@
 		E8CE99F1279E906D0095C958 /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F0279E906D0095C958 /* SurveyViewController.swift */; };
 		E8CE99F3279E907E0095C958 /* ReviewViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F2279E907E0095C958 /* ReviewViewContoller.swift */; };
 		E8CE99F5279E93B40095C958 /* RegionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F4279E93B40095C958 /* RegionButton.swift */; };
-		E8CE99F7279EC1B80095C958 /* ServeyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F6279EC1B80095C958 /* ServeyTableView.swift */; };
-		E8CE99F9279EC1C70095C958 /* ServeyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F8279EC1C70095C958 /* ServeyTableViewCell.swift */; };
+		E8CE99F7279EC1B80095C958 /* SurveyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F6279EC1B80095C958 /* SurveyTableView.swift */; };
+		E8CE99F9279EC1C70095C958 /* SurveyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99F8279EC1C70095C958 /* SurveyTableViewCell.swift */; };
 		E8CE99FF279EF17D0095C958 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99FE279EF17D0095C958 /* Chart.swift */; };
 		E8CE9A03279FEA650095C958 /* QnaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE9A02279FEA650095C958 /* QnaViewController.swift */; };
 		E8CE9A05279FEAEA0095C958 /* QnaTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE9A04279FEAEA0095C958 /* QnaTableVIewCell.swift */; };
@@ -149,7 +150,8 @@
 		E8BFAD4827B16F150007E1DC /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 		E8BFAD4A27B24B780007E1DC /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		E8BFAD4D27B2512E0007E1DC /* SurveyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyModel.swift; sourceTree = "<group>"; };
-		E8BFAD5227B271D20007E1DC /* SurveyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewModel.swift; sourceTree = "<group>"; };
+		E8BFAD5227B271D20007E1DC /* SurveyReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyReviewViewModel.swift; sourceTree = "<group>"; };
+		E8BFAD5627B5FDB10007E1DC /* SurveyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewModel.swift; sourceTree = "<group>"; };
 		E8CE99B827988CFC0095C958 /* MainScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScrollView.swift; sourceTree = "<group>"; };
 		E8CE99BA27989CD40095C958 /* MainWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeatherView.swift; sourceTree = "<group>"; };
 		E8CE99BC279A8BD10095C958 /* RealtimeTempLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeTempLabel.swift; sourceTree = "<group>"; };
@@ -174,8 +176,8 @@
 		E8CE99F0279E906D0095C958 /* SurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
 		E8CE99F2279E907E0095C958 /* ReviewViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewContoller.swift; sourceTree = "<group>"; };
 		E8CE99F4279E93B40095C958 /* RegionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionButton.swift; sourceTree = "<group>"; };
-		E8CE99F6279EC1B80095C958 /* ServeyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServeyTableView.swift; sourceTree = "<group>"; };
-		E8CE99F8279EC1C70095C958 /* ServeyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServeyTableViewCell.swift; sourceTree = "<group>"; };
+		E8CE99F6279EC1B80095C958 /* SurveyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyTableView.swift; sourceTree = "<group>"; };
+		E8CE99F8279EC1C70095C958 /* SurveyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyTableViewCell.swift; sourceTree = "<group>"; };
 		E8CE99FE279EF17D0095C958 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		E8CE9A02279FEA650095C958 /* QnaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaViewController.swift; sourceTree = "<group>"; };
 		E8CE9A04279FEAEA0095C958 /* QnaTableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaTableVIewCell.swift; sourceTree = "<group>"; };
@@ -344,9 +346,10 @@
 		E8BFAD5427B4DBD90007E1DC /* Servey */ = {
 			isa = PBXGroup;
 			children = (
+				E8BFAD5627B5FDB10007E1DC /* SurveyViewModel.swift */,
 				E8CE99F0279E906D0095C958 /* SurveyViewController.swift */,
-				E8CE99F6279EC1B80095C958 /* ServeyTableView.swift */,
-				E8CE99F8279EC1C70095C958 /* ServeyTableViewCell.swift */,
+				E8CE99F6279EC1B80095C958 /* SurveyTableView.swift */,
+				E8CE99F8279EC1C70095C958 /* SurveyTableViewCell.swift */,
 			);
 			path = Servey;
 			sourceTree = "<group>";
@@ -383,7 +386,7 @@
 		E8CE99EB279D8CDC0095C958 /* SurveyReview */ = {
 			isa = PBXGroup;
 			children = (
-				E8BFAD5227B271D20007E1DC /* SurveyViewModel.swift */,
+				E8BFAD5227B271D20007E1DC /* SurveyReviewViewModel.swift */,
 				E8CE99EC279D8D150095C958 /* SurveyReviewViewController.swift */,
 				E8CE99E4279C5D450095C958 /* ReviewTableView.swift */,
 				E8CE99E6279C5D6E0095C958 /* ReviewTableViewCell.swift */,
@@ -807,13 +810,14 @@
 			files = (
 				E8CE99CB279AF5A00095C958 /* ParticulateMatterViewCell.swift in Sources */,
 				E8BFAD4127AE7BB90007E1DC /* TokenModel.swift in Sources */,
-				E8CE99F7279EC1B80095C958 /* ServeyTableView.swift in Sources */,
+				E8CE99F7279EC1B80095C958 /* SurveyTableView.swift in Sources */,
 				E83E01042790885300C4661A /* Observables.swift in Sources */,
 				E8CE99E3279C47EC0095C958 /* MainServeyTitleView.swift in Sources */,
 				E8CE99F3279E907E0095C958 /* ReviewViewContoller.swift in Sources */,
 				E8CE99CF279B04E30095C958 /* ForecastTableView.swift in Sources */,
 				E8BFAD3527AD4D800007E1DC /* NicknameSelectViewModel.swift in Sources */,
 				E8BFAD4B27B24B780007E1DC /* String+Extension.swift in Sources */,
+				E8BFAD5727B5FDB10007E1DC /* SurveyViewModel.swift in Sources */,
 				E8CE99E7279C5D6E0095C958 /* ReviewTableViewCell.swift in Sources */,
 				E8CE99BF279A8CD60095C958 /* WeatherViewController.swift in Sources */,
 				E8BFAD2D27ACEBD30007E1DC /* ErrorMessage.swift in Sources */,
@@ -860,11 +864,11 @@
 				E8CE99D1279B07870095C958 /* WeatherScrollView.swift in Sources */,
 				E8E65BC82782E0E200FFA0FA /* BigRegionViewController.swift in Sources */,
 				E8BFAD2F27ACEC080007E1DC /* URLMethod.swift in Sources */,
-				E8BFAD5327B271D20007E1DC /* SurveyViewModel.swift in Sources */,
+				E8BFAD5327B271D20007E1DC /* SurveyReviewViewModel.swift in Sources */,
 				E8BFAD2627AC405A0007E1DC /* QnaAnswerViewController.swift in Sources */,
 				E8CE99DD279BE56E0095C958 /* MainServeyView.swift in Sources */,
 				E83E010C2790A24F00C4661A /* UserInfo.swift in Sources */,
-				E8CE99F9279EC1C70095C958 /* ServeyTableViewCell.swift in Sources */,
+				E8CE99F9279EC1C70095C958 /* SurveyTableViewCell.swift in Sources */,
 				E8132BAF2795501200A9518B /* TokenUtils.swift in Sources */,
 				E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */,
 				E8BFAD2B27ACEBB80007E1DC /* NetworkManager.swift in Sources */,

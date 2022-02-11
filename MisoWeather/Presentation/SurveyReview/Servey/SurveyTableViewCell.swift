@@ -1,5 +1,5 @@
 //
-//  ServeyTableViewCell.swift
+//  SurveyTableViewCell.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/24.
@@ -8,14 +8,17 @@
 import UIKit
 import SnapKit
 
-final class ServeyTableViewCell: UITableViewCell {
-    weak var navigationController: UINavigationController?
+final class SurveyTableViewCell: UITableViewCell {
+    
+    var chartList: [Chart] = []
+    var titleList: [UILabel] = []
+    var percentList: [UILabel] = []
+    
     // MARK: - SubView
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18.0, weight: .bold)
         label.textColor = .textColor
-        label.text = "오늘 어떤 음료가 땡기세요?☕️"
         return label
     }()
     
@@ -60,7 +63,6 @@ final class ServeyTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .bold)
         label.textColor = .mainColor
-        label.text = "프라푸치노"
         return label
     }()
     
@@ -70,21 +72,18 @@ final class ServeyTableViewCell: UITableViewCell {
         view.backgroundColor = .systemGray5
         return view
     }()
-    
+
     private lazy var chart1: Chart = {
         let chart = Chart()
-        chart.percent = 84
         chart.color = UIColor.mainColor!.cgColor
         return chart
     }()
     private lazy var chart2: Chart = {
         let chart = Chart()
-        chart.percent = 10
         return chart
     }()
     private lazy var chart3: Chart = {
         let chart = Chart()
-        chart.percent = 6
         return chart
     }()
     
@@ -93,7 +92,6 @@ final class ServeyTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 11.0, weight: .bold)
         label.textColor = .mainColor
         label.textAlignment = .right
-        label.text = "아이스 아메"
         return label
     }()
     private lazy var chart2Label: UILabel = {
@@ -101,7 +99,6 @@ final class ServeyTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 11.0, weight: .bold)
         label.textColor = .textColor
         label.textAlignment = .right
-        label.text = "따뜻한 아메"
         return label
     }()
     private lazy var chart3Label: UILabel = {
@@ -109,7 +106,6 @@ final class ServeyTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 11.0, weight: .bold)
         label.textColor = .textColor
         label.textAlignment = .right
-        label.text = "에이드"
         return label
     }()
     
@@ -118,7 +114,6 @@ final class ServeyTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 10, weight: .bold)
         label.textColor = .mainColor
         label.textAlignment = .right
-        label.text = "84%"
         return label
     }()
     private lazy var chart2PercentLabel: UILabel = {
@@ -126,7 +121,6 @@ final class ServeyTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 10, weight: .bold)
         label.textColor = .textColor
         label.textAlignment = .right
-        label.text = "10%"
         return label
     }()
     private lazy var chart3PercentLabel: UILabel = {
@@ -134,13 +128,31 @@ final class ServeyTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 10, weight: .bold)
         label.textColor = .textColor
         label.textAlignment = .right
-        label.text = "6%"
         return label
     }()
-
+    
+    // MARK: - Method
+    
+    private func setList() {
+        chartList = [chart1, chart2, chart3]
+        titleList = [chart1Label, chart2Label, chart3Label]
+        percentList = [chart1PercentLabel, chart2PercentLabel, chart3PercentLabel]
+    }
+    
+    func setData(data: SurveyList) {
+        for index in 0..<chartList.count {
+            titleLabel.text = data.surveyDescription + " " + data.surveyTitle
+            titleList[index].text = data.keyList[index]
+            chartList[index].percent = data.valueList[index]
+            percentList[index].text = "\(data.valueList[index])%"
+            questionLabel.text = "프라푸후치노"
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = .clear
+        setList()
         setupView()
     }
     
@@ -149,7 +161,7 @@ final class ServeyTableViewCell: UITableViewCell {
     }
 }
 
-extension ServeyTableViewCell {
+extension SurveyTableViewCell {
     // MARK: - layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
       
@@ -249,17 +261,17 @@ extension ServeyTableViewCell {
         chart1PercentLabel.snp.makeConstraints {
             $0.centerY.equalTo(chart1)
             $0.leading.equalTo(chart1Label.snp.trailing).offset(3)
-            $0.width.equalTo(27)
+            $0.width.equalTo(31)
         }
         chart2PercentLabel.snp.makeConstraints {
             $0.centerY.equalTo(chart2)
             $0.leading.equalTo(chart1Label.snp.trailing).offset(3)
-            $0.width.equalTo(27)
+            $0.width.equalTo(31)
         }
         chart3PercentLabel.snp.makeConstraints {
             $0.centerY.equalTo(chart3)
             $0.leading.equalTo(chart1Label.snp.trailing).offset(3)
-            $0.width.equalTo(27)
+            $0.width.equalTo(31)
         }
     }
 }

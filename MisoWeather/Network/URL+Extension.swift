@@ -36,12 +36,14 @@ extension URL {
     // 날씨 간략 정보
     static let realtimeForecast = Path.domain + Path.forecast
     
-    // 답변 정보 (Graph)
+    // 서베이 결과(Graph)
     static let survey = Path.domain + Path.survey
+    
     
     // 한줄평
     static let comment = Path.domain + Path.comment + "?"
     
     // 한줄평 등록
     static let registerComment = Path.domain + Path.comment
+
 }
