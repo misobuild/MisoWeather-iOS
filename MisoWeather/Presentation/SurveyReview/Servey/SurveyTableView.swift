@@ -58,8 +58,10 @@ extension SurveyTableView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell", for: indexPath) as? SurveyTableViewCell
         let id = userSurveyList[indexPath.row].surveyId
         
-        // Notification에 userinfo를 실어서 보냄
-        NotificationCenter.default.post( name:  .surveyNotification, object: nil, userInfo: ["surveyID": id])
+        if !userSurveyList[indexPath.row].answered {
+            // Notification에 userinfo를 실어서 보냄
+            NotificationCenter.default.post( name:  .surveyNotification, object: nil, userInfo: ["surveyID": id])
+        }
     }
 }
 

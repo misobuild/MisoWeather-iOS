@@ -34,8 +34,6 @@ final class SurveyViewController: UIViewController {
     
     @objc func notificationReceived(notification: Notification) {
         // Notification에 담겨진 object와 userInfo를 얻어 처리 가능
-        print("noti 실행 ")
-        
         guard let notificationUserInfo = notification.userInfo as? [String: Int] else { return }
         guard let surveyID = notificationUserInfo.values.first else {return}
         print(surveyID)
