@@ -59,11 +59,25 @@ final class SurveyTableViewCell: UITableViewCell {
         return image
     }()
     
-    private lazy var questionLabel: UILabel = {
+    private lazy var questionImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "qusetion")
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
+    private lazy var answerLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .bold)
         label.textColor = .mainColor
         return label
+    }()
+    
+    private lazy var chevronImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "chevron")?.withTintColor(.gray)
+        image.contentMode = .scaleAspectFit
+        return image
     }()
     
     // MARK: - ChartView
@@ -132,6 +146,30 @@ final class SurveyTableViewCell: UITableViewCell {
     }()
     
     // MARK: - Method
+//    override var isSelected: Bool {
+//        didSet {
+//            if isSelected {
+//                print("선택")
+//                answerLabel.textColor = .mainColor
+//                leftBackgoundView.backgroundColor = .orange
+//            } else {
+//                print("안선택")
+//            }
+//        }
+//    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        if isSelected {
+            leftBackgoundView.backgroundColor = .surveyAnswerColor
+            rightBackgoundView.backgroundColor = .surveyAnswerColor
+        } else {
+            self.layer.borderColor = UIColor.clear.cgColor
+            leftBackgoundView.backgroundColor = .backgroundColor
+            rightBackgoundView.backgroundColor = .backgroundColor
+        }
+        
+    }
 
     private func setList() {
         chartList = [chart1, chart2, chart3]
@@ -142,14 +180,26 @@ final class SurveyTableViewCell: UITableViewCell {
     func setSurveyData(surveyData: SurveyList) {
         for index in 0..<chartList.count {
             titleLabel.text = surveyData.surveyDescription + " " + surveyData.surveyTitle
-            titleList[index].text = surveyData.keyList[index]
             chartList[index].percent = surveyData.valueList[index]
             percentList[index].text = "\(surveyData.valueList[index])%"
+            titleList[index].text = surveyData.keyList[index]
         }
     }
     
     func setUserSurveyData(userData: UserSurveyList) {
-            questionLabel.text = userData.memberAnswer
+        if let answer =  userData.memberAnswer {
+            answerLabel.text = answer
+            chevronImage.isHidden = true
+            questionImage.isHidden = true
+            checkImage.isHidden = false
+
+        } else {
+            answerLabel.text = "답변하기"
+            chevronImage.isHidden = false
+            answerLabel.textColor = .gray
+            questionImage.isHidden = false
+            checkImage.isHidden = true
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -169,22 +219,13 @@ extension SurveyTableViewCell {
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
       
         [
-            titleLabel,
-            leftBackgoundView,
-            rightBackgoundView,
-            answerTitleLabel,
-            askTitleLabel,
-            checkImage,
-            questionLabel,
-            chart1,
-            chart1Label,
-            chart1PercentLabel,
-            chart2,
-            chart2Label,
-            chart2PercentLabel,
-            chart3,
-            chart3Label,
-            chart3PercentLabel,
+            titleLabel, leftBackgoundView, rightBackgoundView,
+            answerTitleLabel, askTitleLabel,
+            checkImage, questionImage,
+            answerLabel, chevronImage,
+            chart1, chart1Label, chart1PercentLabel,
+            chart2, chart2Label, chart2PercentLabel,
+            chart3, chart3Label, chart3PercentLabel,
             chartHideView
         ].forEach {addSubview($0)}
 
@@ -218,9 +259,21 @@ extension SurveyTableViewCell {
             $0.width.equalTo(46)
             $0.height.equalTo(46)
         }
-        questionLabel.snp.makeConstraints {
-            $0.top.equalTo(checkImage.snp.bottom).offset(9)
+        questionImage.snp.makeConstraints {
+            $0.top.equalTo(answerTitleLabel.snp.bottom).offset(6)
             $0.centerX.equalTo(leftBackgoundView)
+            $0.width.equalTo(46)
+            $0.height.equalTo(46)
+        }
+        answerLabel.snp.makeConstraints {
+            $0.top.equalTo(questionImage.snp.bottom).offset(9)
+            $0.centerX.equalTo(leftBackgoundView)
+        }
+        chevronImage.snp.makeConstraints {
+            $0.centerY.equalTo(answerLabel)
+            $0.leading.equalTo(answerLabel.snp.trailing).inset(3)
+            $0.width.equalTo(20)
+            $0.height.equalTo(20)
         }
         chartHideView.snp.makeConstraints {
             $0.top.equalTo(askTitleLabel.snp.bottom).offset(3)

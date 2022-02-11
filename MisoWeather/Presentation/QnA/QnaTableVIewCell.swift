@@ -15,15 +15,14 @@ final class QnaTableVIewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18.0, weight: .light)
         label.textColor = .textColor
-        label.text = "꽁꽁 싸매자 롱패딩"
         label.textAlignment = .center
         label.layer.cornerRadius = 20
         
-        guard let text = label.text else { return UILabel() }
-        let attributeString = NSMutableAttributedString(string: text)
-        let font = UIFont.systemFont(ofSize: 18, weight: .heavy)
-        attributeString.addAttribute(.font, value: font, range: (text as NSString).range(of: "롱패딩"))
-        label.attributedText = attributeString
+//        guard let text = label.text else { return UILabel() }
+//        let attributeString = NSMutableAttributedString(string: text)
+//        let font = UIFont.systemFont(ofSize: 18, weight: .heavy)
+//        attributeString.addAttribute(.font, value: font, range: (text as NSString).range(of: "롱패딩"))
+//        label.attributedText = attributeString
         
         return label
     }()
@@ -58,7 +57,14 @@ final class QnaTableVIewCell: UITableViewCell {
         }
     }
     
-    func setup() {
+    func setup(data: SurveyAnswerList) {
+        let text = data.answerDescription + " " + data.answer
+        titleLabel.text = text
+        let attributeString = NSMutableAttributedString(string: text)
+        let font = UIFont.systemFont(ofSize: 18, weight: .heavy)
+        attributeString.addAttribute(.font, value: font, range: (text as NSString).range(of: data.answer))
+        titleLabel.attributedText = attributeString
+         
         setupView()
     }
 }

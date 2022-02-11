@@ -81,7 +81,7 @@ final class RegisterViewController: UIViewController {
     @objc private func hasKakaoToken() {
         if AuthApi.hasToken() {
             // 사용자 액세스 토큰 정보 조회
-            UserApi.shared.accessTokenInfo {(_, error) in
+            UserApi.shared.accessTokenInfo {(oAuthToken, error) in
                 if let error = error {
                     if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
                         // 유효한 토큰 아님 로그인 필요
@@ -97,6 +97,8 @@ final class RegisterViewController: UIViewController {
 //                    self.kakaoLogin()
                     
                     let token = TokenUtils()
+                   // token.create("kakao", account: "userID", value: oAuthToken?.id)
+
                     print(token.read("kakao", account: "accessToken") ?? "")
                     self.kakaoLogin()
                     
@@ -116,7 +118,7 @@ final class RegisterViewController: UIViewController {
     private func hasUser() {
         if AuthApi.hasToken() {
             // 사용자 액세스 토큰 정보 조회
-            UserApi.shared.accessTokenInfo {(_, error) in
+            UserApi.shared.accessTokenInfo {(oauthToken, error) in
                 if let error = error {
                     if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
                         // 유효한 토큰 아님 로그인 필요
@@ -126,8 +128,8 @@ final class RegisterViewController: UIViewController {
                     }
                 } else {
                     // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
-                    
                     let token = TokenUtils()
+                    token.create("kakao", account: "userID", value: String((oauthToken?.id)!))
                     print(token.read("kakao", account: "accessToken") ?? "")
                     // Main으로 화면 전환
 
@@ -191,6 +193,7 @@ final class RegisterViewController: UIViewController {
                     // 키체인에 Token, ID 저장
                     let token = TokenUtils()
                     token.create("kakao", account: "accessToken", value: accessToken)
+
                     
                     // TODO: 우리 기존 회원인지 아닌지 검사하는 과정이 필요함
                     self.checkUser()

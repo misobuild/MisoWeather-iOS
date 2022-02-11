@@ -9,14 +9,11 @@ import UIKit
 
 final class QnaViewController: UIViewController {
     
-    var titleString = "오늘 날씨엔"
-    var qnaString = "어떤외투 입으실래요?"
+    var surveyAnswerList: [SurveyAnswerList] = []
     
     // MARK: - Subviews
     private lazy var titleLabel: TitleLabel = {
         let label = TitleLabel()
-        label.titleLabel.text = "\(titleString)"
-        label.questionLabel.text = "\(qnaString)"
         label.subTitleLabel.text = ""
         return label
     }()
@@ -36,23 +33,29 @@ final class QnaViewController: UIViewController {
         tableView.register(QnaTableVIewCell.self, forCellReuseIdentifier: "QnaTableVIewCell")
         return tableView
     }()
+    
+    private func setData() {
+        titleLabel.titleLabel.text = surveyAnswerList[0].surveyDescription
+        titleLabel.questionLabel.text = surveyAnswerList[0].surveyTitle
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setData()
         setupView()
     }
 }
 
 extension QnaViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return surveyAnswerList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QnaTableVIewCell", for: indexPath) as? QnaTableVIewCell
         cell?.selectionStyle = .none
-        cell?.setup()
+        cell?.setup(data: surveyAnswerList[indexPath.row])
         return cell ?? QnaTableVIewCell()
     }
     

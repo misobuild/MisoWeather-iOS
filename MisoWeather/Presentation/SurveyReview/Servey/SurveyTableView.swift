@@ -29,6 +29,8 @@ final class SurveyTableView: UIView {
         setupView()
         backgroundColor = .clear
         layer.cornerRadius = 20
+        self.tableView.allowsSelection = true
+        tableView.delaysContentTouches = false
     }
     
     required init?(coder: NSCoder) {
@@ -44,19 +46,21 @@ extension SurveyTableView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell", for: indexPath) as? SurveyTableViewCell
+        cell?.selectionStyle = .none
         cell?.setSurveyData(surveyData: surveyList[indexPath.row])
         cell?.setUserSurveyData(userData: userSurveyList[indexPath.row])
         return cell ?? UITableViewCell()
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell") as? SurveyTableViewCell
-        print("선택")
-    }
 }
 
 extension SurveyTableView: UITableViewDataSource {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell", for: indexPath) as? SurveyTableViewCell
+        let id = userSurveyList[indexPath.row].surveyId
+        
+        // Notification에 userinfo를 실어서 보냄
+        NotificationCenter.default.post( name:  .surveyNotification, object: nil, userInfo: ["surveyID": id])
+    }
 }
 
 extension SurveyTableView {

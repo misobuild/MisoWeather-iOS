@@ -11,6 +11,7 @@ final class SurveyViewModel {
     
     private var surveyData: [SurveyList] = []
     private var userSurveyData: [UserSurveyList] = []
+    private var surveyAnswerData: [SurveyAnswerList] = []
     
     var surveyInfo: [SurveyList] {
         self.surveyData
@@ -18,6 +19,10 @@ final class SurveyViewModel {
     
     var userSurveyInfo: [UserSurveyList] {
         self.userSurveyData
+    }
+    
+    var surveyAnswerInfo: [SurveyAnswerList] {
+        self.surveyAnswerData
     }
     
     // MARK: - Survey
@@ -42,7 +47,6 @@ final class SurveyViewModel {
     }
     
     func getUserSurveyData(completion: @escaping () -> Void) {
-       
         let token = TokenUtils()
         guard let serverToken =  token.read("misoWeather", account: "serverToken") else {return}
         
@@ -63,6 +67,28 @@ final class SurveyViewModel {
                 debugPrint("getSurveyData error = \(error)")
             }
         }
+    }
+    
+    func getSurveyAnswerData(id: Int, completion: @escaping () -> Void) {
+        let token = TokenUtils()
+        guard let serverToken =  token.read("misoWeather", account: "serverToken") else {return}
         
+        guard let url = URL(string: URL.surveyAnswer + "\(id)") else {return}
+        var requeset: URLRequest = URLRequest(url: url)
+        requeset.httpMethod = URLMethod.get
+        requeset.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        requeset.addValue(serverToken, forHTTPHeaderField: "serverToken")
+        
+        let networkManager = NetworkManager()
+        networkManager.headerTokenRequsetData(url: requeset) {(result: Result<SurveyAnswerModel, APIError>) in
+            switch result {
+            case .success(let model):
+                self.surveyAnswerData = model.data.responseList
+                completion()
+                
+            case .failure(let error):
+                debugPrint("getSurveyData error = \(error)")
+            }
+        }
     }
 }
