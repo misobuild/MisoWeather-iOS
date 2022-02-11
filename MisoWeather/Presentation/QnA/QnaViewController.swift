@@ -9,17 +9,25 @@ import UIKit
 
 final class QnaViewController: UIViewController {
     
+    let model = QnaViewModel()
     var surveyAnswerList: [SurveyAnswerList] = []
+    var answerID: Int = 0
     
     // MARK: - Subviews
+    private lazy var qnaView: QnaView = {
+        let view = QnaView()
+        return view
+    }()
+    
     private lazy var titleLabel: TitleLabel = {
         let label = TitleLabel()
         label.subTitleLabel.text = ""
         return label
     }()
     
-    lazy var confirmButton: CustomButton = {
+    private lazy var confirmButton: CustomButton = {
         let button = CustomButton(type: .answer)
+        button.addTarget(self, action: #selector(postAnswer), for: .touchUpInside)
         return button
     }()
     
@@ -34,6 +42,23 @@ final class QnaViewController: UIViewController {
         return tableView
     }()
     
+    // MARK: - Private Method
+    @objc private func postAnswer() {
+        model.postSurveyAnswerData(answerID: answerID, surveyID: surveyAnswerList[0].surveyId) {
+            print("성공")
+            DispatchQueue.main.async {
+                let qnaView = QnaView()
+                self.view.addSubview(qnaView)
+                
+                qnaView.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+//                self.navigationController?.pushViewController(QnaAnswerViewController(), animated: true)
+            }
+
+        }
+    }
+
     private func setData() {
         titleLabel.titleLabel.text = surveyAnswerList[0].surveyDescription
         titleLabel.questionLabel.text = surveyAnswerList[0].surveyTitle
@@ -62,6 +87,7 @@ extension QnaViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.isSelected = true
+        self.answerID = surveyAnswerList[indexPath.row].answerId
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -80,7 +106,7 @@ extension QnaViewController {
         [
             titleLabel,
             tableView,
-            confirmButton
+            confirmButton,
         ].forEach {view.addSubview($0)}
         
         titleLabel.snp.makeConstraints {

@@ -64,7 +64,7 @@ final class SurveyViewModel {
                 completion()
                 
             case .failure(let error):
-                debugPrint("getSurveyData error = \(error)")
+                debugPrint("getUserSurveyData error = \(error)")
             }
         }
     }
@@ -87,7 +87,7 @@ final class SurveyViewModel {
                 completion()
                 
             case .failure(let error):
-                debugPrint("getSurveyData error = \(error)")
+                debugPrint("getSurveyAnswerData error = \(error)")
             }
         }
     }
