@@ -10,7 +10,7 @@ import SnapKit
 
 final class ReviewViewContoller: UIViewController {
     var isScrollEnd = false
-    let model = SurveyViewModel()
+    let model = SurveyReviewViewModel()
     var textCount = 0
 
     // MARK: - SubView

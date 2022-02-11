@@ -19,5 +19,7 @@ struct SurveyList: Decodable {
     let keyList: [String?]
     let valueList: [Int]
     let surveyId: Int
+    let surveyTitle: String
+    let surveyDescription: String
 }
 

@@ -19,6 +19,7 @@ enum Path {
     static var commnetId = "commentId="
     static var size = "size="
     static var survey = "survey"
+    static var answers = "/answers/"
 }
 
 extension URL {
@@ -36,12 +37,20 @@ extension URL {
     // 날씨 간략 정보
     static let realtimeForecast = Path.domain + Path.forecast
     
-    // 답변 정보 (Graph)
+    // 서베이 결과(Graph)
     static let survey = Path.domain + Path.survey
+    
+    // 사용자 서베이 답변 상태
+    static let userSurvy = Path.domain + Path.survey + "/" + Path.member
+    
+    // 서베이 답변 목록
+    static let surveyAnswer = Path.domain + Path.survey + Path.answers
     
     // 한줄평
     static let comment = Path.domain + Path.comment + "?"
     
     // 한줄평 등록
     static let registerComment = Path.domain + Path.comment
+    
+
 }

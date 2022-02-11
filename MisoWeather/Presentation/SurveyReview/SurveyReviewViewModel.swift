@@ -7,13 +7,13 @@
 
 import Foundation
 
-final class SurveyViewModel {
+final class SurveyReviewViewModel {
     
     private var row = 15
     private var placeHolder =
                     """
                 오늘 날씨에 대한
-                \(UserDefaults.standard.string(forKey: "nickName")!)의 느낌은 어떠신가요?
+                \(UserDefaults.standard.string(forKey: "nickName") ?? "")님의 느낌은 어떠신가요?
                 """
     private var surveyData: [SurveyList] = []
     private var commentData: [CommentList] = []

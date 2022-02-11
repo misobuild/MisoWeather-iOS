@@ -10,18 +10,60 @@ import SnapKit
 
 final class SurveyViewController: UIViewController {
     
-    // MARK: - SubView 
-    var serveyTableView: ServeyTableView = {
-        let tabieView = ServeyTableView()
+    let model = SurveyViewModel()
+    
+    // MARK: - SubView
+    var surveyTableView: SurveyTableView = {
+        let tabieView = SurveyTableView()
         return tabieView
     }()
+    
+    // MARK: - PrivateMethod
+    
+    private func setData() {
+        model.getSurveyData {
+            self.model.getUserSurveyData {
+                self.surveyTableView.surveyList = self.model.surveyInfo
+                self.surveyTableView.userSurveyList = self.model.userSurveyInfo
+                DispatchQueue.main.async {
+                    self.surveyTableView.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    @objc func notificationReceived(notification: Notification) {
+        // Notification에 담겨진 object와 userInfo를 얻어 처리 가능
+        print("noti 실행 ")
+        
+        guard let notificationUserInfo = notification.userInfo as? [String: Int] else { return }
+        guard let surveyID = notificationUserInfo.values.first else {return}
+        print(surveyID)
+        
+        model.getSurveyAnswerData(id: surveyID) {
+            DispatchQueue.main.async {
+                let nextVC = QnaViewController()
+                nextVC.surveyAnswerList = self.model.surveyAnswerInfo
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
+//        self.present(QnaViewController(), animated: true, completion: nil)
+    }
     
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        setData()
         setupView()
+        
+        // 옵저버를 추가해 구독이 가능하게 끔 함
+        // self에서 notification이란 이름을 가진 노티를 관찰할 것이고, 해당 노티가 발생하는 경우에 notificationReceived 란 함수를 호출해 실행할 것이다.
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationReceived(notification:)), name: .surveyNotification, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.surveyTableView.tableView.reloadData()
     }
 }
 
@@ -29,10 +71,10 @@ extension SurveyViewController {
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         [
-            serveyTableView
+            surveyTableView
         ].forEach {view.addSubview($0)}
         
-        serveyTableView.snp.makeConstraints {
+        surveyTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }

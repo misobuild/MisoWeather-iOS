@@ -42,8 +42,6 @@ final class SurveyReviewViewController: UIViewController, UITableViewDelegate {
     
     private lazy var  surveyViewController: SurveyViewController = {
         let viewController = SurveyViewController()
-        viewController.serveyTableView.tableView.delegate = self
-        
         return viewController
     }()
     

@@ -1,5 +1,5 @@
 //
-//  ServeyTableView.swift
+//  SurveyTableView.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/24.
@@ -8,8 +8,10 @@
 import UIKit
 import SnapKit
 
-final class ServeyTableView: UIView {
+final class SurveyTableView: UIView {
     // MARK: - subView
+    var surveyList: [SurveyList] = []
+    var userSurveyList: [UserSurveyList] = []
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -18,7 +20,7 @@ final class ServeyTableView: UIView {
         tableView.rowHeight = 200
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        tableView.register(ServeyTableViewCell.self, forCellReuseIdentifier: "ServeyTableViewCell")
+        tableView.register(SurveyTableViewCell.self, forCellReuseIdentifier: "ServeyTableViewCell")
         return tableView
     }()
     
@@ -27,6 +29,8 @@ final class ServeyTableView: UIView {
         setupView()
         backgroundColor = .clear
         layer.cornerRadius = 20
+        self.tableView.allowsSelection = true
+        tableView.delaysContentTouches = false
     }
     
     required init?(coder: NSCoder) {
@@ -34,29 +38,32 @@ final class ServeyTableView: UIView {
     }
 }
 
-extension ServeyTableView: UITableViewDelegate {
+extension SurveyTableView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return userSurveyList.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell", for: indexPath) as? ServeyTableViewCell
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell", for: indexPath) as? SurveyTableViewCell
+        cell?.selectionStyle = .none
+        cell?.setSurveyData(surveyData: surveyList[indexPath.row])
+        cell?.setUserSurveyData(userData: userSurveyList[indexPath.row])
         return cell ?? UITableViewCell()
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell") as? ServeyTableViewCell
+}
 
-        print("선택")
+extension SurveyTableView: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell", for: indexPath) as? SurveyTableViewCell
+        let id = userSurveyList[indexPath.row].surveyId
+        
+        // Notification에 userinfo를 실어서 보냄
+        NotificationCenter.default.post( name:  .surveyNotification, object: nil, userInfo: ["surveyID": id])
     }
 }
 
-extension ServeyTableView: UITableViewDataSource {
-    
-}
-
-extension ServeyTableView {
+extension SurveyTableView {
     // MARK: - layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
       

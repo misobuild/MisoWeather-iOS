@@ -27,7 +27,6 @@ final class MainWeatherView: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20.0)
         label.textColor = .textColor
-        label.text = "🌦"
         return label
     }()
     
@@ -35,7 +34,6 @@ final class MainWeatherView: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .medium)
         label.textColor = .textColor
-        label.text = "-10°"
         return label
     }()
 
@@ -68,12 +66,12 @@ extension MainWeatherView {
         
         emojiLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(width * 0.22)
+            $0.trailing.equalToSuperview().inset(width * 0.16)
         }
         
         tempLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(width * 0.12)
+            $0.trailing.equalToSuperview().inset(width * 0.08)
         }
         
         nextButton.snp.makeConstraints {
