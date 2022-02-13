@@ -12,6 +12,7 @@ final class SurveyViewModel {
     private var surveyData: [SurveyList] = []
     private var userSurveyData: [UserSurveyList] = []
     private var surveyAnswerData: [SurveyAnswerList] = []
+    private var isAnswer: Bool = false
     
     var surveyInfo: [SurveyList] {
         self.surveyData
@@ -23,6 +24,22 @@ final class SurveyViewModel {
     
     var surveyAnswerInfo: [SurveyAnswerList] {
         self.surveyAnswerData
+    }
+    
+    var isAnswerInfo: Bool {
+        self.isAnswer
+    }
+    
+    func createRequest(url: URL) -> URLRequest {
+        let token = TokenUtils()
+        guard let serverToken =  token.read("misoWeather", account: "serverToken") else {return URLRequest(url: url)}
+        
+        var requeset: URLRequest = URLRequest(url: url)
+        requeset.httpMethod = URLMethod.get
+        requeset.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        requeset.addValue(serverToken, forHTTPHeaderField: "serverToken")
+        
+        return requeset
     }
     
     // MARK: - Survey
@@ -47,14 +64,8 @@ final class SurveyViewModel {
     }
     
     func getUserSurveyData(completion: @escaping () -> Void) {
-        let token = TokenUtils()
-        guard let serverToken =  token.read("misoWeather", account: "serverToken") else {return}
-        
-        guard let url = URL(string: URL.userSurvy) else {return}
-        var requeset: URLRequest = URLRequest(url: url)
-        requeset.httpMethod = URLMethod.get
-        requeset.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        requeset.addValue(serverToken, forHTTPHeaderField: "serverToken")
+       guard let url = URL(string: URL.userSurvy) else {return}
+        let requeset = createRequest(url: url)
         
         let networkManager = NetworkManager()
         networkManager.headerTokenRequsetData(url: requeset) {(result: Result<UserSurveyModel, APIError>) in
@@ -70,14 +81,8 @@ final class SurveyViewModel {
     }
     
     func getSurveyAnswerData(id: Int, completion: @escaping () -> Void) {
-        let token = TokenUtils()
-        guard let serverToken =  token.read("misoWeather", account: "serverToken") else {return}
-        
         guard let url = URL(string: URL.surveyAnswer + "\(id)") else {return}
-        var requeset: URLRequest = URLRequest(url: url)
-        requeset.httpMethod = URLMethod.get
-        requeset.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        requeset.addValue(serverToken, forHTTPHeaderField: "serverToken")
+        let requeset = createRequest(url: url)
         
         let networkManager = NetworkManager()
         networkManager.headerTokenRequsetData(url: requeset) {(result: Result<SurveyAnswerModel, APIError>) in
@@ -87,7 +92,24 @@ final class SurveyViewModel {
                 completion()
                 
             case .failure(let error):
-                debugPrint("getSurveyAnswerData error = \(error)")
+                debugPrint("??getSurveyAnswerData error = \(error)")
+            }
+        }
+    }
+    
+    func getIsAnswerData(completion: @escaping () -> Void) {
+        guard let url = URL(string: URL.precheck) else {return}
+        let requeset = createRequest(url: url)
+        
+        let networkManager = NetworkManager()
+        networkManager.headerTokenRequsetData(url: requeset) {(result: Result<SurveyIsAnswerModel, APIError>) in
+            switch result {
+            case .success(let model):
+                self.isAnswer = model.data
+                completion()
+                
+            case .failure(let error):
+                debugPrint("getIsAnswerData error = \(error)")
             }
         }
     }

@@ -20,6 +20,7 @@ enum Path {
     static var size = "size="
     static var survey = "survey"
     static var answers = "/answers/"
+    static var precheck = "/precheck"
 }
 
 extension URL {
@@ -36,6 +37,10 @@ extension URL {
     // MainView
     // 날씨 간략 정보
     static let realtimeForecast = Path.domain + Path.forecast
+    
+    // SurvayView
+    // 사용자 서베이 답변 여부
+    static let precheck = Path.domain + Path.survey + Path.precheck
     
     // 서베이 결과(Graph)
     static let survey = Path.domain + Path.survey

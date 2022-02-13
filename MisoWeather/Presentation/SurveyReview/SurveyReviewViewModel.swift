@@ -81,8 +81,10 @@ final class SurveyReviewViewModel {
             networkManager.getfetchData(url: url) {(result: Result<CommentModel, APIError>) in
                 switch result {
                 case .success(let model):
+                    if let lastID = model.data.commentList.last {
+                        self.lastID = lastID.id
+                    }
                     self.commentData = model.data.commentList
-                    self.lastID = model.data.commentList.last!.id
                     self.hasNext = model.data.hasNext
                     
                     completion()

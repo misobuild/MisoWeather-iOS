@@ -17,13 +17,6 @@ final class QnaTableVIewCell: UITableViewCell {
         label.textColor = .textColor
         label.textAlignment = .center
         label.layer.cornerRadius = 20
-        
-//        guard let text = label.text else { return UILabel() }
-//        let attributeString = NSMutableAttributedString(string: text)
-//        let font = UIFont.systemFont(ofSize: 18, weight: .heavy)
-//        attributeString.addAttribute(.font, value: font, range: (text as NSString).range(of: "롱패딩"))
-//        label.attributedText = attributeString
-        
         return label
     }()
     

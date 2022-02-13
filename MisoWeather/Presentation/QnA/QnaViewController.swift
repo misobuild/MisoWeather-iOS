@@ -15,10 +15,6 @@ final class QnaViewController: UIViewController {
     var item = ""
     
     // MARK: - Subviews
-    private lazy var qnaView: QnaView = {
-        let view = QnaView()
-        return view
-    }()
     
     private lazy var titleLabel: TitleLabel = {
         let label = TitleLabel()
@@ -47,14 +43,13 @@ final class QnaViewController: UIViewController {
     @objc private func postAnswer() {
         model.postSurveyAnswerData(answerID: answerID, surveyID: surveyAnswerList[0].surveyId) {
             DispatchQueue.main.async {
+                let qnaView = QnaView(frame: CGRect(), item: self.item)
                 
-                let qnaView = QnaView()
-                qnaView.item = self.item
                 self.view.addSubview(qnaView)
                 qnaView.snp.makeConstraints {
                     $0.edges.equalToSuperview()
                 }
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
                     self.popView()
                 }
             }
@@ -62,8 +57,8 @@ final class QnaViewController: UIViewController {
     }
     
     private func popView() {
-        self.navigationController?.navigationBar.isHidden = true
-        self.navigationController?.popViewController(animated: true)
+        NotificationCenter.default.post( name: .updateNotification, object: nil, userInfo: nil)
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
     private func setData() {
@@ -111,6 +106,12 @@ extension QnaViewController {
     
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
+        self.view.layer.cornerRadius = 25
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+
         [
             titleLabel,
             tableView,
@@ -118,11 +119,11 @@ extension QnaViewController {
         ].forEach {view.addSubview($0)}
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(height * 0.2)
+            $0.top.equalToSuperview().inset(height * 0.12)
         }
         
         tableView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(height * 0.32)
+            $0.top.equalToSuperview().offset(height * 0.25)
             $0.width.equalTo(width - (width * 0.20))
             $0.height.equalTo(height * 0.45)
             $0.centerX.equalToSuperview()
