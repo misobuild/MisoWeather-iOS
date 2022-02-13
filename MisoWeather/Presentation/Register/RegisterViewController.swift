@@ -17,10 +17,11 @@ final class RegisterViewController: UIViewController {
     let model = RegisterViewModel()
     
     // MARK: - Subviews
-    var images = [UIImage(named: "onboarding1"), UIImage(named: "onboarding2"),  UIImage(named: "onboarding3")]
+   
     var imageViews = [UIImageView]()
-    
-    
+//    let abc = self.view.frame.width
+//
+//    let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 360)
     let scrollView = OnboardingView()
 
     private lazy var logoView: UIImageView = {
@@ -226,8 +227,6 @@ final class RegisterViewController: UIViewController {
         self.view.backgroundColor = .mainColor
         self.navigationController?.navigationBar.isHidden = true
         
-
-        
         //        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         //        self.navigationItem.backBarButtonItem = backBarButtonItem
         
@@ -249,6 +248,7 @@ final class RegisterViewController: UIViewController {
     }
 }
 
+// MARK: - AppleLogin
 extension RegisterViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
@@ -267,10 +267,10 @@ extension RegisterViewController: ASAuthorizationControllerDelegate {
             }
             
             // For the purpose of this demo app, store the `userIdentifier` in the keychain.
-            //self.saveUserInKeychain(userIdentifier)
+            // self.saveUserInKeychain(userIdentifier)
             
             // For the purpose of this demo app, show the Apple ID credential information in the `ResultViewController`.
-            //self.showResultViewController(userIdentifier: userIdentifier, fullName: fullName, email: email)
+            // self.showResultViewController(userIdentifier: userIdentifier, fullName: fullName, email: email)
             
         case let passwordCredential as ASPasswordCredential:
             
@@ -314,30 +314,31 @@ extension RegisterViewController {
             titleLabel].forEach {view.addSubview($0)}
         
         logoView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(88)
-            $0.leading.equalToSuperview().inset(43)
+            $0.top.equalToSuperview().inset(height * 0.12)
+            $0.leading.equalToSuperview().inset(width * 0.09)
             $0.width.equalTo(45)
             $0.height.equalTo(45)
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(200.0)
-            $0.height.equalTo(360)
-            $0.width.equalTo(360)
-            $0.centerX.equalToSuperview()
+            $0.top.equalTo(logoView.snp.bottom).offset(height * 0.05)
+            $0.height.equalTo(height * 0.43)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         
         kakaoLoginButon.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(width * 0.06)
+            $0.leading.equalToSuperview().inset(width * 0.07)
             $0.trailing.equalToSuperview().inset(width * 0.06)
-            $0.top.equalTo(scrollView.snp.bottom).offset(50.0)
-            $0.height.equalTo(48)
+            $0.top.equalTo(scrollView.snp.bottom).offset(height * 0.08)
+            $0.height.equalTo(height * 0.06)
         }
+        
         appleLoginButton.snp.makeConstraints {
             $0.leading.equalTo(kakaoLoginButon)
             $0.trailing.equalTo(kakaoLoginButon)
             $0.top.equalTo(kakaoLoginButon.snp.bottom).offset(10)
-            $0.height.equalTo(48)
+            $0.height.equalTo(height * 0.06)
         }
     }
 }
