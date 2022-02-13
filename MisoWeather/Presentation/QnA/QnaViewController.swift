@@ -12,6 +12,7 @@ final class QnaViewController: UIViewController {
     let model = QnaViewModel()
     var surveyAnswerList: [SurveyAnswerList] = []
     var answerID: Int = 0
+    var item = ""
     
     // MARK: - Subviews
     private lazy var qnaView: QnaView = {
@@ -45,18 +46,24 @@ final class QnaViewController: UIViewController {
     // MARK: - Private Method
     @objc private func postAnswer() {
         model.postSurveyAnswerData(answerID: answerID, surveyID: surveyAnswerList[0].surveyId) {
-            print("성공")
             DispatchQueue.main.async {
-                let qnaView = QnaView()
-                self.view.addSubview(qnaView)
                 
+                let qnaView = QnaView()
+                qnaView.item = self.item
+                self.view.addSubview(qnaView)
                 qnaView.snp.makeConstraints {
                     $0.edges.equalToSuperview()
                 }
-//                self.navigationController?.pushViewController(QnaAnswerViewController(), animated: true)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+                    self.popView()
+                }
             }
-
         }
+    }
+    
+    private func popView() {
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.popViewController(animated: true)
     }
 
     private func setData() {
@@ -88,6 +95,7 @@ extension QnaViewController: UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.isSelected = true
         self.answerID = surveyAnswerList[indexPath.row].answerId
+        self.item = surveyAnswerList[indexPath.row].answer
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -106,7 +114,7 @@ extension QnaViewController {
         [
             titleLabel,
             tableView,
-            confirmButton,
+            confirmButton
         ].forEach {view.addSubview($0)}
         
         titleLabel.snp.makeConstraints {

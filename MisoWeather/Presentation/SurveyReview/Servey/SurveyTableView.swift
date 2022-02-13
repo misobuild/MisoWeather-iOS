@@ -60,7 +60,7 @@ extension SurveyTableView: UITableViewDataSource {
         
         if !userSurveyList[indexPath.row].answered {
             // Notification에 userinfo를 실어서 보냄
-            NotificationCenter.default.post( name:  .surveyNotification, object: nil, userInfo: ["surveyID": id])
+            NotificationCenter.default.post( name: .surveyNotification, object: nil, userInfo: ["surveyID": id])
         }
     }
 }

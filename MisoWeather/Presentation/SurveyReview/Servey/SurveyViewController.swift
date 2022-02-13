@@ -36,7 +36,6 @@ final class SurveyViewController: UIViewController {
         // Notification에 담겨진 object와 userInfo를 얻어 처리 가능
         guard let notificationUserInfo = notification.userInfo as? [String: Int] else { return }
         guard let surveyID = notificationUserInfo.values.first else {return}
-        print(surveyID)
         
         model.getSurveyAnswerData(id: surveyID) {
             DispatchQueue.main.async {
@@ -45,14 +44,12 @@ final class SurveyViewController: UIViewController {
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }
-//        self.present(QnaViewController(), animated: true, completion: nil)
     }
     
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setData()
         setupView()
         
         // 옵저버를 추가해 구독이 가능하게 끔 함
@@ -61,6 +58,7 @@ final class SurveyViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setData()
         self.surveyTableView.tableView.reloadData()
     }
 }

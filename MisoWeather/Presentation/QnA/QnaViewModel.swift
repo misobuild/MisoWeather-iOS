@@ -32,8 +32,7 @@ final class QnaViewModel {
         let networkManager = NetworkManager()
         networkManager.headerTokenRequsetData(url: requeset) {(result: Result<SurveyResultModel, APIError>) in
             switch result {
-            case .success(let model):
-                print(model)
+            case .success:
                 completion()
                 
             case .failure(let error):

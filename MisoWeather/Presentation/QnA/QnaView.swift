@@ -11,6 +11,7 @@ import Lottie
 
 class QnaView: UIView {
     
+    var item = ""
     // MARK: - SubView
     private lazy var animationView: AnimationView = {
        let view = AnimationView(name: "lf20_tnqgtf5o")
@@ -26,7 +27,7 @@ class QnaView: UIView {
         label.textAlignment = .center
         label.text = """
                     오늘 같은 날씨엔
-                    역시 롱패딩!
+                    역시 \(item)!
                     """
         label.font = .systemFont(ofSize: 28)
         
@@ -61,6 +62,9 @@ class QnaView: UIView {
 extension QnaView {
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
+        
+        self.backgroundColor = .white
+        
         [
             animationView,
             titleLabel,
