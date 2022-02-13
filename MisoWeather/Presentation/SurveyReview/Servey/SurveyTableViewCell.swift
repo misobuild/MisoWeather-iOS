@@ -13,6 +13,7 @@ final class SurveyTableViewCell: UITableViewCell {
     var chartList: [Chart] = []
     var titleList: [UILabel] = []
     var percentList: [UILabel] = []
+    var isAnswered: Bool = false
     
     // MARK: - SubView
     private lazy var titleLabel: UILabel = {
@@ -146,29 +147,18 @@ final class SurveyTableViewCell: UITableViewCell {
     }()
     
     // MARK: - Method
-//    override var isSelected: Bool {
-//        didSet {
-//            if isSelected {
-//                print("선택")
-//                answerLabel.textColor = .mainColor
-//                leftBackgoundView.backgroundColor = .orange
-//            } else {
-//                print("안선택")
-//            }
-//        }
-//    }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if isSelected {
-            leftBackgoundView.backgroundColor = .surveyAnswerColor
-            rightBackgoundView.backgroundColor = .surveyAnswerColor
+            if !isAnswered {
+                leftBackgoundView.backgroundColor = .surveyAnswerColor
+                rightBackgoundView.backgroundColor = .surveyAnswerColor
+            }
         } else {
             self.layer.borderColor = UIColor.clear.cgColor
             leftBackgoundView.backgroundColor = .backgroundColor
             rightBackgoundView.backgroundColor = .backgroundColor
         }
-        
     }
 
     private func setList() {
@@ -187,6 +177,7 @@ final class SurveyTableViewCell: UITableViewCell {
     }
     
     func setUserSurveyData(userData: UserSurveyList) {
+        isAnswered = userData.answered
         if let answer =  userData.memberAnswer {
             answerLabel.text = answer
             chevronImage.isHidden = true

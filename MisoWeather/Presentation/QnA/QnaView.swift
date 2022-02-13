@@ -1,20 +1,21 @@
 //
-//  QnaAnswerViewController.swift
+//  QnaView.swift
 //  MisoWeather
 //
-//  Created by jiinheo on 2022/02/04.
+//  Created by jiinheo on 2022/02/11.
 //
 
 import UIKit
 import SnapKit
 import Lottie
 
-class QnaAnswerViewController: UIViewController {
+class QnaView: UIView {
     
+    var item = ""
     // MARK: - SubView
     private lazy var animationView: AnimationView = {
        let view = AnimationView(name: "lf20_tnqgtf5o")
-        view.frame = self.view.bounds
+        view.frame = self.bounds
         view.contentMode = .scaleAspectFit
         view.play()
         return view
@@ -26,7 +27,7 @@ class QnaAnswerViewController: UIViewController {
         label.textAlignment = .center
         label.text = """
                     오늘 같은 날씨엔
-                    역시 롱패딩!
+                    역시 \(item)!
                     """
         label.font = .systemFont(ofSize: 28)
         
@@ -46,21 +47,29 @@ class QnaAnswerViewController: UIViewController {
     }()
     
     // MARK: - LifeCycle Method
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupView()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
 
-extension QnaAnswerViewController {
+extension QnaView {
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
+        
+        self.backgroundColor = .white
+        
         [
             animationView,
             titleLabel,
             thankyouLabel
-        ].forEach {view.addSubview($0)}
+        ].forEach {self.addSubview($0)}
         
         animationView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
