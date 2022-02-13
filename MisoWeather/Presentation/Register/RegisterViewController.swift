@@ -17,6 +17,19 @@ final class RegisterViewController: UIViewController {
     let model = RegisterViewModel()
     
     // MARK: - Subviews
+    var images = [UIImage(named: "onboarding1"), UIImage(named: "onboarding2"),  UIImage(named: "onboarding3")]
+    var imageViews = [UIImageView]()
+    
+    
+    let scrollView = OnboardingView()
+
+    private lazy var logoView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        view.image = UIImage(named: "logo")
+        return view
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 45.0, weight: .regular)
@@ -38,7 +51,6 @@ final class RegisterViewController: UIViewController {
         button.addTarget(self, action: #selector(mainVC), for: .touchUpInside)
         return button
     }()
-    
     private lazy var kakaoLoginButon: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "kakaoLoginButton"), for: .normal)
@@ -46,8 +58,8 @@ final class RegisterViewController: UIViewController {
         button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(hasKakaoToken), for: .touchUpInside)
         
-//        // MARK: test
-//        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
+        //        // MARK: test
+        //        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         
         return button
     }()
@@ -59,7 +71,7 @@ final class RegisterViewController: UIViewController {
     }()
     
     // MARK: - Private Method
-
+    
     @objc func handleAuthorizationAppleIDButtonPress() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -94,11 +106,11 @@ final class RegisterViewController: UIViewController {
                     // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
                     
                     // MARK: 엑세스 토큰 발급Test
-//                    self.kakaoLogin()
+                    //                    self.kakaoLogin()
                     
                     let token = TokenUtils()
-                   // token.create("kakao", account: "userID", value: oAuthToken?.id)
-
+                    // token.create("kakao", account: "userID", value: oAuthToken?.id)
+                    
                     print(token.read("kakao", account: "accessToken") ?? "")
                     self.kakaoLogin()
                     
@@ -122,7 +134,7 @@ final class RegisterViewController: UIViewController {
                 if let error = error {
                     if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
                         // 유효한 토큰 아님 로그인 필요
-                       print("유효 토큰 없음 로그인 필요 ")
+                        print("유효 토큰 없음 로그인 필요 ")
                     } else {
                         // 기타 에러..
                     }
@@ -132,7 +144,7 @@ final class RegisterViewController: UIViewController {
                     token.create("kakao", account: "userID", value: String((oauthToken?.id)!))
                     print(token.read("kakao", account: "accessToken") ?? "")
                     // Main으로 화면 전환
-
+                    
                     self.checkMain()
                 }
             }
@@ -193,13 +205,13 @@ final class RegisterViewController: UIViewController {
                     // 키체인에 Token, ID 저장
                     let token = TokenUtils()
                     token.create("kakao", account: "accessToken", value: accessToken)
-
+                    
                     
                     // TODO: 우리 기존 회원인지 아닌지 검사하는 과정이 필요함
                     self.checkUser()
-
-//                    // 지역 선택으로 화면 전환
-//                    self.nextVC()
+                    
+                    //                    // 지역 선택으로 화면 전환
+                    //                    self.nextVC()
                 }
             }
         } else {
@@ -214,21 +226,23 @@ final class RegisterViewController: UIViewController {
         self.view.backgroundColor = .mainColor
         self.navigationController?.navigationBar.isHidden = true
         
-//        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-//        self.navigationItem.backBarButtonItem = backBarButtonItem
 
-//        let token = TokenUtils()
-//        token.delete("kakao", account: "accessToken")
-//
-//
-//        UserApi.shared.logout {(error) in
-//            if let error = error {
-//                print(error)
-//            }
-//            else {
-//                print("logout() success.")
-//            }
-//        }
+        
+        //        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        //        self.navigationItem.backBarButtonItem = backBarButtonItem
+        
+        //        let token = TokenUtils()
+        //        token.delete("kakao", account: "accessToken")
+        //
+        //
+        //        UserApi.shared.logout {(error) in
+        //            if let error = error {
+        //                print(error)
+        //            }
+        //            else {
+        //                print("logout() success.")
+        //            }
+        //        }
         
         hasUser()
         setupView()
@@ -245,9 +259,9 @@ extension RegisterViewController: ASAuthorizationControllerDelegate {
             print("user: \(user)")
             
             if let authorizationCode = appleIDCredential.authorizationCode,
-                let identityToken = appleIDCredential.identityToken,
-                let authString = String(data: authorizationCode, encoding: .utf8),
-                let tokenString = String(data: identityToken, encoding: .utf8) {
+               let identityToken = appleIDCredential.identityToken,
+               let authString = String(data: authorizationCode, encoding: .utf8),
+               let tokenString = String(data: identityToken, encoding: .utf8) {
                 print("authorizationCode: \(authString)")
                 print("identityToken: \(tokenString)")
             }
@@ -257,9 +271,9 @@ extension RegisterViewController: ASAuthorizationControllerDelegate {
             
             // For the purpose of this demo app, show the Apple ID credential information in the `ResultViewController`.
             //self.showResultViewController(userIdentifier: userIdentifier, fullName: fullName, email: email)
-        
+            
         case let passwordCredential as ASPasswordCredential:
-        
+            
             // Sign in using an existing iCloud Keychain credential.
             let username = passwordCredential.user
             let password = passwordCredential.password
@@ -267,9 +281,9 @@ extension RegisterViewController: ASAuthorizationControllerDelegate {
             // For the purpose of this demo app, show the password credential as an alert.
             print(username)
             print(password)
-//            DispatchQueue.main.async {
-//                self.showPasswordCredentialAlert(username: username, password: password)
-//            }
+            //            DispatchQueue.main.async {
+            //                self.showPasswordCredentialAlert(username: username, password: password)
+            //            }
             
         default:
             break
@@ -288,24 +302,35 @@ extension RegisterViewController: ASAuthorizationControllerPresentationContextPr
     }
 }
 
-
 extension RegisterViewController {
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         
         [
+            logoView,
+            scrollView,
             kakaoLoginButon,
             appleLoginButton,
             titleLabel].forEach {view.addSubview($0)}
         
-        titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(300.0)
+        logoView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(88)
+            $0.leading.equalToSuperview().inset(43)
+            $0.width.equalTo(45)
+            $0.height.equalTo(45)
+        }
+        
+        scrollView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(200.0)
+            $0.height.equalTo(360)
+            $0.width.equalTo(360)
             $0.centerX.equalToSuperview()
         }
+        
         kakaoLoginButon.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(width * 0.06)
             $0.trailing.equalToSuperview().inset(width * 0.06)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(150.0)
+            $0.top.equalTo(scrollView.snp.bottom).offset(50.0)
             $0.height.equalTo(48)
         }
         appleLoginButton.snp.makeConstraints {
