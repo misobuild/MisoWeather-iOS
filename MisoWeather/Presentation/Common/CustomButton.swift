@@ -17,6 +17,8 @@ final class CustomButton: UIButton {
         case changeRegion
         case post
         case answer
+        case kakao
+        case apple
     }
     
     init() {
@@ -33,6 +35,10 @@ final class CustomButton: UIButton {
                 backgroundColor = isHighlighted ? .backgroundColor : .white
             } else if self.tag == 2 {
                 backgroundColor = isHighlighted ? .selectButtonColor  : .surveyAnswerColor
+            } else if self.tag == 3 { // kakao
+                backgroundColor = isHighlighted ? .systemGray  : .kakaoButtonColor
+            } else if self.tag == 4 { // apple
+                backgroundColor = isHighlighted ? .systemGray  : .white
             } else {
                 backgroundColor = isHighlighted ? .selectButtonColor : .mainColor
             }
@@ -67,7 +73,6 @@ final class CustomButton: UIButton {
         case .changeRegion:
             self.tag = 1
             self.backgroundColor = .white
-            self.layer.cornerRadius = 15
             self.layer.masksToBounds = true
             self.setTitleColor(.mainColor, for: .normal)
             self.setTitle("서울", for: .normal)
@@ -84,6 +89,36 @@ final class CustomButton: UIButton {
             self.setTitle("답변 완료!", for: .normal)
             self.setTitleColor(.mainColor, for: .normal)
             self.backgroundColor = .surveyAnswerColor
+            
+        case .kakao:
+            self.tag = 3
+            self.backgroundColor = .white
+            self.layer.cornerRadius = 6
+            self.layer.masksToBounds = true
+            self.backgroundColor = .kakaoButtonColor
+            self.titleLabel?.font = .systemFont(ofSize: 19)
+            self.setImage(UIImage(named: "kakao"), for: .normal)
+            self.setTitleColor(.black, for: .normal)
+            self.setTitle("카카오 로그인", for: .normal)
+            self.contentVerticalAlignment = .center
+            self.semanticContentAttribute = .forceLeftToRight
+            self.imageEdgeInsets = .init(top: 0, left: -145, bottom: 0, right: 30)
+            self.titleEdgeInsets = .init(top: 0, left: -10, bottom: 0, right: 10)
+            
+        case .apple:
+            self.tag = 4
+            self.backgroundColor = .white
+            self.layer.cornerRadius = 6
+            self.layer.masksToBounds = true
+            self.imageView?.contentMode = .scaleAspectFit
+            self.titleLabel?.font = .systemFont(ofSize: 19)
+            self.setImage(UIImage(named: "apple"), for: .normal)
+            self.setTitleColor(.black, for: .normal)
+            self.setTitle("Apple로 로그인", for: .normal)
+            self.contentVerticalAlignment = .center
+            self.semanticContentAttribute = .forceLeftToRight
+            self.imageEdgeInsets = .init(top: 0, left: -140, bottom: 0, right: 20)
+            self.titleEdgeInsets = .init(top: 0, left: -20, bottom: 0, right: 10)
         }
     }
 }

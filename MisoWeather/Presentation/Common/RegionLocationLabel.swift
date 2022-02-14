@@ -21,7 +21,7 @@ class RegionLocationLabel: UIView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
         label.textColor = .black
-        label.text = "서울시 강남구 신사동"
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     

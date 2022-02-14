@@ -9,7 +9,7 @@ import Foundation
 
 final class QnaViewModel {
     
-    func postSurveyAnswerData(answerID:Int, surveyID:Int, completion: @escaping () -> Void) {
+    func postSurveyAnswerData(answerID: Int, surveyID:Int, completion: @escaping () -> Void) {
         
         let token = TokenUtils()
         guard let serverToken =  token.read("misoWeather", account: "serverToken") else {return}

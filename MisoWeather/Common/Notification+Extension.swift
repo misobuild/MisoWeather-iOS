@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let surveyNotification = Notification.Name(rawValue: "surveyNotification")
+    static let updateNotification = Notification.Name(rawValue: "updateNotification")
 }

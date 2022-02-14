@@ -15,6 +15,13 @@ final class MainScrollView: UIView {
     let contentView = UIView()
     
     // MARK: - subviews
+    private lazy var logoView: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "logoPurple")
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+    
     private lazy var misoLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18.0, weight: .regular)
@@ -24,7 +31,7 @@ final class MainScrollView: UIView {
     
     private lazy var addLocationButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "addLocation"), for: .normal)
+        button.setImage(UIImage(named: "location"), for: .normal)
         button.tintColor = .black
         return button
     }()
@@ -107,6 +114,7 @@ extension MainScrollView {
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         [
+            logoView,
             misoLabel,
             addLocationButton,
             userButton,
@@ -132,34 +140,39 @@ extension MainScrollView {
             $0.width.equalTo(width)
             $0.height.equalTo(950)
         }
-  
-        misoLabel.snp.makeConstraints {
+        logoView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(30.0)
             $0.leading.equalToSuperview().inset(width * 0.06)
+            $0.width.equalTo(20)
+            $0.height.equalTo(20)
+        }
+        misoLabel.snp.makeConstraints {
+            $0.centerY.equalTo(logoView)
+            $0.leading.equalTo(logoView.snp.trailing).offset(4)
         }
         
         addLocationButton.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(width * 0.14)
-            $0.top.equalTo(misoLabel)
-            $0.width.equalTo(width * 0.06)
-            $0.height.equalTo(width * 0.06)
+            $0.trailing.equalToSuperview().inset(width * 0.12)
+            $0.centerY.equalTo(userButton)
+            $0.width.equalTo(width * 0.09)
+            $0.height.equalTo(width * 0.09)
         }
         
         userButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(width * 0.06)
-            $0.top.equalTo(misoLabel)
+            $0.top.equalTo(logoView)
             $0.width.equalTo(width * 0.06)
             $0.height.equalTo(width * 0.06)
         }
         
         greetingLabel.snp.makeConstraints {
-            $0.top.equalTo(misoLabel.snp.bottom).offset(32.0)
-            $0.leading.equalTo(misoLabel)
+            $0.top.equalTo(logoView.snp.bottom).offset(32.0)
+            $0.leading.equalTo(logoView)
         }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(greetingLabel.snp.bottom).offset(7.0)
-            $0.leading.equalTo(misoLabel)
+            $0.leading.equalTo(greetingLabel)
         }
         
         weatherView.snp.makeConstraints {

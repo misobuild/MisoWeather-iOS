@@ -5,4 +5,8 @@
 //  Created by jiinheo on 2022/02/13.
 //
 
-import Foundation
+struct SurveyIsAnswerModel: Decodable {
+    let status: String
+    let message: String
+    let data: Bool
+}

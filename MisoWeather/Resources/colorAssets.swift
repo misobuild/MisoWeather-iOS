@@ -30,4 +30,7 @@ extension UIColor {
     class var surveyAnswerColor: UIColor? {
         return UIColor(named: "surveyAnswerColor")
     }
+    class var kakaoButtonColor: UIColor? {
+        return UIColor(named: "kakaoButtonColor")
+    }
 }

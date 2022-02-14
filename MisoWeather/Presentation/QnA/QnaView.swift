@@ -11,7 +11,8 @@ import Lottie
 
 class QnaView: UIView {
     
-    var item = ""
+    var item: String
+    
     // MARK: - SubView
     private lazy var animationView: AnimationView = {
        let view = AnimationView(name: "lf20_tnqgtf5o")
@@ -21,42 +22,49 @@ class QnaView: UIView {
         return view
     }()
     
-    private lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.textAlignment = .center
-        label.text = """
-                    오늘 같은 날씨엔
-                    역시 \(item)!
-                    """
-        label.font = .systemFont(ofSize: 28)
+ 
+        label.font = .systemFont(ofSize: 28, weight: .light)
         
-        guard let text = label.text else { return UILabel() }
+        let text = """
+                    오늘 같은 날씨엔
+                    역시 \(self.item)!
+                    """
+        label.text = text
+        
         let attributeString = NSMutableAttributedString(string: text)
         let font = UIFont.systemFont(ofSize: 28, weight: .heavy)
-        attributeString.addAttribute(.font, value: font, range: (text as NSString).range(of: "롱패딩!"))
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 5
+        attributeString.addAttribute(.font, value: font, range: (text as NSString).range(of: self.item))
+        attributeString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributeString.length))
         label.attributedText = attributeString
+        label.textAlignment = .center
+        
         return label
     }()
     
     private lazy var thankyouLabel: UILabel = {
         let label = UILabel()
         label.text = "답변 감사해요!"
-        label.font = .systemFont(ofSize: 24)
+        label.font = .systemFont(ofSize: 24, weight: .light)
         return label
     }()
     
     // MARK: - LifeCycle Method
 
-    override init(frame: CGRect) {
+    init(frame: CGRect, item: String) {
+        self.item = item
+  
         super.init(frame: frame)
-        setupView()
+        self.setupView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 
 extension QnaView {

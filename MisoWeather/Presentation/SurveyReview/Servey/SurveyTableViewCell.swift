@@ -69,6 +69,7 @@ final class SurveyTableViewCell: UITableViewCell {
     
     private lazy var answerLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
         label.font = .systemFont(ofSize: 14.0, weight: .bold)
         label.textColor = .mainColor
         return label
@@ -104,23 +105,26 @@ final class SurveyTableViewCell: UITableViewCell {
     
     private lazy var chart1Label: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 11.0, weight: .bold)
+        label.font = .systemFont(ofSize: 12.0, weight: .bold)
         label.textColor = .mainColor
         label.textAlignment = .right
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     private lazy var chart2Label: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 11.0, weight: .bold)
+        label.font = .systemFont(ofSize: 12.0, weight: .bold)
         label.textColor = .textColor
         label.textAlignment = .right
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     private lazy var chart3Label: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 11.0, weight: .bold)
+        label.font = .systemFont(ofSize: 12.0, weight: .bold)
         label.textColor = .textColor
         label.textAlignment = .right
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -129,6 +133,7 @@ final class SurveyTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 10, weight: .bold)
         label.textColor = .mainColor
         label.textAlignment = .right
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     private lazy var chart2PercentLabel: UILabel = {

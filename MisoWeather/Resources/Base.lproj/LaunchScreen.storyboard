@@ -16,8 +16,24 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="thX-RD-ErQ">
+                                <rect key="frame" x="161.5" y="376.5" width="91.5" height="93.5"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MISOWEATHER" translatesAutoresizingMaskIntoConstraints="NO" id="sC6-mh-8FH">
+                                <rect key="frame" x="105" y="500" width="204" height="18.5"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="mainColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sC6-mh-8FH" secondAttribute="trailing" constant="105" id="CMm-ew-QjQ"/>
+                            <constraint firstItem="sC6-mh-8FH" firstAttribute="top" secondItem="thX-RD-ErQ" secondAttribute="bottom" constant="30" id="Mj6-i4-COR"/>
+                            <constraint firstItem="thX-RD-ErQ" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-30" id="Tka-WN-zdt"/>
+                            <constraint firstItem="sC6-mh-8FH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="105" id="cjE-Ra-O6a"/>
+                            <constraint firstItem="thX-RD-ErQ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="dDQ-OS-4g8"/>
+                            <constraint firstItem="sC6-mh-8FH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zcs-RQ-aen"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -26,6 +42,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="MISOWEATHER" width="200.5" height="18.5"/>
+        <image name="logo" width="91.5" height="93.5"/>
         <namedColor name="mainColor">
             <color red="0.44299998879432678" green="0.39599999785423279" blue="0.88999998569488525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
