@@ -62,16 +62,17 @@ extension MainWeatherView {
         regionLocationLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(width * 0.01)
+            $0.width.equalTo(width * 0.48)
         }
         
         emojiLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(width * 0.16)
+            $0.trailing.equalToSuperview().inset(width * 0.19)
         }
         
         tempLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(width * 0.08)
+            $0.trailing.equalToSuperview().inset(width * 0.1)
         }
         
         nextButton.snp.makeConstraints {
