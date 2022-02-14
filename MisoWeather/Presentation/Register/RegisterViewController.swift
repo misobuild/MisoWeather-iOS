@@ -17,11 +17,7 @@ final class RegisterViewController: UIViewController {
     let model = RegisterViewModel()
     
     // MARK: - Subviews
-   
     var imageViews = [UIImageView]()
-//    let abc = self.view.frame.width
-//
-//    let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 360)
     let scrollView = OnboardingView()
 
     private lazy var logoView: UIImageView = {
@@ -39,34 +35,14 @@ final class RegisterViewController: UIViewController {
         return label
     }()
     
-    private lazy var nonLoginButton: UIButton = {
-        let button = UIButton(type: .system)
-        let text = "그냥 둘러볼래요"
-        button.setTitleColor(.white, for: .normal)
-        button.setTitle(text, for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 16.0)
-        let attributeString = NSMutableAttributedString(string: text)
-        attributeString.addAttribute(.underlineStyle, value: 1, range: NSRange.init(location: 0, length: text.count))
-        button.titleLabel?.attributedText = attributeString
-        // 굵기 1의 언더라인과 함께 처음부터 끝까지 밑줄 설정
-        button.addTarget(self, action: #selector(mainVC), for: .touchUpInside)
-        return button
-    }()
-    private lazy var kakaoLoginButon: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "kakaoLoginButton"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.contentMode = .scaleAspectFit
+    private lazy var kakaoLoginButon: CustomButton = {
+        let button = CustomButton(type: .kakao)
         button.addTarget(self, action: #selector(hasKakaoToken), for: .touchUpInside)
-        
-        //        // MARK: test
-        //        button.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
-        
         return button
     }()
     
-    private lazy var appleLoginButton: ASAuthorizationAppleIDButton = {
-        let button = ASAuthorizationAppleIDButton(type: .signIn, style: .white)
+    private lazy var appleLoginButton: CustomButton = {
+        let button = CustomButton(type: .apple)
         button.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
         return button
     }()
@@ -331,14 +307,14 @@ extension RegisterViewController {
             $0.leading.equalToSuperview().inset(width * 0.07)
             $0.trailing.equalToSuperview().inset(width * 0.06)
             $0.top.equalTo(scrollView.snp.bottom).offset(height * 0.08)
-            $0.height.equalTo(height * 0.06)
+            $0.height.equalTo(44)
         }
         
         appleLoginButton.snp.makeConstraints {
             $0.leading.equalTo(kakaoLoginButon)
             $0.trailing.equalTo(kakaoLoginButon)
             $0.top.equalTo(kakaoLoginButon.snp.bottom).offset(10)
-            $0.height.equalTo(height * 0.06)
+            $0.height.equalTo(44)
         }
     }
 }
