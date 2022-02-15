@@ -19,7 +19,7 @@ final class RegisterViewController: UIViewController {
     // MARK: - Subviews
     var imageViews = [UIImageView]()
     let scrollView = OnboardingView()
-
+    
     private lazy var logoView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
@@ -130,19 +130,13 @@ final class RegisterViewController: UIViewController {
     
     // 로그아웃 -> 로그인 시 기존 유저인지 확인할 때
     private func checkUser() {
-        model.token {(result: Result<String, APIError>) in
-            
-            switch result {
-            case .success(let serverToken):
-                print("유저 있음")
+        model.getIsExistUser { isUser in
+            if isUser == "true"{
                 // 메인으로 화면 전환
                 DispatchQueue.main.async {
                     self.mainVC()
                 }
-                
-            case .failure(let error):
-                print("유저 없음")
-                // 지역 선택으로 화면 전환
+            } else {
                 DispatchQueue.main.async {
                     self.nextVC()
                 }
@@ -152,19 +146,12 @@ final class RegisterViewController: UIViewController {
     
     // 처음 앱 실행 시 화면 분기에 대해서
     private func checkMain() {
-        print("checkMain 실행 ")
-        model.token {(result: Result<String, APIError>) in
-            
-            switch result {
-            case .success(let serverToken):
-                print("유저 있음")
+        model.getIsExistUser { isUser in
+            if isUser == "true"{
                 // 메인으로 화면 전환
                 DispatchQueue.main.async {
                     self.mainVC()
                 }
-                
-            case .failure(let error):
-                print("유저 없음")
             }
         }
     }
@@ -202,22 +189,6 @@ final class RegisterViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .mainColor
         self.navigationController?.navigationBar.isHidden = true
-        
-        //        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        //        self.navigationItem.backBarButtonItem = backBarButtonItem
-        
-        //        let token = TokenUtils()
-        //        token.delete("kakao", account: "accessToken")
-        //
-        //
-        //        UserApi.shared.logout {(error) in
-        //            if let error = error {
-        //                print(error)
-        //            }
-        //            else {
-        //                print("logout() success.")
-        //            }
-        //        }
         
         hasUser()
         setupView()

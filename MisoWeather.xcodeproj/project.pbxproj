@@ -82,6 +82,7 @@
 		E8CE9A03279FEA650095C958 /* QnaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE9A02279FEA650095C958 /* QnaViewController.swift */; };
 		E8CE9A05279FEAEA0095C958 /* QnaTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE9A04279FEAEA0095C958 /* QnaTableVIewCell.swift */; };
 		E8CE9A0A27A00F670095C958 /* qnaData.json in Resources */ = {isa = PBXBuildFile; fileRef = E8CE9A0927A00F670095C958 /* qnaData.json */; };
+		E8CEBFA627BB5944009CD8DE /* Utiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CEBFA527BB5944009CD8DE /* Utiles.swift */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
 		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
@@ -196,6 +197,7 @@
 		E8CE9A02279FEA650095C958 /* QnaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaViewController.swift; sourceTree = "<group>"; };
 		E8CE9A04279FEAEA0095C958 /* QnaTableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaTableVIewCell.swift; sourceTree = "<group>"; };
 		E8CE9A0927A00F670095C958 /* qnaData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = qnaData.json; sourceTree = "<group>"; };
+		E8CEBFA527BB5944009CD8DE /* Utiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utiles.swift; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				E83E01052790898900C4661A /* ObservableVMProtocol.swift */,
 				E8BFAD4A27B24B780007E1DC /* String+Extension.swift */,
 				E8BFAD5A27B66B840007E1DC /* Notification+Extension.swift */,
+				E8CEBFA527BB5944009CD8DE /* Utiles.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -896,6 +899,7 @@
 				E8BFAD5327B271D20007E1DC /* SurveyReviewViewModel.swift in Sources */,
 				E8CE99DD279BE56E0095C958 /* MainServeyView.swift in Sources */,
 				E83E010C2790A24F00C4661A /* UserInfo.swift in Sources */,
+				E8CEBFA627BB5944009CD8DE /* Utiles.swift in Sources */,
 				E8CE99F9279EC1C70095C958 /* SurveyTableViewCell.swift in Sources */,
 				E8132BAF2795501200A9518B /* TokenUtils.swift in Sources */,
 				E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */,
