@@ -21,9 +21,14 @@ enum Path {
     static var survey = "survey"
     static var answers = "/answers/"
     static var precheck = "/precheck"
+    static var exist = "/existence?socialId="
+    static var socialType = "&socialType="
 }
 
 extension URL {
+    // 회원 여부 검사
+    static let existence = Path.domain + Path.member + Path.exist
+    
     static let region = Path.domain + Path.region
     
     static let nickname = Path.domain + Path.member + "/" + Path.nickname
@@ -56,6 +61,5 @@ extension URL {
     
     // 한줄평 등록
     static let registerComment = Path.domain + Path.comment
-    
 
 }

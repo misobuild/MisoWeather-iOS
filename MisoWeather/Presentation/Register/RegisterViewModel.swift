@@ -15,6 +15,7 @@ final class RegisterViewModel {
         self.memberData
     }
     
+
     func token(completion: @escaping (Result<String, APIError>) -> Void) {
         let token = TokenUtils()
         guard let accessToken = token.read("kakao", account: "accessToken") else {return}
@@ -50,4 +51,22 @@ final class RegisterViewModel {
             }
         }
     }
+    func getIsExistUser(completion: @escaping (String) -> Void) {
+        let networkManager = NetworkManager()
+        let token = TokenUtils()
+        guard let id = token.read("kakao", account: "userID") else {return}
+        let urlString = URL.existence + id + Path.socialType + "kakao"
+        if let url =  URL(string: urlString) {
+            networkManager.getfetchData(url: url) {(result: Result<StatusModel, APIError>) in
+                switch result {
+                case .success(let model):
+                    completion(model.message)
+                    
+                case .failure(let error):
+                    debugPrint("error = \(error)")
+                }
+            }
+        }
+    }
+    
 }

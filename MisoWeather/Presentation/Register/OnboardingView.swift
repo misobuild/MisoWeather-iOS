@@ -36,7 +36,6 @@ final class OnboardingView: UIView {
     private func addContentScrollView() {
         var width: CGFloat = 0
         for index in 0..<text.count {
-            print(width)
             configureTitle(index: index, width: width)
             configureSubTitle(index: index, width: width)
             configureimage(index: index, width: width)
