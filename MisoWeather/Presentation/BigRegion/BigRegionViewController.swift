@@ -77,11 +77,6 @@ final class BigRegionViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-//        // MARK: test 시뮬레이터 키체인에 Token, ID 저장
-//        let token = TokenUtils()
-//        token.create("kakao", account: "accessToken", value: "bcHIUrVU5To7BYugt55LUkGqPeoOJ8xmXmRJ7Aopb7gAAAF-xOiRSw")
-//        token.create("kakao", account: "userID", value: "2063494098")
-        
         setupView()
     }
      

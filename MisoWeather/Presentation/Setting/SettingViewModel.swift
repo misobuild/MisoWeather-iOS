@@ -49,17 +49,28 @@ final class SettingViewModel {
         print("deleteUser 실행")
         
         let token = TokenUtils()
-        let userID = token.read("kakao", account: "userID")
+        var userID = ""
+        
+        let loginType = UserDefaults.standard.string(forKey: "loginType")
+        
+        if loginType == "kakao" {
+            userID = token.read("kakao", account: "userID") ?? ""
+            token.delete("kakao", account: "accessToken")
+            token.delete("kakao", account: "userID")
+        } else {
+            userID = token.read("apple", account: "user") ?? ""
+            token.delete("apple", account: "identityToken")
+            token.delete("apple", account: "user")
+        }
+        token.delete("misoWeather", account: "serverToken")
         guard let serverToken = token.read("misoWeather", account: "serverToken") else {return}
-
         
         let body: [String: Any] = [
-            "socialId": userID!,
-            "socialType": "kakao"
+            "socialId": userID,
+            "socialType": loginType
         ]
         
         let urlString = URL.member
-        print(urlString)
         
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         guard let url = URL(string: encodedString) else {return}

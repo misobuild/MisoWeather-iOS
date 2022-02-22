@@ -27,9 +27,9 @@ final class NicknameSelectViewModel {
                 case .success(let model):
                     self.recivedNickName = model.data
                     completion()
-                     
+                    
                 case .failure(let error):
-                    debugPrint("error = \(error)")
+                    debugPrint("fetchNicknameData error = \(error)")
                 }
             }
         }
@@ -38,19 +38,41 @@ final class NicknameSelectViewModel {
     func register(completion: @escaping (Result<String, APIError>) -> Void) {
         
         let token = TokenUtils()
-        guard let accessToken = token.read("kakao", account: "accessToken") else {return}
-        let userID = token.read("kakao", account: "userID")
+
+        let loginType = UserDefaults.standard.string(forKey: "loginType")
         let regionID = UserDefaults.standard.string(forKey: "regionID")
-      
-        let body: [String: Any] = [
-            "defaultRegionId": regionID!,
-            "emoji": recivedNickName.emoji,
-            "nickname": recivedNickName.nickname,
-            "socialId": userID!,
-            "socialType": "kakao"
-        ]
         
-        let urlString = URL.sinup + accessToken
+        var urlString = URL.sinup
+        var body: [String: Any] = [:]
+        
+        if loginType == "kakao" {
+            guard let accessToken = token.read("kakao", account: "accessToken") else {return}
+            let userID = token.read("kakao", account: "userID")
+            body = [
+                "defaultRegionId": regionID!,
+                "emoji": recivedNickName.emoji,
+                "nickname": recivedNickName.nickname,
+                "socialId": userID!,
+                "socialType": "kakao"
+            ]
+            urlString += accessToken
+        } else {
+            guard let accessToken = token.read("apple", account: "identityToken") else {return}
+            let userID = token.read("apple", account: "user")
+            body = [
+                "defaultRegionId": regionID!,
+                "emoji": recivedNickName.emoji,
+                "nickname": recivedNickName.nickname,
+                "socialId": userID!,
+                "socialType": "apple"
+            ]
+            urlString += accessToken
+            print(userID)
+        }
+      
+        print(body)
+        print(urlString)
+        
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         guard let url = URL(string: encodedString) else {return}
         guard let jsonBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return}
@@ -70,6 +92,7 @@ final class NicknameSelectViewModel {
                 completion(.success(""))
                 
             case .failure(let error):
+                debugPrint("register error = \(error)")
                 completion(.failure(error))
             }
         }

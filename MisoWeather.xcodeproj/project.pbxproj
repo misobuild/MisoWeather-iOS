@@ -83,6 +83,7 @@
 		E8CE9A05279FEAEA0095C958 /* QnaTableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE9A04279FEAEA0095C958 /* QnaTableVIewCell.swift */; };
 		E8CE9A0A27A00F670095C958 /* qnaData.json in Resources */ = {isa = PBXBuildFile; fileRef = E8CE9A0927A00F670095C958 /* qnaData.json */; };
 		E8CEBFA627BB5944009CD8DE /* Utiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CEBFA527BB5944009CD8DE /* Utiles.swift */; };
+		E8D7C54627C0DCC800FB34EA /* ExistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D7C54527C0DCC800FB34EA /* ExistModel.swift */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
 		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
@@ -198,6 +199,7 @@
 		E8CE9A04279FEAEA0095C958 /* QnaTableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QnaTableVIewCell.swift; sourceTree = "<group>"; };
 		E8CE9A0927A00F670095C958 /* qnaData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = qnaData.json; sourceTree = "<group>"; };
 		E8CEBFA527BB5944009CD8DE /* Utiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utiles.swift; sourceTree = "<group>"; };
+		E8D7C54527C0DCC800FB34EA /* ExistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistModel.swift; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				E8132BB42795BAE700A9518B /* NicknameModel.swift */,
 				E86EA7052791CC8C0066BB46 /* RegionModel.swift */,
 				E8132BBA279706DA00A9518B /* StatusModel.swift */,
+				E8D7C54527C0DCC800FB34EA /* ExistModel.swift */,
 				E8BFAD4027AE7BB90007E1DC /* TokenModel.swift */,
 			);
 			path = Model;
@@ -889,6 +892,7 @@
 				E8CE99D3279B09DF0095C958 /* ForecastTableViewCell.swift in Sources */,
 				E8132BBB279706DA00A9518B /* StatusModel.swift in Sources */,
 				E8CE9A05279FEAEA0095C958 /* QnaTableVIewCell.swift in Sources */,
+				E8D7C54627C0DCC800FB34EA /* ExistModel.swift in Sources */,
 				E8CE99C4279AC0240095C958 /* HourlyWeatherView.swift in Sources */,
 				E8CE99F1279E906D0095C958 /* SurveyViewController.swift in Sources */,
 				E8CE9A03279FEA650095C958 /* QnaViewController.swift in Sources */,
