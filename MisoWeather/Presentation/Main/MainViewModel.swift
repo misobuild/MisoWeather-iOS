@@ -56,7 +56,7 @@ final class MainViewModel {
                 completion()
                 
             case .failure(let error):
-                debugPrint("error = \(error)")
+                debugPrint("getMemberData error = \(error)")
                 completion()
             }
         }
@@ -66,6 +66,7 @@ final class MainViewModel {
         
         let networkManager = NetworkManager()
         guard let regionID = UserDefaults.standard.string(forKey: "regionID") else {return}
+        
         let urlString = URL.realtimeForecast + regionID
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         
@@ -86,7 +87,7 @@ final class MainViewModel {
                     completion()
                     
                 case .failure(let error):
-                    debugPrint("error = \(error)")
+                    debugPrint("getCurrentTempData error = \(error)")
                 }
             }
         }
@@ -105,7 +106,7 @@ final class MainViewModel {
                     completion()
                     
                 case .failure(let error):
-                    debugPrint("error = \(error)")
+                    debugPrint("getSurveyData error = \(error)")
                 }
             }
         }
@@ -124,7 +125,7 @@ final class MainViewModel {
                     completion()
                     
                 case .failure(let error):
-                    debugPrint("error = \(error)")
+                    debugPrint("getCommentData error = \(error)")
                 }
             }
         }

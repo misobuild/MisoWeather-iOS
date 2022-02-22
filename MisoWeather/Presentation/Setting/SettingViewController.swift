@@ -16,7 +16,7 @@ class SettingViewController: UIViewController {
     // MARK: - SubView
     
     private lazy var stackView: UIStackView = {
-       let view = UIStackView()
+        let view = UIStackView()
         view.axis = .vertical
         view.alignment = .center
         view.distribution = .equalSpacing
@@ -65,9 +65,9 @@ class SettingViewController: UIViewController {
     
     private func logoutAlert() {
         let alert = UIAlertController(title: "로그아웃 하시겠습니까 🔒",
-            message: "",
-            preferredStyle: UIAlertController.Style.alert)
-    
+                                      message: "",
+                                      preferredStyle: UIAlertController.Style.alert)
+        
         let cancle = UIAlertAction(title: "취소", style: .destructive, handler: nil)
         let confirm = UIAlertAction(title: "로그아웃", style: .default) { _ in
             self.kakaoLogout()
@@ -80,9 +80,9 @@ class SettingViewController: UIViewController {
     
     private func deleteAlert() {
         let alert = UIAlertController(title: "계정을 삭제할까요? 😢",
-            message: "",
-            preferredStyle: UIAlertController.Style.alert)
-    
+                                      message: "",
+                                      preferredStyle: UIAlertController.Style.alert)
+        
         let cancle = UIAlertAction(title: "취소", style: .destructive, handler: nil)
         let confirm = UIAlertAction(title: "삭제", style: .default) { _ in
             self.deleteUser()
@@ -107,34 +107,39 @@ class SettingViewController: UIViewController {
     }
     
     private func deleteUser() {
-        UserApi.shared.unlink {(error) in
-            if let error = error {
-                print(error)
-            }
-            else {
-                print("unlink() success.")
-                self.model.deleteUser {(result: Result<String, APIError>) in
-                    
-                    switch result {
-                    case .success(let serverToken):
-                        DispatchQueue.main.async {
-                            let token = TokenUtils()
-                            token.delete("kakao", account: "accessToken")
-                            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(RegisterViewController())
-                        }
-                        
-                    case .failure(let error):
-                        print("error")
-                    }
+        let loginType = UserDefaults.standard.string(forKey: "loginType")
+        if loginType == "kakao" {
+            UserApi.shared.unlink {(error) in
+                if let error = error {
+                    print(error)
                 }
+                else {
+                    self.delete()
+                }
+            }
+        } else {
+            self.delete()
+        }
+    }
+    
+    func delete() {
+        self.model.deleteUser {(result: Result<String, APIError>) in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(RegisterViewController())
+                }
+                
+            case .failure(let error):
+                print("delete error: \(error)")
             }
         }
     }
-
-
-// MARK: - LifeCycle Method
-override func viewDidLoad() {
-    super.viewDidLoad()
+    
+    
+    // MARK: - LifeCycle Method
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setData()
         setupView()
     }
@@ -190,7 +195,7 @@ extension SettingViewController {
             $0.leading.equalToSuperview().inset(28)
             $0.height.equalTo(215)
         }
-
+        
         tableView.snp.makeConstraints {
             $0.top.equalTo(stackView.snp.bottom).offset(30)
             $0.trailing.equalTo(stackView.snp.trailing)
