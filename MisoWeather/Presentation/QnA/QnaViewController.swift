@@ -49,7 +49,7 @@ final class QnaViewController: UIViewController {
                 qnaView.snp.makeConstraints {
                     $0.edges.equalToSuperview()
                 }
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
                     self.popView()
                 }
             }
