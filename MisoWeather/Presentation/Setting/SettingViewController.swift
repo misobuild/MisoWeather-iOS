@@ -70,7 +70,19 @@ class SettingViewController: UIViewController {
         
         let cancle = UIAlertAction(title: "취소", style: .destructive, handler: nil)
         let confirm = UIAlertAction(title: "로그아웃", style: .default) { _ in
-            self.kakaoLogout()
+            
+            let loginType = UserDefaults.standard.string(forKey: "loginType")
+            
+            if loginType == "kakao" {
+                self.kakaoLogout()
+            }
+            
+            if loginType == "apple" {
+                let token = TokenUtils()
+                UserDefaults.standard.removeObject(forKey: "loginType")
+                token.delete("apple", account: "identityToken")
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(RegisterViewController())
+            }
         }
         
         alert.addAction(cancle)
@@ -117,7 +129,9 @@ class SettingViewController: UIViewController {
                     self.delete()
                 }
             }
-        } else {
+        }
+        
+        if loginType == "apple"{
             self.delete()
         }
     }
@@ -135,7 +149,6 @@ class SettingViewController: UIViewController {
             }
         }
     }
-    
     
     // MARK: - LifeCycle Method
     override func viewDidLoad() {

@@ -83,6 +83,7 @@ final class NicknameSelectViewModel {
         requeset.httpBody = jsonBody
         
         let networkManager = NetworkManager()
+        
         networkManager.postRegister(url: requeset) {(result: Result<String, APIError>) in
             
             switch result {

@@ -35,7 +35,7 @@ extension URL {
     static let sinup = Path.domain + Path.member + Path.socialToken
    
     static let member = Path.domain + Path.member
-    
+
     // 토큰 재발급
     static let token = Path.domain + Path.member + Path.token + Path.socialToken
     

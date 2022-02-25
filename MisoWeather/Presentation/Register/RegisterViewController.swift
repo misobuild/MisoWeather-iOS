@@ -68,7 +68,7 @@ final class RegisterViewController: UIViewController {
     }
     
     private func kakaoLogin() {
-        print("kakaoLogin")
+        print("======================kakaoLogin======================")
         // 카카오톡 설치 여부 확인
         if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
@@ -78,12 +78,11 @@ final class RegisterViewController: UIViewController {
                     //  회원가입 성공 시 oauthToken 저장가능
                     guard let accessToken = oauthToken?.accessToken else {return}
                     
-                    // 키체인에 Token, ID 저장
                     let token = TokenUtils()
                     UserDefaults.standard.set("kakao", forKey: "loginType")
                     token.create("kakao", account: "accessToken", value: accessToken)
                     
-                    self.checkUser()
+                    self.hasKakaoToken(isLogin: false)
                 }
             }
         } else {
@@ -92,92 +91,75 @@ final class RegisterViewController: UIViewController {
         }
     }
     
-    @objc private func hasKakaoToken() {
-        print("hasKakaoToken")
+    @objc private func hasKakaoToken(isLogin: Bool) {
+        print("======================hasKakaoToken======================")
         if AuthApi.hasToken() {
-            // 사용자 액세스 토큰 정보 조회
-            UserApi.shared.accessTokenInfo {(_, error) in
+            UserApi.shared.accessTokenInfo {(oAuthToken, error) in
                 if let error = error {
                     if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
-                        // 유효한 토큰 아님 로그인 필요
+                        print("에러")
                         self.kakaoLogin()
                     } else {
+                        print("기타에러")
                         // 기타 에러..
                         self.kakaoLogin()
                     }
                 } else {
-                    // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
-                    
-                    // MARK: 엑세스 토큰 발급Test
-                    // self.kakaoLogin()
+                    print("넘어가유~")
+                    UserDefaults.standard.set("kakao", forKey: "loginType")
                     
                     let token = TokenUtils()
-                    // token.create("kakao", account: "userID", value: oAuthToken?.id)
-                    
-                    print(token.read("kakao", account: "accessToken") ?? "")
-                    self.kakaoLogin()
+                    token.create("kakao", account: "userID", value: String((oAuthToken?.id)!))
+               
+                    if isLogin {
+                        print("아무것도 안함")
+                        self.checkUser(nextVC: false)
+                    } else {
+                        print("다음 뷰로!")
+                        self.checkUser(nextVC: true)
+                    }
                 }
             }
         } else {
-            // 액세스 토큰 정보 없음 로그인 필요
-            self.kakaoLogin()
+            if !isLogin {
+                self.kakaoLogin()
+            }
         }
     }
     
-    // 앱 실행시 처음 실행되는 함수
-    // 화면 분기에 대해 처리해야함
-    // RegionSelect or MainView
     private func hasUser() {
-        print("hasUser")
-        if AuthApi.hasToken() {
-            // 사용자 액세스 토큰 정보 조회
-            UserApi.shared.accessTokenInfo {(oauthToken, error) in
-                if let error = error {
-                    if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
-                        // 유효한 토큰 아님 로그인 필요
-                        print("유효 토큰 없음 로그인 필요 ")
-                    } else {
-                        // 기타 에러..
-                    }
-                } else {
-                    // 토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
-                    let token = TokenUtils()
-                    UserDefaults.standard.set("apple", forKey: "loginType")
-                    token.create("kakao", account: "userID", value: String((oauthToken?.id)!))
-                    print(token.read("kakao", account: "accessToken") ?? "")
-                    
-                    // Main으로 화면 전환
-                    self.checkMain()
-                }
-            }
+        print("======================hasUser======================")
+        let loginType = UserDefaults.standard.string(forKey: "loginType")
+        print("loginType = \(loginType)")
+        
+        if loginType == "kakao" {
+            hasKakaoToken(isLogin: true)
+        }
+        
+        if loginType == "apple" {
+            checkUser(nextVC: true)
         }
     }
     
     // 로그아웃 -> 로그인 시 기존 유저인지 확인할 때
-    private func checkUser() {
-        print("checkUser")
+    private func checkUser(nextVC: Bool) {
+        print("checkUser! ")
         model.getIsExistUser { isUser in
             if isUser == "true"{
+                print("메인으로 화면 전환")
                 // 메인으로 화면 전환
-                DispatchQueue.main.async {
-                    self.mainVC()
+                self.model.postToken { _ in
+                    DispatchQueue.main.async {
+                        self.mainVC()
+                    }
                 }
             } else {
-                DispatchQueue.main.async {
-                    self.nextVC()
-                }
-            }
-        }
-    }
-    
-    // 처음 앱 실행 시 화면 분기에 대해서
-    private func checkMain() {
-        print("checkMain")
-        model.getIsExistUser { isUser in
-            if isUser == "true"{
-                // 메인으로 화면 전환
-                DispatchQueue.main.async {
-                    self.mainVC()
+                print("다음 화면으로 전환")
+                // 다음 화면으로 전환
+                if nextVC {
+                    DispatchQueue.main.async {
+                        self.nextVC()
+                    }
                 }
             }
         }
@@ -188,6 +170,8 @@ final class RegisterViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .mainColor
         self.navigationController?.navigationBar.isHidden = true
+        
+        // UserDefaults.standard.removeObject(forKey: "loginType")
         hasUser()
         setupView()
     }
@@ -204,35 +188,25 @@ extension RegisterViewController: ASAuthorizationControllerDelegate {
             
             if let authorizationCode = appleIDCredential.authorizationCode,
                let identityToken = appleIDCredential.identityToken,
-               //               let authString = String(data: authorizationCode, encoding: .utf8),
                let tokenString = String(data: identityToken, encoding: .utf8) {
                 
                 let token = TokenUtils()
+                print("user = \(user)")
+                print("tokenString = \(tokenString)")
+                UserDefaults.standard.set("apple", forKey: "loginType")
                 token.create("apple", account: "user", value: user)
                 token.create("apple", account: "identityToken", value: tokenString)
                 
-                self.checkUser()
+                self.checkUser(nextVC: true)
             }
-
-            // For the purpose of this demo app, store the `userIdentifier` in the keychain.
-            // self.saveUserInKeychain(userIdentifier)
-            
-            // For the purpose of this demo app, show the Apple ID credential information in the `ResultViewController`.
-            // self.showResultViewController(userIdentifier: userIdentifier, fullName: fullName, email: email)
-            
         case let passwordCredential as ASPasswordCredential:
-            
-            // Sign in using an existing iCloud Keychain credential.
             let username = passwordCredential.user
             let password = passwordCredential.password
-            
-            // For the purpose of this demo app, show the password credential as an alert.
             print(username)
             print(password)
             // DispatchQueue.main.async {
             //   self.showPasswordCredentialAlert(username: username, password: password)
             // }
-            
         default:
             break
         }
