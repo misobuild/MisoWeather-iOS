@@ -45,7 +45,6 @@ final class SettingViewModel {
     }
     
     func deleteUser(completion: @escaping (Result<String, APIError>) -> Void) {
-        
         print("deleteUser 실행")
         
         let token = TokenUtils()
@@ -53,24 +52,23 @@ final class SettingViewModel {
         
         let loginType = UserDefaults.standard.string(forKey: "loginType")
         
+        guard let serverToken = token.read("misoWeather", account: "serverToken") else {return}
+        
         if loginType == "kakao" {
             userID = token.read("kakao", account: "userID") ?? ""
-            token.delete("kakao", account: "accessToken")
-            token.delete("kakao", account: "userID")
-        } else {
-            userID = token.read("apple", account: "user") ?? ""
-            token.delete("apple", account: "identityToken")
-            token.delete("apple", account: "user")
         }
-        token.delete("misoWeather", account: "serverToken")
-        guard let serverToken = token.read("misoWeather", account: "serverToken") else {return}
+        if loginType == "apple"{
+            userID = token.read("apple", account: "user") ?? ""
+        }
         
         let body: [String: Any] = [
             "socialId": userID,
-            "socialType": loginType
+            "socialType": loginType!
         ]
         
         let urlString = URL.member
+        
+        print(body)
         
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         guard let url = URL(string: encodedString) else {return}
@@ -82,14 +80,29 @@ final class SettingViewModel {
         requeset.addValue(serverToken, forHTTPHeaderField: "serverToken")
         requeset.httpBody = jsonBody
         
+        print(urlString)
+        
         let networkManager = NetworkManager()
         networkManager.deleteUser(url: requeset) {(result: Result<String, APIError>) in
             switch result {
-            case .success(let serverToken):
-                print("유저삭제: \(serverToken)")
+            case .success(let message):
+                print("유저삭제: \(message)")
+
+                if loginType == "kakao" {
+                    userID = token.read("kakao", account: "userID") ?? ""
+                    token.delete("kakao", account: "accessToken")
+                    token.delete("kakao", account: "userID")
+                }
+                if loginType == "apple"{
+                    userID = token.read("apple", account: "user") ?? ""
+                    token.delete("apple", account: "identityToken")
+                    token.delete("apple", account: "user")
+                }
+                token.delete("misoWeather", account: "serverToken")
                 completion(.success(""))
                 
             case .failure(let error):
+                print("deleteUser error: \(error)")
                 completion(.failure(error))
             }
         }
