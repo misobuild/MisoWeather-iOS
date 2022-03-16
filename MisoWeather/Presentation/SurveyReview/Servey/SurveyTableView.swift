@@ -55,7 +55,6 @@ extension SurveyTableView: UITableViewDelegate {
 
 extension SurveyTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ServeyTableViewCell", for: indexPath) as? SurveyTableViewCell
         let id = userSurveyList[indexPath.row].surveyId
         
         if !userSurveyList[indexPath.row].answered {

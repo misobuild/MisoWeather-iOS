@@ -105,17 +105,14 @@ final class RegisterViewController: UIViewController {
                         self.kakaoLogin()
                     }
                 } else {
-                    print("넘어가유~")
                     UserDefaults.standard.set("kakao", forKey: "loginType")
                     
                     let token = TokenUtils()
                     token.create("kakao", account: "userID", value: String((oAuthToken?.id)!))
                
                     if isLogin {
-                        print("아무것도 안함")
                         self.checkUser(nextVC: false)
                     } else {
-                        print("다음 뷰로!")
                         self.checkUser(nextVC: true)
                     }
                 }
@@ -202,8 +199,6 @@ extension RegisterViewController: ASAuthorizationControllerDelegate {
         case let passwordCredential as ASPasswordCredential:
             let username = passwordCredential.user
             let password = passwordCredential.password
-            print(username)
-            print(password)
             // DispatchQueue.main.async {
             //   self.showPasswordCredentialAlert(username: username, password: password)
             // }
