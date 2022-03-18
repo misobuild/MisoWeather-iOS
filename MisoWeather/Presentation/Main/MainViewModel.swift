@@ -53,6 +53,7 @@ final class MainViewModel {
                 UserDefaults.standard.set(model.data.regionId, forKey: "regionID")
                 UserDefaults.standard.set(model.data.nickname, forKey: "nickName")
                 UserDefaults.standard.set(model.data.regionName, forKey: "regionName")
+                UserDefaults.standard.set(model.data.regionName, forKey: "selectRegionName")
                 completion()
                 
             case .failure(let error):

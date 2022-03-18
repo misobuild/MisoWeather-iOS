@@ -19,6 +19,7 @@ enum Path {
     static var commnetId = "commentId="
     static var size = "size="
     static var survey = "survey"
+    static var shortBigScale = "?shortBigScale="
     static var answers = "/answers/"
     static var precheck = "/precheck"
     static var exist = "/existence?socialId="

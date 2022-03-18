@@ -44,11 +44,19 @@ final class SurveyViewModel {
     
     // MARK: - Survey
     
+    /// 서베이 결과
     func getSurveyData(completion: @escaping () -> Void) {
         let networkManager = NetworkManager()
-        let urlString = URL.survey
-        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        guard let shortBigScale = UserDefaults.standard.string(forKey: "regionName") else {return}
+        guard let selectBigScale = UserDefaults.standard.string(forKey: "selectRegionName") else {return}
+        var urlString = URL.survey + Path.shortBigScale
+        if shortBigScale != selectBigScale {
+            urlString += selectBigScale
+        } else {
+            urlString += shortBigScale
+        }
         
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         if let url =  URL(string: encodedString) {
             networkManager.getfetchData(url: url) {(result: Result<SurveyModel, APIError>) in
                 switch result {
@@ -63,6 +71,7 @@ final class SurveyViewModel {
         }
     }
     
+    /// 사용자의 서베이 답변 상태 가져오기
     func getUserSurveyData(completion: @escaping () -> Void) {
        guard let url = URL(string: URL.userSurvy) else {return}
         let requeset = createRequest(url: url)
@@ -80,6 +89,7 @@ final class SurveyViewModel {
         }
     }
     
+    /// 서베이 답변 목록 가져오기
     func getSurveyAnswerData(id: Int, completion: @escaping () -> Void) {
         guard let url = URL(string: URL.surveyAnswer + "\(id)") else {return}
         let requeset = createRequest(url: url)
@@ -92,11 +102,12 @@ final class SurveyViewModel {
                 completion()
                 
             case .failure(let error):
-                debugPrint("??getSurveyAnswerData error = \(error)")
+                debugPrint("getSurveyAnswerData error = \(error)")
             }
         }
     }
     
+    /// 서베이 답변 여부
     func getIsAnswerData(completion: @escaping () -> Void) {
         guard let url = URL(string: URL.precheck) else {return}
         let requeset = createRequest(url: url)
