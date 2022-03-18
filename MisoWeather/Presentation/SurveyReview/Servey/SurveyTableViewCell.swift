@@ -208,6 +208,13 @@ final class SurveyTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        chartList.forEach {
+            $0.layer.sublayers?.removeAll()
+            $0.layer.setNeedsDisplay()
+        }
+    }
 }
 
 extension SurveyTableViewCell {
