@@ -40,7 +40,6 @@ final class RegisterViewModel {
             networkManager.getfetchData(url: url) {(result: Result<ExistModel, APIError>) in
                 switch result {
                 case .success(let model):
-                    print(model)
                     completion(String(model.data))
                     
                 case .failure(let error):
@@ -98,7 +97,8 @@ final class RegisterViewModel {
                 completion(String(""))
                 
             case .failure(let error):
-                debugPrint("getIsExistUser error = \(error)")
+                debugPrint("postToken error = \(error)")
+                completion(String("error"))
             }
         }
     }

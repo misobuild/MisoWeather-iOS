@@ -94,21 +94,21 @@ final class RegisterViewController: UIViewController {
     @objc private func hasKakaoToken(isLogin: Bool) {
         print("======================hasKakaoToken======================")
         if AuthApi.hasToken() {
-            UserApi.shared.accessTokenInfo {(oAuthToken, error) in
+            UserApi.shared.accessTokenInfo {(oauthToken, error) in
                 if let error = error {
                     if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
                         print("에러")
                         self.kakaoLogin()
                     } else {
                         print("기타에러")
-                        // 기타 에러..
                         self.kakaoLogin()
                     }
                 } else {
+                    // TODO: 토큰
                     UserDefaults.standard.set("kakao", forKey: "loginType")
                     
                     let token = TokenUtils()
-                    token.create("kakao", account: "userID", value: String((oAuthToken?.id)!))
+                    token.create("kakao", account: "userID", value: String((oauthToken?.id)!))
                
                     if isLogin {
                         self.checkUser(nextVC: false)
@@ -140,13 +140,16 @@ final class RegisterViewController: UIViewController {
     
     // 로그아웃 -> 로그인 시 기존 유저인지 확인할 때
     private func checkUser(nextVC: Bool) {
-        print("checkUser! ")
+        print("checkUser!")
         model.getIsExistUser { isUser in
             if isUser == "true"{
                 print("메인으로 화면 전환")
                 // 메인으로 화면 전환
-                self.model.postToken { _ in
+                self.model.postToken { result in
                     DispatchQueue.main.async {
+                        if result == "error" { // error = accessToken이 만료되었다는것
+                            self.kakaoLogin()
+                        }
                         self.mainVC()
                     }
                 }
