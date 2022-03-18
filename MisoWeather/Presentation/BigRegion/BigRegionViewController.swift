@@ -71,6 +71,7 @@ final class BigRegionViewController: UIViewController {
     @objc private func nextVC() {
         let nextVC = MidRegionListViewController()
         nextVC.delegate = self
+        nextVC.backScreen = backScreen
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     

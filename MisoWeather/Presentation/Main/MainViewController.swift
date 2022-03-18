@@ -16,11 +16,17 @@ final class MainViewController: UIViewController {
         let view = MainScrollView()
         view.weatherView.nextButton.addTarget(MainViewController(), action: #selector(nextWeatherVC), for: .touchUpInside)
         view.serveyTitleView.nextButton.addTarget(MainViewController(), action: #selector(nextServeyVC), for: .touchUpInside)
+        view.locationButton.addTarget(MainViewController(), action: #selector(nextRegionVC), for: .touchUpInside)
         return view
-        
     }()
     
     // MARK: - Private Method
+    @objc private func nextRegionVC() {
+        let nextVC = BigRegionViewController()
+        nextVC.backScreen = .main
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     @objc private func nextWeatherVC() {
         let nextVC = WeatherViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
