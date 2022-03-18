@@ -37,8 +37,18 @@ final class SurveyReviewViewController: UIViewController, UITableViewDelegate {
     
     private lazy var locationButton: RegionButton = {
         let button = RegionButton()
+        if let regionName = UserDefaults.standard.string(forKey: "selectRegionName") {
+            button.regionButton.setTitle(regionName, for: .normal)
+        }
+        button.regionButton.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
     }()
+    
+    @objc private func nextVC() {
+        let nextVC = BigRegionViewController()
+        nextVC.backScreen = .survey
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
     
     private lazy var  surveyViewController: SurveyViewController = {
         let viewController = SurveyViewController()
@@ -85,7 +95,13 @@ final class SurveyReviewViewController: UIViewController, UITableViewDelegate {
         if let firstVC = dataViewControllers.first {
             pageViewController.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
-        
+        setupView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let regionName = UserDefaults.standard.string(forKey: "selectRegionName") {
+            locationButton.regionButton.setTitle(regionName, for: .normal)
+        }
         setupView()
     }
 }
