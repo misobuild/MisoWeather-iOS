@@ -21,7 +21,6 @@ final class RegionSelectViewModel {
     }
     
     func fetchMiddleRegionData(urlString: String, completion: @escaping () -> Void) {
-        
         let networkManager = NetworkManager()
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         if let url =  URL(string: encodedString) {
@@ -32,14 +31,13 @@ final class RegionSelectViewModel {
                     completion()
                     
                 case .failure(let error):
-                    debugPrint("error = \(error)")
+                    debugPrint("fetchMiddleRegionData = \(error)")
                 }
             }
         }
     }
     
     func fetchNicknameData(urlString: String, completion: @escaping () -> Void) {
-        
         let networkManager = NetworkManager()
         if let url = URL(string: urlString) {
             networkManager.getfetchData(url: url) {(result: Result<NicknameModel, APIError>) in
@@ -49,7 +47,30 @@ final class RegionSelectViewModel {
                     completion()
                      
                 case .failure(let error):
-                    debugPrint("error = \(error)")
+                    debugPrint("fetchNicknameData = \(error)")
+                }
+            }
+        }
+    }
+    
+    func putRegionChange(completion: @escaping () -> Void) {
+        let networkManager = NetworkManager()
+        let token = TokenUtils()
+        guard let serverToken =  token.read("misoWeather", account: "serverToken") else {return}
+        guard let regionID = UserDefaults.standard.string(forKey: "regionID") else {return}
+        guard let url = URL(string: URL.chageRegion + regionID) else {return}
+        var requeset: URLRequest = URLRequest(url: url)
+        requeset.httpMethod = URLMethod.put
+        requeset.addValue(serverToken, forHTTPHeaderField: "serverToken")
+        
+        if let url = URL(string: URL.chageRegion + regionID) {
+            networkManager.headerTokenRequsetData(url: requeset) {(result: Result<StatusModel, APIError>) in
+                switch result {
+                case .success:
+                    completion()
+                     
+                case .failure(let error):
+                    debugPrint("putRegionChange = \(error)")
                 }
             }
         }
