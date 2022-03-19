@@ -40,8 +40,8 @@ final class MainViewController: UIViewController {
     private func setWeatherData() {
         if let info = model.forecastInfo {
             mainScrollView.weatherView.regionLocationLabel.regionLabel.text = model.locationInfo
-            mainScrollView.weatherView.emojiLabel.text = info.data.forecast.sky
-            mainScrollView.weatherView.tempLabel.text = info.data.forecast.temperature + "°"
+            mainScrollView.weatherView.emojiLabel.text = info.weather
+            mainScrollView.weatherView.tempLabel.text = String(Int(info.temperature)) + "°"
         }
     }
     
@@ -54,9 +54,11 @@ final class MainViewController: UIViewController {
                     self.mainScrollView.titleLabel.text = "\(data.data.regionName)의 \(data.data.nickname)님\(data.data.emoji)"
                 }
             }
-            self.model.getCurrentTempData {
-                DispatchQueue.main.async {
-                    self.setWeatherData()
+            self.model.getForecastUpdate {
+                self.model.getRealtimeForecast {
+                    DispatchQueue.main.async {
+                        self.setWeatherData()
+                    }
                 }
             }
         }
