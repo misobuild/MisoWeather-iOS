@@ -27,15 +27,7 @@ final class ForecastTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var amLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 14.0, weight: .thin)
-        label.textColor = .textColor
-        label.text = "오전"
-        return label
-    }()
-    
-    private lazy var amStatusLabel: UILabel = {
+    private lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .regular)
         label.textColor = .textColor
@@ -43,19 +35,20 @@ final class ForecastTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var pmLabel: UILabel = {
+    private lazy var poStatusLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .thin)
         label.textColor = .textColor
-        label.text = "오후"
+        label.text = "☔️"
         return label
     }()
     
-    private lazy var pmStatusLabel: UILabel = {
+    private lazy var poLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .regular)
         label.textColor = .textColor
-        label.text = "🌧"
+        label.textAlignment = .right
+        label.text = "20%"
         return label
     }()
     
@@ -63,6 +56,7 @@ final class ForecastTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .regular)
         label.textColor = .textColor
+        label.textAlignment = .right
         label.text = "-15°"
         return label
     }()
@@ -93,10 +87,9 @@ extension ForecastTableViewCell {
         [
             dayLabel,
             dateLabel,
-            amLabel,
-            amStatusLabel,
-            pmLabel,
-            pmStatusLabel,
+            statusLabel,
+            poStatusLabel,
+            poLabel,
             minTempLabel,
             maxTempLabel
         ].forEach {addSubview($0)}
@@ -109,20 +102,17 @@ extension ForecastTableViewCell {
             $0.leading.equalTo(dayLabel.snp.trailing).offset(width * 0.01)
             $0.width.equalTo(40.0)
         }
-        amLabel.snp.makeConstraints {
-            $0.leading.equalTo(dateLabel.snp.trailing).offset(width * 0.09)
+        statusLabel.snp.makeConstraints {
+            $0.leading.equalTo(dateLabel.snp.trailing).offset(width * 0.1)
         }
-        amStatusLabel.snp.makeConstraints {
-            $0.leading.equalTo(amLabel.snp.trailing).offset(width * 0.01)
+        poStatusLabel.snp.makeConstraints {
+            $0.leading.equalTo(statusLabel.snp.trailing).offset(width * 0.05)
         }
-        pmLabel.snp.makeConstraints {
-            $0.leading.equalTo(amStatusLabel.snp.trailing).offset(width * 0.01)
-        }
-        pmStatusLabel.snp.makeConstraints {
-            $0.leading.equalTo(pmLabel.snp.trailing).offset(width * 0.01)
+        poLabel.snp.makeConstraints {
+            $0.leading.equalTo(poStatusLabel.snp.trailing).offset(width * 0.01)
         }
         minTempLabel.snp.makeConstraints {
-            $0.leading.equalTo(pmStatusLabel.snp.trailing).offset(width * 0.09)
+            $0.leading.equalTo(poLabel.snp.trailing).offset(width * 0.09)
         }
         maxTempLabel.snp.makeConstraints {
             $0.leading.equalTo(minTempLabel.snp.trailing).offset(width * 0.02)
