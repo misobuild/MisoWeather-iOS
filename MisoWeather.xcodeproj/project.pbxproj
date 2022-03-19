@@ -85,6 +85,11 @@
 		E8CEBFA627BB5944009CD8DE /* Utiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CEBFA527BB5944009CD8DE /* Utiles.swift */; };
 		E8D7C54627C0DCC800FB34EA /* ExistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D7C54527C0DCC800FB34EA /* ExistModel.swift */; };
 		E8D9908F27E1C7DE00351334 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D9908E27E1C7DE00351334 /* Enum.swift */; };
+		E8D9909227E4CF5100351334 /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D9909127E4CF5100351334 /* ForecastModel.swift */; };
+		E8D9909427E4D2E800351334 /* ForecastDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D9909327E4D2E800351334 /* ForecastDailyModel.swift */; };
+		E8D9909627E4D3F000351334 /* ForecastHourlyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D9909527E4D3F000351334 /* ForecastHourlyModel.swift */; };
+		E8D9909827E4D46A00351334 /* ForecastAirdustModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D9909727E4D46A00351334 /* ForecastAirdustModel.swift */; };
+		E8D9909A27E4D7F100351334 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D9909927E4D7F100351334 /* WeatherViewModel.swift */; };
 		E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */; };
 		E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */; };
 		E8E65B9B2782D4AC00FFA0FA /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65B9A2782D4AC00FFA0FA /* RegisterViewController.swift */; };
@@ -202,6 +207,11 @@
 		E8CEBFA527BB5944009CD8DE /* Utiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utiles.swift; sourceTree = "<group>"; };
 		E8D7C54527C0DCC800FB34EA /* ExistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistModel.swift; sourceTree = "<group>"; };
 		E8D9908E27E1C7DE00351334 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		E8D9909127E4CF5100351334 /* ForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastModel.swift; sourceTree = "<group>"; };
+		E8D9909327E4D2E800351334 /* ForecastDailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDailyModel.swift; sourceTree = "<group>"; };
+		E8D9909527E4D3F000351334 /* ForecastHourlyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastHourlyModel.swift; sourceTree = "<group>"; };
+		E8D9909727E4D46A00351334 /* ForecastAirdustModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAirdustModel.swift; sourceTree = "<group>"; };
+		E8D9909927E4D7F100351334 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		E8E65B932782D4AC00FFA0FA /* MisoWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MisoWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E65B962782D4AC00FFA0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8E65B982782D4AC00FFA0FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -283,10 +293,10 @@
 		E83E00F9279001F400C4661A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				E8BFAD4A27B24B780007E1DC /* String+Extension.swift */,
 				E83E010B2790A24F00C4661A /* UserInfo.swift */,
 				E83E01032790885300C4661A /* Observables.swift */,
 				E83E01052790898900C4661A /* ObservableVMProtocol.swift */,
-				E8BFAD4A27B24B780007E1DC /* String+Extension.swift */,
 				E8BFAD5A27B66B840007E1DC /* Notification+Extension.swift */,
 				E8CEBFA527BB5944009CD8DE /* Utiles.swift */,
 			);
@@ -309,6 +319,10 @@
 				E8132BBA279706DA00A9518B /* StatusModel.swift */,
 				E8D7C54527C0DCC800FB34EA /* ExistModel.swift */,
 				E8BFAD4027AE7BB90007E1DC /* TokenModel.swift */,
+				E8D9909127E4CF5100351334 /* ForecastModel.swift */,
+				E8D9909527E4D3F000351334 /* ForecastHourlyModel.swift */,
+				E8D9909327E4D2E800351334 /* ForecastDailyModel.swift */,
+				E8D9909727E4D46A00351334 /* ForecastAirdustModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -393,6 +407,7 @@
 		E8CE99C0279A8CDE0095C958 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				E8D9909927E4D7F100351334 /* WeatherViewModel.swift */,
 				E8CE99BE279A8CD60095C958 /* WeatherViewController.swift */,
 				E8BFAD4F27B25EE70007E1DC /* View */,
 			);
@@ -893,6 +908,7 @@
 				E8132BB32795978B00A9518B /* SmallRegionListViewController.swift in Sources */,
 				E8BFAD4E27B2512E0007E1DC /* SurveyModel.swift in Sources */,
 				E8FB85ED278C2F9B0007DE27 /* MidRegionListViewController.swift in Sources */,
+				E8D9909427E4D2E800351334 /* ForecastDailyModel.swift in Sources */,
 				E839205B2786F132006A1D1B /* BigRegionCollectionViewCell.swift in Sources */,
 				E8CE99E1279BE6200095C958 /* ChartView.swift in Sources */,
 				E8CE99FF279EF17D0095C958 /* Chart.swift in Sources */,
@@ -901,6 +917,7 @@
 				E8CE99D5279B13700095C958 /* WindSpeedView.swift in Sources */,
 				E8E65B972782D4AC00FFA0FA /* AppDelegate.swift in Sources */,
 				E8CE99D3279B09DF0095C958 /* ForecastTableViewCell.swift in Sources */,
+				E8D9909827E4D46A00351334 /* ForecastAirdustModel.swift in Sources */,
 				E8132BBB279706DA00A9518B /* StatusModel.swift in Sources */,
 				E8CE9A05279FEAEA0095C958 /* QnaTableVIewCell.swift in Sources */,
 				E8D7C54627C0DCC800FB34EA /* ExistModel.swift in Sources */,
@@ -910,13 +927,16 @@
 				E8CE9A03279FEA650095C958 /* QnaViewController.swift in Sources */,
 				E8CE99ED279D8D150095C958 /* SurveyReviewViewController.swift in Sources */,
 				E8CE99D1279B07870095C958 /* WeatherScrollView.swift in Sources */,
+				E8D9909227E4CF5100351334 /* ForecastModel.swift in Sources */,
 				E8E65BC82782E0E200FFA0FA /* BigRegionViewController.swift in Sources */,
 				E8BFAD2F27ACEC080007E1DC /* URLMethod.swift in Sources */,
 				E8BFAD5327B271D20007E1DC /* SurveyReviewViewModel.swift in Sources */,
 				E8CE99DD279BE56E0095C958 /* MainServeyView.swift in Sources */,
 				E83E010C2790A24F00C4661A /* UserInfo.swift in Sources */,
 				E8CEBFA627BB5944009CD8DE /* Utiles.swift in Sources */,
+				E8D9909A27E4D7F100351334 /* WeatherViewModel.swift in Sources */,
 				E8CE99F9279EC1C70095C958 /* SurveyTableViewCell.swift in Sources */,
+				E8D9909627E4D3F000351334 /* ForecastHourlyModel.swift in Sources */,
 				E8132BAF2795501200A9518B /* TokenUtils.swift in Sources */,
 				E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */,
 				E8BFAD2B27ACEBB80007E1DC /* NetworkManager.swift in Sources */,
