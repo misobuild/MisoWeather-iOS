@@ -34,6 +34,12 @@ final class HourlyWeatherViewCell: UICollectionViewCell {
         label.text = "16시"
         return label
     }()
+
+    func configureData(hourly: HourlyForecastList) {
+        tempLabel.text = String(Int(hourly.temperature)) + "°"
+        emojiLabel.text = hourly.weather
+        timeLabel.text = hourly.forecastTime[11..<13] + "시"
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

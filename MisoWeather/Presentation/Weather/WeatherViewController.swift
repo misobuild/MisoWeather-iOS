@@ -10,21 +10,54 @@ import SnapKit
 
 final class WeatherViewController: UIViewController {
     
+    let model = WeatherViewModel()
+    
     // MARK: - subviews
     private lazy var weatherScrollView: WeatherScrollView = {
         let view = WeatherScrollView()
         return view
     }()
-//    // MARK: - Private Method
-//    @objc private func nextVC() {
-//        
-//        self.navigationController?.pushViewController(nextVC, animated: true)
-//    }
+    // MARK: - Private Method
+    
+    private func fetchData() {
+        model.getRealtimeForecast {
+            DispatchQueue.main.async {
+                self.setRealTimeData()
+            }
+        }
+        model.getHourlyForecast {
+            DispatchQueue.main.async {
+                self.setHourlyData()
+            }
+        }
+    }
+    
+    private func setRealTimeData() {
+        if let info = model.forecastInfo {
+            weatherScrollView.locationLabel.regionLabel.text = model.locationInfo
+            weatherScrollView.realtimeTempLabel.realtimeTempLabel.text = String(Int(info.temperature)) + "°"
+            weatherScrollView.realtimeTempLabel.emojiLabel.text = info.weather
+            weatherScrollView.realtimeTempLabel.minMaxtempLabel.text = "최저 " + String(Int(info.temperatureMin)) + "°" + " / 최고 " + String(Int(info.temperatureMax)) + "°"
+        }
+    }
+    
+    private func setHourlyData() {
+        if let info = model.houlryInfo {
+            weatherScrollView.hourlyWeatherView.hourly = info.data.hourlyForecastList
+        }
+        weatherScrollView.hourlyWeatherView.hourlyWeatherView.reloadData()
+    }
+    
+    @objc private func nextVC() {
+        let nextVC = SurveyReviewViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.setupView()
+        fetchData()
+        setupView()
     }
 }
 

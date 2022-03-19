@@ -14,12 +14,12 @@ class WeatherScrollView: UIView {
     let contentView = UIView()
     
     // MARK: - subView
-    private lazy var locationLabel: RegionLocationLabel = {
+    lazy var locationLabel: RegionLocationLabel = {
         let view = RegionLocationLabel()
         return view
     }()
     
-    private lazy var realtimeTempLabel: RealtimeTempLabel = {
+    lazy var realtimeTempLabel: RealtimeTempLabel = {
         let label = RealtimeTempLabel()
         return label
     }()
@@ -30,7 +30,7 @@ class WeatherScrollView: UIView {
         return button
     }()
     
-    private lazy var hourlyWeatherView: HourlyWeatherView = {
+    lazy var hourlyWeatherView: HourlyWeatherView = {
         let view = HourlyWeatherView()
         return view
     }()

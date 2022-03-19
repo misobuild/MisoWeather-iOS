@@ -10,6 +10,8 @@ import SnapKit
 
 final class HourlyWeatherView: UIView {
     
+    var hourly: [HourlyForecastList] = []
+    
     // MARK: - subviews
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -19,7 +21,7 @@ final class HourlyWeatherView: UIView {
         return label
     }()
     
-    private lazy var hourlyWeatherView: UICollectionView = {
+    lazy var hourlyWeatherView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .init(), collectionViewLayout: layout)
@@ -46,12 +48,13 @@ final class HourlyWeatherView: UIView {
 extension HourlyWeatherView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24
+        return hourly.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyWeatherViewCell", for: indexPath)
-        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyWeatherViewCell", for: indexPath) as? HourlyWeatherViewCell
+        cell?.configureData(hourly: hourly[indexPath.row])
+        return cell ?? UICollectionViewCell()
     }
 }
 
