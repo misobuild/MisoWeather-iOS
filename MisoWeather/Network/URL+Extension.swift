@@ -25,6 +25,10 @@ enum Path {
     static var exist = "/existence?socialId="
     static var socialType = "&socialType="
     static var chageRegion = "member-region-mapping/default?regionId="
+    static var weather = "new-forecast/"
+    static var update = "update/"
+    static var houlry = "hourly/"
+    static var daily = "daily/"
 }
 
 extension URL {
@@ -66,5 +70,16 @@ extension URL {
     
     /// 지역 변경
     static let chageRegion = Path.domain + Path.chageRegion
+    
+    /// 날씨 업데이트
+    static let forecastUpdate = Path.domain + Path.weather + Path.update
 
+    /// 현재 날씨
+    static let forecast = Path.domain + Path.weather
+    
+    /// 시간대별 날씨
+    static let houlryForecast = Path.domain + Path.weather + Path.houlry
+    
+    /// 일별 날씨
+    static let dailyForecast = Path.domain + Path.weather + Path.daily
 }
