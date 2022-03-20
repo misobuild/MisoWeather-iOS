@@ -87,6 +87,12 @@ final class SurveyReviewViewController: UIViewController, UITableViewDelegate {
         }
     }
     
+    @objc func updateNotificationReceived(notification: Notification) {
+        if let regionName = UserDefaults.standard.string(forKey: "selectRegionName") {
+            locationButton.regionButton.setTitle(regionName, for: .normal)
+        }
+    }
+    
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +109,7 @@ final class SurveyReviewViewController: UIViewController, UITableViewDelegate {
             locationButton.regionButton.setTitle(regionName, for: .normal)
         }
         setupView()
+        NotificationCenter.default.addObserver(self, selector: #selector(updateNotificationReceived(notification:)), name: .updateNotification, object: nil)
     }
 }
 
