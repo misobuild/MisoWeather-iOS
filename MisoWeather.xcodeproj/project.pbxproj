@@ -59,7 +59,7 @@
 		E8CE99C2279A8F4D0095C958 /* RegionLocationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99C1279A8F4D0095C958 /* RegionLocationLabel.swift */; };
 		E8CE99C4279AC0240095C958 /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99C3279AC0240095C958 /* HourlyForecastView.swift */; };
 		E8CE99C7279AEB020095C958 /* HourlyForecastViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99C6279AEB020095C958 /* HourlyForecastViewCell.swift */; };
-		E8CE99C9279AF3E90095C958 /* ParticulateMatterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99C8279AF3E90095C958 /* ParticulateMatterView.swift */; };
+		E8CE99C9279AF3E90095C958 /* DustView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99C8279AF3E90095C958 /* DustView.swift */; };
 		E8CE99CB279AF5A00095C958 /* ParticulateMatterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99CA279AF5A00095C958 /* ParticulateMatterViewCell.swift */; };
 		E8CE99CD279AFACF0095C958 /* PrecipitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99CC279AFACF0095C958 /* PrecipitationView.swift */; };
 		E8CE99CF279B04E30095C958 /* DailyForecastTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE99CE279B04E30095C958 /* DailyForecastTableView.swift */; };
@@ -181,7 +181,7 @@
 		E8CE99C1279A8F4D0095C958 /* RegionLocationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionLocationLabel.swift; sourceTree = "<group>"; };
 		E8CE99C3279AC0240095C958 /* HourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
 		E8CE99C6279AEB020095C958 /* HourlyForecastViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewCell.swift; sourceTree = "<group>"; };
-		E8CE99C8279AF3E90095C958 /* ParticulateMatterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticulateMatterView.swift; sourceTree = "<group>"; };
+		E8CE99C8279AF3E90095C958 /* DustView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DustView.swift; sourceTree = "<group>"; };
 		E8CE99CA279AF5A00095C958 /* ParticulateMatterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticulateMatterViewCell.swift; sourceTree = "<group>"; };
 		E8CE99CC279AFACF0095C958 /* PrecipitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrecipitationView.swift; sourceTree = "<group>"; };
 		E8CE99CE279B04E30095C958 /* DailyForecastTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastTableView.swift; sourceTree = "<group>"; };
@@ -373,7 +373,7 @@
 				E8CE99D0279B07870095C958 /* WeatherScrollView.swift */,
 				E8CE99C3279AC0240095C958 /* HourlyForecastView.swift */,
 				E8CE99C6279AEB020095C958 /* HourlyForecastViewCell.swift */,
-				E8CE99C8279AF3E90095C958 /* ParticulateMatterView.swift */,
+				E8CE99C8279AF3E90095C958 /* DustView.swift */,
 				E8CE99CA279AF5A00095C958 /* ParticulateMatterViewCell.swift */,
 				E8CE99CC279AFACF0095C958 /* PrecipitationView.swift */,
 				E8CE99CE279B04E30095C958 /* DailyForecastTableView.swift */,
@@ -941,7 +941,7 @@
 				E8E65B992782D4AC00FFA0FA /* SceneDelegate.swift in Sources */,
 				E8BFAD2B27ACEBB80007E1DC /* NetworkManager.swift in Sources */,
 				E8CE99B927988CFC0095C958 /* MainScrollView.swift in Sources */,
-				E8CE99C9279AF3E90095C958 /* ParticulateMatterView.swift in Sources */,
+				E8CE99C9279AF3E90095C958 /* DustView.swift in Sources */,
 				E8CE99CD279AFACF0095C958 /* PrecipitationView.swift in Sources */,
 				E8BFAD3127AD01000007E1DC /* BigRegionViewModel.swift in Sources */,
 				E8BFAD3727AE47680007E1DC /* MainViewModel.swift in Sources */,

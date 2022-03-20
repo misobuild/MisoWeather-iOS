@@ -12,9 +12,11 @@ struct ForecastAirdustModel: Decodable {
 }
 
 struct Airdust: Decodable {
+    let fineDust: Int
+    let fineDustIcon: String
+    let ultraFineDust: Int
+    let ultraFineDustIcon: String
+    let fineDustGrade: String
+    let ultraFineDustGrade: String
     let bigScale: String
-    let pm10: Int
-    let pm10Grade: String
-    let pm25: Int
-    let pm25Grade: String
 }

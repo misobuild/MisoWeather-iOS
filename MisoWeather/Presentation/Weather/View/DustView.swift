@@ -1,5 +1,5 @@
 //
-//  ParticulateMatterView.swift
+//  DustView.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/21.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ParticulateMatterView: UIView {
+final class DustView: UIView {
     
     // MARK: - subviews
     private lazy var titleLabel: UILabel = {
@@ -19,7 +19,7 @@ final class ParticulateMatterView: UIView {
         return label
     }()
     
-    private lazy var emojiLabel: UILabel = {
+    lazy var emojiLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30.0, weight: .regular)
         label.textColor = .textColor
@@ -35,7 +35,7 @@ final class ParticulateMatterView: UIView {
         return view
     }()
     
-    private lazy var PMLabel: UILabel = {
+    lazy var PMLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .bold)
         label.textColor = .textColor
@@ -43,7 +43,7 @@ final class ParticulateMatterView: UIView {
         return label
     }()
     
-    private lazy var statusLabel: UILabel = {
+    lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .thin)
         label.textColor = .textColor
@@ -59,7 +59,7 @@ final class ParticulateMatterView: UIView {
         return label
     }()
     
-    private lazy var ultraEmojiLabel: UILabel = {
+    lazy var ultraEmojiLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30.0, weight: .regular)
         label.textColor = .textColor
@@ -75,7 +75,7 @@ final class ParticulateMatterView: UIView {
         return view
     }()
     
-    private lazy var ultraPMLabel: UILabel = {
+    lazy var ultraPMLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .bold)
         label.textColor = .textColor
@@ -83,7 +83,7 @@ final class ParticulateMatterView: UIView {
         return label
     }()
     
-    private lazy var ultraStatusLabel: UILabel = {
+    lazy var ultraStatusLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .thin)
         label.textColor = .textColor
@@ -103,7 +103,7 @@ final class ParticulateMatterView: UIView {
     }
 }
 
-extension ParticulateMatterView {
+extension DustView {
     
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {

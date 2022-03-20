@@ -29,6 +29,7 @@ enum Path {
     static var update = "update/"
     static var houlry = "hourly/"
     static var daily = "daily/"
+    static var airdust = "airdust/"
 }
 
 extension URL {
@@ -82,4 +83,7 @@ extension URL {
     
     /// 일별 날씨
     static let dailyForecast = Path.domain + Path.weather + Path.daily
+    
+    /// 미세먼지
+    static let dustForecast = Path.domain + Path.weather + Path.airdust
 }

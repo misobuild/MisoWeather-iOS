@@ -39,6 +39,11 @@ final class WeatherViewController: UIViewController {
                 self.setPopData()
             }
         }
+        model.getAirDust {
+            DispatchQueue.main.async {
+                self.setDustData()
+            }
+        }
     }
     
     private func setRealTimeData() {
@@ -83,6 +88,17 @@ final class WeatherViewController: UIViewController {
             weatherScrollView.precipitationView.emojiLabel.text = info.data.popIcon
             weatherScrollView.precipitationView.precipitationLabel.text = String(info.data.rain) + "%"
             weatherScrollView.precipitationView.descriptionLabel.text = "시간당 " + String(info.data.rain) + "mm"
+        }
+    }
+    
+    private func setDustData() {
+        if let info = model.dustInfo {
+            weatherScrollView.dustView.emojiLabel.text = info.fineDustIcon
+            weatherScrollView.dustView.statusLabel.text = info.fineDustGrade
+            weatherScrollView.dustView.PMLabel.text = String(info.fineDust)
+            weatherScrollView.dustView.ultraEmojiLabel.text = info.ultraFineDustIcon
+            weatherScrollView.dustView.ultraStatusLabel.text = info.ultraFineDustGrade
+            weatherScrollView.dustView.ultraPMLabel.text = String(info.ultraFineDust)
         }
     }
     

@@ -84,7 +84,6 @@ final class MainViewModel {
         guard let regionID = UserDefaults.standard.string(forKey: "regionID") else {return}
     
         if let url =  URL(string: URL.forecast + regionID) {
-            print(url)
             networkManager.getfetchData(url: url) {(result: Result<ForecastModel, APIError>) in
                 switch result {
                 case .success(let model):

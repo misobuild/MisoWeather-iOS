@@ -35,8 +35,8 @@ class WeatherScrollView: UIView {
         return view
     }()
     
-    private lazy var particulateMatterView: ParticulateMatterView = {
-        let view = ParticulateMatterView()
+    lazy var dustView: DustView = {
+        let view = DustView()
         return view
     }()
     
@@ -81,7 +81,7 @@ extension WeatherScrollView {
             realtimeTempLabel,
             chatButton,
             hourlyWeatherView,
-            particulateMatterView,
+            dustView,
             precipitationView,
             dailyTableView,
             windSpeedView,
@@ -126,7 +126,7 @@ extension WeatherScrollView {
             $0.centerX.equalToSuperview()
         }
         
-        particulateMatterView.snp.makeConstraints {
+        dustView.snp.makeConstraints {
             $0.top.equalTo(hourlyWeatherView.snp.bottom).offset(10.0)
             $0.height.equalTo(105.0)
             $0.width.equalTo(width * 0.42)
@@ -134,7 +134,7 @@ extension WeatherScrollView {
         }
         
         precipitationView.snp.makeConstraints {
-            $0.top.equalTo(particulateMatterView)
+            $0.top.equalTo(dustView)
             $0.height.equalTo(105.0)
             $0.width.equalTo(width * 0.42)
             $0.trailing.equalToSuperview().inset(width * 0.07)

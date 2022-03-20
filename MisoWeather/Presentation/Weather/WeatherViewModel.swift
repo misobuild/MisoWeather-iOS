@@ -13,6 +13,7 @@ final class WeatherViewModel {
     private var forecastData: ForecastData?
     private var houlryData: ForecastHourlyModel?
     private var dailyData: ForecastDailyModel?
+    private var dustData: Airdust?
     
     var locationInfo: String {
         self.location
@@ -28,6 +29,10 @@ final class WeatherViewModel {
     
     var dailyInfo: ForecastDailyModel? {
         self.dailyData
+    }
+    
+    var dustInfo: Airdust? {
+        self.dustData
     }
     
     func getRealtimeForecast(completion: @escaping () -> Void) {
@@ -85,7 +90,24 @@ final class WeatherViewModel {
                     completion()
                     
                 case .failure(let error):
-                    debugPrint("getHourlyForecast = \(error)")
+                    debugPrint("getDailyForecast = \(error)")
+                }
+            }
+        }
+    }
+    
+    func getAirDust(completion: @escaping () -> Void) {
+        guard let regionID = UserDefaults.standard.string(forKey: "regionID") else {return}
+        let networkManager = NetworkManager()
+        if let url =  URL(string: URL.dustForecast + regionID) {
+            networkManager.getfetchData(url: url) {(result: Result<ForecastAirdustModel, APIError>) in
+                switch result {
+                case .success(let model):
+                    self.dustData = model.data
+                    completion()
+                    
+                case .failure(let error):
+                    debugPrint("getAirDust = \(error)")
                 }
             }
         }
