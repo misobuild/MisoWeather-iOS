@@ -72,7 +72,6 @@ class SettingViewController: UIViewController {
         let confirm = UIAlertAction(title: "로그아웃", style: .default) { _ in
             
             let loginType = UserDefaults.standard.string(forKey: "loginType")
-            
             if loginType == "kakao" {
                 self.kakaoLogout()
             }
@@ -84,7 +83,6 @@ class SettingViewController: UIViewController {
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(RegisterViewController())
             }
         }
-        
         alert.addAction(cancle)
         alert.addAction(confirm)
         present(alert, animated: true, completion: nil)
@@ -103,6 +101,35 @@ class SettingViewController: UIViewController {
         alert.addAction(cancle)
         alert.addAction(confirm)
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func appVersionAlert() {
+        func currentAppVersion() -> String {
+          if let info: [String: Any] = Bundle.main.infoDictionary,
+              let currentVersion: String = info["CFBundleShortVersionString"] as? String {
+                return currentVersion
+          }
+          return "nil"
+        }
+        
+        let alert = UIAlertController(title: "MisoWeather",
+                                      message: """
+                                            
+                                            ▪️App Version:  \(currentAppVersion())▪️
+                                            
+                                            ▪️MisoBuild Member▪️
+                                            Designer: 정한나
+                                            Andorid Developer: 허현성
+                                            Backend Developer: 강승연
+                                            iOS Developer: 허지인, 강경훈
+                                            """,
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        let confirm = UIAlertAction(title: "확인", style: .destructive, handler: nil)
+        alert.addAction(confirm)
+        present(alert, animated: true) {
+            self.tableView.reloadData()
+        }
     }
     
     private func kakaoLogout() {
@@ -124,8 +151,7 @@ class SettingViewController: UIViewController {
             UserApi.shared.unlink {(error) in
                 if let error = error {
                     print(error)
-                }
-                else {
+                } else {
                     self.delete()
                 }
             }
@@ -172,11 +198,16 @@ extension SettingViewController: UITableViewDelegate {
 
 extension SettingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        
+        switch indexPath.row {
+        case 0:
             logoutAlert()
-        }
-        if indexPath.row == 2 {
+        case 1:
+            appVersionAlert()
+        case 2:
             deleteAlert()
+        default:
+            break
         }
     }
 }
