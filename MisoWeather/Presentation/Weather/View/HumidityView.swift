@@ -19,7 +19,7 @@ final class HumidityView: UIView {
         return label
     }()
     
-    private lazy var emojiLabel: UILabel = {
+    lazy var emojiLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 36.0, weight: .regular)
         label.textColor = .textColor
@@ -27,7 +27,7 @@ final class HumidityView: UIView {
         return label
     }()
     
-    private lazy var humidityLabel: UILabel = {
+    lazy var humidityLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 30.0, weight: .bold)
         label.textColor = .textColor

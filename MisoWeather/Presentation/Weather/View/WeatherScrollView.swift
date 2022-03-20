@@ -24,14 +24,14 @@ class WeatherScrollView: UIView {
         return label
     }()
     
-    private lazy var chatButton: UIButton = {
+    lazy var chatButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(named: "chatButton"), for: .normal)
         return button
     }()
     
-    lazy var hourlyWeatherView: HourlyWeatherView = {
-        let view = HourlyWeatherView()
+    lazy var hourlyWeatherView: HourlyForecastView = {
+        let view = HourlyForecastView()
         return view
     }()
     
@@ -40,22 +40,22 @@ class WeatherScrollView: UIView {
         return view
     }()
     
-    private lazy var precipitationView: PrecipitationView = {
+    lazy var precipitationView: PrecipitationView = {
         let view = PrecipitationView()
         return view
     }()
     
-    private lazy var forecastTableView: ForecastTableView = {
-        let view = ForecastTableView()
+    lazy var dailyTableView: DailyForecastTableView = {
+        let view = DailyForecastTableView()
         return view
     }()
     
-    private lazy var windSpeedView: WindSpeedView = {
+    lazy var windSpeedView: WindSpeedView = {
         let view = WindSpeedView()
         return view
     }()
     
-    private lazy var humidityView: HumidityView = {
+    lazy var humidityView: HumidityView = {
         let view = HumidityView()
         return view
     }()
@@ -83,7 +83,7 @@ extension WeatherScrollView {
             hourlyWeatherView,
             particulateMatterView,
             precipitationView,
-            forecastTableView,
+            dailyTableView,
             windSpeedView,
             humidityView
         ].forEach {contentView.addSubview($0)}
@@ -114,7 +114,7 @@ extension WeatherScrollView {
         
         chatButton.snp.makeConstraints {
             $0.top.equalTo(locationLabel.snp.bottom).offset(150.0)
-            $0.height.equalTo(height * 0.08)
+            $0.height.equalTo(height * 0.07)
             $0.width.equalTo(width - (width * 0.14))
             $0.centerX.equalToSuperview()
         }
@@ -140,15 +140,15 @@ extension WeatherScrollView {
             $0.trailing.equalToSuperview().inset(width * 0.07)
         }
         
-        forecastTableView.snp.makeConstraints {
+        dailyTableView.snp.makeConstraints {
             $0.top.equalTo(precipitationView.snp.bottom).offset(10.0)
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(450)
+            $0.height.equalTo(340)
             $0.width.equalTo(width - (width * 0.14))
         }
         
         windSpeedView.snp.makeConstraints {
-            $0.top.equalTo(forecastTableView.snp.bottom).offset(10.0)
+            $0.top.equalTo(dailyTableView.snp.bottom).offset(10.0)
             $0.height.equalTo(105.0)
             $0.width.equalTo(width * 0.42)
             $0.leading.equalToSuperview().inset(width * 0.07)

@@ -11,16 +11,84 @@ import SnapKit
 final class ParticulateMatterView: UIView {
     
     // MARK: - subviews
-    private lazy var particulateMatterView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .init(), collectionViewLayout: layout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.backgroundColor = .backgroundColor
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(ParticulateMatterViewCell.self, forCellWithReuseIdentifier: "ParticulateMatterViewCell")
-        return collectionView
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14.0, weight: .regular)
+        label.textColor = .textColor
+        label.text = "미세먼지"
+        return label
+    }()
+    
+    private lazy var emojiLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 30.0, weight: .regular)
+        label.textColor = .textColor
+        label.text = "😊"
+        return label
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 4
+        view.distribution = .equalSpacing
+        return view
+    }()
+    
+    private lazy var PMLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14.0, weight: .bold)
+        label.textColor = .textColor
+        label.text = "21"
+        return label
+    }()
+    
+    private lazy var statusLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14.0, weight: .thin)
+        label.textColor = .textColor
+        label.text = "좋음"
+        return label
+    }()
+    
+    private lazy var ultraTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14.0, weight: .regular)
+        label.textColor = .textColor
+        label.text = "초미세먼지"
+        return label
+    }()
+    
+    private lazy var ultraEmojiLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 30.0, weight: .regular)
+        label.textColor = .textColor
+        label.text = "😊"
+        return label
+    }()
+    
+    private lazy var ultraStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 4
+        view.distribution = .equalSpacing
+        return view
+    }()
+    
+    private lazy var ultraPMLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14.0, weight: .bold)
+        label.textColor = .textColor
+        label.text = "26"
+        return label
+    }()
+    
+    private lazy var ultraStatusLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14.0, weight: .thin)
+        label.textColor = .textColor
+        label.text = "나쁨"
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -35,39 +103,50 @@ final class ParticulateMatterView: UIView {
     }
 }
 
-extension ParticulateMatterView: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ParticulateMatterViewCell", for: indexPath)
-        return cell
-    }
-}
-
-extension ParticulateMatterView: UICollectionViewDelegate {
-    
-}
-
-extension ParticulateMatterView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width * 0.4, height: 80.0)
-    }
-}
-
 extension ParticulateMatterView {
     
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
-      
-        [
-            particulateMatterView
+        
+        [   titleLabel,
+            emojiLabel,
+            stackView,
+            ultraTitleLabel,
+            ultraEmojiLabel,
+            ultraStackView
         ].forEach {addSubview($0)}
+        
+        [PMLabel, statusLabel].forEach {stackView.addArrangedSubview($0)}
+        [ultraPMLabel, ultraStatusLabel].forEach {ultraStackView.addArrangedSubview($0)}
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(15)
+            $0.leading.equalToSuperview().offset(15)
+        }
+        
+        emojiLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(5)
+            $0.leading.equalToSuperview().offset(25)
+        }
+        
+        stackView.snp.makeConstraints {
+            $0.top.equalTo(emojiLabel.snp.bottom).offset(5)
+            $0.leading.equalToSuperview().offset(15)
+        }
+        
+        ultraTitleLabel.snp.makeConstraints {
+            $0.top.equalTo(titleLabel)
+            $0.leading.equalToSuperview().offset(80)
+        }
+        
+        ultraEmojiLabel.snp.makeConstraints {
+            $0.top.equalTo(emojiLabel)
+            $0.leading.equalToSuperview().offset(95)
+        }
 
-        particulateMatterView.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(10.0)
+        ultraStackView.snp.makeConstraints {
+            $0.top.equalTo(stackView)
+            $0.leading.equalToSuperview().offset(90)
         }
     }
 }

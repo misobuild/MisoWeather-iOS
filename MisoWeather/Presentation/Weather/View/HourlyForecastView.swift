@@ -1,5 +1,5 @@
 //
-//  HourlyWeatherView.swift
+//  HourlyForecastView.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/21.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class HourlyWeatherView: UIView {
+final class HourlyForecastView: UIView {
     
     var hourly: [HourlyForecastList] = []
     
@@ -29,7 +29,7 @@ final class HourlyWeatherView: UIView {
         collectionView.delegate = self
         collectionView.backgroundColor = .backgroundColor
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(HourlyWeatherViewCell.self, forCellWithReuseIdentifier: "HourlyWeatherViewCell")
+        collectionView.register(HourlyForecastViewCell.self, forCellWithReuseIdentifier: "HourlyWeatherViewCell")
         return collectionView
     }()
     
@@ -45,30 +45,30 @@ final class HourlyWeatherView: UIView {
     }
 }
 
-extension HourlyWeatherView: UICollectionViewDataSource {
+extension HourlyForecastView: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return hourly.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyWeatherViewCell", for: indexPath) as? HourlyWeatherViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HourlyWeatherViewCell", for: indexPath) as? HourlyForecastViewCell
         cell?.configureData(hourly: hourly[indexPath.row])
         return cell ?? UICollectionViewCell()
     }
 }
 
-extension HourlyWeatherView: UICollectionViewDelegate {
+extension HourlyForecastView: UICollectionViewDelegate {
     
 }
 
-extension HourlyWeatherView: UICollectionViewDelegateFlowLayout {
+extension HourlyForecastView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 50.0, height: 80.0)
     }
 }
 
-extension HourlyWeatherView {
+extension HourlyForecastView {
     
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {

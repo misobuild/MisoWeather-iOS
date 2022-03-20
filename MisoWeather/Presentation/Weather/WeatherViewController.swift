@@ -15,14 +15,17 @@ final class WeatherViewController: UIViewController {
     // MARK: - subviews
     private lazy var weatherScrollView: WeatherScrollView = {
         let view = WeatherScrollView()
+        view.chatButton.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return view
     }()
-    // MARK: - Private Method
     
-    private func fetchData() {
+    // MARK: - Private Method
+    private func setData() {
         model.getRealtimeForecast {
             DispatchQueue.main.async {
                 self.setRealTimeData()
+                self.setHumidityData()
+                self.setWindSpeedData()
             }
         }
         model.getHourlyForecast {
@@ -43,7 +46,21 @@ final class WeatherViewController: UIViewController {
             weatherScrollView.locationLabel.regionLabel.text = model.locationInfo
             weatherScrollView.realtimeTempLabel.realtimeTempLabel.text = String(Int(info.temperature)) + "°"
             weatherScrollView.realtimeTempLabel.emojiLabel.text = info.weather
-            weatherScrollView.realtimeTempLabel.minMaxtempLabel.text = "최저 " + String(Int(info.temperatureMin)) + "°" + " / 최고 " + String(Int(info.temperatureMax)) + "°"
+            weatherScrollView.realtimeTempLabel.minMaxtempLabel.text = "최저 " + String(Int(info.temperatureMin)) + "°" + " /  최고 " + String(Int(info.temperatureMax)) + "°"
+        }
+    }
+    
+    private func setHumidityData() {
+        if let info = model.forecastInfo {
+            weatherScrollView.humidityView.emojiLabel.text = info.humidityIcon
+            weatherScrollView.humidityView.humidityLabel.text = String(info.humidity) + "%"
+        }
+    }
+    
+    private func setWindSpeedData() {
+        if let info = model.forecastInfo {
+            weatherScrollView.windSpeedView.emojiLabel.text = info.windSpeedIcon
+            weatherScrollView.windSpeedView.descriptionLabel.text = info.windSpeedComment
         }
     }
     
