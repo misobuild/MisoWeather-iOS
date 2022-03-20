@@ -30,6 +30,12 @@ final class WeatherViewController: UIViewController {
                 self.setHourlyData()
             }
         }
+        model.getDailyForecast {
+            DispatchQueue.main.async {
+                self.setDailyData()
+                self.setPopData()
+            }
+        }
     }
     
     private func setRealTimeData() {
@@ -48,6 +54,21 @@ final class WeatherViewController: UIViewController {
         weatherScrollView.hourlyWeatherView.hourlyWeatherView.reloadData()
     }
     
+    private func setDailyData() {
+        if let info = model.dailyInfo {
+            weatherScrollView.dailyTableView.daily = info.data.dailyForecastList
+        }
+        weatherScrollView.dailyTableView.tableView.reloadData()
+    }
+    
+    private func setPopData() {
+        if let info = model.dailyInfo {
+            weatherScrollView.precipitationView.emojiLabel.text = info.data.popIcon
+            weatherScrollView.precipitationView.precipitationLabel.text = String(info.data.rain) + "%"
+            weatherScrollView.precipitationView.descriptionLabel.text = "시간당 " + String(info.data.rain) + "mm"
+        }
+    }
+    
     @objc private func nextVC() {
         let nextVC = SurveyReviewViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
@@ -56,13 +77,12 @@ final class WeatherViewController: UIViewController {
     // MARK: - LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
+        setData()
         setupView()
     }
 }
 
 extension WeatherViewController {
-    
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         view.backgroundColor = .white

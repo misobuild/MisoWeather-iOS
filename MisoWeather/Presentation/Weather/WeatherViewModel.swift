@@ -12,6 +12,7 @@ final class WeatherViewModel {
     private var location: String = ""
     private var forecastData: ForecastData?
     private var houlryData: ForecastHourlyModel?
+    private var dailyData: ForecastDailyModel?
     
     var locationInfo: String {
         self.location
@@ -25,12 +26,15 @@ final class WeatherViewModel {
         self.houlryData
     }
     
+    var dailyInfo: ForecastDailyModel? {
+        self.dailyData
+    }
+    
     func getRealtimeForecast(completion: @escaping () -> Void) {
         let networkManager = NetworkManager()
         guard let regionID = UserDefaults.standard.string(forKey: "regionID") else {return}
     
         if let url =  URL(string: URL.forecast + regionID) {
-            print(url)
             networkManager.getfetchData(url: url) {(result: Result<ForecastModel, APIError>) in
                 switch result {
                 case .success(let model):
@@ -61,6 +65,23 @@ final class WeatherViewModel {
                 switch result {
                 case .success(let model):
                     self.houlryData = model
+                    completion()
+                    
+                case .failure(let error):
+                    debugPrint("getHourlyForecast = \(error)")
+                }
+            }
+        }
+    }
+    
+    func getDailyForecast(completion: @escaping () -> Void) {
+        guard let regionID = UserDefaults.standard.string(forKey: "regionID") else {return}
+        let networkManager = NetworkManager()
+        if let url =  URL(string: URL.dailyForecast + regionID) {
+            networkManager.getfetchData(url: url) {(result: Result<ForecastDailyModel, APIError>) in
+                switch result {
+                case .success(let model):
+                    self.dailyData = model
                     completion()
                     
                 case .failure(let error):
