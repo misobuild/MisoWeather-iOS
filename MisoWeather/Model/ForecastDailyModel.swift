@@ -14,12 +14,20 @@ struct ForecastDailyModel: Decodable {
 struct DailyData: Decodable {
     let region: RegionList
     let dailyForecastList: [DailyForecastList]
+    let rain: Int
+    let snow: Int
+    let pop: Int
+    let popIcon: String
 }
 
 struct DailyForecastList: Decodable {
     let createdAt: String
     let forecastTime: String
-    let maxTemperature: Int
-    let minTemperature: Int
+    let maxTemperature: Double
+    let minTemperature: Double
     let weather: String
+    let pop: Int
+    let rain: Int
+    let snow: Int
+    let popIcon: String
 }

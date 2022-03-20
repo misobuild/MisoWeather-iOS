@@ -17,4 +17,9 @@ struct ForecastData: Decodable {
     let temperatureMax: Double
     let temperatureMin: Double
     let weather: String
+    let windSpeed: Double
+    let windSpeedIcon: String
+    let humidity: Int
+    let humidityIcon: String
+    let windSpeedComment: String
 }
