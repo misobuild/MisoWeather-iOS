@@ -45,8 +45,6 @@ final class SettingViewModel {
     }
     
     func deleteUser(completion: @escaping (Result<String, APIError>) -> Void) {
-        print("deleteUser 실행")
-        
         let token = TokenUtils()
         var userID = ""
         
@@ -65,11 +63,7 @@ final class SettingViewModel {
             "socialId": userID,
             "socialType": loginType!
         ]
-        
         let urlString = URL.member
-        
-        print(body)
-        
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         guard let url = URL(string: encodedString) else {return}
         guard let jsonBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return}
@@ -80,13 +74,11 @@ final class SettingViewModel {
         requeset.addValue(serverToken, forHTTPHeaderField: "serverToken")
         requeset.httpBody = jsonBody
         
-        print(urlString)
-        
         let networkManager = NetworkManager()
         networkManager.deleteUser(url: requeset) {(result: Result<String, APIError>) in
             switch result {
             case .success(let message):
-                print("유저삭제: \(message)")
+                debugPrint("유저삭제: \(message)")
 
                 if loginType == "kakao" {
                     userID = token.read("kakao", account: "userID") ?? ""
@@ -102,7 +94,7 @@ final class SettingViewModel {
                 completion(.success(""))
                 
             case .failure(let error):
-                print("deleteUser error: \(error)")
+                debugPrint("deleteUser error: \(error)")
                 completion(.failure(error))
             }
         }

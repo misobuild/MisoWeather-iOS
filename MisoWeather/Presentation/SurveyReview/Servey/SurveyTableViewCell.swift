@@ -194,8 +194,7 @@ final class SurveyTableViewCell: UITableViewCell {
                 titleList[index].isHidden = false
                 askTitleLabel.isHidden = false
                 chartHideView.isHidden = false
-            }
-            else {
+            } else {
                 noteLabel.isHidden = false
                 chartList.forEach {$0.isHidden = true}
                 titleList.forEach {$0.isHidden = true}

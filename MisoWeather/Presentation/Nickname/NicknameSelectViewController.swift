@@ -102,7 +102,7 @@ final class NicknameSelectViewController: UIViewController {
         model.register {(result: Result<String, APIError>) in
             switch result {
             case .failure(let error):
-                print("error: \(error)")
+                debugPrint("registerError: \(error)")
                 
             case .success:
                 DispatchQueue.main.async {

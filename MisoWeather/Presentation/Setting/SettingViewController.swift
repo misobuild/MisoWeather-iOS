@@ -104,18 +104,10 @@ class SettingViewController: UIViewController {
     }
     
     private func appVersionAlert() {
-        func currentAppVersion() -> String {
-          if let info: [String: Any] = Bundle.main.infoDictionary,
-              let currentVersion: String = info["CFBundleShortVersionString"] as? String {
-                return currentVersion
-          }
-          return "nil"
-        }
-        
         let alert = UIAlertController(title: "MisoWeather",
                                       message: """
                                             
-                                            ▪️App Version:  \(currentAppVersion())▪️
+                                            ▪️App Version:  \(Utils.getAppVersion())▪️
                                             
                                             ▪️MisoBuild Member▪️
                                             Designer: 정한나
@@ -135,9 +127,9 @@ class SettingViewController: UIViewController {
     private func kakaoLogout() {
         UserApi.shared.logout {(error) in
             if let error = error {
-                print(error)
+                debugPrint(error)
             } else {
-                print("logout() success.")
+                debugPrint("logout() success.")
                 let token = TokenUtils()
                 token.delete("kakao", account: "accessToken")
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(RegisterViewController())
@@ -150,7 +142,7 @@ class SettingViewController: UIViewController {
         if loginType == "kakao" {
             UserApi.shared.unlink {(error) in
                 if let error = error {
-                    print(error)
+                    debugPrint(error)
                 } else {
                     self.delete()
                 }
@@ -171,7 +163,7 @@ class SettingViewController: UIViewController {
                 }
                 
             case .failure(let error):
-                print("delete error: \(error)")
+                debugPrint("delete error: \(error)")
             }
         }
     }

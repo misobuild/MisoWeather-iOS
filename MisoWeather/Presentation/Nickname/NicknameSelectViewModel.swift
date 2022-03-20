@@ -67,12 +67,7 @@ final class NicknameSelectViewModel {
                 "socialType": "apple"
             ]
             urlString += accessToken
-            print(userID)
         }
-      
-        print(body)
-        print(urlString)
-        
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         guard let url = URL(string: encodedString) else {return}
         guard let jsonBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return}
@@ -88,7 +83,6 @@ final class NicknameSelectViewModel {
             
             switch result {
             case .success(let serverToken):
-                print("serverToken: \(serverToken)")
                 token.create("misoWeather", account: "serverToken", value: serverToken)
                 completion(.success(""))
                 
