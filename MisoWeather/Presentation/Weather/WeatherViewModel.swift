@@ -47,7 +47,9 @@ final class WeatherViewModel {
                     
                     var text = model.data.region.bigScale
                     if model.data.region.midScale != "선택 안 함" {
-                        text.append(" " + model.data.region.midScale)
+                        if model.data.region.midScale != text {
+                            text.append(" " + model.data.region.midScale)
+                        }
                         if model.data.region.smallScale != "선택 안 함" {
                             text.append(" " + model.data.region.smallScale)
                         }
