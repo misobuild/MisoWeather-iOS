@@ -29,7 +29,7 @@ final class MainScrollView: UIView {
         return label
     }()
     
-    private lazy var addLocationButton: UIButton = {
+    lazy var locationButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "location"), for: .normal)
         button.tintColor = .black
@@ -116,7 +116,7 @@ extension MainScrollView {
         [
             logoView,
             misoLabel,
-            addLocationButton,
+            locationButton,
             userButton,
             greetingLabel,
             titleLabel,
@@ -151,7 +151,7 @@ extension MainScrollView {
             $0.leading.equalTo(logoView.snp.trailing).offset(4)
         }
         
-        addLocationButton.snp.makeConstraints {
+        locationButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(width * 0.12)
             $0.centerY.equalTo(userButton)
             $0.width.equalTo(width * 0.09)

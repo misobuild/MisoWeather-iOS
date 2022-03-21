@@ -13,38 +13,39 @@ final class RealtimeTempLabel: UIView {
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.spacing = 6
-        view.distribution = .equalSpacing
+        view.spacing = 1
+        view.distribution = .fillEqually
         return view
     }()
     
-    private lazy var emojiLabel: UILabel = {
+    lazy var emojiLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 55.0, weight: .regular)
-        label.textColor = .black
+        label.textColor = .textColor
         label.text = "☀️"
+        label.textAlignment = .center
         return label
     }()
     
-    private lazy var realtimeTempLabel: UILabel = {
+    lazy var realtimeTempLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 48.0, weight: .regular)
-        label.textColor = .black
+        label.textColor = .textColor
         label.text = "-10°"
+        label.textAlignment = .center
         return label
     }()
     
-    private lazy var minMaxtempLabel: UILabel = {
+    lazy var minMaxtempLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16.0, weight: .regular)
-        label.textColor = .black
+        label.textColor = .textColor
         label.text = "최저 -15°/ 최고 0°"
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         self.setupView()
     }
     
@@ -67,8 +68,6 @@ extension RealtimeTempLabel {
         
         stackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(160.0)
-            $0.height.equalTo(64.0)
         }
         
         minMaxtempLabel.snp.makeConstraints {

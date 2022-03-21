@@ -12,8 +12,8 @@ final class SmallRegionListViewController: UIViewController {
 
     private var model = RegionSelectViewModel()
     weak var delegate: RegionSendDelegate?
-  
     var smallScaleRegionList: [RegionList] = []
+    var backScreen = BackScreen.create
     
     // MARK: - Subviews
     private lazy var regionSelectListView: RegionSelectListView = {
@@ -45,11 +45,21 @@ final class SmallRegionListViewController: UIViewController {
         if regionSelectListView.selectRegion == "" {
             self.showAlert()
         } else {
-            let urlString = URL.nickname
-            UserDefaults.standard.set(regionSelectListView.regionID, forKey: "regionID")
-            model.fetchNicknameData(urlString: urlString) {
-                DispatchQueue.main.async {
-                    self.nextVC()
+            switch backScreen {
+            case .survey, .main:
+                UserDefaults.standard.set(regionSelectListView.regionID, forKey: "regionID")
+                model.putRegionChange {
+                    DispatchQueue.main.async {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                }
+            case .create:
+                let urlString = URL.nickname
+                UserDefaults.standard.set(regionSelectListView.regionID, forKey: "regionID")
+                model.fetchNicknameData(urlString: urlString) {
+                    DispatchQueue.main.async {
+                        self.nextVC()
+                    }
                 }
             }
         }

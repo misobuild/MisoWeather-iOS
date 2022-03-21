@@ -19,7 +19,7 @@ final class PrecipitationView: UIView {
         return label
     }()
     
-    private lazy var emojiLabel: UILabel = {
+    lazy var emojiLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 36.0, weight: .regular)
         label.textColor = .textColor
@@ -27,7 +27,7 @@ final class PrecipitationView: UIView {
         return label
     }()
     
-    private lazy var precipitationLabel: UILabel = {
+    lazy var precipitationLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 24.0, weight: .bold)
         label.textColor = .textColor
@@ -35,7 +35,7 @@ final class PrecipitationView: UIView {
         return label
     }()
     
-    private lazy var descriptionLabel: UILabel = {
+    lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .thin)
         label.textColor = .textColor

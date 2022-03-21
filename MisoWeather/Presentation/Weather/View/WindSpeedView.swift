@@ -19,7 +19,7 @@ final class WindSpeedView: UIView {
         return label
     }()
     
-    private lazy var emojiLabel: UILabel = {
+    lazy var emojiLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 36.0, weight: .regular)
         label.textColor = .textColor
@@ -35,7 +35,7 @@ final class WindSpeedView: UIView {
         return label
     }()
     
-    private lazy var descriptionLabel: UILabel = {
+    lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18.0, weight: .bold)
         label.textColor = .textColor

@@ -40,7 +40,6 @@ class NetworkManager {
             }
         }
         dataTask.resume()
-        dataTasks.append(dataTask)
     }
     
     func headerTokenRequsetData<T: Decodable>(url: URLRequest, completion: @escaping (Result<T, APIError>) -> Void) {
@@ -63,7 +62,6 @@ class NetworkManager {
             }
         }
         dataTask.resume()
-        dataTasks.append(dataTask)
     }
     
     // MARK: - POST
@@ -77,7 +75,6 @@ class NetworkManager {
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
                 return completion(.failure(.statusCode))
             }
-            print(statusCode)
             
             guard self.sucessRange.contains(statusCode) else {
                 return completion(.failure(.error))
@@ -85,18 +82,16 @@ class NetworkManager {
             if let httpResponse = response as? HTTPURLResponse {
                 if let serverToken =  httpResponse.value(forHTTPHeaderField: "serverToken") {
                     completion(.success(serverToken as! T))
-                    
                 } else {
                     if let resultString = String(data: data, encoding: .utf8) {
-                        print("result String: \(resultString)")
+                        debugPrint("result String: \(resultString)")
                     }
-                    print("postRegister error = \(httpResponse)")
+                    debugPrint("postRegister error = \(httpResponse)")
                     completion(.failure(.error))
                 }
             }
         }
         dataTask.resume()
-        dataTasks.append(dataTask)
     }
     
     // MARK: - DELETE
@@ -119,6 +114,5 @@ class NetworkManager {
             }
         }
         dataTask.resume()
-        dataTasks.append(dataTask)
     }
 }

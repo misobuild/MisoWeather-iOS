@@ -11,6 +11,7 @@ import KakaoSDKCommon
 
 final class BigRegionViewController: UIViewController {
     
+    var backScreen = BackScreen.create
     private let model = BigRegionViewModel()
     private var midScaleRegionList: [RegionList] = []
     
@@ -38,8 +39,17 @@ final class BigRegionViewController: UIViewController {
     
     private lazy var confirmButton: CustomButton = {
         let button = CustomButton(type: .next)
-        button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
-        return button
+        switch backScreen {
+        case .survey:
+            button.addTarget(self, action: #selector(nextSurveyVC), for: .touchUpInside)
+            return button
+        case .main:
+            button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
+            return button
+        default:
+            button.addTarget(self, action: #selector(fetchData), for: .touchUpInside)
+            return button
+        }
     }()
     
     // MARK: - Private Method
@@ -53,13 +63,19 @@ final class BigRegionViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    @objc private func nextSurveyVC() {
+        UserDefaults.standard.set(selectRegion, forKey: "selectRegionName")
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @objc private func nextVC() {
         let nextVC = MidRegionListViewController()
         nextVC.delegate = self
+        nextVC.backScreen = backScreen
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
-    // 2단계 지역 리스트 가져오기
+    /// 2단계 지역 리스트 가져오기
     @objc private func fetchData() {
         if selectRegion == "" {
             self.showAlert()
@@ -81,7 +97,13 @@ final class BigRegionViewController: UIViewController {
     }
      
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.isHidden = true
+        switch backScreen {
+        case .survey, .main:
+            self.navigationController?.navigationBar.isHidden = false
+        case .create:
+            self.navigationController?.navigationBar.isHidden = true
+        }
+    
     }
 }
 
@@ -115,7 +137,6 @@ extension BigRegionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let region = selectRegionList[indexPath.row]
         selectRegion = region
-
         // User 대분류 지역 저장
         UserInfo.shared.region = selectRegionList[indexPath.row]
     }

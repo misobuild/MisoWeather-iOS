@@ -16,11 +16,17 @@ final class MainViewController: UIViewController {
         let view = MainScrollView()
         view.weatherView.nextButton.addTarget(MainViewController(), action: #selector(nextWeatherVC), for: .touchUpInside)
         view.serveyTitleView.nextButton.addTarget(MainViewController(), action: #selector(nextServeyVC), for: .touchUpInside)
+        view.locationButton.addTarget(MainViewController(), action: #selector(nextRegionVC), for: .touchUpInside)
         return view
-        
     }()
     
     // MARK: - Private Method
+    @objc private func nextRegionVC() {
+        let nextVC = BigRegionViewController()
+        nextVC.backScreen = .main
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     @objc private func nextWeatherVC() {
         let nextVC = WeatherViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
@@ -34,8 +40,8 @@ final class MainViewController: UIViewController {
     private func setWeatherData() {
         if let info = model.forecastInfo {
             mainScrollView.weatherView.regionLocationLabel.regionLabel.text = model.locationInfo
-            mainScrollView.weatherView.emojiLabel.text = info.data.forecast.sky
-            mainScrollView.weatherView.tempLabel.text = info.data.forecast.temperature + "°"
+            mainScrollView.weatherView.emojiLabel.text = info.weather
+            mainScrollView.weatherView.tempLabel.text = String(Int(info.temperature)) + "°"
         }
     }
     
@@ -48,9 +54,11 @@ final class MainViewController: UIViewController {
                     self.mainScrollView.titleLabel.text = "\(data.data.regionName)의 \(data.data.nickname)님\(data.data.emoji)"
                 }
             }
-            self.model.getCurrentTempData {
-                DispatchQueue.main.async {
-                    self.setWeatherData()
+            self.model.getForecastUpdate {
+                self.model.getRealtimeForecast {
+                    DispatchQueue.main.async {
+                        self.setWeatherData()
+                    }
                 }
             }
         }

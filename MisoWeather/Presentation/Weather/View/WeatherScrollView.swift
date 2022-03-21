@@ -14,48 +14,66 @@ class WeatherScrollView: UIView {
     let contentView = UIView()
     
     // MARK: - subView
-    private lazy var locationLabel: RegionLocationLabel = {
-        let view = RegionLocationLabel()
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 1
+        view.distribution = .equalSpacing
         return view
     }()
     
-    private lazy var realtimeTempLabel: RealtimeTempLabel = {
+    private lazy var location: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "location")
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+    
+    lazy var regionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16.0, weight: .regular)
+        label.textColor = .black
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    lazy var realtimeTempLabel: RealtimeTempLabel = {
         let label = RealtimeTempLabel()
         return label
     }()
     
-    private lazy var chatButton: UIButton = {
+    lazy var chatButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(named: "chatButton"), for: .normal)
         return button
     }()
     
-    private lazy var hourlyWeatherView: HourlyWeatherView = {
-        let view = HourlyWeatherView()
+    lazy var hourlyWeatherView: HourlyForecastView = {
+        let view = HourlyForecastView()
         return view
     }()
     
-    private lazy var particulateMatterView: ParticulateMatterView = {
-        let view = ParticulateMatterView()
+    lazy var dustView: DustView = {
+        let view = DustView()
         return view
     }()
     
-    private lazy var precipitationView: PrecipitationView = {
+    lazy var precipitationView: PrecipitationView = {
         let view = PrecipitationView()
         return view
     }()
     
-    private lazy var forecastTableView: ForecastTableView = {
-        let view = ForecastTableView()
+    lazy var dailyTableView: DailyForecastTableView = {
+        let view = DailyForecastTableView()
         return view
     }()
     
-    private lazy var windSpeedView: WindSpeedView = {
+    lazy var windSpeedView: WindSpeedView = {
         let view = WindSpeedView()
         return view
     }()
     
-    private lazy var humidityView: HumidityView = {
+    lazy var humidityView: HumidityView = {
         let view = HumidityView()
         return view
     }()
@@ -76,16 +94,19 @@ extension WeatherScrollView {
     
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
+        
+        [location, regionLabel].forEach{stackView.addArrangedSubview($0)}
+        
         [
-            locationLabel,
+            stackView,
             realtimeTempLabel,
             chatButton,
             hourlyWeatherView,
-            particulateMatterView,
+            dustView,
             precipitationView,
-            forecastTableView,
+            dailyTableView,
             windSpeedView,
-            humidityView
+            humidityView,
         ].forEach {contentView.addSubview($0)}
         
         scrollView.addSubview(contentView)
@@ -101,20 +122,19 @@ extension WeatherScrollView {
             $0.height.equalTo(height * 1.35)
         }
   
-        locationLabel.snp.makeConstraints {
+        stackView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(10.0)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(185.0)
         }
         
         realtimeTempLabel.snp.makeConstraints {
-            $0.top.equalTo(locationLabel.snp.bottom).offset(25.00)
+            $0.top.equalTo(stackView.snp.bottom).offset(25.00)
             $0.centerX.equalToSuperview()
         }
         
         chatButton.snp.makeConstraints {
-            $0.top.equalTo(locationLabel.snp.bottom).offset(150.0)
-            $0.height.equalTo(height * 0.08)
+            $0.top.equalTo(stackView.snp.bottom).offset(150.0)
+            $0.height.equalTo(height * 0.07)
             $0.width.equalTo(width - (width * 0.14))
             $0.centerX.equalToSuperview()
         }
@@ -126,7 +146,7 @@ extension WeatherScrollView {
             $0.centerX.equalToSuperview()
         }
         
-        particulateMatterView.snp.makeConstraints {
+        dustView.snp.makeConstraints {
             $0.top.equalTo(hourlyWeatherView.snp.bottom).offset(10.0)
             $0.height.equalTo(105.0)
             $0.width.equalTo(width * 0.42)
@@ -134,21 +154,21 @@ extension WeatherScrollView {
         }
         
         precipitationView.snp.makeConstraints {
-            $0.top.equalTo(particulateMatterView)
+            $0.top.equalTo(dustView)
             $0.height.equalTo(105.0)
             $0.width.equalTo(width * 0.42)
             $0.trailing.equalToSuperview().inset(width * 0.07)
         }
         
-        forecastTableView.snp.makeConstraints {
+        dailyTableView.snp.makeConstraints {
             $0.top.equalTo(precipitationView.snp.bottom).offset(10.0)
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(450)
+            $0.height.equalTo(340)
             $0.width.equalTo(width - (width * 0.14))
         }
         
         windSpeedView.snp.makeConstraints {
-            $0.top.equalTo(forecastTableView.snp.bottom).offset(10.0)
+            $0.top.equalTo(dailyTableView.snp.bottom).offset(10.0)
             $0.height.equalTo(105.0)
             $0.width.equalTo(width * 0.42)
             $0.leading.equalToSuperview().inset(width * 0.07)

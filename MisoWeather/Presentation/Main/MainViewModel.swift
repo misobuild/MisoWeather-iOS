@@ -9,7 +9,7 @@ import Foundation
 final class MainViewModel {
     
     private var memberData: MemberModel?
-    private var forecastData: CurrentTempModel?
+    private var forecastData: ForecastData?
     private var location: String = ""
     private var commentData: [CommentList] = []
     private var surveyData: [SurveyList] = []
@@ -18,7 +18,7 @@ final class MainViewModel {
         self.memberData
     }
     
-    var forecastInfo: CurrentTempModel? {
+    var forecastInfo: ForecastData? {
         self.forecastData
     }
     
@@ -35,7 +35,6 @@ final class MainViewModel {
     }
     
     func getMemberData(completion: @escaping () -> Void) {
-        
         let networkManager = NetworkManager()
         
         let token = TokenUtils()
@@ -53,6 +52,7 @@ final class MainViewModel {
                 UserDefaults.standard.set(model.data.regionId, forKey: "regionID")
                 UserDefaults.standard.set(model.data.nickname, forKey: "nickName")
                 UserDefaults.standard.set(model.data.regionName, forKey: "regionName")
+                UserDefaults.standard.set(model.data.regionName, forKey: "selectRegionName")
                 completion()
                 
             case .failure(let error):
@@ -62,32 +62,47 @@ final class MainViewModel {
         }
     }
     
-    func getCurrentTempData(completion: @escaping () -> Void) {
-        
+    func getForecastUpdate(completion: @escaping () -> Void) {
         let networkManager = NetworkManager()
+
         guard let regionID = UserDefaults.standard.string(forKey: "regionID") else {return}
         
-        let urlString = URL.realtimeForecast + regionID
-        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
-        
-        if let url =  URL(string: encodedString) {
-            networkManager.getfetchData(url: url) {(result: Result<CurrentTempModel, APIError>) in
+        if let url = URL(string: URL.forecastUpdate + regionID) {
+            networkManager.getfetchData(url: url) {(result: Result<StatusModel, APIError>)  in
+                switch result {
+                case .success:
+                    completion()
+                case .failure(let error):
+                    debugPrint("getForecastUpdate error = \(error)")
+                }
+            }
+        }
+    }
+    
+    func getRealtimeForecast(completion: @escaping () -> Void) {
+        let networkManager = NetworkManager()
+        guard let regionID = UserDefaults.standard.string(forKey: "regionID") else {return}
+    
+        if let url =  URL(string: URL.forecast + regionID) {
+            networkManager.getfetchData(url: url) {(result: Result<ForecastModel, APIError>) in
                 switch result {
                 case .success(let model):
-                    self.forecastData = model
+                    self.forecastData = model.data
                     
                     var text = model.data.region.bigScale
                     if model.data.region.midScale != "선택 안 함" {
-                        text.append(" " + model.data.region.midScale)
+                        if model.data.region.midScale != text {
+                            text.append(" " + model.data.region.midScale)
+                        }
                         if model.data.region.smallScale != "선택 안 함" {
                             text.append(" " + model.data.region.smallScale)
                         }
                     }
                     self.location = text
-                    completion()
+                    completion( )
                     
                 case .failure(let error):
-                    debugPrint("getCurrentTempData error = \(error)")
+                    debugPrint("getRealtimeForecast error = \(error)")
                 }
             }
         }
