@@ -82,7 +82,6 @@ extension RegionSelectListView: UITableViewDataSource {
 }
 
 extension RegionSelectListView {
-    
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
         [

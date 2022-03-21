@@ -52,6 +52,7 @@ extension RegionLocationLabel {
         
         regionLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
+            $0.width.equalToSuperview()
             $0.leading.equalTo(location.snp.trailing).offset(width * 0.01)
         }
     }

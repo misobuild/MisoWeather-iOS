@@ -40,7 +40,6 @@ class NetworkManager {
             }
         }
         dataTask.resume()
-        dataTasks.append(dataTask)
     }
     
     func headerTokenRequsetData<T: Decodable>(url: URLRequest, completion: @escaping (Result<T, APIError>) -> Void) {
@@ -63,7 +62,6 @@ class NetworkManager {
             }
         }
         dataTask.resume()
-        dataTasks.append(dataTask)
     }
     
     // MARK: - POST
@@ -94,7 +92,6 @@ class NetworkManager {
             }
         }
         dataTask.resume()
-        dataTasks.append(dataTask)
     }
     
     // MARK: - DELETE
@@ -117,6 +114,5 @@ class NetworkManager {
             }
         }
         dataTask.resume()
-        dataTasks.append(dataTask)
     }
 }

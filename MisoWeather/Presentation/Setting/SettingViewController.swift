@@ -43,7 +43,6 @@ class SettingViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .orange
         tableView.isScrollEnabled = true
         tableView.delegate = self
         tableView.dataSource = self

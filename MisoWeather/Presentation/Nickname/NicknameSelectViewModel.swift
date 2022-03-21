@@ -36,9 +36,7 @@ final class NicknameSelectViewModel {
     }
     
     func register(completion: @escaping (Result<String, APIError>) -> Void) {
-        
         let token = TokenUtils()
-
         let loginType = UserDefaults.standard.string(forKey: "loginType")
         let regionID = UserDefaults.standard.string(forKey: "regionID")
         
@@ -78,13 +76,11 @@ final class NicknameSelectViewModel {
         requeset.httpBody = jsonBody
         
         let networkManager = NetworkManager()
-        
         networkManager.postRegister(url: requeset) {(result: Result<String, APIError>) in
-            
             switch result {
             case .success(let serverToken):
                 token.create("misoWeather", account: "serverToken", value: serverToken)
-                completion(.success(""))
+                completion(.success(serverToken))
                 
             case .failure(let error):
                 debugPrint("register error = \(error)")

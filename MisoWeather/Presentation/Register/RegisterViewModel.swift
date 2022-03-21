@@ -83,7 +83,6 @@ final class RegisterViewModel {
         networkManager.postRegister(url: requeset) {(result: Result<String, APIError>) in
             switch result {
             case .success(let serverToken):
-                debugPrint("serverToken: \(serverToken)")
                 token.create("misoWeather", account: "serverToken", value: serverToken)
                 completion(String(""))
                 

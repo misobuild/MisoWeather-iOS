@@ -48,7 +48,7 @@ final class WeatherViewController: UIViewController {
     
     private func setRealTimeData() {
         if let info = model.forecastInfo {
-            weatherScrollView.locationLabel.regionLabel.text = model.locationInfo
+            weatherScrollView.regionLabel.text = model.locationInfo
             weatherScrollView.realtimeTempLabel.realtimeTempLabel.text = String(Int(info.temperature)) + "°"
             weatherScrollView.realtimeTempLabel.emojiLabel.text = info.weather
             weatherScrollView.realtimeTempLabel.minMaxtempLabel.text = "최저 " + String(Int(info.temperatureMin)) + "°" + " /  최고 " + String(Int(info.temperatureMax)) + "°"

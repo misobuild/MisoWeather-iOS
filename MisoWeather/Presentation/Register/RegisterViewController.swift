@@ -113,7 +113,11 @@ final class RegisterViewController: UIViewController {
                     UserDefaults.standard.set("kakao", forKey: "loginType")
                     let token = TokenUtils()
                     token.create("kakao", account: "userID", value: String((oauthToken?.id)!))
-                    
+                    guard let reLogin = UserDefaults.standard.string(forKey: "RegisterError") else {return}
+                    if reLogin == "true" {
+                        UserDefaults.standard.set("false", forKey: "RegisterError")
+                        self.kakaoLogin()
+                    }
                     if isLogin {
                         self.checkUser(nextVC: false)
                     } else {
@@ -170,6 +174,7 @@ final class RegisterViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .mainColor
         self.navigationController?.navigationBar.isHidden = true
+        UserDefaults.standard.set("false", forKey: "RegisterError")
         hasUser()
         setupView()
     }

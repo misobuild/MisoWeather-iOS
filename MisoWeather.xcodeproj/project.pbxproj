@@ -358,8 +358,8 @@
 		E8BFAD4C27B24F540007E1DC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E8CE99B827988CFC0095C958 /* MainScrollView.swift */,
 				E8CE99BA27989CD40095C958 /* MainWeatherView.swift */,
+				E8CE99B827988CFC0095C958 /* MainScrollView.swift */,
 				E8CE99E2279C47EC0095C958 /* MainServeyTitleView.swift */,
 				E8CE99DC279BE56E0095C958 /* MainServeyView.swift */,
 				E8CE99E0279BE6200095C958 /* ChartView.swift */,
@@ -1116,7 +1116,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MisoWeather/MisoWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MisoWeather/Resources/Info.plist;
@@ -1147,7 +1147,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MisoWeather/MisoWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MisoWeather/Resources/Info.plist;

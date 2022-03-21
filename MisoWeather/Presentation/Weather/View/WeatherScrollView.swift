@@ -14,9 +14,27 @@ class WeatherScrollView: UIView {
     let contentView = UIView()
     
     // MARK: - subView
-    lazy var locationLabel: RegionLocationLabel = {
-        let view = RegionLocationLabel()
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.spacing = 1
+        view.distribution = .equalSpacing
         return view
+    }()
+    
+    private lazy var location: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "location")
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+    
+    lazy var regionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16.0, weight: .regular)
+        label.textColor = .black
+        label.adjustsFontSizeToFitWidth = true
+        return label
     }()
     
     lazy var realtimeTempLabel: RealtimeTempLabel = {
@@ -76,8 +94,11 @@ extension WeatherScrollView {
     
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
+        
+        [location, regionLabel].forEach{stackView.addArrangedSubview($0)}
+        
         [
-            locationLabel,
+            stackView,
             realtimeTempLabel,
             chatButton,
             hourlyWeatherView,
@@ -85,7 +106,7 @@ extension WeatherScrollView {
             precipitationView,
             dailyTableView,
             windSpeedView,
-            humidityView
+            humidityView,
         ].forEach {contentView.addSubview($0)}
         
         scrollView.addSubview(contentView)
@@ -101,19 +122,18 @@ extension WeatherScrollView {
             $0.height.equalTo(height * 1.35)
         }
   
-        locationLabel.snp.makeConstraints {
+        stackView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(10.0)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(185.0)
         }
         
         realtimeTempLabel.snp.makeConstraints {
-            $0.top.equalTo(locationLabel.snp.bottom).offset(25.00)
+            $0.top.equalTo(stackView.snp.bottom).offset(25.00)
             $0.centerX.equalToSuperview()
         }
         
         chatButton.snp.makeConstraints {
-            $0.top.equalTo(locationLabel.snp.bottom).offset(150.0)
+            $0.top.equalTo(stackView.snp.bottom).offset(150.0)
             $0.height.equalTo(height * 0.07)
             $0.width.equalTo(width - (width * 0.14))
             $0.centerX.equalToSuperview()
