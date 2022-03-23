@@ -106,7 +106,7 @@ extension WeatherScrollView {
             precipitationView,
             dailyTableView,
             windSpeedView,
-            humidityView,
+            humidityView
         ].forEach {contentView.addSubview($0)}
         
         scrollView.addSubview(contentView)
@@ -123,12 +123,12 @@ extension WeatherScrollView {
         }
   
         stackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(10.0)
+            $0.top.equalToSuperview().inset(5.0)
             $0.centerX.equalToSuperview()
         }
         
         realtimeTempLabel.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom).offset(25.00)
+            $0.top.equalTo(stackView.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
         }
         

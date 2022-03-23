@@ -162,18 +162,21 @@ final class SurveyTableViewCell: UITableViewCell {
     // MARK: - Method
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        if isSelected {
-            if !isAnswered {
-                leftBackgoundView.backgroundColor = .surveyAnswerColor
-                rightBackgoundView.backgroundColor = .surveyAnswerColor
+        guard let loginType = UserDefaults.standard.string(forKey: "loginType") else { return }
+        if loginType != "nonLogin" {
+            if isSelected {
+                if !isAnswered {
+                    leftBackgoundView.backgroundColor = .surveyAnswerColor
+                    rightBackgoundView.backgroundColor = .surveyAnswerColor
+                }
+            } else {
+                self.layer.borderColor = UIColor.clear.cgColor
+                leftBackgoundView.backgroundColor = .backgroundColor
+                rightBackgoundView.backgroundColor = .backgroundColor
             }
-        } else {
-            self.layer.borderColor = UIColor.clear.cgColor
-            leftBackgoundView.backgroundColor = .backgroundColor
-            rightBackgoundView.backgroundColor = .backgroundColor
         }
     }
-
+    
     private func setList() {
         chartList = [chart1, chart2, chart3]
         titleList = [chart1Label, chart2Label, chart3Label]

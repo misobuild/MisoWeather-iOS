@@ -56,10 +56,12 @@ extension SurveyTableView: UITableViewDelegate {
 extension SurveyTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let id = userSurveyList[indexPath.row].surveyId
-        
-        if !userSurveyList[indexPath.row].answered {
-            // Notification에 userinfo를 실어서 보냄
-            NotificationCenter.default.post( name: .surveyNotification, object: nil, userInfo: ["surveyID": id])
+        guard let loginType = UserDefaults.standard.string(forKey: "loginType") else { return }
+        if loginType != "nonLogin" {
+            if !userSurveyList[indexPath.row].answered {
+                // Notification에 userinfo를 실어서 보냄
+                NotificationCenter.default.post( name: .surveyNotification, object: nil, userInfo: ["surveyID": id])
+            }
         }
     }
 }

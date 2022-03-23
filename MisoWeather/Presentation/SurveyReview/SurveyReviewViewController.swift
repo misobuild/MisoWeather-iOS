@@ -37,12 +37,25 @@ final class SurveyReviewViewController: UIViewController, UITableViewDelegate {
     
     private lazy var locationButton: RegionButton = {
         let button = RegionButton()
-        if let regionName = UserDefaults.standard.string(forKey: "selectRegionName") {
-            button.regionButton.setTitle(regionName, for: .normal)
+        guard let loginType = UserDefaults.standard.string(forKey: "loginType") else {return button}
+        if loginType == "nonLogin" {
+            button.regionButton.setTitle("서울", for: .normal)
+            button.regionButton.addTarget(self, action: #selector(coverVC), for: .touchUpInside)
+        } else {
+            if let regionName = UserDefaults.standard.string(forKey: "selectRegionName") {
+                button.regionButton.setTitle(regionName, for: .normal)
+                button.regionButton.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
+            }
         }
-        button.regionButton.addTarget(self, action: #selector(nextVC), for: .touchUpInside)
         return button
     }()
+    
+    // MARK: - Methods
+    @objc private func coverVC() {
+        let nextVC = CoverViewContoller()
+        nextVC.modalPresentationStyle = .overFullScreen
+        self.present(nextVC, animated: true)
+    }
     
     @objc private func nextVC() {
         let nextVC = BigRegionViewController()
