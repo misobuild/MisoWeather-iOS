@@ -33,4 +33,7 @@ extension UIColor {
     class var kakaoButtonColor: UIColor? {
         return UIColor(named: "kakaoButtonColor")
     }
+    class var coverColor: UIColor? {
+        return UIColor(named: "coverColor")
+    }
 }
