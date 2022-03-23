@@ -46,8 +46,29 @@ final class RegisterViewController: UIViewController {
         button.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
         return button
     }()
+
+    private lazy var nonLoginButton: UIButton = {
+        let button = UIButton(type: .system)
+        let text = "그냥 둘러볼래요"
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle(text, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16.0)
+        let attributeString = NSMutableAttributedString(string: text)
+        attributeString.addAttribute(.underlineStyle, value: 1, range: NSRange.init(location: 0, length: text.count))
+        button.titleLabel?.attributedText = attributeString
+        button.addTarget(self, action: #selector(nonLogin), for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - Private Method
+    @objc func nonLogin() {
+        UserDefaults.standard.set("nonLogin", forKey: "loginType")
+        UserDefaults.standard.set("서울", forKey: "regionName")
+        UserDefaults.standard.set("서울", forKey: "selectRegionName")
+        UserDefaults.standard.set("수줍은 힐끔 방문자", forKey: "nickName")
+        self.navigationController?.pushViewController(MainViewController(), animated: true)
+    }
+    
     @objc func handleAuthorizationAppleIDButtonPress() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -220,9 +241,9 @@ extension RegisterViewController {
         [
             logoView,
             scrollView,
-            kakaoLoginButon,
             appleLoginButton,
-            titleLabel].forEach {view.addSubview($0)}
+            nonLoginButton
+        ].forEach {view.addSubview($0)}
         
         logoView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(height * 0.12)
@@ -238,17 +259,23 @@ extension RegisterViewController {
             $0.trailing.equalToSuperview()
         }
         
-        kakaoLoginButon.snp.makeConstraints {
+//        kakaoLoginButon.snp.makeConstraints {
+//            $0.leading.equalToSuperview().inset(width * 0.07)
+//            $0.trailing.equalToSuperview().inset(width * 0.06)
+//            $0.top.equalTo(scrollView.snp.bottom).offset(height * 0.08)
+//            $0.height.equalTo(44)
+//        }
+        
+        appleLoginButton.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(width * 0.07)
             $0.trailing.equalToSuperview().inset(width * 0.06)
             $0.top.equalTo(scrollView.snp.bottom).offset(height * 0.08)
             $0.height.equalTo(44)
         }
         
-        appleLoginButton.snp.makeConstraints {
-            $0.leading.equalTo(kakaoLoginButon)
-            $0.trailing.equalTo(kakaoLoginButon)
-            $0.top.equalTo(kakaoLoginButon.snp.bottom).offset(10)
+        nonLoginButton.snp.makeConstraints {
+            $0.top.equalTo(appleLoginButton.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(44)
         }
     }
