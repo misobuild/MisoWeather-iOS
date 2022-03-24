@@ -46,8 +46,28 @@ final class RegisterViewController: UIViewController {
         button.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
         return button
     }()
+
+    private lazy var nonLoginButton: UIButton = {
+        let button = UIButton(type: .system)
+        let text = "그냥 둘러볼래요"
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle(text, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16.0)
+        let attributeString = NSMutableAttributedString(string: text)
+        attributeString.addAttribute(.underlineStyle, value: 1, range: NSRange.init(location: 0, length: text.count))
+        button.titleLabel?.attributedText = attributeString
+        button.addTarget(self, action: #selector(nonLogin), for: .touchUpInside)
+        return button
+    }()
     
     // MARK: - Private Method
+    @objc func nonLogin() {
+        UserDefaults.standard.set("nonLogin", forKey: "loginType")
+        UserDefaults.standard.set("서울", forKey: "regionName")
+        UserDefaults.standard.set("서울", forKey: "selectRegionName")
+        UserDefaults.standard.set("수줍은 힐끔 방문자", forKey: "nickName")
+        self.navigationController?.pushViewController(MainViewController(), animated: true)
+    }
     
     @objc func handleAuthorizationAppleIDButtonPress() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -68,12 +88,11 @@ final class RegisterViewController: UIViewController {
     }
     
     private func kakaoLogin() {
-        print("======================kakaoLogin======================")
         // 카카오톡 설치 여부 확인
         if UserApi.isKakaoTalkLoginAvailable() {
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                 if let error = error {
-                    print(error)
+                    debugPrint(error)
                 } else {
                     //  회원가입 성공 시 oauthToken 저장가능
                     guard let accessToken = oauthToken?.accessToken else {return}
@@ -81,41 +100,48 @@ final class RegisterViewController: UIViewController {
                     let token = TokenUtils()
                     UserDefaults.standard.set("kakao", forKey: "loginType")
                     token.create("kakao", account: "accessToken", value: accessToken)
-                    
                     self.hasKakaoToken(isLogin: false)
                 }
             }
         } else {
-            // TODO: ShowAlert 카카오톡이 설치되어있지 않습니다.
-            print("카카오톡 미설치")
+            // 카카오톡 미설치
+            noticeAlert()
         }
     }
     
+    private func noticeAlert() {
+        let alert = UIAlertController(title: "카카오톡이 설치되어있지 않습니다.",
+                                      message: "",
+                                      preferredStyle: UIAlertController.Style.alert)
+        
+        let confirm = UIAlertAction(title: "확인", style: .destructive, handler: nil)
+        alert.addAction(confirm)
+        present(alert, animated: true, completion: nil)
+    }
+    
     @objc private func hasKakaoToken(isLogin: Bool) {
-        print("======================hasKakaoToken======================")
         if AuthApi.hasToken() {
-            UserApi.shared.accessTokenInfo {(oAuthToken, error) in
+            UserApi.shared.accessTokenInfo {(oauthToken, error) in
                 if let error = error {
                     if let sdkError = error as? SdkError, sdkError.isInvalidTokenError() == true {
-                        print("에러")
+                        // Error
                         self.kakaoLogin()
                     } else {
-                        print("기타에러")
-                        // 기타 에러..
+                        // ETC Error
                         self.kakaoLogin()
                     }
                 } else {
-                    print("넘어가유~")
                     UserDefaults.standard.set("kakao", forKey: "loginType")
-                    
                     let token = TokenUtils()
-                    token.create("kakao", account: "userID", value: String((oAuthToken?.id)!))
-               
+                    token.create("kakao", account: "userID", value: String((oauthToken?.id)!))
+                    guard let reLogin = UserDefaults.standard.string(forKey: "RegisterError") else {return}
+                    if reLogin == "true" {
+                        UserDefaults.standard.set("false", forKey: "RegisterError")
+                        self.kakaoLogin()
+                    }
                     if isLogin {
-                        print("아무것도 안함")
                         self.checkUser(nextVC: false)
                     } else {
-                        print("다음 뷰로!")
                         self.checkUser(nextVC: true)
                     }
                 }
@@ -128,9 +154,7 @@ final class RegisterViewController: UIViewController {
     }
     
     private func hasUser() {
-        print("======================hasUser======================")
         let loginType = UserDefaults.standard.string(forKey: "loginType")
-        print("loginType = \(loginType)")
         
         if loginType == "kakao" {
             hasKakaoToken(isLogin: true)
@@ -143,18 +167,19 @@ final class RegisterViewController: UIViewController {
     
     // 로그아웃 -> 로그인 시 기존 유저인지 확인할 때
     private func checkUser(nextVC: Bool) {
-        print("checkUser! ")
         model.getIsExistUser { isUser in
             if isUser == "true"{
-                print("메인으로 화면 전환")
                 // 메인으로 화면 전환
-                self.model.postToken { _ in
+                self.model.postToken { result in
                     DispatchQueue.main.async {
+                        if result == "error" {
+                            // accessToken 만료
+                            self.kakaoLogin()
+                        }
                         self.mainVC()
                     }
                 }
             } else {
-                print("다음 화면으로 전환")
                 // 다음 화면으로 전환
                 if nextVC {
                     DispatchQueue.main.async {
@@ -170,8 +195,7 @@ final class RegisterViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .mainColor
         self.navigationController?.navigationBar.isHidden = true
-        
-        // UserDefaults.standard.removeObject(forKey: "loginType")
+        UserDefaults.standard.set("false", forKey: "RegisterError")
         hasUser()
         setupView()
     }
@@ -182,39 +206,25 @@ extension RegisterViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            
-            // Create an account in your system.
             let user = appleIDCredential.user
             
-            if let authorizationCode = appleIDCredential.authorizationCode,
-               let identityToken = appleIDCredential.identityToken,
+            if let identityToken = appleIDCredential.identityToken,
                let tokenString = String(data: identityToken, encoding: .utf8) {
                 
                 let token = TokenUtils()
-                print("user = \(user)")
-                print("tokenString = \(tokenString)")
                 UserDefaults.standard.set("apple", forKey: "loginType")
                 token.create("apple", account: "user", value: user)
                 token.create("apple", account: "identityToken", value: tokenString)
                 
                 self.checkUser(nextVC: true)
             }
-        case let passwordCredential as ASPasswordCredential:
-            let username = passwordCredential.user
-            let password = passwordCredential.password
-            print(username)
-            print(password)
-            // DispatchQueue.main.async {
-            //   self.showPasswordCredentialAlert(username: username, password: password)
-            // }
         default:
             break
         }
     }
-    
-    // 로그인 실패
+    /// 로그인 실패
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print(" -- login error")
+        debugPrint(" -- login error")
     }
 }
 extension RegisterViewController: ASAuthorizationControllerPresentationContextProviding {
@@ -231,9 +241,9 @@ extension RegisterViewController {
         [
             logoView,
             scrollView,
-            kakaoLoginButon,
             appleLoginButton,
-            titleLabel].forEach {view.addSubview($0)}
+            nonLoginButton
+        ].forEach {view.addSubview($0)}
         
         logoView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(height * 0.12)
@@ -249,17 +259,23 @@ extension RegisterViewController {
             $0.trailing.equalToSuperview()
         }
         
-        kakaoLoginButon.snp.makeConstraints {
+//        kakaoLoginButon.snp.makeConstraints {
+//            $0.leading.equalToSuperview().inset(width * 0.07)
+//            $0.trailing.equalToSuperview().inset(width * 0.06)
+//            $0.top.equalTo(scrollView.snp.bottom).offset(height * 0.08)
+//            $0.height.equalTo(44)
+//        }
+        
+        appleLoginButton.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(width * 0.07)
             $0.trailing.equalToSuperview().inset(width * 0.06)
             $0.top.equalTo(scrollView.snp.bottom).offset(height * 0.08)
             $0.height.equalTo(44)
         }
         
-        appleLoginButton.snp.makeConstraints {
-            $0.leading.equalTo(kakaoLoginButon)
-            $0.trailing.equalTo(kakaoLoginButon)
-            $0.top.equalTo(kakaoLoginButon.snp.bottom).offset(10)
+        nonLoginButton.snp.makeConstraints {
+            $0.top.equalTo(appleLoginButton.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(44)
         }
     }

@@ -29,7 +29,7 @@ final class MainScrollView: UIView {
         return label
     }()
     
-    private lazy var addLocationButton: UIButton = {
+    lazy var locationButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "location"), for: .normal)
         button.tintColor = .black
@@ -46,7 +46,7 @@ final class MainScrollView: UIView {
     private lazy var greetingLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 19.0, weight: .light)
-        label.textColor = .black
+        label.textColor = .textColor
         label.numberOfLines = 0
         label.text = "안녕하세요!"
         return label
@@ -55,9 +55,21 @@ final class MainScrollView: UIView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20.0, weight: .heavy)
-        label.textColor = .black
+        label.textColor = .textColor
         label.numberOfLines = 0
         return label
+    }()
+    
+    lazy var loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        let text = "새로운 닉네임 받아보실래요?"
+        button.setTitleColor(.mainColor, for: .normal)
+        button.setTitle(text, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18.0, weight: .light)
+        let attributeString = NSMutableAttributedString(string: text)
+        attributeString.addAttribute(.underlineStyle, value: 1, range: NSRange.init(location: 0, length: text.count))
+        button.titleLabel?.attributedText = attributeString
+        return button
     }()
     
     lazy var weatherView: MainWeatherView = {
@@ -116,10 +128,11 @@ extension MainScrollView {
         [
             logoView,
             misoLabel,
-            addLocationButton,
+            locationButton,
             userButton,
             greetingLabel,
             titleLabel,
+            loginButton,
             weatherView,
             serveyBackView,
             serveyTitleView,
@@ -151,7 +164,7 @@ extension MainScrollView {
             $0.leading.equalTo(logoView.snp.trailing).offset(4)
         }
         
-        addLocationButton.snp.makeConstraints {
+        locationButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(width * 0.12)
             $0.centerY.equalTo(userButton)
             $0.width.equalTo(width * 0.09)
@@ -175,11 +188,24 @@ extension MainScrollView {
             $0.leading.equalTo(greetingLabel)
         }
         
+        loginButton.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(15.0)
+            $0.leading.equalTo(greetingLabel)
+            $0.height.equalTo(10.0)
+        }
+        
         weatherView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(23.0)
             $0.leading.equalToSuperview().inset(width * 0.05)
             $0.width.equalTo(width - (width * 0.1))
             $0.height.equalTo(42.0)
+            
+            if let loginType = UserDefaults.standard.string(forKey: "loginType") {
+                if loginType == "nonLogin" {
+                    $0.top.equalTo(loginButton.snp.bottom).offset(23.0)
+                } else {
+                    $0.top.equalTo(titleLabel.snp.bottom).offset(23.0)
+                }
+            }
         }
         
         serveyBackView.snp.makeConstraints {

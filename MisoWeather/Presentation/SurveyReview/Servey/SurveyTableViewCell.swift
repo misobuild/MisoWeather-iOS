@@ -53,6 +53,14 @@ final class SurveyTableViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var noteLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14.0, weight: .bold)
+        label.textColor = .textColor
+        label.text = "아직 답변이 없습니다. 🥲"
+        return label
+    }()
+    
     private lazy var checkImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "checkCircle")
@@ -154,30 +162,49 @@ final class SurveyTableViewCell: UITableViewCell {
     // MARK: - Method
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        if isSelected {
-            if !isAnswered {
-                leftBackgoundView.backgroundColor = .surveyAnswerColor
-                rightBackgoundView.backgroundColor = .surveyAnswerColor
+        guard let loginType = UserDefaults.standard.string(forKey: "loginType") else { return }
+        if loginType != "nonLogin" {
+            if isSelected {
+                if !isAnswered {
+                    leftBackgoundView.backgroundColor = .surveyAnswerColor
+                    rightBackgoundView.backgroundColor = .surveyAnswerColor
+                }
+            } else {
+                self.layer.borderColor = UIColor.clear.cgColor
+                leftBackgoundView.backgroundColor = .backgroundColor
+                rightBackgoundView.backgroundColor = .backgroundColor
             }
-        } else {
-            self.layer.borderColor = UIColor.clear.cgColor
-            leftBackgoundView.backgroundColor = .backgroundColor
-            rightBackgoundView.backgroundColor = .backgroundColor
         }
     }
-
+    
     private func setList() {
         chartList = [chart1, chart2, chart3]
         titleList = [chart1Label, chart2Label, chart3Label]
         percentList = [chart1PercentLabel, chart2PercentLabel, chart3PercentLabel]
     }
-    
+
     func setSurveyData(surveyData: SurveyList) {
+        
         for index in 0..<chartList.count {
             titleLabel.text = surveyData.surveyDescription + " " + surveyData.surveyTitle
-            chartList[index].percent = surveyData.valueList[index]
-            percentList[index].text = "\(surveyData.valueList[index])%"
-            titleList[index].text = surveyData.keyList[index]
+            if surveyData.valueList[0] != 0 {
+                chartList[index].percent = surveyData.valueList[index]
+                percentList[index].text = "\(surveyData.valueList[index])%"
+                titleList[index].text = surveyData.keyList[index]
+                noteLabel.isHidden = true
+                chartList[index].isHidden = false
+                percentList[index].isHidden = false
+                titleList[index].isHidden = false
+                askTitleLabel.isHidden = false
+                chartHideView.isHidden = false
+            } else {
+                noteLabel.isHidden = false
+                chartList.forEach {$0.isHidden = true}
+                titleList.forEach {$0.isHidden = true}
+                percentList.forEach {$0.isHidden = true}
+                askTitleLabel.isHidden = true
+                chartHideView.isHidden = true
+            }
         }
     }
     
@@ -208,6 +235,14 @@ final class SurveyTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        chartList.forEach {
+            $0.layer.sublayers?.removeAll()
+            $0.layer.setNeedsDisplay()
+        }
+        percentList.forEach { $0.text = "" }
+    }
 }
 
 extension SurveyTableViewCell {
@@ -222,7 +257,8 @@ extension SurveyTableViewCell {
             chart1, chart1Label, chart1PercentLabel,
             chart2, chart2Label, chart2PercentLabel,
             chart3, chart3Label, chart3PercentLabel,
-            chartHideView
+            chartHideView,
+            noteLabel
         ].forEach {addSubview($0)}
 
         titleLabel.snp.makeConstraints {
@@ -324,6 +360,10 @@ extension SurveyTableViewCell {
             $0.centerY.equalTo(chart3)
             $0.leading.equalTo(chart1Label.snp.trailing).offset(1)
             $0.width.equalTo(33)
+        }
+        noteLabel.snp.makeConstraints {
+            $0.centerX.equalTo(rightBackgoundView)
+            $0.centerY.equalTo(rightBackgoundView)
         }
     }
 }

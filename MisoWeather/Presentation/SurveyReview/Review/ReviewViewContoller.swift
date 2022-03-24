@@ -52,7 +52,12 @@ final class ReviewViewContoller: UIViewController {
 
     private lazy var postButton: CustomButton = {
         let button = CustomButton(type: .post)
-        button.addTarget(ReviewViewContoller(), action: #selector(ReviewViewContoller.post), for: .touchUpInside)
+        guard let loginType = UserDefaults.standard.string(forKey: "loginType") else { return button }
+        if loginType == "nonLogin" {
+            button.addTarget(self, action: #selector(coverVC), for: .touchUpInside)
+        } else {
+            button.addTarget(self, action: #selector(post), for: .touchUpInside)
+        }
         return button
     }()
 
@@ -61,15 +66,12 @@ final class ReviewViewContoller: UIViewController {
         view.frontColor = UIColor.backgroundColor ?? .gray
         view.tableView.delegate = self
         view.backColor = UIColor.white
-        
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         view.tableView.refreshControl = refreshControl
-
         return view
     }()
     
     // MARK: - Private Method
-    
     private func setData() {
         model.getCommentData {
             DispatchQueue.main.async {
@@ -119,6 +121,12 @@ final class ReviewViewContoller: UIViewController {
                 self.setData()
             }
         }
+    }
+    
+    @objc private func coverVC() {
+        let nextVC = CoverViewContoller()
+        nextVC.modalPresentationStyle = .overFullScreen
+        self.present(nextVC, animated: true)
     }
 
     @objc private func didTapTextView(_ sender: Any) {

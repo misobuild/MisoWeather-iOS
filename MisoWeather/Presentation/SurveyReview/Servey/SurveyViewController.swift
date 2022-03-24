@@ -21,7 +21,6 @@ final class SurveyViewController: UIViewController {
     // MARK: - PrivateMethod
     
     private func setData() {
-        
         model.getIsAnswerData {
             if self.model.isAnswerInfo == false {
                 DispatchQueue.main.async {
@@ -42,7 +41,30 @@ final class SurveyViewController: UIViewController {
         }
     }
     
-    func nextQnaView(surveyID: Int) {
+    private func configure() {
+        guard let loginType = UserDefaults.standard.string(forKey: "loginType") else {return}
+        if loginType == "nonLogin" {
+            model.getSurveyData {
+                let userSurveyInfo:[UserSurveyList] = [UserSurveyList(surveyId: 0, memberAnswer: nil, answered: false),
+                                                       UserSurveyList(surveyId: 1, memberAnswer: nil, answered: false),
+                                                       UserSurveyList(surveyId: 2, memberAnswer: nil, answered: false),
+                                                       UserSurveyList(surveyId: 3, memberAnswer: nil, answered: false),
+                                                       UserSurveyList(surveyId: 4, memberAnswer: nil, answered: false),
+                                                       UserSurveyList(surveyId: 5, memberAnswer: nil, answered: false),
+                                                       UserSurveyList(surveyId: 6, memberAnswer: nil, answered: false),
+                                                       UserSurveyList(surveyId: 7, memberAnswer: nil, answered: false)]
+                self.surveyTableView.surveyList = self.model.surveyInfo
+                self.surveyTableView.userSurveyList = userSurveyInfo
+                DispatchQueue.main.async {
+                    self.surveyTableView.tableView.reloadData()
+                }
+            }
+        } else {
+            self.setData()
+        }
+    }
+    
+    private func nextQnaView(surveyID: Int) {
         model.getSurveyAnswerData(id: surveyID) {
             DispatchQueue.main.async {
                 let nextVC = QnaViewController()
@@ -77,7 +99,7 @@ final class SurveyViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setData()
+        configure()
         self.surveyTableView.tableView.reloadData()
     }
 }

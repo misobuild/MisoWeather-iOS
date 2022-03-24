@@ -36,9 +36,7 @@ final class NicknameSelectViewModel {
     }
     
     func register(completion: @escaping (Result<String, APIError>) -> Void) {
-        
         let token = TokenUtils()
-
         let loginType = UserDefaults.standard.string(forKey: "loginType")
         let regionID = UserDefaults.standard.string(forKey: "regionID")
         
@@ -67,12 +65,7 @@ final class NicknameSelectViewModel {
                 "socialType": "apple"
             ]
             urlString += accessToken
-            print(userID)
         }
-      
-        print(body)
-        print(urlString)
-        
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
         guard let url = URL(string: encodedString) else {return}
         guard let jsonBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {return}
@@ -83,14 +76,11 @@ final class NicknameSelectViewModel {
         requeset.httpBody = jsonBody
         
         let networkManager = NetworkManager()
-        
         networkManager.postRegister(url: requeset) {(result: Result<String, APIError>) in
-            
             switch result {
             case .success(let serverToken):
-                print("serverToken: \(serverToken)")
                 token.create("misoWeather", account: "serverToken", value: serverToken)
-                completion(.success(""))
+                completion(.success(serverToken))
                 
             case .failure(let error):
                 debugPrint("register error = \(error)")

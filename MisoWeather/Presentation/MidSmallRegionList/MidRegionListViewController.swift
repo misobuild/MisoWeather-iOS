@@ -9,11 +9,12 @@ import UIKit
 import SnapKit
 
 final class MidRegionListViewController: UIViewController {
+    
     weak var delegate: RegionSendDelegate?
     private let model = RegionSelectViewModel()
-    
     private var midScaleRegionList: [RegionList] = []
     private var smallScaleRegionList: [RegionList] = []
+    var backScreen = BackScreen.create
     
     // MARK: - Subviews
     private lazy var regionSelectListView: RegionSelectListView = {
@@ -28,13 +29,24 @@ final class MidRegionListViewController: UIViewController {
         if regionSelectListView.selectRegion == midScaleRegionList.first?.smallScale {
             // 선택 지역ID 저장
             UserDefaults.standard.set(midScaleRegionList[0].id, forKey: "regionID")
-            let nextVC = NicknameSelectViewController()
-            nextVC.recivedNickName = model.reciveNickname
-            self.navigationController?.pushViewController(nextVC, animated: true)
+            switch backScreen {
+            case .survey, .main:
+                model.putRegionChange {
+                    DispatchQueue.main.async {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                }
+            case .create:
+                let nextVC = NicknameSelectViewController()
+                nextVC.recivedNickName = model.reciveNickname
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            }
+     
         } else {
             let nextVC = SmallRegionListViewController()
             nextVC.delegate = self
             nextVC.smallScaleRegionList = model.midleRegionList
+            nextVC.backScreen = backScreen
             self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }

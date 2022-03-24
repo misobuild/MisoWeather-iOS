@@ -1,5 +1,5 @@
 //
-//  ForecastTableView.swift
+//  DailyForecastTableView.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/22.
@@ -8,25 +8,26 @@
 import UIKit
 import SnapKit
 
-final class ForecastTableView: UIView {
+final class DailyForecastTableView: UIView {
     
+    var daily: [DailyForecastList] = []
     // MARK: - subView
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14.0, weight: .regular)
         label.textColor = .textColor
-        label.text = "10일 예보"
+        label.text = "주간 예보"
         return label
     }()
     
-    private lazy var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.isScrollEnabled = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 39.0
         tableView.separatorStyle = .none
-        tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: "ForecastTableViewCell")
+        tableView.register(DailyForecastTableViewCell.self, forCellReuseIdentifier: "ForecastTableViewCell")
     
         return tableView
     }()
@@ -43,22 +44,28 @@ final class ForecastTableView: UIView {
     }
 }
 
-extension ForecastTableView: UITableViewDelegate {
+extension DailyForecastTableView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return daily.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastTableViewCell", for: indexPath)
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastTableViewCell", for: indexPath) as? DailyForecastTableViewCell
+        cell?.configureData(daily: daily[indexPath.row])
+        cell?.selectionStyle = .none
+        if indexPath.row == 0 {
+            cell?.dayLabel.text = "오늘"
+        }
+        return cell ?? UITableViewCell()
     }
 }
 
-extension ForecastTableView: UITableViewDataSource {
+extension DailyForecastTableView: UITableViewDataSource {
     
 }
 
-extension ForecastTableView {
+extension DailyForecastTableView {
     // MARK: - layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {
       
@@ -75,7 +82,7 @@ extension ForecastTableView {
         tableView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(27.0)
             $0.leading.equalToSuperview()
-            $0.height.equalTo(390)
+            $0.height.equalTo(273)
             $0.width.equalTo(width - (width * 0.17))
         }
     }

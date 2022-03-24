@@ -9,11 +9,14 @@ import Foundation
 
 final class QnaViewModel {
     
-    func postSurveyAnswerData(answerID: Int, surveyID:Int, completion: @escaping () -> Void) {
+    /// 서베이 답변 입력
+    func postSurveyAnswerData(answerID: Int, surveyID: Int, completion: @escaping () -> Void) {
         
         let token = TokenUtils()
         guard let serverToken =  token.read("misoWeather", account: "serverToken") else {return}
         guard let regionName = UserDefaults.standard.string(forKey: "regionName") else {return}
+        UserDefaults.standard.set(regionName, forKey: "selectRegionName")
+        
         let body: [String: Any] = [
             "answerId": answerID,
             "shortBigScale": regionName,

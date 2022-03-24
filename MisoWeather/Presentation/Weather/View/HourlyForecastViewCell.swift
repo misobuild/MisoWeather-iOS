@@ -1,5 +1,5 @@
 //
-//  HourlyWeatherViewCell.swift
+//  HourlyForecastViewCell.swift
 //  MisoWeather
 //
 //  Created by jiinheo on 2022/01/21.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class HourlyWeatherViewCell: UICollectionViewCell {
+final class HourlyForecastViewCell: UICollectionViewCell {
     
     // MARK: - subviews
     private lazy var tempLabel: UILabel = {
@@ -34,6 +34,12 @@ final class HourlyWeatherViewCell: UICollectionViewCell {
         label.text = "16시"
         return label
     }()
+
+    func configureData(hourly: HourlyForecastList) {
+        tempLabel.text = String(Int(hourly.temperature)) + "°"
+        emojiLabel.text = hourly.weather
+        timeLabel.text = hourly.forecastTime[11..<13] + "시"
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,7 +51,7 @@ final class HourlyWeatherViewCell: UICollectionViewCell {
     }
 }
 
-extension HourlyWeatherViewCell {
+extension HourlyForecastViewCell {
     
     // MARK: - Layout
     private func setupView(width: CGFloat = UIScreen.main.bounds.width, height: CGFloat = UIScreen.main.bounds.height) {

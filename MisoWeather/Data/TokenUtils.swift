@@ -53,7 +53,7 @@ final class TokenUtils {
             let value = String(data: retrievedData, encoding: String.Encoding.utf8)
             return value
         } else {
-            print("failed to loading, status code = \(status)")
+            debugPrint("failed to loading, status code = \(status)")
             return nil
         }
     }

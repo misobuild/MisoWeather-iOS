@@ -102,14 +102,29 @@ final class NicknameSelectViewController: UIViewController {
         model.register {(result: Result<String, APIError>) in
             switch result {
             case .failure(let error):
-                print("error: \(error)")
-                
-            case .success:
+                debugPrint("registerError: \(error)")
+                DispatchQueue.main.async {
+                    self.noticeAlert()
+                    UserDefaults.standard.set("true", forKey: "RegisterError")
+                }
+            case .success(let message):
                 DispatchQueue.main.async {
                     self.nextVC()
                 }
             }
         }
+    }
+    
+    private func noticeAlert() {
+        let alert = UIAlertController(title: "회원가입에 실패했습니다.",
+                                      message: "다시 시도해주세요.",
+                                      preferredStyle: UIAlertController.Style.alert)
+        let confirm = UIAlertAction(title: "확인", style: .default) { _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        alert.addAction(confirm)
+        present(alert, animated: true, completion: nil)
     }
     
     private func animate() {
