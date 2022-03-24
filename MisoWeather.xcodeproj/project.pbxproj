@@ -102,6 +102,7 @@
 		E8E65BD6278568A500FFA0FA /* NicknameSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */; };
 		E8FB85ED278C2F9B0007DE27 /* MidRegionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FB85EC278C2F9B0007DE27 /* MidRegionListViewController.swift */; };
 		E8FB85F0278D45DD0007DE27 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = E8FB85EF278D45DD0007DE27 /* .swiftlint.yml */; };
+		E8FC403827EA16AB009B9A89 /* CoverViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FC403727EA16AB009B9A89 /* CoverViewContoller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +229,7 @@
 		E8E65BD5278568A500FFA0FA /* NicknameSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSelectViewController.swift; sourceTree = "<group>"; };
 		E8FB85EC278C2F9B0007DE27 /* MidRegionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidRegionListViewController.swift; sourceTree = "<group>"; };
 		E8FB85EF278D45DD0007DE27 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		E8FC403727EA16AB009B9A89 /* CoverViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverViewContoller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,6 +494,7 @@
 				E86EA7042791CC610066BB46 /* Model */,
 				E86EA70727927FE50066BB46 /* Network */,
 				E8E65BCF2783032300FFA0FA /* Presentation */,
+				E8FC403627EA1635009B9A89 /* Cover */,
 				E8E65BCC278301F500FFA0FA /* Resources */,
 			);
 			path = MisoWeather;
@@ -600,6 +603,14 @@
 				E8132BB02795863600A9518B /* RegionSelectListView.swift */,
 			);
 			path = MidSmallRegionList;
+			sourceTree = "<group>";
+		};
+		E8FC403627EA1635009B9A89 /* Cover */ = {
+			isa = PBXGroup;
+			children = (
+				E8FC403727EA16AB009B9A89 /* CoverViewContoller.swift */,
+			);
+			path = Cover;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -901,6 +912,7 @@
 				E8BFAD3327AD0DA00007E1DC /* RegionSelectViewModel.swift in Sources */,
 				E8BFAD6127B69CB80007E1DC /* SurveyResultModel.swift in Sources */,
 				E8CE99BB27989CD40095C958 /* MainWeatherView.swift in Sources */,
+				E8FC403827EA16AB009B9A89 /* CoverViewContoller.swift in Sources */,
 				E8BFAD3D27AE5B210007E1DC /* SettingViewModel.swift in Sources */,
 				E8BFAD2427AC30880007E1DC /* SettingViewController.swift in Sources */,
 				E83E00FE27901E4200C4661A /* TitleLabel.swift in Sources */,
@@ -1116,7 +1128,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MisoWeather/MisoWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MisoWeather/Resources/Info.plist;
@@ -1147,7 +1159,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MisoWeather/MisoWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 9HJKFUTNXJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MisoWeather/Resources/Info.plist;

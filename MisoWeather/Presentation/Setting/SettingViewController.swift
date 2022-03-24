@@ -76,12 +76,14 @@ class SettingViewController: UIViewController {
             }
             
             if loginType == "apple" {
-                let token = TokenUtils()
                 UserDefaults.standard.removeObject(forKey: "loginType")
+                let token = TokenUtils()
                 token.delete("apple", account: "identityToken")
                 (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(RegisterViewController())
             }
         }
+        let token = TokenUtils()
+        token.delete("misoWeather", account: "serverToken")
         alert.addAction(cancle)
         alert.addAction(confirm)
         present(alert, animated: true, completion: nil)
