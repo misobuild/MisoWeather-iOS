@@ -47,9 +47,11 @@ final class SurveyViewModel {
     /// 서베이 결과
     func getSurveyData(completion: @escaping () -> Void) {
         let networkManager = NetworkManager()
+        var urlString = URL.survey + Path.shortBigScale
+        
         guard let shortBigScale = UserDefaults.standard.string(forKey: "regionName") else {return}
         guard let selectBigScale = UserDefaults.standard.string(forKey: "selectRegionName") else {return}
-        var urlString = URL.survey + Path.shortBigScale
+        
         if shortBigScale != selectBigScale {
             urlString += selectBigScale
         } else {
@@ -57,6 +59,7 @@ final class SurveyViewModel {
         }
         
         guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        
         if let url =  URL(string: encodedString) {
             networkManager.getfetchData(url: url) {(result: Result<SurveyModel, APIError>) in
                 switch result {
