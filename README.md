@@ -66,10 +66,10 @@
 ## Feature ✨
 > 화면별 기능 목록입니다. ✨
 
-| <img width="331" height="360" alt="image" src="https://user-images.githubusercontent.com/39071796/160231244-a02f571b-f41e-4d3d-af51-05090980c32c.PNG"> | <img width="331" height="360" src="https://user-images.githubusercontent.com/39071796/160231242-89b2036c-158a-49fe-8128-32cd289939dc.PNG"> | <img width="331" height="360"  src="https://user-images.githubusercontent.com/39071796/160231239-ce556b3f-f956-41c5-92d5-96b4e3795100.PNG"> | <img width="331" height="360" src="https://user-images.githubusercontent.com/39071796/160231254-254c497b-9392-4c22-a3db-e70a505dc12b.png"> |
+| <img width="331" height="470" alt="image" src="https://user-images.githubusercontent.com/39071796/160231244-a02f571b-f41e-4d3d-af51-05090980c32c.PNG"> | <img width="331" height="470" src="https://user-images.githubusercontent.com/39071796/160231242-89b2036c-158a-49fe-8128-32cd289939dc.PNG"> | <img width="331" height="470"  src="https://user-images.githubusercontent.com/39071796/160231239-ce556b3f-f956-41c5-92d5-96b4e3795100.PNG"> | <img width="331" height="470" src="https://user-images.githubusercontent.com/39071796/160231254-254c497b-9392-4c22-a3db-e70a505dc12b.png"> |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |                     `로그인`                     |                      `둘러보기`                      |                        `비로그인`                        |                        `랜덤 닉네임`                        |
-| <img width="331" height="360" alt="image" src="https://user-images.githubusercontent.com/39071796/160231248-dcf2cec1-f383-4552-91b9-1e2a858eb43e.PNG"> | <img width="331" height="360" src="https://user-images.githubusercontent.com/39071796/160231247-2355e9d6-84ee-41c1-849d-05746121e48d.PNG"> | <img width="240" height="360" src="https://user-images.githubusercontent.com/39071796/160231234-b6d21309-101d-4b38-b453-b085458561fc.PNG"> | <img width="240" height="360" src="https://user-images.githubusercontent.com/39071796/160231245-c2771e84-9f46-46de-8538-ca4312fa83ec.PNG">| 
+| <img width="331" height="470" alt="image" src="https://user-images.githubusercontent.com/39071796/160231248-dcf2cec1-f383-4552-91b9-1e2a858eb43e.PNG"> | <img width="331" height="470" src="https://user-images.githubusercontent.com/39071796/160231247-2355e9d6-84ee-41c1-849d-05746121e48d.PNG"> | <img width="240" height="470" src="https://user-images.githubusercontent.com/39071796/160231234-b6d21309-101d-4b38-b453-b085458561fc.PNG"> | <img width="240" height="470" src="https://user-images.githubusercontent.com/39071796/160231245-c2771e84-9f46-46de-8538-ca4312fa83ec.PNG">| 
 |                     `날씨 이야기`                     |                      `오늘의 사람들`                      |                        `날씨 한 줄 평`                        |                        `설정`                       |
 #### 회원가입 및 로그인 
 - Apple Login 
@@ -122,76 +122,10 @@
 
 ## Challenges 💪
 
-<details>
-<summary>Kakao Login</summary>
-<div markdown="1">
-kakao Login API 사용에 대한 어려움보단 토큰 흐름과 처리를 이해하기 위해 오래걸렸던 부분입니다.      
-Kakao Login 시 access Token을 받아 서버로 전달    
-서버에서 전달받은 access Token의 유효성을 검사   
-회원가입 하고 JWT를 발급해주는 방식으로 진행   
-
-</div>
-</details>
-
-<details>
-<summary>SegmentedControl & PageView</summary>
-<div markdown="1"> 
-    
-    
-SegmentedControl의 인덱스와 PageView의 인덱스가 동일할 때 페이지를 같이 넘겨주려고 생각했습니다. SegmentedControl은 인덱스를 가져올 수 있어서 컨트롤을 눌렀을때 PageView의 페이지 변환이 가능했지만, 반대로 슬라이드해서 PageView에 따른 SegementedControl을 변경하려고 했을때 변경되지 않는 문제가 있었습니다. 이유는 PageView는 지금 보고있는 뷰의 인덱스를 계속 0으로 반환했기 때문입니다.
-    
-
-    private lazy var  dataViewControllers: [UIViewController] = {
-        return [surveyViewController, reviewViewController]
-    }()
-    
-    private var currentIndex: Int {
-        guard let viewController = pageViewController.viewControllers?.first else {return 0}
-        return dataViewControllers.firstIndex(of: viewController) ?? 0
-    }
-    
-따라서 위와같이 dataViewControllers라는 ViewController배열을 만들어서, 현재화면에 해당하는 VC가 dataViewContoller의 몇번째 인덱스에 있는지를 가져오는 방법으로 처리하게 되었습니다.   
-    SegmentedControl과 PageView의 레퍼런스가 별로 없어서 시간을 많이 할애했던 부분이었습니다. 
-    또 SegmentedControl이 iS iOS13부터 corner raidus가 15로 고정되어 원래 둥근 모양이었던 디자인이 둥근사각으로 바뀌게 되어서 디자인 그대로 표현해내지 못해 아쉬움이 남았던 부분입니다. 
-    </div>
-</details>
-
-
-<details>
-<summary>댓글기능 무한 스크롤 적용</summary>
-<div markdown="1">
-    
-스크롤을 내렸을때 x값을 가져와서 
-</div>
-</details>
-
-<details>
-<summary>리젝 경험</summary>
-<div markdown="1">
-    <img width="1166" alt="image" src="https://user-images.githubusercontent.com/39071796/160236680-7dcde996-d1a9-4cf2-af81-378226b6ece6.png">
-
-</div>
-</details>
-
-
-<details>
-<summary>화면 크기 대응에 대한 고민</summary>
-<div markdown="1">
-스크롤을 내렸을때 x값을 가져와서 
-</div>
-</details>
-    
-
-
-
-</div>
-</details>
-
 ### 후기
 
 iOS 첫 프로젝트로 많이 부족했지만 이 프로젝트로 인해 정말 많이 성장했다고 느꼈습니다.    
 디자이너와 협업하면서 H.I.G를 찾아보며 서로 의견을 나누기도 했고, 백엔드와 Swagger 문서로 API에 대해 같이 고민하기도 했습니다.   
 Android 개발자와도 기획할때 시간내에 구현이 가능한 기능인지에 대한 고민과, 각 기능 비즈니스 로직에 대해 얘기를 나눈게 기억에 남습니다.   
 소셜로그인을 구현해보면서 토큰에 대한 이해도를 높였으며, kakao API를 사용하면서 블로그보단 개발 문서를 읽는 습관이 생겼습니다.    
-필요한 기능과 디자인이 기대한것과 동일하게 나와서 뿌듯한 마음도 있지만 개인적으로 첫 프로젝트라 아키텍처나 객체간의 결합 대해 많이 생각해보지 못했던것 같아 아쉽습니다.    
-앞으로 재사용 가능하고 유지보수가 용이한 코드에 대해 고민해보며 리팩토링을 할 계획입니다.
+필요한 기능과 디자인이 기대한것과 동일하게 나와서 뿌듯한 마음도 있지만 개인적으로 첫 프로젝트라 아키텍처나 객체간의 결합 대해 많이 생각해보지 못했던것 같아 아쉽습니다. 앞으로 재사용 가능하고 유지보수가 용이한 코드에 대해 고민해보며 리팩토링을 할 계획입니다.
