@@ -122,6 +122,43 @@
 
 ## Challenges 💪
 
+<details>
+<summary>SegmentedControl & PageView</summary>
+<div markdown="1"> 
+    
+    
+SegmentedControl의 인덱스와 PageView의 인덱스가 동일할 때 페이지를 같이 넘겨주려고 생각했습니다. SegmentedControl은 인덱스를 가져올 수 있어서 컨트롤을 눌렀을때 PageView의 페이지 변환이 가능했지만, 반대로 슬라이드해서 PageView에 따른 SegementedControl을 변경하려고 했을때 변경되지 않는 문제가 있었습니다. 이유는 PageView는 지금 보고있는 뷰의 인덱스를 계속 0으로 반환했기 때문입니다.
+    
+
+    private lazy var  dataViewControllers: [UIViewController] = {
+        return [surveyViewController, reviewViewController]
+    }()
+    
+    private var currentIndex: Int {
+        guard let viewController = pageViewController.viewControllers?.first else {return 0}
+        return dataViewControllers.firstIndex(of: viewController) ?? 0
+    }
+    
+따라서 위와같이 dataViewControllers라는 ViewController배열을 만들어서, 현재화면에 해당하는 VC가 dataViewContoller의 몇번째 인덱스에 있는지를 가져오는 방법으로 처리하게 되었습니다.   
+    SegmentedControl과 PageView의 레퍼런스가 별로 없어서 시간을 많이 할애했던 부분이었습니다. 
+    또 SegmentedControl이 iS iOS13부터 corner raidus가 15로 고정되어 원래 둥근 모양이었던 디자인이 둥근사각으로 바뀌게 되어서 디자인 그대로 표현해내지 못해 아쉬움이 남았던 부분입니다. 
+    </div>
+</details>
+
+<details>
+<summary>앱스토어 심사 거절 경험</summary>
+<div markdown="1">
+    <img width="1166" alt="image" src="https://user-images.githubusercontent.com/39071796/160236680-7dcde996-d1a9-4cf2-af81-378226b6ece6.png">
+    
+지침 5.1.1 - 법률 - 개인정보 보호 - 데이터 수집 및 저장
+    
+앱스토어 심사 거절을 경험했습니다. 
+    
+앱의 핵심 기능과 직접 관련이 있거나 법률에서 요구하는 경우를 제외하고 앱은 기능을 위해 사용자에게 개인 정보를 입력하도록 요구하지 않을 수 있기 때문입니다. 예를 들어, 레스토랑 앱은 사용자가 주문하기 전에 메뉴를 탐색할 수 있도록 해야 합니다. 따라서 기존에 로그인을 해야지만 모든 기능을 사용할 수 있었던 미소웨더 앱도 로그인이 필요하지 않은 기능에 대해 로그인 없이 사용할 수 있도록 변경했습니다. 비회원도 앱의 대부분의 기능을 사용할 수 있도록 '둘러보기' 기능을 제공하였고, 심사에 무사히 통과할 수 있었습니다. 
+
+</div>
+</details>
+
 ### 후기
 
 iOS 첫 프로젝트로 많이 부족했지만 이 프로젝트로 인해 정말 많이 성장했다고 느꼈습니다.    
